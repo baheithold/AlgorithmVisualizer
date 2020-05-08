@@ -57,32 +57,6 @@ public class VisualizerWindow extends JFrame {
 		menubar.add(createHelpMenu());
 	}
 	
-	private JMenu createFileMenu() {
-		// create file menu and file menu items
-		JMenu menu = new JMenu("File");
-		JMenuItem exitItem = new JMenuItem("Exit");
-		
-		// file menu action listener
-		class FileMenuListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == exitItem) {
-					System.exit(0);
-				}
-			}
-			
-		}
-		
-		// add action listener to menu items 
-		exitItem.addActionListener(new FileMenuListener());
-		
-		// add menu items to menu
-		menu.add(exitItem);
-		
-		return menu;
-	}
-	
 	private JMenu createSortingMenu() {
 		JMenu menu = new JMenu("Sorting");
 		
