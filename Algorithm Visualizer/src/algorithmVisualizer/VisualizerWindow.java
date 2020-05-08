@@ -5,6 +5,11 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import menu.FileMenu;
+import menu.HelpMenu;
+import menu.PathFindingMenu;
+import menu.SortingMenu;
+
 /**
  * @author Brett Heithold
  *
@@ -33,18 +38,21 @@ public class VisualizerWindow extends JFrame {
 	}
 	
 	private void createMenuBar() {
-		// Create the menubar and add the various menus
+		// instantiate menubar and add it to the window
 		JMenuBar menubar = new JMenuBar();
+		setJMenuBar(menubar);
+		
 		// create file menu and add it to the menubar
 		menubar.add(new FileMenu());
+		
 		// create sorting menu and add it to the menubar
 		menubar.add(new SortingMenu());
+		
 		// create pathfinding menu and add it to the menubar
 		menubar.add(new PathFindingMenu());
+		
 		// create help menu and add it to the menubar
 		menubar.add(new HelpMenu());
-		// set the menubar
-		setJMenuBar(menubar);
 	}
 	
 }
