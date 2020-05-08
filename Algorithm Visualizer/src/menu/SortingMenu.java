@@ -1,4 +1,4 @@
-package algorithmVisualizer;
+package menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
