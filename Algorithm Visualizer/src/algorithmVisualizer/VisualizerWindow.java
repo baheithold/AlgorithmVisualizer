@@ -1,8 +1,11 @@
 package algorithmVisualizer;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,7 +26,7 @@ public class VisualizerWindow extends JFrame {
 		toolkit = Toolkit.getDefaultToolkit();
 		initializeWindow();
 		createMenuBar();
-		add(new VisualizationPanel());
+		add(new SortingPanel());
 		setVisible(true);
 	}
 	
@@ -42,7 +45,7 @@ public class VisualizerWindow extends JFrame {
 		setJMenuBar(menubar);
 		
 		// create file menu and add it to the menubar
-		menubar.add(createFileMenu());
+		menubar.add(new FileMenu());
 		
 		// create sorting menu and add it to the menubar
 		menubar.add(createSortingMenu());
@@ -55,9 +58,28 @@ public class VisualizerWindow extends JFrame {
 	}
 	
 	private JMenu createFileMenu() {
+		// create file menu and file menu items
 		JMenu menu = new JMenu("File");
 		JMenuItem exitItem = new JMenuItem("Exit");
+		
+		// file menu action listener
+		class FileMenuListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == exitItem) {
+					System.exit(0);
+				}
+			}
+			
+		}
+		
+		// add action listener to menu items 
+		exitItem.addActionListener(new FileMenuListener());
+		
+		// add menu items to menu
 		menu.add(exitItem);
+		
 		return menu;
 	}
 	
@@ -65,13 +87,17 @@ public class VisualizerWindow extends JFrame {
 		JMenu menu = new JMenu("Sorting");
 		
 		// add comparison based sorting algorithm items to sorting menu
+		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
+		menu.add(new JLabel("Comparison Based"));
+		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
 		menu.add(new JMenuItem("Algorithm 0"));
 		menu.add(new JMenuItem("Algorithm 1"));
 		menu.add(new JMenuItem("Algorithm 2"));
-		
-		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
-		
+				
 		// add non-comparison based sorting algorithm items to sorting menu
+		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
+		menu.add(new JLabel("Non-comparison Based"));
+		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
 		menu.add(new JMenuItem("Algorithm 3"));
 		menu.add(new JMenuItem("Algorithm 4"));
 		menu.add(new JMenuItem("Algorithm 5"));
