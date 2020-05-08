@@ -3,8 +3,11 @@ package menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import algorithmVisualizer.PathFindingPanel;
 
 /**
  * @author Brett Heithold
@@ -13,10 +16,14 @@ import javax.swing.JMenuItem;
 public class PathFindingMenu extends JMenu implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
+	// Window
+	private JFrame window;
+	
 	// Path Finding Menu Items
 	private JMenuItem algorithmItem0, algorithmItem1, algorithmItem2, algorithmItem3;
 	
-	public PathFindingMenu() {
+	public PathFindingMenu(JFrame window) {
+		this.window = window;
 		setText("Path Finding");
 		initializePathFindingMenuItems();
 	}
@@ -38,6 +45,9 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		window.getContentPane().removeAll();
+		window.getContentPane().add(new PathFindingPanel());
+		window.revalidate();
 	}
 
 }

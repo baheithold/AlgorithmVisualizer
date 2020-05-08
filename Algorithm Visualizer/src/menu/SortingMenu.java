@@ -3,11 +3,14 @@ package menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
+import algorithmVisualizer.SortingPanel;
 
 /**
  * @author Brett Heithold
@@ -15,11 +18,15 @@ import javax.swing.SwingConstants;
  */
 public class SortingMenu extends JMenu implements ActionListener {
 	static final long serialVersionUID = 1L;
-
+	
+	// Window
+	private JFrame window;
+	
 	// Sorting Menu Items
 	private JMenuItem algorithm0Item, algorithm1Item, algorithm2Item, algorithm3Item, algorithm4Item, algorithm5Item;
 	
-	public SortingMenu() {
+	public SortingMenu(JFrame window) {
+		this.window = window;
 		setText("Sorting");
 		initializeSortingMenuItems();
 	}
@@ -57,6 +64,9 @@ public class SortingMenu extends JMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		window.getContentPane().removeAll();
+		window.getContentPane().add(new SortingPanel());
+		window.revalidate();
 	}
 	
 }
