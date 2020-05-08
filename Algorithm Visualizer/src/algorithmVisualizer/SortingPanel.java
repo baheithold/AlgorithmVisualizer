@@ -7,6 +7,8 @@ import java.util.Random;
 
 import javax.swing.JLabel;
 
+import sortingAlgorithms.BubbleSort;
+
 /**
  * @author Brett Heithold
  *
@@ -25,6 +27,8 @@ public class SortingPanel extends VisualizationPanel {
 		helloLabel = createHelloLabel();
 		array = new int[windowWidth / BAR_WIDTH];
 		randomizeArray();
+		new BubbleSort(array).Run();
+		repaint();
 	}
 	
 	@Override
