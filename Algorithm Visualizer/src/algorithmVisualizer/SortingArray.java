@@ -5,40 +5,27 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import javax.swing.JLabel;
-
 import sortingAlgorithms.BubbleSort;
 
 /**
  * @author Brett Heithold
  *
  */
-public class SortingPanel extends VisualizationPanel {
+public class SortingArray extends VisualizationPanel {
 	private static final long serialVersionUID = 1L;
 	private static final int BAR_WIDTH = 8;
 	private static int windowWidth = 800;
 	private static int windowHeight = 600;
-	private static JLabel helloLabel;
 	
 	// Array
-	int[] array;
+	private int[] array;
 	
-	public SortingPanel() {
-		helloLabel = createHelloLabel();
+	public SortingArray() {
+		setBackground(Color.DARK_GRAY);
 		array = new int[windowWidth / BAR_WIDTH];
 		randomizeArray();
-		new BubbleSort(array).Run();
+		new BubbleSort(this).Run();
 		repaint();
-	}
-	
-	@Override
-	public JLabel createHelloLabel() {
-		JLabel label = new JLabel("Hello Sorting Panel");
-		label.setBackground(new Color(255, 255, 255));
-		label.setOpaque(true);
-		add(label);
-		setBackground(new Color(150, 12, 12));
-		return label;
 	}
 	
 	private void randomizeArray() {
@@ -53,11 +40,23 @@ public class SortingPanel extends VisualizationPanel {
 		}
 	}
 	
+	public int length() {
+		return array.length;
+	}
+	
+	public int getValue(int index) {
+		return array[index];
+	}
+	
+	public void setValue(int index, int value) {
+		array[index] = value;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		super.paintComponent(g);
-		graphics.setColor(Color.white);
+		graphics.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < array.length; i++) {
 			int height = array[i];
 			int xBegin = i + (BAR_WIDTH - 1) * i;

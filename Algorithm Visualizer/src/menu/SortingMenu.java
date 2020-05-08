@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-import algorithmVisualizer.SortingPanel;
+import algorithmVisualizer.SortingArray;
 
 /**
  * @author Brett Heithold
@@ -65,7 +65,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		window.getContentPane().removeAll();
-		window.getContentPane().add(new SortingPanel());
+		window.getContentPane().add(new SortingArray());
 		window.revalidate();
 	}
 	

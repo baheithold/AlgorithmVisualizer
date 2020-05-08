@@ -1,23 +1,25 @@
 package sortingAlgorithms;
 
+import algorithmVisualizer.SortingArray;
+
 /**
  * @author Brett Heithold
  *
  */
 public class BubbleSort {
-	private int[] array;
+	private SortingArray array;
 	
-	public BubbleSort(int[] array) {
+	public BubbleSort(SortingArray array) {
 		this.array = array;
 	}
 	
 	public void Run() {
 		boolean isSorted = false;
-		int lastUnsortedIndex = array.length - 1;
+		int lastUnsortedIndex = array.length() - 1;
 		while (!isSorted) {
 			isSorted = true;
 			for (int i = 0; i < lastUnsortedIndex; i++) {
-				if (array[i] > array[i + 1]) {
+				if (array.getValue(i) > array.getValue(i + 1)) {
 					swap(i, i + 1);
 					isSorted = false;
 				}
@@ -27,9 +29,9 @@ public class BubbleSort {
 	}
 	
 	private void swap(int i, int j) {
-		int temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
+		int temp = array.getValue(i);
+		array.setValue(i, array.getValue(j));
+		array.setValue(j, temp);
 	}
 	
 }
