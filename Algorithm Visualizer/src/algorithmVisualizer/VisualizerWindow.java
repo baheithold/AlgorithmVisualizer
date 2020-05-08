@@ -38,20 +38,20 @@ public class VisualizerWindow extends JFrame {
 	}
 	
 	private void createMenuBar() {
-		// instantiate menubar and add it to the window
+		// instantiate menu bar and add it to the window
 		JMenuBar menubar = new JMenuBar();
 		setJMenuBar(menubar);
 		
-		// create file menu and add it to the menubar
+		// create file menu and add it to the menu bar
 		menubar.add(new FileMenu());
 		
-		// create sorting menu and add it to the menubar
+		// create sorting menu and add it to the menu bar
 		menubar.add(new SortingMenu());
 		
-		// create pathfinding menu and add it to the menubar
+		// create path finding menu and add it to the menu bar
 		menubar.add(new PathFindingMenu());
 		
-		// create help menu and add it to the menubar
+		// create help menu and add it to the menu bar
 		menubar.add(new HelpMenu());
 	}
 	
