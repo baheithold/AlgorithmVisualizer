@@ -46,35 +46,13 @@ public class VisualizerWindow extends JFrame {
 		menubar.add(new FileMenu());
 		
 		// create sorting menu and add it to the menubar
-		menubar.add(createSortingMenu());
+		menubar.add(new SortingMenu());
 		
 		// create pathfinding menu and add it to the menubar
 		menubar.add(createPathfindingMenu());
 		
 		// create help menu and add it to the menubar
 		menubar.add(createHelpMenu());
-	}
-	
-	private JMenu createSortingMenu() {
-		JMenu menu = new JMenu("Sorting");
-		
-		// add comparison based sorting algorithm items to sorting menu
-		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
-		menu.add(new JLabel("Comparison Based"));
-		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
-		menu.add(new JMenuItem("Algorithm 0"));
-		menu.add(new JMenuItem("Algorithm 1"));
-		menu.add(new JMenuItem("Algorithm 2"));
-				
-		// add non-comparison based sorting algorithm items to sorting menu
-		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
-		menu.add(new JLabel("Non-comparison Based"));
-		menu.add(new JSeparator(SwingConstants.HORIZONTAL));
-		menu.add(new JMenuItem("Algorithm 3"));
-		menu.add(new JMenuItem("Algorithm 4"));
-		menu.add(new JMenuItem("Algorithm 5"));
-		
-		return menu;
 	}
 	
 	private JMenu createPathfindingMenu() {
