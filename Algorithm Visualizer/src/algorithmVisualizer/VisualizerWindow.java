@@ -24,7 +24,7 @@ public class VisualizerWindow extends JFrame {
 		toolkit = Toolkit.getDefaultToolkit();
 		initializeWindow();
 		createMenuBar();
-		add(new SortingPanel());
+		add(new AboutPanel());
 		setVisible(true);
 	}
 	
@@ -46,13 +46,13 @@ public class VisualizerWindow extends JFrame {
 		menubar.add(new FileMenu());
 		
 		// create sorting menu and add it to the menu bar
-		menubar.add(new SortingMenu());
+		menubar.add(new SortingMenu(this));
 		
 		// create path finding menu and add it to the menu bar
-		menubar.add(new PathFindingMenu());
+		menubar.add(new PathFindingMenu(this));
 		
 		// create help menu and add it to the menu bar
-		menubar.add(new HelpMenu());
+		menubar.add(new HelpMenu(this));
 	}
 	
 }
