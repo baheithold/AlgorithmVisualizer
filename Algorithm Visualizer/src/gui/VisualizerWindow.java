@@ -1,14 +1,9 @@
-package algorithmVisualizer;
+package gui;
 
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-
-import menu.FileMenu;
-import menu.HelpMenu;
-import menu.PathFindingMenu;
-import menu.SortingMenu;
 
 /**
  * @author Brett Heithold

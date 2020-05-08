@@ -1,4 +1,4 @@
-package algorithmVisualizer;
+package gui;
 
 /**
  * @author Brett Heithold

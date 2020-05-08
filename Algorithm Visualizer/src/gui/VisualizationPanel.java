@@ -1,4 +1,4 @@
-package algorithmVisualizer;
+package gui;
 
 import javax.swing.JPanel;
 
