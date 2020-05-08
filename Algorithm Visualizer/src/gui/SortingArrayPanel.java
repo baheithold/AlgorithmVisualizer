@@ -1,27 +1,24 @@
-package algorithmVisualizer;
+package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import gui.VisualizationPanel;
 import sortingAlgorithms.BubbleSort;
 
 /**
  * @author Brett Heithold
  *
  */
-public class SortingArray extends VisualizationPanel {
+public class SortingArrayPanel extends VisualizationPanel {
 	private static final long serialVersionUID = 1L;
 	private static final int BAR_WIDTH = 8;
-	private static int windowWidth = 800;
-	private static int windowHeight = 600;
 	
 	// Array
 	private int[] array;
 	
-	public SortingArray() {
+	public SortingArrayPanel() {
 		setBackground(Color.DARK_GRAY);
 		array = new int[windowWidth / BAR_WIDTH];
 		randomizeArray();

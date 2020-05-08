@@ -1,15 +1,15 @@
 package sortingAlgorithms;
 
-import algorithmVisualizer.SortingArray;
+import gui.SortingArrayPanel;
 
 /**
  * @author Brett Heithold
  *
  */
 public class BubbleSort {
-	private SortingArray array;
+	private SortingArrayPanel array;
 	
-	public BubbleSort(SortingArray array) {
+	public BubbleSort(SortingArrayPanel array) {
 		this.array = array;
 	}
 	
