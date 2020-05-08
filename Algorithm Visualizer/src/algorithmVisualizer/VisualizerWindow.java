@@ -52,14 +52,7 @@ public class VisualizerWindow extends JFrame {
 		menubar.add(new PathFindingMenu());
 		
 		// create help menu and add it to the menubar
-		menubar.add(createHelpMenu());
-	}
-	
-	private JMenu createHelpMenu() {
-		JMenu menu = new JMenu("Help");
-		JMenuItem aboutItem = new JMenuItem("About");
-		menu.add(aboutItem);
-		return menu;
+		menubar.add(new HelpMenu());
 	}
 	
 }
