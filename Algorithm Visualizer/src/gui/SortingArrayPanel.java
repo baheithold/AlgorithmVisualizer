@@ -22,6 +22,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 		setBackground(Color.DARK_GRAY);
 		array = new int[windowWidth / BAR_WIDTH];
 		randomizeArray();
+		repaint();
 		new BubbleSort(this).Run();
 		repaint();
 	}
