@@ -51,6 +51,12 @@ public class SortingArrayPanel extends VisualizationPanel {
 		array[index] = value;
 	}
 	
+	public void swap(int a, int b) {
+		int temp = array[a];
+		array[a] = array[b];
+		array[b] = temp;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;

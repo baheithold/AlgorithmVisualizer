@@ -20,18 +20,12 @@ public class BubbleSort {
 			isSorted = true;
 			for (int i = 0; i < lastUnsortedIndex; i++) {
 				if (array.getValue(i) > array.getValue(i + 1)) {
-					swap(i, i + 1);
+					array.swap(i, i + 1);
 					isSorted = false;
 				}
 			}
 			lastUnsortedIndex--;
 		}
-	}
-	
-	private void swap(int i, int j) {
-		int temp = array.getValue(i);
-		array.setValue(i, array.getValue(j));
-		array.setValue(j, temp);
 	}
 	
 }
