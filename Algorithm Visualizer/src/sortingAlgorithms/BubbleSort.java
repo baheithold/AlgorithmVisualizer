@@ -31,33 +31,58 @@ public class BubbleSort implements Runnable {
 						array.setColor(i, Color.blue);
 						array.setColor(i + 1, Color.red);
 						publish();
-						Thread.sleep(10);
+						Thread.sleep(1);
 						if (array.getValue(i) > array.getValue(i + 1)) {
 							array.swap(i, i + 1);
 							isSorted = false;
 						}
 						array.setColor(i, Color.lightGray);
+						publish();
 					}
 					array.setColor(lastUnsortedIndex, Color.green);
 					publish();
 					lastUnsortedIndex--;					
 					try {
-						Thread.sleep(10);
+						Thread.sleep(1);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
+				
+				// Verify that the array was sorted correctly
+				array.setAllColors(Color.green);
+				if (verifySortedCorrectly()) {
+					System.out.println("BubbleSort: Success!");
+				}
+				else {
+					System.out.println("BubbleSort: Failed!");
+				}
+				array.setAllColors(Color.green);
+				
 				return null;
 			}
-
+			
+			private Boolean verifySortedCorrectly() {
+				for (int i = 1; i < array.length(); i++) {
+					if (array.getValue(i) > i - 1) {
+						array.setColor(i - 1, Color.blue);
+						publish();
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					else return false;
+				}
+				return true;
+			}
+			
 			@Override
 			protected void process(List<Void> chunks) {
 				array.repaint();
-				array.revalidate();
 			}
 
-						
-			
 		};
 		
 		workerThread.execute();		
