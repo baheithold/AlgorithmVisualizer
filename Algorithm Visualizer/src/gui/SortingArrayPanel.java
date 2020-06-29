@@ -23,7 +23,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	private Color[] colors;
 	
 	public SortingArrayPanel(String sortName) {
-		array = new int[windowWidth / BAR_WIDTH];
+		array = new int[(windowWidth / BAR_WIDTH) - 2];
 		colors = new Color[windowWidth / BAR_WIDTH];
 		randomizeArray();
 		resetColors();
@@ -64,10 +64,14 @@ public class SortingArrayPanel extends VisualizationPanel {
 		array[index] = value;
 	}
 	
-	private void resetColors() {
+	public void setAllColors(Color color) {
 		for (int i = 0; i < colors.length; i++) {
-			colors[i] = Color.LIGHT_GRAY;
+			setColor(i, color);
 		}
+	}
+	
+	private void resetColors() {
+		setAllColors(Color.lightGray);
 	}
 	
 	public void setColor(int index, Color color) {

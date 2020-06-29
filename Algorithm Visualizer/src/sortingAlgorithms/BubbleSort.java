@@ -19,7 +19,7 @@ public class BubbleSort implements Runnable {
 	}
 	
 	public void run() {
-		SwingWorker<Void, Void> workerThread= new SwingWorker<Void, Void>() {
+		SwingWorker<Void, Void> workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
@@ -64,7 +64,7 @@ public class BubbleSort implements Runnable {
 			
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i) > i - 1) {
+					if (array.getValue(i - 1) <= array.getValue(i)) {
 						array.setColor(i - 1, Color.blue);
 						publish();
 						try {
