@@ -66,7 +66,6 @@ public class SortingArrayPanel extends VisualizationPanel {
 	}
 	
 	public void swap(int a, int b) {
-		System.out.println("Swapping " + array[a] + " and " + array[b]);
 		int temp = array[a];
 		array[a] = array[b];
 		array[b] = temp;
