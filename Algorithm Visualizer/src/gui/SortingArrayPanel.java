@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 import sortingAlgorithms.BubbleSort;
 
 /**
@@ -17,13 +20,17 @@ public class SortingArrayPanel extends VisualizationPanel {
 	
 	// Array
 	private int[] array;
+	private Color[] colors;
 	
 	public SortingArrayPanel() {
-		setBackground(Color.DARK_GRAY);
 		array = new int[windowWidth / BAR_WIDTH];
+		colors = new Color[windowWidth / BAR_WIDTH];
 		randomizeArray();
-		repaint();
-		new BubbleSort(this).Run();
+		resetColors();
+		setBackground(Color.DARK_GRAY);
+		BubbleSort bs = new BubbleSort(this);
+		SwingUtilities.invokeLater(bs);
+		resetColors();
 		repaint();
 	}
 	
@@ -33,9 +40,6 @@ public class SortingArrayPanel extends VisualizationPanel {
 			// generate an integer [1..windowHeight]
 			int n = rand.nextInt(windowHeight);
 			array[i] = n;
-		}
-		for (int i = 0; i < array.length; i++) {
-			System.out.println(array[i]);
 		}
 	}
 	
@@ -51,7 +55,18 @@ public class SortingArrayPanel extends VisualizationPanel {
 		array[index] = value;
 	}
 	
+	private void resetColors() {
+		for (int i = 0; i < colors.length; i++) {
+			colors[i] = Color.LIGHT_GRAY;
+		}
+	}
+	
+	public void setColor(int index, Color color) {
+		colors[index] = color;
+	}
+	
 	public void swap(int a, int b) {
+		System.out.println("Swapping " + array[a] + " and " + array[b]);
 		int temp = array[a];
 		array[a] = array[b];
 		array[b] = temp;
@@ -61,13 +76,15 @@ public class SortingArrayPanel extends VisualizationPanel {
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics = (Graphics2D) g;
 		super.paintComponent(g);
-		graphics.setColor(Color.LIGHT_GRAY);
 		for (int i = 0; i < array.length; i++) {
 			int height = array[i];
 			int xBegin = i + (BAR_WIDTH - 1) * i;
 			int yBegin = windowHeight - height;
+			graphics.setColor(colors[i]);
 			graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
 		}
 	}
+	
+	
 	
 }
