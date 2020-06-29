@@ -21,7 +21,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Sorting Menu Items
-	private JMenuItem algorithm0Item, algorithm1Item, algorithm2Item, algorithm3Item, algorithm4Item, algorithm5Item;
+	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, algorithm2Item, algorithm3Item, algorithm4Item, algorithm5Item;
 	
 	public SortingMenu(JFrame window) {
 		this.window = window;
@@ -35,12 +35,12 @@ public class SortingMenu extends JMenu implements ActionListener {
 		JLabel comparisonLabel = new JLabel("Comparison Based");
 		add(comparisonLabel);
 		add(new JSeparator(SwingConstants.HORIZONTAL));
-		algorithm0Item = new JMenuItem("Algorithm0");
-		algorithm0Item.addActionListener(this);
-		add(algorithm0Item);
-		algorithm1Item = new JMenuItem("Algorithm1");
-		algorithm1Item.addActionListener(this);
-		add(algorithm1Item);
+		bubbleSortJMenuItem = new JMenuItem("Bubble Sort");
+		bubbleSortJMenuItem.addActionListener(this);
+		add(bubbleSortJMenuItem);
+		insertionSortJMenuItem = new JMenuItem("Insertion Sort");
+		insertionSortJMenuItem.addActionListener(this);
+		add(insertionSortJMenuItem);
 		algorithm2Item = new JMenuItem("Algorithm2");
 		algorithm2Item.addActionListener(this);
 		add(algorithm2Item);
