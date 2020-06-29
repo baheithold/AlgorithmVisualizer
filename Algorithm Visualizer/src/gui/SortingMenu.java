@@ -21,7 +21,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Sorting Menu Items
-	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, algorithm2Item, algorithm3Item, algorithm4Item, algorithm5Item;
+	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
 	
 	public SortingMenu(JFrame window) {
 		this.window = window;
@@ -41,9 +41,9 @@ public class SortingMenu extends JMenu implements ActionListener {
 		insertionSortJMenuItem = new JMenuItem("Insertion Sort");
 		insertionSortJMenuItem.addActionListener(this);
 		add(insertionSortJMenuItem);
-		algorithm2Item = new JMenuItem("Algorithm2");
-		algorithm2Item.addActionListener(this);
-		add(algorithm2Item);
+		selectionSortJMenuItem = new JMenuItem("Selection Sort");
+		selectionSortJMenuItem.addActionListener(this);
+		add(selectionSortJMenuItem);
 		// Non-comparison Based Sorting Algorithms
 		add(new JSeparator(SwingConstants.HORIZONTAL));
 		JLabel noncomparisonLabel = new JLabel("Non-comparison Based");
@@ -62,10 +62,14 @@ public class SortingMenu extends JMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// set which sorting algorithm was selected
 		String sortName;
 		if (e.getSource() == bubbleSortJMenuItem) sortName = "bubbleSort";
 		else if (e.getSource() == insertionSortJMenuItem) sortName = "insertionSort";
-		else sortName = "error";
+		else if (e.getSource() == selectionSortJMenuItem) sortName = "selectionSort";
+		else sortName = "unknown algorithm";
+		
+		// instantiate sortingArrayPanel
 		window.getContentPane().removeAll();
 		window.getContentPane().add(new SortingArrayPanel(sortName));
 		window.revalidate();

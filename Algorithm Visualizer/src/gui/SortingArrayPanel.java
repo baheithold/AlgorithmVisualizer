@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 
 import sortingAlgorithms.BubbleSort;
 import sortingAlgorithms.InsertionSort;
+import sortingAlgorithms.SelectionSort;
 
 /**
  * @author Brett Heithold
@@ -37,6 +38,10 @@ public class SortingArrayPanel extends VisualizationPanel {
 			case "insertionSort":
 				InsertionSort is = new InsertionSort(this);
 				SwingUtilities.invokeLater(is);
+				break;
+			case "selectionSort":
+				SelectionSort ss = new SelectionSort(this);
+				SwingUtilities.invokeLater(ss);
 				break;
 			default:
 				break;
@@ -79,6 +84,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	}
 	
 	public void swap(int a, int b) {
+		System.out.println("Swapping " + a + " and " + b);
 		int temp = array[a];
 		array[a] = array[b];
 		array[b] = temp;
