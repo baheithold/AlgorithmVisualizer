@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import sortingAlgorithms.BubbleSort;
 import sortingAlgorithms.InsertionSort;
 
 /**
@@ -21,16 +22,25 @@ public class SortingArrayPanel extends VisualizationPanel {
 	private int[] array;
 	private Color[] colors;
 	
-	public SortingArrayPanel() {
+	public SortingArrayPanel(String sortName) {
 		array = new int[windowWidth / BAR_WIDTH];
 		colors = new Color[windowWidth / BAR_WIDTH];
 		randomizeArray();
 		resetColors();
 		setBackground(Color.DARK_GRAY);
-		InsertionSort is = new InsertionSort(this);
-		SwingUtilities.invokeLater(is);
-		resetColors();
-		repaint();
+		
+		switch (sortName) {
+			case "bubbleSort":
+				BubbleSort bs = new BubbleSort(this);
+				SwingUtilities.invokeLater(bs);
+				break;
+			case "insertionSort":
+				InsertionSort is = new InsertionSort(this);
+				SwingUtilities.invokeLater(is);
+				break;
+			default:
+				break;
+		}
 	}
 	
 	private void randomizeArray() {
@@ -82,7 +92,5 @@ public class SortingArrayPanel extends VisualizationPanel {
 			graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
 		}
 	}
-	
-	
 	
 }

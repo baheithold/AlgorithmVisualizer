@@ -62,8 +62,12 @@ public class SortingMenu extends JMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String sortName;
+		if (e.getSource() == bubbleSortJMenuItem) sortName = "bubbleSort";
+		else if (e.getSource() == insertionSortJMenuItem) sortName = "insertionSort";
+		else sortName = "error";
 		window.getContentPane().removeAll();
-		window.getContentPane().add(new SortingArrayPanel());
+		window.getContentPane().add(new SortingArrayPanel(sortName));
 		window.revalidate();
 	}
 	
