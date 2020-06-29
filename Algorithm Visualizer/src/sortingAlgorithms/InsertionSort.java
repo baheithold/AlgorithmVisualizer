@@ -3,6 +3,7 @@
  */
 package sortingAlgorithms;
 
+import java.awt.Color;
 import java.util.List;
 
 import javax.swing.SwingWorker;
@@ -28,14 +29,18 @@ public class InsertionSort implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				
+				array.setColor(0, Color.green);
+				publish();
 				for (int i = 1; i < array.length() - 1; i++) {
 					int j = i;
 					while (j > 0 && array.getValue(j - 1) > array.getValue(j)) {
+						publish();
+						array.setColor(j, Color.green);
+						publish();
 						array.swap(j, j - 1);
+						
 						j--;
 					}
-					publish();
 					Thread.sleep(100);
 				}
 				
