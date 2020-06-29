@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
-import sortingAlgorithms.BubbleSort;
+import sortingAlgorithms.InsertionSort;
 
 /**
  * @author Brett Heithold
@@ -27,8 +27,8 @@ public class SortingArrayPanel extends VisualizationPanel {
 		randomizeArray();
 		resetColors();
 		setBackground(Color.DARK_GRAY);
-		BubbleSort bs = new BubbleSort(this);
-		SwingUtilities.invokeLater(bs);
+		InsertionSort is = new InsertionSort(this);
+		SwingUtilities.invokeLater(is);
 		resetColors();
 		repaint();
 	}
