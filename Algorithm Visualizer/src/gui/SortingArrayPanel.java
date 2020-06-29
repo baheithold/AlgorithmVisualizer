@@ -37,7 +37,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 		Random rand = new Random();
 		for (int i = 0; i < array.length; i++) {
 			// generate an integer [1..windowHeight]
-			int n = rand.nextInt(windowHeight);
+			int n = rand.nextInt(windowHeight - 100) + 70;
 			array[i] = n;
 		}
 	}
