@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 import sortingAlgorithms.BubbleSort;
 
