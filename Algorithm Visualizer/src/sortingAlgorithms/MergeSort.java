@@ -34,6 +34,8 @@ public class MergeSort implements Runnable {
 			
 		};
 		
+		workerThread.execute();
+		
 	}
 
 }
