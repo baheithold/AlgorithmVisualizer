@@ -51,6 +51,7 @@ public class BubbleSort implements Runnable {
 				
 				// Verify that the array was sorted correctly
 				array.setAllColors(Color.green);
+				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("BubbleSort: Success!");
 				}
@@ -58,6 +59,7 @@ public class BubbleSort implements Runnable {
 					System.out.println("BubbleSort: Failed!");
 				}
 				array.setAllColors(Color.green);
+				publish();
 				
 				return null;
 			}
@@ -74,6 +76,10 @@ public class BubbleSort implements Runnable {
 						}
 					}
 					else return false;
+				}
+				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+					array.setColor(array.length() - 1, Color.blue);
+					publish();
 				}
 				return true;
 			}
