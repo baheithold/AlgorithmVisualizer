@@ -21,7 +21,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Sorting Menu Items
-	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
+	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
 	
 	public SortingMenu(JFrame window) {
 		this.window = window;
@@ -44,6 +44,9 @@ public class SortingMenu extends JMenu implements ActionListener {
 		selectionSortJMenuItem = new JMenuItem("Selection Sort");
 		selectionSortJMenuItem.addActionListener(this);
 		add(selectionSortJMenuItem);
+		mergeSortJMenuItem = new JMenuItem("Merge Sort");
+		mergeSortJMenuItem.addActionListener(this);
+		add(mergeSortJMenuItem);
 		// Non-comparison Based Sorting Algorithms
 		add(new JSeparator(SwingConstants.HORIZONTAL));
 		JLabel noncomparisonLabel = new JLabel("Non-comparison Based");
@@ -67,6 +70,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 		if (e.getSource() == bubbleSortJMenuItem) sortName = "bubbleSort";
 		else if (e.getSource() == insertionSortJMenuItem) sortName = "insertionSort";
 		else if (e.getSource() == selectionSortJMenuItem) sortName = "selectionSort";
+		else if (e.getSource() == mergeSortJMenuItem) sortName = "mergeSort";
 		else sortName = "unknown algorithm";
 		
 		// instantiate sortingArrayPanel
