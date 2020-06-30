@@ -26,17 +26,12 @@ public class InsertionSort implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				array.setColor(0, Color.green);
-				publish();
 				for (int i = 1; i < array.length(); i++) {
 					int j = i;
 					while (j > 0 && array.getValue(j - 1) > array.getValue(j)) {
-						array.setColor(j, Color.green);
-						publish();
 						array.swap(j, j - 1);
 						j--;
 					}
-					array.setColor(j, Color.red);
 					publish();
 					Thread.sleep(100);
 				}
@@ -49,8 +44,8 @@ public class InsertionSort implements Runnable {
 				else {
 					System.out.println("InsertionSort: Failed!");
 				}
-//				array.setAllColors(Color.green);
-//				publish();
+				array.setAllColors(Color.green);
+				publish();
 				
 				return null;
 			}
