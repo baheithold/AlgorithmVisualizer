@@ -69,6 +69,10 @@ public class SortingArrayPanel extends VisualizationPanel {
 		array[index] = value;
 	}
 	
+	public int[] getArray() {
+		return this.array;
+	}
+	
 	public void setAllColors(Color color) {
 		for (int i = 0; i < colors.length; i++) {
 			setColor(i, color);
