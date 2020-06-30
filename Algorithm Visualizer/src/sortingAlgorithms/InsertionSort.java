@@ -42,13 +42,15 @@ public class InsertionSort implements Runnable {
 				}
 				
 				array.setAllColors(Color.green);
+				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("InsertionSort: Success!");
 				}
 				else {
 					System.out.println("InsertionSort: Failed!");
 				}
-				array.setAllColors(Color.green);
+//				array.setAllColors(Color.green);
+//				publish();
 				
 				return null;
 			}
@@ -65,6 +67,10 @@ public class InsertionSort implements Runnable {
 						}
 					}
 					else return false;
+				}
+				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+					array.setColor(array.length() - 1, Color.blue);
+					publish();
 				}
 				return true;
 			}
