@@ -28,24 +28,38 @@ public class SelectionSort implements Runnable {
 				for (int j = 0; j < array.length() - 1; j++) {
 					int iMin = j;
 					array.setColor(iMin, Color.red);
+					publish();
 					Thread.sleep(10);
 					for (int i = j + 1; i < array.length(); i++) {
 						array.setColor(i, Color.blue);
 						publish();
 						Thread.sleep(10);
 						if (array.getValue(i) < array.getValue(iMin)) {
+							array.setColor(iMin, Color.lightGray);
+							array.setColor(i, Color.red);
+							publish();
 							iMin = i;
+						}
+						else {
+							array.setColor(i, Color.lightGray);
+							publish();
 						}
 					}
 					if (iMin != j) {
 						array.swap(j, iMin);
+						array.setColor(iMin, Color.lightGray);
 						array.setColor(j, Color.green);
+						publish();
+					}
+					else {
+						array.setColor(iMin, Color.green);
 						publish();
 					}
 				}
 				
 				// Verify that the array was sorted correctly
 				array.setAllColors(Color.green);
+				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("SelectionSort: Success!");
 				}
@@ -53,6 +67,7 @@ public class SelectionSort implements Runnable {
 					System.out.println("SelectionSort: Failed!");
 				}
 				array.setAllColors(Color.green);
+				publish();
 				
 				return null;
 			}
@@ -69,6 +84,10 @@ public class SelectionSort implements Runnable {
 						}
 					}
 					else return false;
+				}
+				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+					array.setColor(array.length() - 1, Color.blue);
+					publish();
 				}
 				return true;
 			}
