@@ -60,11 +60,25 @@ public class MergeSort implements Runnable {
 				while (i < nLeft && j < nRight) {
 					if (leftPartition[i] <= rightPartition[j]) {
 						arr[k] = leftPartition[i];
+						publish();
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						System.out.println("Comparing " + leftPartition[i] + " and " + rightPartition[j]);
 						i++;
 					}
 					else {
 						arr[k] = rightPartition[j];
+						publish();
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						j++;
 					}
 					System.out.println("Merged: " + arr[k]);
