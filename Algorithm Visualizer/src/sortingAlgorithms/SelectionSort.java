@@ -62,11 +62,12 @@ public class SelectionSort implements Runnable {
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("SelectionSort: Success!");
+					array.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("SelectionSort: Failed!");
+					array.setAllColors(Color.red);
 				}
-				array.setAllColors(Color.green);
 				publish();
 				
 				return null;
