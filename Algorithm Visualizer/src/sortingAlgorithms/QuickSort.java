@@ -27,6 +27,17 @@ public class QuickSort implements Runnable {
 			protected Void doInBackground() throws Exception {
 				sort(0, array.length());
 				publish();
+				// Verify that the array was sorted correctly
+				publish();
+				if (verifySortedCorrectly()) {
+					System.out.println("QuickSort: Success!");
+					array.setAllColors(Color.green);
+				}
+				else {
+					System.out.println("QuickSort: Failed!");
+					array.setAllColors(Color.red);
+				}
+				publish();
 				return null;
 			}
 
