@@ -1,5 +1,6 @@
 package sortingAlgorithms;
 
+import java.awt.Color;
 import java.util.List;
 
 import javax.swing.SwingWorker;
@@ -25,9 +26,6 @@ public class MergeSort implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				sort(array.getArray(), 0, array.length() - 1);
-				for (int i = 0; i < array.length(); i++) {
-					System.out.println(array.getValue(i));
-				}
 				return null;
 			}
 
@@ -58,43 +56,72 @@ public class MergeSort implements Runnable {
 				int j = 0;
 				int k = l;
 				while (i < nLeft && j < nRight) {
+					array.setColor(k, Color.red);
+					publish();
 					if (leftPartition[i] <= rightPartition[j]) {
 						arr[k] = leftPartition[i];
+						array.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(100);
+							Thread.sleep(10);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						System.out.println("Comparing " + leftPartition[i] + " and " + rightPartition[j]);
 						i++;
 					}
 					else {
 						arr[k] = rightPartition[j];
+						array.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(100);
+							Thread.sleep(10);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						j++;
 					}
-					System.out.println("Merged: " + arr[k]);
+					// paint newly merged element green
+					array.setColor(k, Color.green);
+					publish();
 					k++;
 				}
 				
 				// Either left partition or right partition is now empty, merge the remaining elements
 				while (i < nLeft) {
 					arr[k] = leftPartition[i];
-					System.out.println("Merged: " + arr[k]);
+					array.setColor(k, Color.red);
+					publish();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					array.setColor(k, Color.green);
+					publish();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					i++;
 					k++;
 				}
 				while (j < nRight) {
 					arr[k] = rightPartition[j];
-					System.out.println("Merged: " + arr[k]);
+					array.setColor(k, Color.red);
+					publish();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					array.setColor(k, Color.green);
+					publish();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 					j++;
 					k++;
 				}
