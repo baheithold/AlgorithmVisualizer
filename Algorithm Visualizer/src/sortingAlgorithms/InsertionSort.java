@@ -47,12 +47,13 @@ public class InsertionSort implements Runnable {
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("InsertionSort: Success!");
+					array.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("InsertionSort: Failed!");
+					array.setAllColors(Color.red);
 				}
-//				array.setAllColors(Color.green);
-//				publish();
+				publish();
 				
 				return null;
 			}
