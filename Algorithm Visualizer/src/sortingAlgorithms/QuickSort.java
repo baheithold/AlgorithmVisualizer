@@ -28,7 +28,6 @@ public class QuickSort implements Runnable {
 				sort(0, array.length());
 				publish();
 				// Verify that the array was sorted correctly
-				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("QuickSort: Success!");
 					array.setAllColors(Color.green);
@@ -73,29 +72,29 @@ public class QuickSort implements Runnable {
 			}
 			
 			private int partition(int low, int high) {
-				int pivotIndex = low;
-				int pivotValue = array.getValue(pivotIndex);
+				int pivotValue = array.getValue(low);
+				int leftwall = low;
 				
 				for (int i = low + 1; i < high; i++) {
 					if (array.getValue(i) < pivotValue) {
-						array.swap(i, pivotIndex);
+						leftwall++;
+						array.swap(i, leftwall);
 						publish();
 						try {
-							Thread.sleep(10);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						pivotIndex++;
 					}
 				}
-				array.swap(low, pivotIndex);
+				array.swap(low, leftwall);
 				publish();
 				try {
-					Thread.sleep(10);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				return pivotIndex;
+				return leftwall;
 			}
 			
 			private Boolean verifySortedCorrectly() {
