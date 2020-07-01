@@ -26,6 +26,14 @@ public class MergeSort implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				sort(array.getArray(), 0, array.length() - 1);
+				if (verifySortedCorrectly()) {
+					System.out.println("BubbleSort: Success!");
+				}
+				else {
+					System.out.println("BubbleSort: Failed!");
+				}
+				array.setAllColors(Color.green);
+				publish();
 				return null;
 			}
 
@@ -139,6 +147,26 @@ public class MergeSort implements Runnable {
 					// Merge left and right partitions
 					merge(arr, l, m, r);
 				}
+			}
+			
+			private Boolean verifySortedCorrectly() {
+				for (int i = 1; i < array.length(); i++) {
+					if (array.getValue(i - 1) <= array.getValue(i)) {
+						array.setColor(i - 1, Color.blue);
+						publish();
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					else return false;
+				}
+				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+					array.setColor(array.length() - 1, Color.blue);
+					publish();
+				}
+				return true;
 			}
 			
 		};
