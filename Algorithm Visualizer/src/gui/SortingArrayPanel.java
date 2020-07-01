@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import sortingAlgorithms.BubbleSort;
 import sortingAlgorithms.InsertionSort;
 import sortingAlgorithms.MergeSort;
+import sortingAlgorithms.QuickSort;
 import sortingAlgorithms.SelectionSort;
 
 /**
@@ -47,6 +48,10 @@ public class SortingArrayPanel extends VisualizationPanel {
 			case "mergeSort":
 				MergeSort ms = new MergeSort(this);
 				SwingUtilities.invokeLater(ms);
+				break;
+			case "quickSort":
+				QuickSort qs = new QuickSort(this);
+				SwingUtilities.invokeLater(qs);
 				break;
 			default:
 				break;
