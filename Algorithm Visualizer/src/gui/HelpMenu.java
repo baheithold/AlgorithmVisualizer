@@ -44,6 +44,7 @@ public class HelpMenu extends JMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == about) {
+			// Add remove previous content and add new content to content pane
 			window.getContentPane().removeAll();
 			window.getContentPane().add(new AboutPanel());
 			window.revalidate();
