@@ -54,11 +54,12 @@ public class BubbleSort implements Runnable {
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("BubbleSort: Success!");
+					array.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("BubbleSort: Failed!");
+					array.setAllColors(Color.red);
 				}
-				array.setAllColors(Color.green);
 				publish();
 				
 				return null;
