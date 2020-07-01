@@ -28,11 +28,12 @@ public class MergeSort implements Runnable {
 				sort(array.getArray(), 0, array.length() - 1);
 				if (verifySortedCorrectly()) {
 					System.out.println("MergeSort: Success!");
+					array.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("MergeSort: Failed!");
+					array.setAllColors(Color.red);
 				}
-				array.setAllColors(Color.green);
 				publish();
 				return null;
 			}
