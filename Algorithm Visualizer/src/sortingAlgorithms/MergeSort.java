@@ -27,10 +27,10 @@ public class MergeSort implements Runnable {
 			protected Void doInBackground() throws Exception {
 				sort(array.getArray(), 0, array.length() - 1);
 				if (verifySortedCorrectly()) {
-					System.out.println("BubbleSort: Success!");
+					System.out.println("MergeSort: Success!");
 				}
 				else {
-					System.out.println("BubbleSort: Failed!");
+					System.out.println("MergeSort: Failed!");
 				}
 				array.setAllColors(Color.green);
 				publish();
