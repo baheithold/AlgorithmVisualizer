@@ -75,7 +75,12 @@ public class QuickSort implements Runnable {
 				int pivotValue = array.getValue(low);
 				int leftwall = low;
 				
+				array.setColor(leftwall, Color.blue);
+				publish();
+				
 				for (int i = low + 1; i < high; i++) {
+					array.setColor(i, Color.red);
+					publish();
 					if (array.getValue(i) < pivotValue) {
 						leftwall++;
 						array.swap(i, leftwall);
@@ -86,8 +91,11 @@ public class QuickSort implements Runnable {
 							e.printStackTrace();
 						}
 					}
+					array.setColor(i, Color.lightGray);
+					publish();
 				}
 				array.swap(low, leftwall);
+				array.setColor(leftwall, Color.green);
 				publish();
 				try {
 					Thread.sleep(100);
