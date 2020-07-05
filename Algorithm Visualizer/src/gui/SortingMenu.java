@@ -21,7 +21,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Sorting Menu Items
-	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, quickSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
+	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, quickSortJMenuItem, heapSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
 	
 	public SortingMenu(JFrame window) {
 		this.window = window;
@@ -50,6 +50,10 @@ public class SortingMenu extends JMenu implements ActionListener {
 		quickSortJMenuItem = new JMenuItem("Quick Sort");
 		quickSortJMenuItem.addActionListener(this);
 		add(quickSortJMenuItem);
+		heapSortJMenuItem = new JMenuItem("Heap Sort");
+		heapSortJMenuItem.addActionListener(this);
+		add(heapSortJMenuItem);
+		
 		// Non-comparison Based Sorting Algorithms
 		add(new JSeparator(SwingConstants.HORIZONTAL));
 		JLabel noncomparisonLabel = new JLabel("Non-comparison Based");

@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.SwingUtilities;
 
 import sortingAlgorithms.BubbleSort;
+import sortingAlgorithms.HeapSort;
 import sortingAlgorithms.InsertionSort;
 import sortingAlgorithms.MergeSort;
 import sortingAlgorithms.QuickSort;
@@ -52,6 +53,10 @@ public class SortingArrayPanel extends VisualizationPanel {
 			case "quickSort":
 				QuickSort qs = new QuickSort(this);
 				SwingUtilities.invokeLater(qs);
+				break;
+			case "heapSort":
+				HeapSort hs = new HeapSort(this);
+				SwingUtilities.invokeLater(hs);
 				break;
 			default:
 				break;
