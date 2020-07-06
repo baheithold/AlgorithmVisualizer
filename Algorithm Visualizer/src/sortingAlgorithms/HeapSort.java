@@ -24,6 +24,7 @@ public class HeapSort implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
+				// Perform Heap Sort
 				sort();
 				publish();
 				
@@ -51,8 +52,12 @@ public class HeapSort implements Runnable {
 			private void sort() {
 				int heapSize = array.length();
 				BuildMaxHeap(heapSize);
+				// Swap each extreme value with last value,
+				// then call Heapify
 				for (int i = heapSize - 1; i > 0; i--) {
 					array.swap(0, i);
+					array.setColor(i, Color.green);
+					publish();
 					Heapify(i, 0);
 				}
 			}
@@ -63,14 +68,7 @@ public class HeapSort implements Runnable {
 				}
 			}
 			
-			private void Heapify(int heapSize, int i) {
-				publish();
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
+			private void Heapify(int heapSize, int i) {				
 				int leftIndex = 2 * i + 1;
 				int rightIndex = 2 * i + 2;
 				int maxIndex = i;
@@ -84,8 +82,32 @@ public class HeapSort implements Runnable {
 				}				
 				
 				if (maxIndex != i) {
+					array.setColor(maxIndex, Color.red);
+					publish();
 					array.swap(i, maxIndex);
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					array.setColor(i, Color.lightGray);
+					array.setColor(maxIndex, Color.red);
+					publish();
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					array.setColor(maxIndex, Color.lightGray);
+					publish();
 					Heapify(heapSize, maxIndex);
+				}
+				
+				publish();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 			
