@@ -27,7 +27,7 @@ public class VisualizerWindow extends JFrame {
 		setTitle("Algorithm Visualizer");
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setFocusable(true);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
