@@ -68,7 +68,7 @@ public class HeapSort implements Runnable {
 				}
 			}
 			
-			private void Heapify(int heapSize, int i) {				
+			private void Heapify(int heapSize, int i) {		
 				int leftIndex = 2 * i + 1;
 				int rightIndex = 2 * i + 2;
 				int maxIndex = i;
@@ -84,7 +84,15 @@ public class HeapSort implements Runnable {
 				array.incrementComparisons();
 				
 				if (maxIndex != i) {
+					array.setColor(maxIndex, Color.red);
+					publish();
 					array.swap(i, maxIndex);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					array.setColor(maxIndex, Color.lightGray);
 					publish();
 					Heapify(heapSize, maxIndex);
 				}
