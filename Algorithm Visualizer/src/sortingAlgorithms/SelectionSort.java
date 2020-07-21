@@ -34,6 +34,7 @@ public class SelectionSort implements Runnable {
 						array.setColor(i, Color.blue);
 						publish();
 						Thread.sleep(10);
+						array.incrementComparisons();
 						if (array.getValue(i) < array.getValue(iMin)) {
 							array.setColor(iMin, Color.lightGray);
 							array.setColor(i, Color.red);

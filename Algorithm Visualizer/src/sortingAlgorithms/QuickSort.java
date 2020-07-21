@@ -81,6 +81,7 @@ public class QuickSort implements Runnable {
 				for (int i = low + 1; i < high; i++) {
 					array.setColor(i, Color.red);
 					publish();
+					array.incrementComparisons();
 					if (array.getValue(i) < pivotValue) {
 						leftwall++;
 						array.swap(i, leftwall);

@@ -31,6 +31,7 @@ public class InsertionSort implements Runnable {
 				for (int i = 1; i < array.length(); i++) {
 					int j = i;
 					while (j > 0 && array.getValue(j - 1) > array.getValue(j)) {
+						array.incrementComparisons();
 						array.setColor(j, Color.red);
 						publish();
 						Thread.sleep(100);
@@ -43,6 +44,7 @@ public class InsertionSort implements Runnable {
 					Thread.sleep(10);
 				}
 				
+				// Verify that the array was sorted correctly
 				array.setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {

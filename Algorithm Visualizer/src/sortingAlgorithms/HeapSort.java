@@ -76,34 +76,19 @@ public class HeapSort implements Runnable {
 				if (leftIndex < heapSize && array.getValue(leftIndex) > array.getValue(maxIndex)) {
 					maxIndex = leftIndex;
 				}
+				array.incrementComparisons();
 				
 				if (rightIndex < heapSize && array.getValue(rightIndex) > array.getValue(maxIndex)) {
 					maxIndex = rightIndex;
-				}				
+				}
+				array.incrementComparisons();
 				
 				if (maxIndex != i) {
-					array.setColor(maxIndex, Color.red);
-					publish();
 					array.swap(i, maxIndex);
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					array.setColor(i, Color.lightGray);
-					array.setColor(maxIndex, Color.red);
-					publish();
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					array.setColor(maxIndex, Color.lightGray);
 					publish();
 					Heapify(heapSize, maxIndex);
 				}
 				
-				publish();
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {

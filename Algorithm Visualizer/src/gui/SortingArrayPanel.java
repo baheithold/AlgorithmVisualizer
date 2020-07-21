@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,9 +27,24 @@ public class SortingArrayPanel extends VisualizationPanel {
 	private int[] array;
 	private Color[] colors;
 	
+	// Statistics
+	private SortingStatisticsPanel statsPanel;
+	private int numSwaps;
+	private int numAccesses;
+	private int numComparisons;
+	
 	public SortingArrayPanel(String sortName) {
 		array = new int[(windowWidth / BAR_WIDTH) - 2];
 		colors = new Color[windowWidth / BAR_WIDTH];
+		
+		// initialize statistics panel
+		statsPanel = new SortingStatisticsPanel(this);
+		this.add(statsPanel, BorderLayout.NORTH);
+		numSwaps = 0;
+		numAccesses = 0;
+		numComparisons = 0;
+		
+		// Randomize sorting panel and reset colors
 		randomizeArray();
 		resetColors();
 		setBackground(Color.DARK_GRAY);
@@ -77,6 +93,8 @@ public class SortingArrayPanel extends VisualizationPanel {
 	}
 	
 	public int getValue(int index) {
+		numAccesses++;
+		statsPanel.updateNumAccessesJLabel(numAccesses);
 		return array[index];
 	}
 	
@@ -107,6 +125,25 @@ public class SortingArrayPanel extends VisualizationPanel {
 		int temp = array[a];
 		array[a] = array[b];
 		array[b] = temp;
+		numSwaps++;
+		statsPanel.updateNumSwapsJLabel(numSwaps);
+	}
+	
+	public int getNumSwaps() {
+		return this.numSwaps;
+	}
+	
+	public int getNumAccesses() {
+		return this.numAccesses;
+	}
+	
+	public int getNumComparisons() {
+		return this.numComparisons;
+	}
+	
+	public void incrementComparisons() {
+		numComparisons++;
+		statsPanel.updateNumComparisonsJLabel(numComparisons);
 	}
 	
 	@Override

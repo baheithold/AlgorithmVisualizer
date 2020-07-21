@@ -36,6 +36,7 @@ public class BubbleSort implements Runnable {
 							array.swap(i, i + 1);
 							isSorted = false;
 						}
+						array.incrementComparisons();
 						array.setColor(i, Color.lightGray);
 						publish();
 					}

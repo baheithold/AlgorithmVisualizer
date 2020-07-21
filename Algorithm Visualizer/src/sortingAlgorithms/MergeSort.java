@@ -67,6 +67,7 @@ public class MergeSort implements Runnable {
 				while (i < nLeft && j < nRight) {
 					array.setColor(k, Color.red);
 					publish();
+					array.incrementComparisons();
 					if (leftPartition[i] <= rightPartition[j]) {
 						arr[k] = leftPartition[i];
 						array.setColor(k, Color.red);
