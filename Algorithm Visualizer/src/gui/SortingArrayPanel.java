@@ -27,22 +27,27 @@ public class SortingArrayPanel extends VisualizationPanel {
 	private int[] array;
 	private Color[] colors;
 	
-	// Statistics
+	// Statistics panel
 	private SortingStatisticsPanel statsPanel;
 	private int numSwaps;
 	private int numAccesses;
 	private int numComparisons;
 	
+	// Control Panel
+	private SortingControlPanel controlPanel;
+	
 	public SortingArrayPanel(String sortName) {
 		array = new int[(windowWidth / BAR_WIDTH) - 2];
 		colors = new Color[windowWidth / BAR_WIDTH];
-		
+
+		// set layout to BorderLayout
+		this.setLayout(new BorderLayout());
+
 		// initialize statistics panel
-		statsPanel = new SortingStatisticsPanel(this);
-		this.add(statsPanel, BorderLayout.NORTH);
-		numSwaps = 0;
-		numAccesses = 0;
-		numComparisons = 0;
+		initializeStatisticsPanel();
+		
+		// initialize control panel
+		initializeControlPanel();
 		
 		// Randomize sorting panel and reset colors
 		randomizeArray();
@@ -144,6 +149,19 @@ public class SortingArrayPanel extends VisualizationPanel {
 	public void incrementComparisons() {
 		numComparisons++;
 		statsPanel.updateNumComparisonsJLabel(numComparisons);
+	}
+	
+	private void initializeStatisticsPanel() {
+		statsPanel = new SortingStatisticsPanel(this);
+		this.add(statsPanel, BorderLayout.NORTH);
+		numSwaps = 0;
+		numAccesses = 0;
+		numComparisons = 0;
+	}
+	
+	private void initializeControlPanel() {
+		controlPanel = new SortingControlPanel(this);
+		this.add(controlPanel, BorderLayout.SOUTH);
 	}
 	
 	@Override
