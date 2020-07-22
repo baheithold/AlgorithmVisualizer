@@ -23,6 +23,13 @@ public class SortingStatisticsPanel extends JPanel {
 		this.array = array;
 		
 		// initialize statistic panel items
+		initializeStatisticJLabels();
+		
+		// construct the statistics panel
+		constructStatisticsPanel();
+	}
+	
+	private void initializeStatisticJLabels() {
 		itemsJLabel = new JLabel("Items: ");
 		numItemsJLabel = new JLabel(Integer.toString(array.length()));
 		swapsJLabel = new JLabel("Swaps: ");
@@ -31,8 +38,9 @@ public class SortingStatisticsPanel extends JPanel {
 		numAccessesJLabel = new JLabel(Integer.toString(array.getNumAccesses()));
 		comparisonsJlabel = new JLabel("Comparisons: ");
 		numComparisonsJLabel = new JLabel(Integer.toString(array.getNumComparisons()));
-		
-		// construct the statistics panel
+	}
+	
+	private void constructStatisticsPanel() {
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		this.add(Box.createHorizontalStrut(10));
 		this.add(itemsJLabel);
