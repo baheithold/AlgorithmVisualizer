@@ -38,7 +38,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	
 	public SortingArrayPanel(String sortName) {
 		array = new int[(windowWidth / BAR_WIDTH) - 2];
-		colors = new Color[windowWidth / BAR_WIDTH];
+		colors = new Color[(windowWidth / BAR_WIDTH) - 2];
 
 		// set layout to BorderLayout
 		this.setLayout(new BorderLayout());
