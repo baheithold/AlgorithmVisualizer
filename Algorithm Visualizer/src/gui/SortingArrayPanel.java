@@ -41,7 +41,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	public final int MIN_DELAY = 1;
 	public final int MAX_DELAY = 1000;
 	private int currentDelay;
-	public final int DEFAULT_NUM_ITEMS = 50;
+	public final int DEFAULT_NUM_ITEMS = 98;
 	public final int MIN_NUM_ITEMS = 1;
 	public final int MAX_NUM_ITEMS = 98;
 	private int currentNumItems;
