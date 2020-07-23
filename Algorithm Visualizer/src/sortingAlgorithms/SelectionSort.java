@@ -36,7 +36,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 						publish();
 						Thread.sleep(10);
 						array.incrementComparisons();
-						if (array.getValue(i) < array.getValue(iMin)) {
+						if (array.getValue(i, false) < array.getValue(iMin, false)) {
 							array.setColor(iMin, Color.lightGray);
 							array.setColor(i, Color.red);
 							publish();
@@ -77,7 +77,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1) <= array.getValue(i)) {
+					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
 						array.setColor(i - 1, Color.blue);
 						publish();
 						try {
@@ -88,7 +88,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
 					array.setColor(array.length() - 1, Color.blue);
 					publish();
 				}

@@ -105,8 +105,8 @@ public class SortingArrayPanel extends VisualizationPanel {
 		return array.length;
 	}
 	
-	public int getValue(int index) {
-		numAccesses++;
+	public int getValue(int index, boolean isVerifying) {
+		if (!isVerifying) numAccesses++;
 		statsPanel.updateNumAccessesJLabel(numAccesses);
 		return array[index];
 	}

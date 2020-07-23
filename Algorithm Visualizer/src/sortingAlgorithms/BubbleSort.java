@@ -33,7 +33,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 						array.setColor(i + 1, Color.red);
 						publish();
 						Thread.sleep(1);
-						if (array.getValue(i) > array.getValue(i + 1)) {
+						if (array.getValue(i, false) > array.getValue(i + 1, false)) {
 							array.swap(i, i + 1);
 							isSorted = false;
 						}
@@ -69,7 +69,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 			
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1) <= array.getValue(i)) {
+					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
 						array.setColor(i - 1, Color.blue);
 						publish();
 						try {
@@ -80,7 +80,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
 					array.setColor(array.length() - 1, Color.blue);
 					publish();
 				}

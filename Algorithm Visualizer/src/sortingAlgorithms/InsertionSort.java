@@ -31,7 +31,7 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 				publish();
 				for (int i = 1; i < array.length(); i++) {
 					int j = i;
-					while (j > 0 && array.getValue(j - 1) > array.getValue(j)) {
+					while (j > 0 && array.getValue(j - 1, false) > array.getValue(j, false)) {
 						array.incrementComparisons();
 						array.setColor(j, Color.red);
 						publish();
@@ -63,7 +63,7 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1) <= array.getValue(i)) {
+					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
 						array.setColor(i - 1, Color.blue);
 						publish();
 						try {
@@ -74,7 +74,7 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
 					array.setColor(array.length() - 1, Color.blue);
 					publish();
 				}

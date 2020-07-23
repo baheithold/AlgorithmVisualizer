@@ -73,7 +73,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private int partition(int low, int high) {
-				int pivotValue = array.getValue(low);
+				int pivotValue = array.getValue(low, false);
 				int leftwall = low;
 				
 				array.setColor(leftwall, Color.blue);
@@ -83,7 +83,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					array.setColor(i, Color.red);
 					publish();
 					array.incrementComparisons();
-					if (array.getValue(i) < pivotValue) {
+					if (array.getValue(i, false) < pivotValue) {
 						leftwall++;
 						array.swap(i, leftwall);
 						publish();
@@ -109,7 +109,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1) <= array.getValue(i)) {
+					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
 						array.setColor(i - 1, Color.blue);
 						publish();
 						try {
@@ -120,7 +120,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1) > array.getValue(array.length() - 2)) {
+				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
 					array.setColor(array.length() - 1, Color.blue);
 					publish();
 				}
