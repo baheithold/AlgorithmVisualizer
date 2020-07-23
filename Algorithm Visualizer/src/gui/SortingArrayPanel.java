@@ -96,7 +96,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 		}
 	}
 	
-	private void randomizeArray() {
+	public void randomizeArray() {
 		Random rand = new Random();
 		for (int i = 0; i < array.length; i++) {
 			// generate an integer [1..windowHeight]
@@ -129,7 +129,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 		}
 	}
 	
-	private void resetColors() {
+	public void resetColors() {
 		setAllColors(Color.lightGray);
 	}
 	

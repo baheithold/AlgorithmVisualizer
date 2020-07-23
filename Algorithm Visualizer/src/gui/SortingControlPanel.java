@@ -88,6 +88,9 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
+			array.randomizeArray();
+			array.resetColors();
+			array.repaint();
 		}
 	}
 
