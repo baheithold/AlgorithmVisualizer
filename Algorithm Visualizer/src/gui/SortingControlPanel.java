@@ -83,11 +83,11 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == randomizeJButton) {
-			System.out.println("Button Pressed: Randomize");
-		}
-		else if (e.getSource() == sortJButton) {
+		if (e.getSource() == sortJButton) {
 			System.out.println("Button Pressed: Sort");
+		}
+		else if (e.getSource() == randomizeJButton) {
+			System.out.println("Button Pressed: Randomize");
 		}
 	}
 
