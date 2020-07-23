@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -8,12 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author Brett Heithold
  *
  */
-public class SortingControlPanel extends JPanel {
+public class SortingControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 
 	private SortingArrayPanel array;
@@ -45,13 +50,19 @@ public class SortingControlPanel extends JPanel {
 	}
 	
 	private void initializeJSliders() {
-		speedJSlider = new JSlider(1, 1000);
-		numItemsJSlider = new JSlider(5, 100);
+		speedJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY);
+		speedJSlider.setValue(array.DEFAULT_DELAY);
+		speedJSlider.addChangeListener(this);
+		numItemsJSlider = new JSlider(array.MIN_NUM_ITEMS, array.MAX_NUM_ITEMS);
+		numItemsJSlider.setValue(array.DEFAULT_NUM_ITEMS);
+		numItemsJSlider.addChangeListener(this);
 	}
 	
 	private void initializeJButtons() {
 		sortJButton = new JButton("Sort");
+		sortJButton.addActionListener(this);
 		randomizeJButton = new JButton("Randomize");
+		randomizeJButton.addActionListener(this);
 	}
 	
 	private void constructControlPanel() {
@@ -68,6 +79,28 @@ public class SortingControlPanel extends JPanel {
 		this.add(Box.createHorizontalStrut(10));
 		this.add(randomizeJButton);
 		this.add(Box.createHorizontalStrut(10));
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == randomizeJButton) {
+			System.out.println("Button Pressed: Randomize");
+		}
+		else if (e.getSource() == sortJButton) {
+			System.out.println("Button Pressed: Sort");
+		}
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == numItemsJSlider) {
+			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
+			array.setCurrentNumItems(numItemsJSlider.getValue());
+		}
+		else if (e.getSource() == speedJSlider) {
+			System.out.println("Speed Slider Changed: " + speedJSlider.getValue());
+			array.setCurrentDelay(speedJSlider.getValue());
+		}
 	}
 	
 }

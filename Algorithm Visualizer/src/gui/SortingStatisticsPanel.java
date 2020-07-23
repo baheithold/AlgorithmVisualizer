@@ -75,4 +75,8 @@ public class SortingStatisticsPanel extends JPanel {
 		numComparisonsJLabel.setText(Integer.toString(n));
 	}
 	
+	public void updateNumItemsJLabel(int n) {
+		numItemsJLabel.setText(Integer.toString(n));
+	}
+	
 }
