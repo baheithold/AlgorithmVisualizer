@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -11,12 +9,10 @@ import javax.swing.JMenuBar;
  */
 public class VisualizerWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private Toolkit toolkit;
 	private static final int DEFAULT_WIDTH = 800; 
 	private static final int DEFAULT_HEIGHT = 600;
 
 	public VisualizerWindow() {
-		toolkit = Toolkit.getDefaultToolkit();
 		initializeWindow();
 		createMenuBar();
 		add(new AboutPanel());
