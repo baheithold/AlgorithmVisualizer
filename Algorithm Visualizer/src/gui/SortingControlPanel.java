@@ -28,7 +28,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	private JLabel numItemsJLabel;
 	
 	// JSliders
-	private JSlider speedJSlider;
+	private JSlider delayJSlider;
 	private JSlider numItemsJSlider;
 	
 	// JButtons
@@ -45,15 +45,26 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	}
 	
 	private void initializeJLabels() {
-		sortingSpeedJLabel = new JLabel("Sorting Speed");
+		sortingSpeedJLabel = new JLabel("Delay (ms)");
 		numItemsJLabel = new JLabel("Number of Items");
 	}
 	
 	private void initializeJSliders() {
-		speedJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY);
-		speedJSlider.setValue(array.DEFAULT_DELAY);
-		speedJSlider.addChangeListener(this);
+		// speedJSlider
+		delayJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY);
+		delayJSlider.setMajorTickSpacing(500);
+		delayJSlider.setMinorTickSpacing(100);
+		delayJSlider.setPaintTicks(true);
+		delayJSlider.setPaintLabels(true);
+		delayJSlider.setValue(array.DEFAULT_DELAY);
+		delayJSlider.addChangeListener(this);
+		
+		// numItemsJSlider
 		numItemsJSlider = new JSlider(array.MIN_NUM_ITEMS, array.MAX_NUM_ITEMS);
+		numItemsJSlider.setMajorTickSpacing(10);
+		numItemsJSlider.setMinorTickSpacing(1);
+		numItemsJSlider.setPaintTicks(true);
+		numItemsJSlider.setPaintLabels(true);
 		numItemsJSlider.setValue(array.DEFAULT_NUM_ITEMS);
 		numItemsJSlider.addChangeListener(this);
 	}
@@ -68,7 +79,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	private void constructControlPanel() {
 		this.add(Box.createHorizontalStrut(10));
 		this.add(sortingSpeedJLabel);
-		this.add(speedJSlider);
+		this.add(delayJSlider);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(new JSeparator(SwingConstants.VERTICAL));
 		this.add(Box.createHorizontalStrut(10));
@@ -100,9 +111,9 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
 			array.setCurrentNumItems(numItemsJSlider.getValue());
 		}
-		else if (e.getSource() == speedJSlider) {
-			System.out.println("Speed Slider Changed: " + speedJSlider.getValue());
-			array.setCurrentDelay(speedJSlider.getValue());
+		else if (e.getSource() == delayJSlider) {
+			System.out.println("Speed Slider Changed: " + delayJSlider.getValue());
+			array.setCurrentDelay(delayJSlider.getValue());
 		}
 	}
 	
