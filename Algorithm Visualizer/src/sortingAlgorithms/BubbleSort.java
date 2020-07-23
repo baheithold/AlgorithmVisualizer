@@ -93,7 +93,7 @@ public class BubbleSort implements Runnable {
 
 		};
 		
-		workerThread.execute();		
+		workerThread.execute();
 		
 	}
 	
