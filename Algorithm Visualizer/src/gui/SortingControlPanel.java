@@ -96,10 +96,16 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortJButton) {
 			System.out.println("Button Pressed: Sort");
+			if (array.sortAlgorithm.isRunning()) {
+				array.sortAlgorithm.killSort();
+			}
 			array.sortAlgorithm.runSort();
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
+			if (array.sortAlgorithm.isRunning()) {
+				array.sortAlgorithm.killSort();
+			}
 			array.randomizeArray();
 			array.resetColors();
 			array.repaint();
@@ -110,10 +116,16 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == numItemsJSlider) {
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
+			if (array.sortAlgorithm.isRunning()) {
+				array.sortAlgorithm.killSort();
+			}
 			array.setCurrentNumItems(numItemsJSlider.getValue());
 		}
 		else if (e.getSource() == delayJSlider) {
 			System.out.println("Speed Slider Changed: " + delayJSlider.getValue());
+			if (array.sortAlgorithm.isRunning()) {
+				array.sortAlgorithm.killSort();
+			}
 			array.setCurrentDelay(delayJSlider.getValue());
 		}
 	}

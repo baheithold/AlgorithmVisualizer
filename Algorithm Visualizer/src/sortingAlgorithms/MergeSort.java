@@ -13,7 +13,7 @@ import gui.SortingArrayPanel;
  *
  */
 public class MergeSort extends SortingAlgorithm implements Runnable {
-	private SortingArrayPanel array;
+	public SwingWorker<Void, Void> workerThread;
 	
 	public MergeSort(SortingArrayPanel array) {
 		this.array = array;
@@ -22,7 +22,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 	@Override
 	public void run() {
 		
-		SwingWorker<Void, Void> workerThread = new SwingWorker<Void, Void>() {
+		workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
@@ -182,4 +182,10 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
+	@Override
+	public void killSort() {
+		setRunning(false);
+		workerThread.cancel(true);
+	}
+	
 }

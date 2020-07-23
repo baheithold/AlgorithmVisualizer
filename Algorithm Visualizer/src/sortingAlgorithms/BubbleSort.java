@@ -13,7 +13,7 @@ import gui.SortingArrayPanel;
  *
  */
 public class BubbleSort extends SortingAlgorithm implements Runnable {
-	private SwingWorker<Void, Void> workerThread;
+	public SwingWorker<Void, Void> workerThread;
 	
 	public BubbleSort(SortingArrayPanel array) {
 		super(array);
@@ -100,7 +100,14 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 	
 	@Override
 	public void runSort() {
+		setRunning(true);
 		SwingUtilities.invokeLater(this);
+	}
+	
+	@Override
+	public void killSort() {
+		setRunning(false);
+		workerThread.cancel(true);
 	}
 	
 }

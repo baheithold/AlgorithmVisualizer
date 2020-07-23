@@ -82,7 +82,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 		else if (e.getSource() == heapSortJMenuItem) sortName = "heapSort";
 		else sortName = "unknown algorithm";
 		
-		// instantiate sortingArrayPanel
+//		 instantiate sortingArrayPanel
 		window.getContentPane().removeAll();
 		window.getContentPane().add(new SortingArrayPanel(sortName));
 		window.revalidate();
