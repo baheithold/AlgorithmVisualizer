@@ -3,6 +3,7 @@ package sortingAlgorithms;
 import java.awt.Color;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import gui.SortingArrayPanel;
@@ -11,7 +12,7 @@ import gui.SortingArrayPanel;
  * @author Brett Heithold
  *
  */
-public class InsertionSort implements Runnable {
+public class InsertionSort extends SortingAlgorithm implements Runnable {
 
 	private SortingArrayPanel array;
 	
@@ -89,6 +90,11 @@ public class InsertionSort implements Runnable {
 		
 		workerThread.execute();
 		
+	}
+
+	@Override
+	public void runSort() {
+		SwingUtilities.invokeLater(this);
 	}
 
 }

@@ -6,14 +6,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import javax.swing.SwingUtilities;
-
 import sortingAlgorithms.BubbleSort;
 import sortingAlgorithms.HeapSort;
 import sortingAlgorithms.InsertionSort;
 import sortingAlgorithms.MergeSort;
 import sortingAlgorithms.QuickSort;
 import sortingAlgorithms.SelectionSort;
+import sortingAlgorithms.SortingAlgorithm;
 
 /**
  * @author Brett Heithold
@@ -46,6 +45,9 @@ public class SortingArrayPanel extends VisualizationPanel {
 	public final int MAX_NUM_ITEMS = 98;
 	private int currentNumItems;
 	
+	// Sort
+	public SortingAlgorithm sortAlgorithm;
+	
 	public SortingArrayPanel(String sortName) {
 		currentDelay = DEFAULT_DELAY;
 		currentNumItems = DEFAULT_NUM_ITEMS;
@@ -68,28 +70,22 @@ public class SortingArrayPanel extends VisualizationPanel {
 		
 		switch (sortName) {
 			case "bubbleSort":
-				BubbleSort bs = new BubbleSort(this);
-				SwingUtilities.invokeLater(bs);
+				sortAlgorithm = new BubbleSort(this);
 				break;
 			case "insertionSort":
-				InsertionSort is = new InsertionSort(this);
-				SwingUtilities.invokeLater(is);
+				sortAlgorithm = new InsertionSort(this);
 				break;
 			case "selectionSort":
-				SelectionSort ss = new SelectionSort(this);
-				SwingUtilities.invokeLater(ss);
+				sortAlgorithm = new SelectionSort(this);
 				break;
 			case "mergeSort":
-				MergeSort ms = new MergeSort(this);
-				SwingUtilities.invokeLater(ms);
+				sortAlgorithm = new MergeSort(this);
 				break;
 			case "quickSort":
-				QuickSort qs = new QuickSort(this);
-				SwingUtilities.invokeLater(qs);
+				sortAlgorithm = new QuickSort(this);
 				break;
 			case "heapSort":
-				HeapSort hs = new HeapSort(this);
-				SwingUtilities.invokeLater(hs);
+				sortAlgorithm = new HeapSort(this);
 				break;
 			default:
 				break;

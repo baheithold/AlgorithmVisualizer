@@ -3,6 +3,7 @@ package sortingAlgorithms;
 import java.awt.Color;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import gui.SortingArrayPanel;
@@ -11,15 +12,15 @@ import gui.SortingArrayPanel;
  * @author Brett Heithold
  *
  */
-public class BubbleSort implements Runnable {
-	private SortingArrayPanel array;
+public class BubbleSort extends SortingAlgorithm implements Runnable {
+	private SwingWorker<Void, Void> workerThread;
 	
 	public BubbleSort(SortingArrayPanel array) {
-		this.array = array;
+		super(array);
 	}
 	
 	public void run() {
-		SwingWorker<Void, Void> workerThread = new SwingWorker<Void, Void>() {
+		workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
@@ -95,6 +96,11 @@ public class BubbleSort implements Runnable {
 		
 		workerThread.execute();
 		
+	}
+	
+	@Override
+	public void runSort() {
+		SwingUtilities.invokeLater(this);
 	}
 	
 }
