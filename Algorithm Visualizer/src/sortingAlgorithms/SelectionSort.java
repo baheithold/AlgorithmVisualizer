@@ -16,7 +16,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 	public SwingWorker<Void, Void> workerThread;
 	
 	public SelectionSort(SortingArrayPanel array) {
-		this.array = array;
+		super(array);
 	}
 	
 	@Override
@@ -108,6 +108,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 
 	@Override
 	public void runSort() {
+		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
 	

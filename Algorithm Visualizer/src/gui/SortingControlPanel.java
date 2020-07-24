@@ -114,18 +114,17 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
+		// check if a sort is currently running and kill it
+		if (array.sortAlgorithm.isRunning()) {
+			array.sortAlgorithm.killSort();
+		}
+		// adjust values for sliders
 		if (e.getSource() == numItemsJSlider) {
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
-			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killSort();
-			}
 			array.setCurrentNumItems(numItemsJSlider.getValue());
 		}
 		else if (e.getSource() == delayJSlider) {
 			System.out.println("Speed Slider Changed: " + delayJSlider.getValue());
-			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killSort();
-			}
 			array.setCurrentDelay(delayJSlider.getValue());
 		}
 	}

@@ -16,7 +16,7 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 	public SwingWorker<Void, Void> workerThread;
 	
 	public HeapSort(SortingArrayPanel array) {
-		this.array = array;
+		super(array);
 	}
 
 	@Override
@@ -133,6 +133,7 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 
 	@Override
 	public void runSort() {
+		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
 

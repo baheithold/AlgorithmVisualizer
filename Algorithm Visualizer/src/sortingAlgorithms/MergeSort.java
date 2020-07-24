@@ -16,7 +16,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 	public SwingWorker<Void, Void> workerThread;
 	
 	public MergeSort(SortingArrayPanel array) {
-		this.array = array;
+		super(array);
 	}
 	
 	@Override
@@ -179,6 +179,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 
 	@Override
 	public void runSort() {
+		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
 
