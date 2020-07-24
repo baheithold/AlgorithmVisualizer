@@ -178,6 +178,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	
 	public void setCurrentDelay(int delay) {
 		currentDelay = delay;
+		statsPanel.updateDelayJLabel(getCurrentDelay());
 	}
 	
 	public int getCurrentNumItems() {

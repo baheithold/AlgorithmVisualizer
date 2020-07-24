@@ -15,6 +15,7 @@ public class SortingStatisticsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private SortingArrayPanel array;
 	private JLabel itemsJLabel, numItemsJLabel;
+	private JLabel delayJLabel, delayValueJLable;
 	private JLabel swapsJLabel, numSwapsJLabel;
 	private JLabel accessesJLabel, numAccessesJLabel;
 	private JLabel comparisonsJlabel, numComparisonsJLabel;
@@ -32,6 +33,8 @@ public class SortingStatisticsPanel extends JPanel {
 	private void initializeStatisticJLabels() {
 		itemsJLabel = new JLabel("Items: ");
 		numItemsJLabel = new JLabel(Integer.toString(array.length()));
+		delayJLabel = new JLabel("Delay (ms): ");
+		delayValueJLable = new JLabel(Integer.toString(array.getCurrentDelay()));
 		swapsJLabel = new JLabel("Swaps: ");
 		numSwapsJLabel = new JLabel(Integer.toString(array.getNumSwaps()));
 		accessesJLabel = new JLabel("Accesses: ");
@@ -45,6 +48,11 @@ public class SortingStatisticsPanel extends JPanel {
 		this.add(Box.createHorizontalStrut(10));
 		this.add(itemsJLabel);
 		this.add(numItemsJLabel);
+		this.add(Box.createHorizontalStrut(10));
+		this.add(new JSeparator(SwingConstants.VERTICAL));
+		this.add(Box.createHorizontalStrut(10));
+		this.add(delayJLabel);
+		this.add(delayValueJLable);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(new JSeparator(SwingConstants.VERTICAL));
 		this.add(Box.createHorizontalStrut(10));
@@ -77,6 +85,10 @@ public class SortingStatisticsPanel extends JPanel {
 	
 	public void updateNumItemsJLabel(int n) {
 		numItemsJLabel.setText(Integer.toString(n));
+	}
+	
+	public void updateDelayJLabel(int n) {
+		delayValueJLable.setText(Integer.toString(n));
 	}
 	
 }

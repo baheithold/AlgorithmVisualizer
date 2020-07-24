@@ -30,11 +30,11 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 					int iMin = j;
 					array.setColor(iMin, Color.red);
 					publish();
-					Thread.sleep(10);
+					Thread.sleep(array.getCurrentDelay());
 					for (int i = j + 1; i < array.length(); i++) {
 						array.setColor(i, Color.blue);
 						publish();
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 						array.incrementComparisons();
 						if (array.getValue(i, false) < array.getValue(iMin, false)) {
 							array.setColor(iMin, Color.lightGray);

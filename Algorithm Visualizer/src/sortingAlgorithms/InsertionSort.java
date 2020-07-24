@@ -34,14 +34,14 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 						array.incrementComparisons();
 						array.setColor(j, Color.red);
 						publish();
-						Thread.sleep(100);
+						Thread.sleep(array.getCurrentDelay());
 						array.swap(j, j - 1);
 						array.setColor(j, Color.green);
 						publish();
-						Thread.sleep(100);
+						Thread.sleep(array.getCurrentDelay());
 						j--;
 					}
-					Thread.sleep(10);
+					Thread.sleep(array.getCurrentDelay());
 				}
 				
 				// Verify that the array was sorted correctly

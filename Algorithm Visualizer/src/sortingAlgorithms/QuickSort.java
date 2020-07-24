@@ -51,21 +51,21 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					int pivotIndex = partition(low, high);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					sort(low, pivotIndex);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					sort(pivotIndex + 1, high);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -88,7 +88,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 						array.swap(i, leftwall);
 						publish();
 						try {
-							Thread.sleep(100);
+							Thread.sleep(array.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -100,7 +100,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 				array.setColor(leftwall, Color.green);
 				publish();
 				try {
-					Thread.sleep(100);
+					Thread.sleep(array.getCurrentDelay());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

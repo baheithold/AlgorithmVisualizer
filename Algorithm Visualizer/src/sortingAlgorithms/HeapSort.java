@@ -89,7 +89,7 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 					publish();
 					array.swap(i, maxIndex);
 					try {
-						Thread.sleep(100);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -99,7 +99,7 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 				}
 				
 				try {
-					Thread.sleep(100);
+					Thread.sleep(array.getCurrentDelay());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

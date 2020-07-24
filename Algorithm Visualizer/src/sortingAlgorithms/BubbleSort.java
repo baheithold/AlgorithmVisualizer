@@ -32,7 +32,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 						array.setColor(i, Color.blue);
 						array.setColor(i + 1, Color.red);
 						publish();
-						Thread.sleep(1);
+						Thread.sleep(array.getCurrentDelay());
 						if (array.getValue(i, false) > array.getValue(i + 1, false)) {
 							array.swap(i, i + 1);
 							isSorted = false;
@@ -45,7 +45,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 					publish();
 					lastUnsortedIndex--;					
 					try {
-						Thread.sleep(1);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

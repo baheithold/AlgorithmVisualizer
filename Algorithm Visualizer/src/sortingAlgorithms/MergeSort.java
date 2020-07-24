@@ -74,7 +74,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 						array.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(10);
+							Thread.sleep(array.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -85,7 +85,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 						array.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(10);
+							Thread.sleep(array.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -110,7 +110,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					array.setColor(k, Color.green);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -122,14 +122,14 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					array.setColor(k, Color.red);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
 					array.setColor(k, Color.green);
 					publish();
 					try {
-						Thread.sleep(10);
+						Thread.sleep(array.getCurrentDelay());
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
