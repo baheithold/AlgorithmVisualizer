@@ -51,21 +51,19 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	
 	private void initializeJSliders() {
 		// speedJSlider
-		delayJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY);
+		delayJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY, array.DEFAULT_DELAY);
 		delayJSlider.setMajorTickSpacing(500);
 		delayJSlider.setMinorTickSpacing(100);
 		delayJSlider.setPaintTicks(true);
 		delayJSlider.setPaintLabels(true);
-		delayJSlider.setValue(array.DEFAULT_DELAY);
 		delayJSlider.addChangeListener(this);
 		
 		// numItemsJSlider
-		numItemsJSlider = new JSlider(array.MIN_NUM_ITEMS, array.MAX_NUM_ITEMS);
+		numItemsJSlider = new JSlider(array.MIN_NUM_ITEMS, array.MAX_NUM_ITEMS, array.DEFAULT_NUM_ITEMS);
 		numItemsJSlider.setMajorTickSpacing(10);
 		numItemsJSlider.setMinorTickSpacing(1);
 		numItemsJSlider.setPaintTicks(true);
 		numItemsJSlider.setPaintLabels(true);
-		numItemsJSlider.setValue(array.DEFAULT_NUM_ITEMS);
 		numItemsJSlider.addChangeListener(this);
 	}
 	
