@@ -21,7 +21,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Sorting Menu Items
-	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, quickSortJMenuItem, heapSortJMenuItem, algorithm3Item, algorithm4Item, algorithm5Item;
+	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, quickSortJMenuItem, heapSortJMenuItem, bucketSortJMenuItem, countingSortJMenuItem, radixSortJMenuItem;
 	
 	public SortingMenu(JFrame window) {
 		this.window = window;
@@ -59,15 +59,15 @@ public class SortingMenu extends JMenu implements ActionListener {
 		JLabel noncomparisonLabel = new JLabel("Non-comparison Based");
 		add(noncomparisonLabel);
 		add(new JSeparator(SwingConstants.HORIZONTAL));
-		algorithm3Item = new JMenuItem("Algorithm3");
-		algorithm3Item.addActionListener(this);
-		add(algorithm3Item);
-		algorithm4Item = new JMenuItem("Algorithm4");
-		algorithm4Item.addActionListener(this);
-		add(algorithm4Item);
-		algorithm5Item = new JMenuItem("Algorithm5");
-		algorithm5Item.addActionListener(this);
-		add(algorithm5Item);
+		bucketSortJMenuItem = new JMenuItem("Bucket Sort");
+		bucketSortJMenuItem.addActionListener(this);
+		add(bucketSortJMenuItem);
+		countingSortJMenuItem = new JMenuItem("Counting Sort");
+		countingSortJMenuItem.addActionListener(this);
+		add(countingSortJMenuItem);
+		radixSortJMenuItem = new JMenuItem("Radix Sort");
+		radixSortJMenuItem.addActionListener(this);
+		add(radixSortJMenuItem);
 	}
 
 	@Override
@@ -80,6 +80,9 @@ public class SortingMenu extends JMenu implements ActionListener {
 		else if (e.getSource() == mergeSortJMenuItem) sortName = "mergeSort";
 		else if (e.getSource() == quickSortJMenuItem) sortName = "quickSort";
 		else if (e.getSource() == heapSortJMenuItem) sortName = "heapSort";
+		else if (e.getSource() == bucketSortJMenuItem) sortName = "bucketSort";
+		else if (e.getSource() == countingSortJMenuItem) sortName = "countingSort";
+		else if (e.getSource() == radixSortJMenuItem) sortName = "radixSort";
 		else sortName = "unknown algorithm";
 		
 //		 instantiate sortingArrayPanel
