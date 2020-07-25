@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import gui.SortingArrayPanel;
+import gui.SortingPanel;
 
 /**
  * @author Brett Heithold
@@ -15,7 +15,7 @@ import gui.SortingArrayPanel;
 public class QuickSort extends SortingAlgorithm implements Runnable {
 	public SwingWorker<Void, Void> workerThread;
 	
-	public QuickSort(SortingArrayPanel array) {
+	public QuickSort(SortingPanel array) {
 		super(array);
 	}
 	

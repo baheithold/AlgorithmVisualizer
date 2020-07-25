@@ -18,7 +18,7 @@ import sortingAlgorithms.SortingAlgorithm;
  * @author Brett Heithold
  *
  */
-public class SortingArrayPanel extends VisualizationPanel {
+public class SortingPanel extends VisualizationPanel {
 	private static final long serialVersionUID = 1L;
 	private static final int BAR_WIDTH = 8;
 	
@@ -48,7 +48,7 @@ public class SortingArrayPanel extends VisualizationPanel {
 	// Sort
 	public SortingAlgorithm sortAlgorithm;
 	
-	public SortingArrayPanel(String sortName) {
+	public SortingPanel(String sortName) {
 		currentDelay = DEFAULT_DELAY;
 		currentNumItems = DEFAULT_NUM_ITEMS;
 		array = new int[DEFAULT_NUM_ITEMS];

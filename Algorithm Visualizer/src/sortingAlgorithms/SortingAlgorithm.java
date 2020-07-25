@@ -1,20 +1,20 @@
 package sortingAlgorithms;
 
-import gui.SortingArrayPanel;
+import gui.SortingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
 public abstract class SortingAlgorithm {
-	protected SortingArrayPanel array;
+	protected SortingPanel array;
 	private boolean isRunning;
 	
 	public SortingAlgorithm() {
 		isRunning = false;
 	}
 	
-	public SortingAlgorithm(SortingArrayPanel array) {
+	public SortingAlgorithm(SortingPanel array) {
 		this.array = array;
 	}
 	

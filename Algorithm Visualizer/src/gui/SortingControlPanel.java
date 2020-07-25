@@ -21,7 +21,7 @@ import javax.swing.event.ChangeListener;
 public class SortingControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 
-	private SortingArrayPanel array;
+	private SortingPanel array;
 	
 	// JLabels
 	private JLabel sortingSpeedJLabel;
@@ -35,7 +35,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	private JButton sortJButton;
 	private JButton randomizeJButton;
 	
-	public SortingControlPanel(SortingArrayPanel array) {
+	public SortingControlPanel(SortingPanel array) {
 		this.array = array;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initializeJLabels();

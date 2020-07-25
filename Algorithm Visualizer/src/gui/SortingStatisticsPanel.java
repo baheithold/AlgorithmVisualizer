@@ -13,14 +13,14 @@ import javax.swing.SwingConstants;
  */
 public class SortingStatisticsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private SortingArrayPanel array;
+	private SortingPanel array;
 	private JLabel itemsJLabel, numItemsJLabel;
 	private JLabel delayJLabel, delayValueJLable;
 	private JLabel swapsJLabel, numSwapsJLabel;
 	private JLabel accessesJLabel, numAccessesJLabel;
 	private JLabel comparisonsJlabel, numComparisonsJLabel;
 	
-	public SortingStatisticsPanel(SortingArrayPanel array) {
+	public SortingStatisticsPanel(SortingPanel array) {
 		this.array = array;
 		
 		// initialize statistic panel items

@@ -114,7 +114,7 @@ public class SortingMenu extends JMenu implements ActionListener {
 		
 		//instantiate sortingArrayPanel
 		window.getContentPane().removeAll();
-		window.getContentPane().add(new SortingArrayPanel(sortName));
+		window.getContentPane().add(new SortingPanel(sortName));
 		window.revalidate();
 	}
 	
