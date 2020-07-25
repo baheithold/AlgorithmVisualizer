@@ -24,27 +24,32 @@ public class HelpMenu extends JMenu implements ActionListener {
 		this.window = window;
 		setText("Help");
 		initializeHelpMenu();
+		constructHelpMenu();
 	}
 	
 	private void initializeHelpMenu() {
 		about = new JMenuItem("About");
 		about.addActionListener(this);
-		add(about);
 		item1 = new JMenuItem("Item1");
 		item1.addActionListener(this);
-		add(item1);
 		item2 = new JMenuItem("Item2");
 		item2.addActionListener(this);
-		add(item2);
 		item3 = new JMenuItem("Item3");
 		item3.addActionListener(this);
+	}
+	
+	private void constructHelpMenu() {
+		add(about);
+		add(item1);
+		add(item2);
 		add(item3);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == about) {
-			// Add remove previous content and add new content to content pane
+			// Remove previous content and add about content to content pane
+			window.setTitle("Algorithm Visualizer");
 			window.getContentPane().removeAll();
 			window.getContentPane().add(new AboutPanel());
 			window.revalidate();
