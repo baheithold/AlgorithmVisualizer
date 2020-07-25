@@ -53,6 +53,31 @@ public class GraphMenu extends JMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String algorithmName;
+		if (e.getSource() == bfsJMenuItem) {
+			algorithmName = "bfs";
+			window.setTitle("Breadth First Search");
+		}
+		else if (e.getSource() == dfsJMenuItem) {
+			algorithmName = "dfs";
+			window.setTitle("Depth First Search");
+		}
+		else if (e.getSource() == dijkstraJMenuItem) {
+			algorithmName = "dijkstra";
+			window.setTitle("Dijkstra");
+		}
+		else if (e.getSource() == primJMenuItem) {
+			algorithmName = "prim";
+			window.setTitle("Prim");
+		}
+		else if (e.getSource() == kruskalJMenuItem) {
+			algorithmName = "Kruskal";
+			window.setTitle("Kruskal");
+		}
+		else if (e.getSource() == bellmanfordJMenuItem) {
+			algorithmName = "Bellman-Ford";
+			window.setTitle("Bellman-Ford");
+		}
 	}
 
 }
