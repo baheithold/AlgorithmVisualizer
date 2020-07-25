@@ -35,10 +35,10 @@ public class SortingArrayPanel extends VisualizationPanel {
 	// Control Panel
 	private SortingControlPanel controlPanel;
 	
-	// Control Panel Constants
-	public final int DEFAULT_DELAY = 500;
+	// Control Panel
+	public final int DEFAULT_DELAY = 100;
 	public final int MIN_DELAY = 1;
-	public final int MAX_DELAY = 1000;
+	public final int MAX_DELAY = 500;
 	private int currentDelay;
 	public final int DEFAULT_NUM_ITEMS = 98;
 	public final int MIN_NUM_ITEMS = 1;
@@ -162,9 +162,20 @@ public class SortingArrayPanel extends VisualizationPanel {
 	private void initializeStatisticsPanel() {
 		statsPanel = new SortingStatisticsPanel(this);
 		this.add(statsPanel, BorderLayout.NORTH);
+		resetStatistics();
+	}
+	
+	public void resetStatistics() {
 		numSwaps = 0;
 		numAccesses = 0;
 		numComparisons = 0;
+		resetStatsPanel();
+	}
+	
+	private void resetStatsPanel() {
+		statsPanel.updateNumSwapsJLabel(0);
+		statsPanel.updateNumAccessesJLabel(0);
+		statsPanel.updateNumComparisonsJLabel(0);
 	}
 	
 	private void initializeControlPanel() {

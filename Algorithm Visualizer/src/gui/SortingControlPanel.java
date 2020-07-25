@@ -108,6 +108,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 			array.resetColors();
 			array.repaint();
 		}
+		array.resetStatistics();
 	}
 
 	@Override
