@@ -78,6 +78,15 @@ public class GraphMenu extends JMenu implements ActionListener {
 			algorithmName = "Bellman-Ford";
 			window.setTitle("Bellman-Ford");
 		}
+		else {
+			algorithmName = "unknown algorithm";
+		}
+		
+		//instantiate GraphPanel
+		window.getContentPane().removeAll();
+		window.getContentPane().add(new GraphPanel(algorithmName));
+		window.revalidate();
+		
 	}
 
 }
