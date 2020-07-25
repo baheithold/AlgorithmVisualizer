@@ -74,15 +74,42 @@ public class SortingMenu extends JMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// set which sorting algorithm was selected
 		String sortName;
-		if (e.getSource() == bubbleSortJMenuItem) sortName = "bubbleSort";
-		else if (e.getSource() == insertionSortJMenuItem) sortName = "insertionSort";
-		else if (e.getSource() == selectionSortJMenuItem) sortName = "selectionSort";
-		else if (e.getSource() == mergeSortJMenuItem) sortName = "mergeSort";
-		else if (e.getSource() == quickSortJMenuItem) sortName = "quickSort";
-		else if (e.getSource() == heapSortJMenuItem) sortName = "heapSort";
-		else if (e.getSource() == bucketSortJMenuItem) sortName = "bucketSort";
-		else if (e.getSource() == countingSortJMenuItem) sortName = "countingSort";
-		else if (e.getSource() == radixSortJMenuItem) sortName = "radixSort";
+		if (e.getSource() == bubbleSortJMenuItem) {
+			sortName = "bubbleSort";
+			window.setTitle("Bubble Sort");
+		}
+		else if (e.getSource() == insertionSortJMenuItem) {
+			sortName = "insertionSort";
+			window.setTitle("Insertion Sort");
+		}
+		else if (e.getSource() == selectionSortJMenuItem) {
+			sortName = "selectionSort";
+			window.setTitle("Selection Sort");
+		}
+		else if (e.getSource() == mergeSortJMenuItem) {
+			sortName = "mergeSort";
+			window.setTitle("Merge Sort");
+		}
+		else if (e.getSource() == quickSortJMenuItem) {
+			sortName = "quickSort";
+			window.setTitle("Quick Sort");
+		}
+		else if (e.getSource() == heapSortJMenuItem) {
+			sortName = "heapSort";
+			window.setTitle("Heap Sort");
+		}
+		else if (e.getSource() == bucketSortJMenuItem) {
+			sortName = "bucketSort";
+			window.setTitle("Bucket Sort");
+		}
+		else if (e.getSource() == countingSortJMenuItem) {
+			sortName = "countingSort";
+			window.setTitle("Counting Sort");
+		}
+		else if (e.getSource() == radixSortJMenuItem) {
+			sortName = "radixSort";
+			window.setTitle("Radix Sort");
+		}
 		else sortName = "unknown algorithm";
 		
 //		 instantiate sortingArrayPanel
