@@ -18,33 +18,38 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Path Finding Menu Items
-	private JMenuItem algorithmItem0, algorithmItem1, algorithmItem2, algorithmItem3;
+	private JMenuItem aStarJMenuItem;
 	
 	public PathFindingMenu(JFrame window) {
 		this.window = window;
 		setText("Path Finding");
 		initializePathFindingMenuItems();
+		constructPathFindingMenu();
 	}
 	
 	private void initializePathFindingMenuItems() {
-		algorithmItem0 = new JMenuItem("Algorithm 0");
-		algorithmItem0.addActionListener(this);
-		add(algorithmItem0);
-		algorithmItem1 = new JMenuItem("Algorithm 1");
-		algorithmItem1.addActionListener(this);
-		add(algorithmItem1);
-		algorithmItem2 = new JMenuItem("Algorithm 2");
-		algorithmItem2.addActionListener(this);
-		add(algorithmItem2);
-		algorithmItem3 = new JMenuItem("Algorithm 3");
-		algorithmItem3.addActionListener(this);
-		add(algorithmItem3);
+		aStarJMenuItem = new JMenuItem("A*");
+		aStarJMenuItem.addActionListener(this);
 	}
 
+	private void constructPathFindingMenu() {
+		add(aStarJMenuItem);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String algorithmName;
+		if (e.getSource() == aStarJMenuItem) {
+			algorithmName = "aStar";
+			window.setTitle("A*");
+		}
+		else {
+			algorithmName = "unknown algorithm";
+		}
+		
+		// change content on content pane
 		window.getContentPane().removeAll();
-		window.getContentPane().add(new PathFindingPanel());
+		window.getContentPane().add(new PathFindingPanel(algorithmName));
 		window.revalidate();
 	}
 

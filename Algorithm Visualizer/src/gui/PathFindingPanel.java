@@ -7,7 +7,7 @@ package gui;
 public class PathFindingPanel extends VisualizationPanel {
 	private static final long serialVersionUID = 1L;
 
-	public PathFindingPanel() {
+	public PathFindingPanel(String algorithmName) {
 	}
 	
 }
