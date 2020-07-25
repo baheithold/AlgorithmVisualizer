@@ -39,6 +39,9 @@ public class VisualizerWindow extends JFrame {
 		// create sorting menu and add it to the menu bar
 		menubar.add(new SortingMenu(this));
 		
+		// create graph menu and add it to the menu bar
+		menubar.add(new GraphMenu(this));
+		
 		// create path finding menu and add it to the menu bar
 		menubar.add(new PathFindingMenu(this));
 		
