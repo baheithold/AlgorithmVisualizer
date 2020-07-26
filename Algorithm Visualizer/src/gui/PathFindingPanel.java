@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,11 +34,11 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		for (int i = 1; i < this.windowWidth - 20; i += 20) {
-			for (int j = 1; j < this.windowHeight - 120; j += 20) {
-				g.drawRect(i, j, 20, 20);
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				g.drawRect((i * 20) + 1, (j * 20) + 1, 20, 20);
 				g.setColor(grid.getNodeColor(i, j));
-				g.fillRect(i, j, 19, 19);
+				g.fillRect((i * 20) + 1, (j * 20) + 1, 19, 19);
 			}
 		}
 	}

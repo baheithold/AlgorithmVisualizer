@@ -18,10 +18,10 @@ public class Grid {
 		this.panel = panel;
 		this.numGridRows = rows;
 		this.numGridCols = cols;
-		this.grid = new GridNode[numGridRows][numGridCols];
+		this.grid = new GridNode[numGridCols][numGridRows];
 		// initialize grid matrix
-		for (int i = 0; i < numGridRows; i++) {
-			for (int j = 0; j < numGridCols; j++) {
+		for (int i = 0; i < numGridCols; i++) {
+			for (int j = 0; j < numGridRows; j++) {
 				grid[i][j] = new GridNode(i, j);
 			}
 		}
