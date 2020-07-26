@@ -80,8 +80,11 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		radioGroup = new ButtonGroup();
 		startRadioButton = new JRadioButton("Start");
 		startRadioButton.setSelected(true);
+		startRadioButton.addActionListener(this);
 		endRadioButton = new JRadioButton("End");
+		endRadioButton.addActionListener(this);
 		obstacleRadioButton = new JRadioButton("Obstacle");
+		obstacleRadioButton.addActionListener(this);
 	}
 	
 	private void constructControlPanel() {
@@ -123,10 +126,31 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == runJButton) {
+			System.out.println("Button Pressed: Run");
+		}
+		else if (e.getSource() == stepJButton) {
+			System.out.println("Button Pressed: Step");
+		}
+		else if (e.getSource() == resetJButton) {
+			System.out.println("Button Pressed: Reset");
+		}
+		else if (e.getSource() == startRadioButton) {
+			System.out.println("Radio Button Selected: Start");
+		}
+		else if (e.getSource() == endRadioButton) {
+			System.out.println("Radio Button Selected: End");
+		}
+		else if (e.getSource() == obstacleRadioButton) {
+			System.out.println("Radio Button Selected: Obstacle");
+		}
 	}
 	
 	@Override
 	public void stateChanged(ChangeEvent e) {
+		if (e.getSource() == delayJSlider) {
+			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
+		}
 	}
 	
 }
