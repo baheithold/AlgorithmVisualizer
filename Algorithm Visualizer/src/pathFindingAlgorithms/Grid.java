@@ -1,5 +1,7 @@
 package pathFindingAlgorithms;
 
+import java.awt.Color;
+
 import gui.PathFindingPanel;
 
 /**
@@ -10,11 +12,19 @@ public class Grid {
 	private PathFindingPanel panel;
 	private int numGridRows;
 	private int numGridCols;
+	private GridNode[][] grid;
 
 	public Grid(PathFindingPanel panel, int rows, int cols) {
 		this.panel = panel;
 		this.numGridRows = rows;
 		this.numGridCols = cols;
+		this.grid = new GridNode[numGridRows][numGridCols];
+		// initialize grid matrix
+		for (int i = 0; i < numGridRows; i++) {
+			for (int j = 0; j < numGridCols; j++) {
+				grid[i][j] = new GridNode(i, j);
+			}
+		}
 	}
 	
 	public int getNumGridRows() {
@@ -35,6 +45,14 @@ public class Grid {
 	
 	public int numGridNodes() {
 		return this.numGridRows * this.numGridCols;
+	}
+	
+	public Color getNodeColor(int x, int y) {
+		return this.grid[x][y].getColor();
+	}
+	
+	public void setNodeColor(int x, int y, Color color) {
+		this.grid[x][y].setColor(color);
 	}
 	
 }

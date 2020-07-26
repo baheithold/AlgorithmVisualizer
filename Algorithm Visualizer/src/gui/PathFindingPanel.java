@@ -1,7 +1,10 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import pathFindingAlgorithms.Grid;
 
@@ -9,7 +12,7 @@ import pathFindingAlgorithms.Grid;
  * @author Brett Heithold
  *
  */
-public class PathFindingPanel extends VisualizationPanel {
+public class PathFindingPanel extends VisualizationPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private String algorithmName;
 	private Grid grid;
@@ -22,6 +25,7 @@ public class PathFindingPanel extends VisualizationPanel {
 		this.algorithmName = algorithmName;
 		this.grid = new Grid(this, (this.windowHeight / 20) - 6, (this.windowWidth / 20) - 1);
 		initializeControlPanel();
+		this.addMouseListener(this);
 	}
 	
 	private void initializeControlPanel() {
@@ -34,8 +38,31 @@ public class PathFindingPanel extends VisualizationPanel {
 		for (int i = 1; i < this.windowWidth - 20; i += 20) {
 			for (int j = 1; j < this.windowHeight - 120; j += 20) {
 				g.drawRect(i, j, 20, 20);
+				g.setColor(grid.getNodeColor(i, j));
+				g.fillRect(i, j, 19, 19);
 			}
 		}
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		System.out.println("Mouse Released: " + Math.floor(e.getPoint().getX() / 20) + ", " + Math.floor(e.getPoint().getY() / 20));
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}	
 	
 }
