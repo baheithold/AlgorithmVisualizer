@@ -20,7 +20,7 @@ public class PathFindingPanel extends VisualizationPanel {
 	public PathFindingPanel(String algorithmName) {
 		this.setLayout(new BorderLayout());
 		this.algorithmName = algorithmName;
-		this.grid = new Grid(this, this.windowWidth / 20, this.windowHeight / 20);
+		this.grid = new Grid(this, (this.windowHeight / 20) - 6, (this.windowWidth / 20) - 1);
 		initializeControlPanel();
 	}
 	
@@ -31,8 +31,8 @@ public class PathFindingPanel extends VisualizationPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		for (int i = 0; i <= this.windowWidth; i += 20) {
-			for (int j = 0; j <= this.windowHeight - 60; j += 20) {
+		for (int i = 1; i < this.windowWidth - 20; i += 20) {
+			for (int j = 1; j < this.windowHeight - 120; j += 20) {
 				g.drawRect(i, j, 20, 20);
 			}
 		}
