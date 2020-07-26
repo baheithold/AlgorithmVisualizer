@@ -79,6 +79,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private void initializeRadioButtons() {
 		radioGroup = new ButtonGroup();
 		startRadioButton = new JRadioButton("Start");
+		startRadioButton.setSelected(true);
 		endRadioButton = new JRadioButton("End");
 		obstacleRadioButton = new JRadioButton("Obstacle");
 	}
