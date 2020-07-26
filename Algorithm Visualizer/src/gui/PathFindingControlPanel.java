@@ -28,10 +28,10 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private PathFindingPanel panel;
 
 	// JLabels
-	private JLabel speedJLabel;
+	private JLabel delayJLabel;
 	
 	// JSliders
-	private JSlider speedJSlider;
+	private JSlider delayJSlider;
 	
 	// JButtons
 	private JButton runJButton;
@@ -55,16 +55,16 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	}
 	
 	private void initializeLabels() {
-		speedJLabel = new JLabel("Speed");
+		delayJLabel = new JLabel("Delay (ms)");
 	}
 	
 	private void initializeSliders() {
-		speedJSlider = new JSlider(MIN_DELAY, MAX_DELAY, DEFAULT_DELAY);
-		speedJSlider.setMajorTickSpacing(500);
-		speedJSlider.setMinorTickSpacing(100);
-		speedJSlider.setPaintTicks(true);
-		speedJSlider.setPaintLabels(true);
-		speedJSlider.addChangeListener(this);
+		delayJSlider = new JSlider(MIN_DELAY, MAX_DELAY, DEFAULT_DELAY);
+		delayJSlider.setMajorTickSpacing(500);
+		delayJSlider.setMinorTickSpacing(100);
+		delayJSlider.setPaintTicks(true);
+		delayJSlider.setPaintLabels(true);
+		delayJSlider.addChangeListener(this);
 	}
 	
 	private void initializeButtons() {
@@ -86,8 +86,8 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private void constructControlPanel() {
 		// Speed slider
 		this.add(Box.createHorizontalStrut(10));
-		this.add(speedJLabel);
-		this.add(speedJSlider);
+		this.add(delayJLabel);
+		this.add(delayJSlider);
 		
 		// Separator
 		this.add(Box.createHorizontalStrut(10));
