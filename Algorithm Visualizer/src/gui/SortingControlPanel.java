@@ -123,7 +123,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 			array.setCurrentNumItems(numItemsJSlider.getValue());
 		}
 		else if (e.getSource() == delayJSlider) {
-			System.out.println("Speed Slider Changed: " + delayJSlider.getValue());
+			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
 			array.setCurrentDelay(delayJSlider.getValue());
 		}
 	}
