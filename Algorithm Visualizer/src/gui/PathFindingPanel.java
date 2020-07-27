@@ -77,12 +77,30 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		if (mouseInGrid(xPos, yPos)) {
 			switch (controlPanel.whichRadioSelected()) {
 				case "start":
-					if (grid.getNodeColor(xPos, yPos) == START_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
-					else grid.setNodeColor(xPos, yPos, START_COLOR);
+					if (grid.getNodeColor(xPos, yPos) == START_COLOR) {
+						grid.setStartNode(null);
+						grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+					}
+					else {
+						if (grid.hasStartNode()) {
+							grid.setNodeColor(grid.getStartNode().getXLocation(), grid.getStartNode().getYLocation(), DEFAULT_COLOR);
+						}
+						grid.setStartNode(grid.getNode(xPos, yPos));
+						grid.setNodeColor(xPos, yPos, START_COLOR);
+					}
 					break;
 				case "end":
-					if (grid.getNodeColor(xPos, yPos) == END_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
-					else grid.setNodeColor(xPos, yPos, END_COLOR);
+					if (grid.getNodeColor(xPos, yPos) == END_COLOR) {
+						grid.setEndNode(null);
+						grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+					}
+					else {
+						if (grid.hasEndNode()) {
+							grid.setNodeColor(grid.getEndNode().getXLocation(), grid.getEndNode().getYLocation(), DEFAULT_COLOR);
+						}
+						grid.setEndNode(grid.getNode(xPos, yPos));
+						grid.setNodeColor(xPos, yPos, END_COLOR);
+					}
 					break;
 				case "obstacle":
 					if (grid.getNodeColor(xPos, yPos) == OBSTACLE_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
