@@ -36,6 +36,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	// JButtons
 	private JButton runJButton;
 	private JButton stepJButton;
+	private JButton randomizeJButton;
 	private JButton resetJButton;
 	
 	// JRadioButtons
@@ -72,6 +73,8 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		runJButton.addActionListener(this);
 		stepJButton = new JButton("Step");
 		stepJButton.addActionListener(this);
+		randomizeJButton = new JButton("Randomize");
+		randomizeJButton.addActionListener(this);
 		resetJButton = new JButton("Reset");
 		resetJButton.addActionListener(this);
 	}
@@ -119,6 +122,10 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(stepJButton);
 		this.add(Box.createHorizontalStrut(10));
 		
+		// Randomize Button
+		this.add(randomizeJButton);
+		this.add(Box.createHorizontalStrut(10));
+		
 		// Reset Button
 		this.add(resetJButton);
 		this.add(Box.createHorizontalStrut(10));
@@ -139,8 +146,13 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		else if (e.getSource() == stepJButton) {
 			System.out.println("Button Pressed: Step");
 		}
+		else if (e.getSource() == randomizeJButton) {
+			System.out.println("Button Pressed: Randomize");
+			panel.randomizeGrid();
+		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: Reset");
+			panel.resetGrid();
 		}
 		else if (e.getSource() == startRadioButton) {
 			System.out.println("Radio Button Selected: Start");

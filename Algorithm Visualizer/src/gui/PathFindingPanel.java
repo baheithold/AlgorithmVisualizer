@@ -39,6 +39,21 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.add(controlPanel, BorderLayout.SOUTH);
 	}
 	
+	public void randomizeGrid() {
+		resetGrid();
+		this.grid.randomizeGrid();
+		repaint();
+	}
+	
+	public void resetGrid() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				grid.setNodeColor(i, j, DEFAULT_COLOR);
+			}
+		}
+		repaint();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

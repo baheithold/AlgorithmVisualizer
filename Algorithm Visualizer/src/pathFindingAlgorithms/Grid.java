@@ -1,6 +1,7 @@
 package pathFindingAlgorithms;
 
 import java.awt.Color;
+import java.util.Random;
 
 import gui.PathFindingPanel;
 
@@ -85,6 +86,39 @@ public class Grid {
 	
 	public void setNodeColor(int x, int y, Color color) {
 		this.grid[x][y].setColor(color);
+	}
+	
+	public void randomizeGrid() {
+		int numberOfObstacles = generateRandomNumber(0, (this.numGridRows * this.numGridCols) / 2);
+		for (int i = 0; i < this.numGridCols; i++) {
+			for (int j = 0; j < this.numGridRows; j++) {
+				if (generateRandomNumber(0, 1000000) % 2 == 0 && numberOfObstacles > 0) {
+					this.setNodeColor(i, j, Color.darkGray);
+					numberOfObstacles--;
+				}
+			}
+		}
+		// pick random start node
+		int xStart = generateRandomNumber(0, 38);
+		int yStart = generateRandomNumber(0, 23);
+		this.setNodeColor(xStart, yStart, Color.green);
+		this.setStartNode(this.grid[xStart][yStart]);
+		// pick random end node
+		int xEnd = generateRandomNumber(0, 38);
+		int yEnd = generateRandomNumber(0, 23);
+		// make sure start and end nodes are not the same
+		while (xStart == xEnd && yStart == yEnd) {
+			xEnd = generateRandomNumber(0, 38);
+			yEnd = generateRandomNumber(0, 23);
+		}
+		// set end node
+		this.setEndNode(this.grid[xEnd][yEnd]);
+		this.setNodeColor(xEnd, yEnd, Color.red);
+	}
+	
+	private int generateRandomNumber(int low, int high) {
+		Random rand = new Random();
+		return rand.nextInt(high - low) + low;
 	}
 	
 }
