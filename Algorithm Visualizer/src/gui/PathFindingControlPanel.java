@@ -124,6 +124,13 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(Box.createHorizontalStrut(10));
 	}
 
+	public String whichRadioSelected() {
+		if (startRadioButton.isSelected()) return "start";
+		else if (endRadioButton.isSelected()) return "end";
+		else if (obstacleRadioButton.isSelected()) return "obstacle";
+		else return "unknown";
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == runJButton) {
