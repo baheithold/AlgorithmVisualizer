@@ -91,8 +91,8 @@ public class Grid {
 	public void randomizeGrid() {
 		int numberOfObstacles = generateRandomNumber(0, (this.numGridRows * this.numGridCols) / 2);
 		while (numberOfObstacles > 0) {
-			int x = generateRandomNumber(0, 38);
-			int y = generateRandomNumber(0, 23);
+			int x = generateRandomNumber(0, 39);
+			int y = generateRandomNumber(0, 24);
 			while (this.getNodeColor(x, y) != Color.lightGray) {
 				x = generateRandomNumber(0, 38);
 				y = generateRandomNumber(0, 23);
