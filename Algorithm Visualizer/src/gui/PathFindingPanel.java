@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import pathFindingAlgorithms.AStar;
 import pathFindingAlgorithms.Grid;
 
 /**
@@ -25,12 +26,14 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	
 	// Control Panel
 	private PathFindingControlPanel controlPanel;
+	public AStar algorithmAStar;
 
 	public PathFindingPanel(String algorithmName) {
 		this.setLayout(new BorderLayout());
 		this.algorithmName = algorithmName;
 		this.grid = new Grid(this, (this.windowHeight / 20) - 6, (this.windowWidth / 20) - 1);
 		initializeControlPanel();
+		algorithmAStar = new AStar(this);
 		this.addMouseListener(this);
 	}
 	

@@ -142,16 +142,20 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: Run");
+			panel.algorithmAStar.runAStar();
 		}
 		else if (e.getSource() == stepJButton) {
 			System.out.println("Button Pressed: Step");
+			panel.algorithmAStar.killAStar();
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
+			panel.algorithmAStar.killAStar();
 			panel.randomizeGrid();
 		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: Reset");
+			panel.algorithmAStar.killAStar();
 			panel.resetGrid();
 		}
 		else if (e.getSource() == startRadioButton) {
