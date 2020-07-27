@@ -13,7 +13,7 @@ import gui.SortingPanel;
  *
  */
 public class InsertionSort extends SortingAlgorithm implements Runnable {
-	public SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	public InsertionSort(SortingPanel array) {
 		super(array);

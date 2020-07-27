@@ -13,7 +13,7 @@ import gui.SortingPanel;
  *
  */
 public class BubbleSort extends SortingAlgorithm implements Runnable {
-	public SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	public BubbleSort(SortingPanel array) {
 		super(array);

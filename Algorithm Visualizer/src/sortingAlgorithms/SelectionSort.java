@@ -13,7 +13,7 @@ import gui.SortingPanel;
  *
  */
 public class SelectionSort extends SortingAlgorithm implements Runnable {
-	public SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	public SelectionSort(SortingPanel array) {
 		super(array);

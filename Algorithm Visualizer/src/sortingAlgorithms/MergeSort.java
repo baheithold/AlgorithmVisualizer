@@ -13,7 +13,7 @@ import gui.SortingPanel;
  *
  */
 public class MergeSort extends SortingAlgorithm implements Runnable {
-	public SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	public MergeSort(SortingPanel array) {
 		super(array);

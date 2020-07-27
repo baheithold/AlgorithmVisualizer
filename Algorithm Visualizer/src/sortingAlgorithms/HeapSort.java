@@ -13,7 +13,7 @@ import gui.SortingPanel;
  *
  */
 public class HeapSort extends SortingAlgorithm implements Runnable {
-	public SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	public HeapSort(SortingPanel array) {
 		super(array);
