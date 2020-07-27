@@ -94,24 +94,24 @@ public class Grid {
 			int x = generateRandomNumber(0, 39);
 			int y = generateRandomNumber(0, 24);
 			while (this.getNodeColor(x, y) != Color.lightGray) {
-				x = generateRandomNumber(0, 38);
-				y = generateRandomNumber(0, 23);
+				x = generateRandomNumber(0, 39);
+				y = generateRandomNumber(0, 24);
 			}
 			this.setNodeColor(x, y, Color.darkGray);
 			numberOfObstacles--;
 		}
 		// pick random start node
-		int xStart = generateRandomNumber(0, 38);
-		int yStart = generateRandomNumber(0, 23);
+		int xStart = generateRandomNumber(0, 39);
+		int yStart = generateRandomNumber(0, 24);
 		this.setNodeColor(xStart, yStart, Color.green);
 		this.setStartNode(this.grid[xStart][yStart]);
 		// pick random end node
-		int xEnd = generateRandomNumber(0, 38);
-		int yEnd = generateRandomNumber(0, 23);
+		int xEnd = generateRandomNumber(0, 39);
+		int yEnd = generateRandomNumber(0, 24);
 		// make sure start and end nodes are not the same
 		while (xStart == xEnd && yStart == yEnd) {
-			xEnd = generateRandomNumber(0, 38);
-			yEnd = generateRandomNumber(0, 23);
+			xEnd = generateRandomNumber(0, 39);
+			yEnd = generateRandomNumber(0, 24);
 		}
 		// set end node
 		this.setEndNode(this.grid[xEnd][yEnd]);
