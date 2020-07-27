@@ -17,6 +17,12 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	private String algorithmName;
 	private Grid grid;
 	
+	// GridNode Colors
+	private Color DEFAULT_COLOR = Color.lightGray;
+	private Color START_COLOR = Color.green;
+	private Color END_COLOR = Color.red;
+	private Color OBSTACLE_COLOR = Color.darkGray;
+	
 	// Control Panel
 	private PathFindingControlPanel controlPanel;
 
@@ -71,13 +77,16 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		if (mouseInGrid(xPos, yPos)) {
 			switch (controlPanel.whichRadioSelected()) {
 				case "start":
-					grid.setNodeColor(xPos, yPos, Color.green);
+					if (grid.getNodeColor(xPos, yPos) == START_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+					else grid.setNodeColor(xPos, yPos, START_COLOR);
 					break;
 				case "end":
-					grid.setNodeColor(xPos, yPos, Color.red);
+					if (grid.getNodeColor(xPos, yPos) == END_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+					else grid.setNodeColor(xPos, yPos, END_COLOR);
 					break;
 				case "obstacle":
-					grid.setNodeColor(xPos, yPos, Color.darkGray);
+					if (grid.getNodeColor(xPos, yPos) == OBSTACLE_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+					else grid.setNodeColor(xPos, yPos, OBSTACLE_COLOR);
 					break;
 				default:
 					System.out.println("Unknown radio button selected!");
