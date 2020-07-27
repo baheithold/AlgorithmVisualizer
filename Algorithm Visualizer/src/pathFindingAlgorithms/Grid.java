@@ -90,13 +90,15 @@ public class Grid {
 	
 	public void randomizeGrid() {
 		int numberOfObstacles = generateRandomNumber(0, (this.numGridRows * this.numGridCols) / 2);
-		for (int i = 0; i < this.numGridCols; i++) {
-			for (int j = 0; j < this.numGridRows; j++) {
-				if (generateRandomNumber(0, 1000000) % 2 == 0 && numberOfObstacles > 0) {
-					this.setNodeColor(i, j, Color.darkGray);
-					numberOfObstacles--;
-				}
+		while (numberOfObstacles > 0) {
+			int x = generateRandomNumber(0, 38);
+			int y = generateRandomNumber(0, 23);
+			while (this.getNodeColor(x, y) != Color.lightGray) {
+				x = generateRandomNumber(0, 38);
+				y = generateRandomNumber(0, 23);
 			}
+			this.setNodeColor(x, y, Color.darkGray);
+			numberOfObstacles--;
 		}
 		// pick random start node
 		int xStart = generateRandomNumber(0, 38);
