@@ -162,6 +162,8 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 			if (panel.pathFindingAlgorithm.isRunning()) {
 				panel.pathFindingAlgorithm.killPathFindingAlgorithm();				
 			}
+			panel.getGrid().setStartNode(null);
+			panel.getGrid().setEndNode(null);
 			panel.resetGrid();
 		}
 		else if (e.getSource() == startRadioButton) {
