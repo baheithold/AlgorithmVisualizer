@@ -55,43 +55,43 @@ public class AStar implements Runnable {
 					ArrayList<GridNode> neighbors = new ArrayList<GridNode>();
 					
 					// North Neighbor
-					if (grid.inBounds(qNode.getXLocation(), qNode.getYLocation() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation(), qNode.getYLocation() - 1);
+					if (grid.inBounds(qNode.getX(), qNode.getY() - 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX(), qNode.getY() - 1);
 						neighbors.add(neighbor);
 					}
 					// South Neighbor
-					if (grid.inBounds(qNode.getXLocation(), qNode.getYLocation() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation(), qNode.getYLocation() + 1);
+					if (grid.inBounds(qNode.getX(), qNode.getY() + 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX(), qNode.getY() + 1);
 						neighbors.add(neighbor);
 					}
 					// East Neighbor
-					if (grid.inBounds(qNode.getXLocation() + 1, qNode.getYLocation())) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() + 1, qNode.getYLocation());
+					if (grid.inBounds(qNode.getX() + 1, qNode.getY())) {
+						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY());
 						neighbors.add(neighbor);
 					}
 					// West Neighbor
-					if (grid.inBounds(qNode.getXLocation() - 1, qNode.getYLocation())) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() - 1, qNode.getYLocation());
+					if (grid.inBounds(qNode.getX() - 1, qNode.getY())) {
+						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY());
 						neighbors.add(neighbor);
 					}
 					// NorthEast Neighbor
-					if (grid.inBounds(qNode.getXLocation() + 1, qNode.getYLocation() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() + 1, qNode.getYLocation() - 1);
+					if (grid.inBounds(qNode.getX() + 1, qNode.getY() - 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY() - 1);
 						neighbors.add(neighbor);
 					}
 					// NorthWest Neighbor
-					if (grid.inBounds(qNode.getXLocation() - 1, qNode.getYLocation() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() - 1, qNode.getYLocation() - 1);
+					if (grid.inBounds(qNode.getX() - 1, qNode.getY() - 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY() - 1);
 						neighbors.add(neighbor);
 					}
 					// SouthEast Neighbor
-					if (grid.inBounds(qNode.getXLocation() + 1, qNode.getYLocation() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() + 1, qNode.getYLocation() + 1);
+					if (grid.inBounds(qNode.getX() + 1, qNode.getY() + 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY() + 1);
 						neighbors.add(neighbor);
 					}
 					// SouthWest Neighbor
-					if (grid.inBounds(qNode.getXLocation() - 1, qNode.getYLocation() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getXLocation() - 1, qNode.getYLocation() + 1);
+					if (grid.inBounds(qNode.getX() - 1, qNode.getY() + 1)) {
+						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY() + 1);
 						neighbors.add(neighbor);
 					}
 					
@@ -130,7 +130,7 @@ public class AStar implements Runnable {
 	}
 	
 	private Boolean isEndNode(GridNode node) {
-		return node.getXLocation() == endNode.getXLocation() && node.getYLocation() == endNode.getYLocation();
+		return node.getX() == endNode.getX() && node.getY() == endNode.getY();
 	}
 	
 	public void runAStar() {

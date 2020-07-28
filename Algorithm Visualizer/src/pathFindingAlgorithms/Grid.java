@@ -84,10 +84,6 @@ public class Grid {
 		return this.grid[x][y].getColor();
 	}
 	
-	public void setNodeColor(int x, int y, Color color) {
-		this.grid[x][y].setColor(color);
-	}
-	
 	public Boolean inBounds(int x, int y) {
 		return x >= 0 && x < this.numGridCols && y >= 0 && y < this.numGridRows;
 	}
@@ -97,17 +93,17 @@ public class Grid {
 		while (numberOfObstacles > 0) {
 			int x = generateRandomNumber(0, 39);
 			int y = generateRandomNumber(0, 24);
-			while (this.getNodeColor(x, y) != Color.lightGray) {
+			while (!this.getNode(x, y).isDefault()) {
 				x = generateRandomNumber(0, 39);
 				y = generateRandomNumber(0, 24);
 			}
-			this.setNodeColor(x, y, Color.darkGray);
+			this.getNode(x, y).setObstacle();;
 			numberOfObstacles--;
 		}
 		// pick random start node
 		int xStart = generateRandomNumber(0, 39);
 		int yStart = generateRandomNumber(0, 24);
-		this.setNodeColor(xStart, yStart, Color.green);
+		this.getNode(xStart, yStart).setStart();
 		this.setStartNode(this.grid[xStart][yStart]);
 		// pick random end node
 		int xEnd = generateRandomNumber(0, 39);
@@ -119,7 +115,7 @@ public class Grid {
 		}
 		// set end node
 		this.setEndNode(this.grid[xEnd][yEnd]);
-		this.setNodeColor(xEnd, yEnd, Color.red);
+		this.getNode(xEnd, yEnd).setEnd();
 	}
 	
 	private int generateRandomNumber(int low, int high) {

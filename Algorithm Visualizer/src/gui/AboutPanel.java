@@ -28,7 +28,7 @@ public class AboutPanel extends VisualizationPanel {
 	public JTextArea createAboutTextArea() {
 		JTextArea textArea = readTextFileToTextArea(ABOUT_TEXT_FILEPATH);
 		textArea.setLineWrap(true);
-		textArea.setSize(windowWidth - 100, windowHeight - 100);
+		textArea.setSize(WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100);
 		return textArea;
 	}
 	

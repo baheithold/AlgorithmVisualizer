@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,12 +17,6 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	private String algorithmName;
 	private Grid grid;
 	
-	// GridNode Colors
-	private Color DEFAULT_COLOR = Color.lightGray;
-	private Color START_COLOR = Color.green;
-	private Color END_COLOR = Color.red;
-	private Color OBSTACLE_COLOR = Color.darkGray;
-	
 	// Control Panel
 	private PathFindingControlPanel controlPanel;
 	public AStar algorithmAStar;
@@ -31,7 +24,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	public PathFindingPanel(String algorithmName) {
 		this.setLayout(new BorderLayout());
 		this.algorithmName = algorithmName;
-		this.grid = new Grid(this, (this.windowHeight / 20) - 6, (this.windowWidth / 20) - 1);
+		this.grid = new Grid(this, (this.WINDOW_HEIGHT / 20) - 6, (this.WINDOW_WIDTH / 20) - 1);
 		initializeControlPanel();
 		algorithmAStar = new AStar(this);
 		this.addMouseListener(this);
@@ -55,7 +48,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	public void resetGrid() {
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
-				grid.setNodeColor(i, j, DEFAULT_COLOR);
+				grid.getNode(i, j).setDefault();;
 			}
 		}
 		repaint();
@@ -94,34 +87,34 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		if (mouseInGrid(xPos, yPos)) {
 			switch (controlPanel.whichRadioSelected()) {
 				case "start":
-					if (grid.getNodeColor(xPos, yPos) == START_COLOR) {
+					if (grid.getNode(xPos, yPos).isStart()) {
 						grid.setStartNode(null);
-						grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+						grid.getNode(xPos, yPos).setDefault();
 					}
 					else {
 						if (grid.hasStartNode()) {
-							grid.setNodeColor(grid.getStartNode().getXLocation(), grid.getStartNode().getYLocation(), DEFAULT_COLOR);
+							grid.getNode(grid.getStartNode().getX(), grid.getStartNode().getY()).setDefault();
 						}
 						grid.setStartNode(grid.getNode(xPos, yPos));
-						grid.setNodeColor(xPos, yPos, START_COLOR);
+						grid.getNode(xPos, yPos).setStart();;
 					}
 					break;
 				case "end":
-					if (grid.getNodeColor(xPos, yPos) == END_COLOR) {
+					if (grid.getNode(xPos, yPos).isEnd()) {
 						grid.setEndNode(null);
-						grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
+						grid.getNode(xPos, yPos).setDefault();;
 					}
 					else {
 						if (grid.hasEndNode()) {
-							grid.setNodeColor(grid.getEndNode().getXLocation(), grid.getEndNode().getYLocation(), DEFAULT_COLOR);
+							grid.getNode(grid.getEndNode().getX(), grid.getEndNode().getY()).setDefault();
 						}
 						grid.setEndNode(grid.getNode(xPos, yPos));
-						grid.setNodeColor(xPos, yPos, END_COLOR);
+						grid.getNode(xPos, yPos).setEnd();
 					}
 					break;
 				case "obstacle":
-					if (grid.getNodeColor(xPos, yPos) == OBSTACLE_COLOR) grid.setNodeColor(xPos, yPos, DEFAULT_COLOR);
-					else grid.setNodeColor(xPos, yPos, OBSTACLE_COLOR);
+					if (grid.getNode(xPos, yPos).isObstacle()) grid.getNode(xPos, yPos).setDefault();
+					else grid.getNode(xPos, yPos).setObstacle();
 					break;
 				default:
 					System.out.println("Unknown radio button selected!");

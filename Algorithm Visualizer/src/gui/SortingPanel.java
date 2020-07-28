@@ -96,7 +96,7 @@ public class SortingPanel extends VisualizationPanel {
 		Random rand = new Random();
 		for (int i = 0; i < array.length; i++) {
 			// generate an integer [1..windowHeight]
-			int n = rand.nextInt(windowHeight - 125) + 20;
+			int n = rand.nextInt(WINDOW_HEIGHT - 125) + 20;
 			array[i] = n;
 		}
 	}
@@ -213,7 +213,7 @@ public class SortingPanel extends VisualizationPanel {
 		for (int i = 0; i < array.length; i++) {
 			int height = array[i];
 			int xBegin = i + (BAR_WIDTH - 1) * i;
-			int yBegin = windowHeight - height - 85;
+			int yBegin = WINDOW_HEIGHT - height - 85;
 			graphics.setColor(colors[i]);
 			graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
 		}

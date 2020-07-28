@@ -7,18 +7,24 @@ import java.awt.Color;
  *
  */
 public class GridNode {
+	// Color Constants
+	private final Color DEFAULT_COLOR = Color.lightGray;
+	private final Color START_COLOR = Color.green;
+	private final Color END_COLOR = Color.red;
+	private final Color OBSTACLE_COLOR = Color.darkGray;
+	
 	private GridNode parent;
-	private int xLocation;
-	private int yLocation;
+	private int x;
+	private int y;
 	private int gCost;
 	private Color color;
 	
 	public GridNode(int x, int y) {
 		this.parent = null;
-		this.xLocation = x;
-		this.yLocation = y;
+		this.x = x;
+		this.y = y;
 		this.gCost = 0;
-		this.color = Color.lightGray;
+		this.color = DEFAULT_COLOR;
 	}
 	
 	public GridNode getParent() {
@@ -29,12 +35,12 @@ public class GridNode {
 		this.parent = p;
 	}
 	
-	public int getXLocation() {
-		return this.xLocation;
+	public int getX() {
+		return this.x;
 	}
 	
-	public int getYLocation() {
-		return this.yLocation;
+	public int getY() {
+		return this.y;
 	}
 	
 	public int gCost() {
@@ -53,20 +59,44 @@ public class GridNode {
 		return manhattanDistanceTo(endNode);
 	}
 	
+	public Boolean isDefault() {
+		return this.color == DEFAULT_COLOR;
+	}
+	
+	public void setDefault() {
+		this.color = DEFAULT_COLOR;
+	}
+	
+	public Boolean isStart() {
+		return this.color == START_COLOR;
+	}
+	
+	public void setStart() {
+		this.color = START_COLOR;
+	}
+	
+	public Boolean isEnd() {
+		return this.color == END_COLOR;
+	}
+	
+	public void setEnd() {
+		this.color = END_COLOR;
+	}
+	
+	public Boolean isObstacle() {
+		return this.color == OBSTACLE_COLOR;
+	}
+	
+	public void setObstacle() {
+		this.color = OBSTACLE_COLOR;
+	}
+	
 	public Color getColor() {
 		return this.color;
 	}
 	
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	
-	public Boolean isObstacle() {
-		return this.color == Color.lightGray;
-	}
-	
 	public int manhattanDistanceTo(GridNode endNode) {
-		return Math.abs(this.xLocation - endNode.getXLocation()) + Math.abs(this.yLocation - endNode.getYLocation());
+		return Math.abs(this.x - endNode.getX()) + Math.abs(this.y - endNode.getY());
 	}
 	
 }
