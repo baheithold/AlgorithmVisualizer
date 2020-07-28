@@ -15,6 +15,7 @@ public class GridNode {
 	public GridNode(int x, int y) {
 		this.xLocation = x;
 		this.yLocation = y;
+		this.gCost = 0;
 		this.color = Color.lightGray;
 	}
 	
