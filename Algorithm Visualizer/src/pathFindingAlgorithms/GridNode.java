@@ -69,8 +69,8 @@ public class GridNode {
 		this.color = color;
 	}
 	
-	public int manhattanDistanceTo(int endX, int endY) {
-		return Math.abs(this.xLocation - endX) + Math.abs(this.yLocation - endY);
+	public int manhattanDistanceTo(GridNode endNode) {
+		return Math.abs(this.xLocation - endNode.getXLocation()) + Math.abs(this.yLocation - endNode.getYLocation());
 	}
 	
 }
