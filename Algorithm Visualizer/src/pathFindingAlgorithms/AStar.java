@@ -22,10 +22,6 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	private TreeSet<GridNode> openList;
 	private HashMap<GridNode, Boolean> closedList;
 	
-	// Start and End nodes
-	private GridNode startNode;
-	private GridNode endNode;
-	
 	public AStar(PathFindingPanel panel) {
 		this.panel = panel;
 		this.grid = panel.getGrid();
