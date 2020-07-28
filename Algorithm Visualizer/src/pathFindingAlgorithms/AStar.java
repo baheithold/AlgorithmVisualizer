@@ -37,6 +37,16 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 				// Add start node to open list
 				openList.add(grid.getStartNode());
 				
+				// Neighbors
+				GridNode northNeighbor;
+				GridNode southNeighbor;
+				GridNode eastNeighbor;
+				GridNode westNeighbor;
+				GridNode northeastNeighbor;
+				GridNode northwestNeighbor;
+				GridNode southeastNeighbor;
+				GridNode southwestNeighbor;
+				
 				// Neighbors List
 				ArrayList<GridNode> neighbors = new ArrayList<GridNode>();
 				
@@ -49,43 +59,43 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					
 					// North Neighbor
 					if (grid.inBounds(qNode.getX(), qNode.getY() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX(), qNode.getY() - 1);
-						neighbors.add(neighbor);
+						northNeighbor = grid.getNode(qNode.getX(), qNode.getY() - 1);
+						neighbors.add(northNeighbor);
 					}
 					// South Neighbor
 					if (grid.inBounds(qNode.getX(), qNode.getY() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX(), qNode.getY() + 1);
-						neighbors.add(neighbor);
+						southNeighbor = grid.getNode(qNode.getX(), qNode.getY() + 1);
+						neighbors.add(southNeighbor);
 					}
 					// East Neighbor
 					if (grid.inBounds(qNode.getX() + 1, qNode.getY())) {
-						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY());
-						neighbors.add(neighbor);
+						eastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY());
+						neighbors.add(eastNeighbor);
 					}
 					// West Neighbor
 					if (grid.inBounds(qNode.getX() - 1, qNode.getY())) {
-						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY());
-						neighbors.add(neighbor);
+						westNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY());
+						neighbors.add(westNeighbor);
 					}
 					// NorthEast Neighbor
 					if (grid.inBounds(qNode.getX() + 1, qNode.getY() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY() - 1);
-						neighbors.add(neighbor);
+						northeastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY() - 1);
+						neighbors.add(northeastNeighbor);
 					}
 					// NorthWest Neighbor
 					if (grid.inBounds(qNode.getX() - 1, qNode.getY() - 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY() - 1);
-						neighbors.add(neighbor);
+						northwestNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY() - 1);
+						neighbors.add(northwestNeighbor);
 					}
 					// SouthEast Neighbor
 					if (grid.inBounds(qNode.getX() + 1, qNode.getY() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX() + 1, qNode.getY() + 1);
-						neighbors.add(neighbor);
+						southeastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY() + 1);
+						neighbors.add(southeastNeighbor);
 					}
 					// SouthWest Neighbor
 					if (grid.inBounds(qNode.getX() - 1, qNode.getY() + 1)) {
-						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY() + 1);
-						neighbors.add(neighbor);
+						southwestNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY() + 1);
+						neighbors.add(southwestNeighbor);
 					}
 					// For each neighbor (clear neighbors after done)
 					for (GridNode neighbor : neighbors) {
