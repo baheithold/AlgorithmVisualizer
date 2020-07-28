@@ -15,6 +15,7 @@ public abstract class SortingAlgorithm {
 	}
 	
 	public SortingAlgorithm(SortingPanel array) {
+		isRunning = false;
 		this.array = array;
 	}
 	
