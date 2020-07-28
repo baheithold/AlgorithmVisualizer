@@ -11,6 +11,7 @@ import gui.PathFindingPanel;
  */
 public abstract class PathFindingAlgorithm {
 	protected PathFindingPanel panel;
+	protected Grid grid;
 	private boolean isRunning;
 	protected GridNode startNode;
 	protected GridNode endNode;
@@ -23,7 +24,10 @@ public abstract class PathFindingAlgorithm {
 	
 	public PathFindingAlgorithm(PathFindingPanel panel) {
 		isRunning = false;
+		startNode = null;
+		endNode = null;
 		this.panel = panel;
+		grid = panel.getGrid();
 	}
 	
 	public boolean isRunning() {

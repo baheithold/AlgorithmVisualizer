@@ -14,8 +14,6 @@ import gui.PathFindingPanel;
  *
  */
 public class AStar extends PathFindingAlgorithm implements Runnable {
-	private PathFindingPanel panel;
-	private Grid grid;
 	SwingWorker<Void, Void> workerThread;
 
 	// Open/Closed
@@ -23,12 +21,11 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	private HashMap<GridNode, Boolean> closedList;
 	
 	public AStar(PathFindingPanel panel) {
-		this.panel = panel;
-		this.grid = panel.getGrid();
+		super(panel);
 		this.openList = new TreeSet<GridNode>();
 		this.closedList = new HashMap<GridNode, Boolean>();
-		startNode = panel.getGrid().getStartNode();
-		endNode = panel.getGrid().getEndNode();
+		startNode = grid.getStartNode();
+		endNode = grid.getEndNode();
 	}
 	
 	@Override
