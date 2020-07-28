@@ -35,7 +35,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				// Add start node to open list
-				openList.add(panel.getGrid().getStartNode());
+				openList.add(startNode);
 				
 				// while the open list is not empty
 				while (!openList.isEmpty()) {

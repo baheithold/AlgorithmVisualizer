@@ -19,14 +19,14 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	
 	// Control Panel
 	private PathFindingControlPanel controlPanel;
-	public AStar algorithmAStar;
+	public AStar pathFindingAlgorithm;
 
 	public PathFindingPanel(String algorithmName) {
 		this.setLayout(new BorderLayout());
 		this.algorithmName = algorithmName;
 		this.grid = new Grid(this, (this.WINDOW_HEIGHT / 20) - 6, (this.WINDOW_WIDTH / 20) - 1);
 		initializeControlPanel();
-		algorithmAStar = new AStar(this);
+		pathFindingAlgorithm = new AStar(this);
 		this.addMouseListener(this);
 	}
 	
