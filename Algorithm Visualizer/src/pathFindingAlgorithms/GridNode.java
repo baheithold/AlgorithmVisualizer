@@ -7,7 +7,6 @@ import java.awt.Color;
  *
  */
 public class GridNode {
-	private final int NODE_SIZE = 10;
 	private int xLocation;
 	private int yLocation;
 	private int gCost;
