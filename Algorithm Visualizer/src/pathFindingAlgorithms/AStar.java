@@ -13,10 +13,9 @@ import gui.PathFindingPanel;
  * @author Brett Heithold
  *
  */
-public class AStar implements Runnable {
+public class AStar extends PathFindingAlgorithm implements Runnable {
 	private PathFindingPanel panel;
 	private Grid grid;
-	private boolean isRunning;
 	SwingWorker<Void, Void> workerThread;
 
 	// Open/Closed
@@ -30,7 +29,6 @@ public class AStar implements Runnable {
 	public AStar(PathFindingPanel panel) {
 		this.panel = panel;
 		this.grid = panel.getGrid();
-		this.isRunning = false;
 		this.openList = new TreeSet<GridNode>();
 		this.closedList = new HashMap<GridNode, Boolean>();
 		startNode = panel.getGrid().getStartNode();
@@ -133,13 +131,15 @@ public class AStar implements Runnable {
 		return node.getX() == endNode.getX() && node.getY() == endNode.getY();
 	}
 	
-	public void runAStar() {
-		this.isRunning = true;
+	@Override
+	public void runPathFindingAlgorithm() {
+		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
 	
-	public void killAStar() {
-		this.isRunning = false;
+	@Override
+	public void killPathFindingAlgorithm() {
+		setRunning(false);
 		workerThread.cancel(true);
 	}
 
