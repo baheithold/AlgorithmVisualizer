@@ -7,16 +7,26 @@ import java.awt.Color;
  *
  */
 public class GridNode {
+	private GridNode parent;
 	private int xLocation;
 	private int yLocation;
 	private int gCost;
 	private Color color;
 	
 	public GridNode(int x, int y) {
+		this.parent = null;
 		this.xLocation = x;
 		this.yLocation = y;
 		this.gCost = 0;
 		this.color = Color.lightGray;
+	}
+	
+	public GridNode getParent() {
+		return this.parent;
+	}
+	
+	public void setParent(GridNode p) {
+		this.parent = p;
 	}
 	
 	public int getXLocation() {
