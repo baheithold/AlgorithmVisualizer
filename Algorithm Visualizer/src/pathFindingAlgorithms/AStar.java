@@ -1,9 +1,7 @@
 package pathFindingAlgorithms;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -18,13 +16,13 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	SwingWorker<Void, Void> workerThread;
 
 	// Open/Closed
-	private TreeSet<GridNode> openList;
-	private HashMap<GridNode, Boolean> closedList;
+	private ArrayList<GridNode> openList;
+	private boolean[][] closedList;
 	
 	public AStar(PathFindingPanel panel) {
 		super(panel);
-		this.openList = new TreeSet<GridNode>();
-		this.closedList = new HashMap<GridNode, Boolean>();
+		this.openList = new ArrayList<GridNode>();
+		this.closedList = new boolean[grid.getNumGridCols()][grid.getNumGridRows()];
 	}
 	
 	@Override
@@ -33,18 +31,21 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
+				// if start or end node is missing, return
+				if (!grid.hasStartNode() || !grid.hasEndNode()) return null;
+				
 				// Add start node to open list
-				System.out.println(grid.getStartNode().getX() + " " + grid.getStartNode().getY());
 				openList.add(grid.getStartNode());
+				
+				// Neighbors List
+				ArrayList<GridNode> neighbors = new ArrayList<GridNode>();
 				
 				// while the open list is not empty
 				while (!openList.isEmpty()) {
-					System.out.println("HERE");
 					GridNode qNode = findLowestFCost();
 					openList.remove(qNode);
 					
 					/***** Generate successors *****/
-					ArrayList<GridNode> neighbors = new ArrayList<GridNode>();
 					
 					// North Neighbor
 					if (grid.inBounds(qNode.getX(), qNode.getY() - 1)) {
@@ -86,16 +87,18 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 						GridNode neighbor = grid.getNode(qNode.getX() - 1, qNode.getY() + 1);
 						neighbors.add(neighbor);
 					}
-					
 					// For each neighbor (clear neighbors after done)
 					for (GridNode neighbor : neighbors) {
+						System.out.println("HELLO NEIGHBOR");
 						neighbor.setParent(qNode);
 						if (neighbor.isEnd()) {
 							// end node found!
 							System.out.println("End Node Found!");
+							setPathFound(true);
 							break;
 						}
-						else if (!closedList.get(neighbor) && !neighbor.isObstacle()) {
+						else if (!closedList[qNode.getX()][qNode.getY()] && !neighbor.isObstacle()) {
+							openList.add(neighbor);
 							int gNew = neighbor.gCost() + 1;
 							int hNew = neighbor.calculateHCost(grid.getEndNode());
 							int fNew = gNew + hNew;
@@ -106,10 +109,12 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 						}
 					}
 					neighbors.clear();
-					closedList.put(qNode, true);
+					closedList[qNode.getX()][qNode.getY()] = true;
 				}
 				
-				tracePath();
+				if (isPathFound()) {
+					tracePath();
+				}
 				publish();
 				return null;
 			}

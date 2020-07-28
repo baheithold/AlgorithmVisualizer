@@ -15,6 +15,7 @@ public abstract class PathFindingAlgorithm {
 	protected PathFindingPanel panel;
 	protected Grid grid;
 	private boolean isRunning;
+	private boolean pathFound;
 	
 	// path
 	private Stack<GridNode> pathStack = new Stack<GridNode>();
@@ -24,9 +25,10 @@ public abstract class PathFindingAlgorithm {
 	}
 	
 	public PathFindingAlgorithm(PathFindingPanel panel) {
-		isRunning = false;
 		this.panel = panel;
 		grid = panel.getGrid();
+		isRunning = false;
+		pathFound = false;
 	}
 	
 	public boolean isRunning() {
@@ -37,11 +39,20 @@ public abstract class PathFindingAlgorithm {
 		isRunning = run;
 	}
 	
+	protected void setPathFound(boolean found) {
+		pathFound = found;
+	}
+	
+	protected boolean isPathFound() {
+		return pathFound;
+	}
+	
 	private void constructPath() {
 		GridNode curr = grid.getEndNode();
 		while (curr != null) {
 			pathStack.add(curr);
 			curr = curr.getParent();
+			System.out.println("HERE!!!");
 		}
 	}
 	
