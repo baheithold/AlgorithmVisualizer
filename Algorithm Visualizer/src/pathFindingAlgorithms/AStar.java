@@ -2,6 +2,7 @@ package pathFindingAlgorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.swing.SwingUtilities;
@@ -33,10 +34,12 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				// Add start node to open list
+				System.out.println(grid.getStartNode().getX() + " " + grid.getStartNode().getY());
 				openList.add(grid.getStartNode());
 				
 				// while the open list is not empty
 				while (!openList.isEmpty()) {
+					System.out.println("HERE");
 					GridNode qNode = findLowestFCost();
 					openList.remove(qNode);
 					
@@ -84,21 +87,38 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 						neighbors.add(neighbor);
 					}
 					
-					// For each neighbor
+					// For each neighbor (clear neighbors after done)
 					for (GridNode neighbor : neighbors) {
 						neighbor.setParent(qNode);
-						if (isEndNode(neighbor)) {
+						if (neighbor.isEnd()) {
 							// end node found!
 							System.out.println("End Node Found!");
 							break;
 						}
+						else if (!closedList.get(neighbor) && !neighbor.isObstacle()) {
+							int gNew = neighbor.gCost() + 1;
+							int hNew = neighbor.calculateHCost(grid.getEndNode());
+							int fNew = gNew + hNew;
+							int fOld = neighbor.calculateFCost(grid.getEndNode());
+							if (fOld > fNew) {
+								neighbor.setGCost(gNew);
+							}
+						}
 					}
-					
+					neighbors.clear();
+					closedList.put(qNode, true);
 				}
 				
+				tracePath();
+				publish();
 				return null;
 			}
-			
+
+			@Override
+			protected void process(List<Void> chunks) {
+				panel.repaint();
+			}
+						
 		};
 		
 		workerThread.execute();
@@ -116,10 +136,6 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			}
 		}
 		return nodeWithLowestFCost;
-	}
-	
-	private Boolean isEndNode(GridNode node) {
-		return node.getX() == grid.getEndNode().getX() && node.getY() == grid.getEndNode().getY();
 	}
 	
 	@Override

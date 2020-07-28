@@ -7,6 +7,13 @@ import java.awt.event.MouseListener;
 
 import pathFindingAlgorithms.AStar;
 import pathFindingAlgorithms.Grid;
+import pathFindingAlgorithms.PathFindingAlgorithm;
+import sortingAlgorithms.BubbleSort;
+import sortingAlgorithms.HeapSort;
+import sortingAlgorithms.InsertionSort;
+import sortingAlgorithms.MergeSort;
+import sortingAlgorithms.QuickSort;
+import sortingAlgorithms.SelectionSort;
 
 /**
  * @author Brett Heithold
@@ -19,7 +26,9 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	
 	// Control Panel
 	private PathFindingControlPanel controlPanel;
-	public AStar pathFindingAlgorithm;
+	
+	// Path Finding Algorithm
+	public PathFindingAlgorithm pathFindingAlgorithm;
 
 	public PathFindingPanel(String algorithmName) {
 		this.setLayout(new BorderLayout());
@@ -28,6 +37,14 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		initializeControlPanel();
 		pathFindingAlgorithm = new AStar(this);
 		this.addMouseListener(this);
+		
+		switch (algorithmName) {
+			case "AStar":
+				pathFindingAlgorithm = new AStar(this);
+				break;
+			default:
+				break;
+	}
 	}
 	
 	public Grid getGrid() {

@@ -12,6 +12,7 @@ public class GridNode {
 	private final Color START_COLOR = Color.green;
 	private final Color END_COLOR = Color.red;
 	private final Color OBSTACLE_COLOR = Color.darkGray;
+	private final Color PATH_COLOR = Color.blue;
 	
 	private GridNode parent;
 	private int x;
@@ -59,7 +60,7 @@ public class GridNode {
 		return manhattanDistanceTo(endNode);
 	}
 	
-	public Boolean isDefault() {
+	public boolean isDefault() {
 		return this.color == DEFAULT_COLOR;
 	}
 	
@@ -67,7 +68,7 @@ public class GridNode {
 		this.color = DEFAULT_COLOR;
 	}
 	
-	public Boolean isStart() {
+	public boolean isStart() {
 		return this.color == START_COLOR;
 	}
 	
@@ -75,7 +76,7 @@ public class GridNode {
 		this.color = START_COLOR;
 	}
 	
-	public Boolean isEnd() {
+	public boolean isEnd() {
 		return this.color == END_COLOR;
 	}
 	
@@ -83,12 +84,20 @@ public class GridNode {
 		this.color = END_COLOR;
 	}
 	
-	public Boolean isObstacle() {
+	public boolean isObstacle() {
 		return this.color == OBSTACLE_COLOR;
 	}
 	
 	public void setObstacle() {
 		this.color = OBSTACLE_COLOR;
+	}
+	
+	public boolean isPath() {
+		return this.color == PATH_COLOR;
+	}
+	
+	public void setPath() {
+		this.color = PATH_COLOR;
 	}
 	
 	public Color getColor() {
