@@ -88,6 +88,10 @@ public class Grid {
 		this.grid[x][y].setColor(color);
 	}
 	
+	public Boolean inBounds(int x, int y) {
+		return x >= 0 && x < this.numGridCols && y >= 0 && y < this.numGridRows;
+	}
+	
 	public void randomizeGrid() {
 		int numberOfObstacles = generateRandomNumber(0, (this.numGridRows * this.numGridCols) / 2);
 		while (numberOfObstacles > 0) {

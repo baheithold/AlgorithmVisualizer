@@ -37,6 +37,10 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.addMouseListener(this);
 	}
 	
+	public Grid getGrid() {
+		return this.grid;
+	}
+	
 	private void initializeControlPanel() {
 		controlPanel = new PathFindingControlPanel(this);
 		this.add(controlPanel, BorderLayout.SOUTH);
@@ -70,12 +74,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	}
 
 	private boolean mouseInGrid(int x, int y) {
-		if (x >= 0 && x < grid.getNumGridCols()) {
-			if (y >= 0 && y < grid.getNumGridRows()) {
-				return true;
-			}
-		}
-		return false;
+		return grid.inBounds(x, y);
 	}
 	
 	@Override
