@@ -24,8 +24,6 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 		super(panel);
 		this.openList = new TreeSet<GridNode>();
 		this.closedList = new HashMap<GridNode, Boolean>();
-		startNode = grid.getStartNode();
-		endNode = grid.getEndNode();
 	}
 	
 	@Override
@@ -35,7 +33,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				// Add start node to open list
-				openList.add(startNode);
+				openList.add(grid.getStartNode());
 				
 				// while the open list is not empty
 				while (!openList.isEmpty()) {
@@ -112,7 +110,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 		for (GridNode gridNode : openList) {
 			if (nodeWithLowestFCost == null) nodeWithLowestFCost = gridNode;
 			else {
-				if (gridNode.calculateFCost(endNode) < nodeWithLowestFCost.calculateFCost(endNode)) {
+				if (gridNode.calculateFCost(grid.getEndNode()) < nodeWithLowestFCost.calculateFCost(grid.getEndNode())) {
 					nodeWithLowestFCost = gridNode;
 				}
 			}
@@ -121,7 +119,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	}
 	
 	private Boolean isEndNode(GridNode node) {
-		return node.getX() == endNode.getX() && node.getY() == endNode.getY();
+		return node.getX() == grid.getEndNode().getX() && node.getY() == grid.getEndNode().getY();
 	}
 	
 	@Override
