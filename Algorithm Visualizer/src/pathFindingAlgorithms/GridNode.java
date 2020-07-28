@@ -11,18 +11,12 @@ public class GridNode {
 	private int xLocation;
 	private int yLocation;
 	private int gCost;
-	private int hCost;
-	private int fCost;
 	private Color color;
 	
 	public GridNode(int x, int y) {
 		this.xLocation = x;
 		this.yLocation = y;
 		this.color = Color.lightGray;
-	}
-	
-	public int getNodeSize() {
-		return NODE_SIZE;
 	}
 	
 	public int getXLocation() {
@@ -41,24 +35,12 @@ public class GridNode {
 		this.gCost = g;
 	}
 	
-	public int hCost() {
-		return this.hCost;
+	public int calculateFCost(GridNode endNode) {
+		return this.gCost + manhattanDistanceTo(endNode);
 	}
 	
-	public void setHCost(int h) {
-		this.hCost = h;
-	}
-	
-	public int fCost() {
-		return this.fCost;
-	}
-	
-	public void setFCost(int f) {
-		this.fCost = f;
-	}
-	
-	public int calculateFCost() {
-		return this.gCost + this.hCost;
+	public int calculateHCost(GridNode endNode) {
+		return manhattanDistanceTo(endNode);
 	}
 	
 	public Color getColor() {
@@ -69,7 +51,7 @@ public class GridNode {
 		this.color = color;
 	}
 	
-	public int manhattanDistanceTo(GridNode endNode) {
+	private int manhattanDistanceTo(GridNode endNode) {
 		return Math.abs(this.xLocation - endNode.getXLocation()) + Math.abs(this.yLocation - endNode.getYLocation());
 	}
 	
