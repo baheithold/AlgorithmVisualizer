@@ -50,7 +50,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 		
 	}
 	
-	private GridNode findLowestFCost() {
+	private GridNode findLowestOpenFCost() {
 		GridNode nodeWithLowestFCost = null;
 		for (GridNode gridNode : openList) {
 			if (nodeWithLowestFCost == null) nodeWithLowestFCost = gridNode;
