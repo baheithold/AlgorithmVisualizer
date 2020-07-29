@@ -57,6 +57,9 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	}
 	
 	public void resetGrid() {
+		grid.setStartNode(null);
+		grid.setEndNode(null);
+		pathFindingAlgorithm.setPathFound(false);
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
 				grid.getNode(i, j).setDefault();
