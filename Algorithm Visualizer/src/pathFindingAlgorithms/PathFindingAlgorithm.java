@@ -42,12 +42,10 @@ public abstract class PathFindingAlgorithm {
 		while (curr != null) {
 			pathStack.add(curr);
 			curr = curr.getParent();
-			System.out.println("HERE!!!");
 		}
 	}
 	
 	protected void tracePath() {
-		System.out.println("Path found!");
 		constructPath();
 		GridNode curr = pathStack.pop();
 		while (curr != null) {
