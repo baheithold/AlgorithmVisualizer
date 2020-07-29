@@ -8,12 +8,6 @@ import java.awt.event.MouseListener;
 import pathFindingAlgorithms.AStar;
 import pathFindingAlgorithms.Grid;
 import pathFindingAlgorithms.PathFindingAlgorithm;
-import sortingAlgorithms.BubbleSort;
-import sortingAlgorithms.HeapSort;
-import sortingAlgorithms.InsertionSort;
-import sortingAlgorithms.MergeSort;
-import sortingAlgorithms.QuickSort;
-import sortingAlgorithms.SelectionSort;
 
 /**
  * @author Brett Heithold
