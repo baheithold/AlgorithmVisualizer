@@ -19,10 +19,18 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	private ArrayList<GridNode> openList;
 	private boolean[][] closedList;
 	
+	// Neighbors
+	private ArrayList<GridNode> neighbors;
+	private GridNode northNeighbor;
+	private GridNode southNeighbor;
+	private GridNode eastNeighbor;
+	private GridNode westNeighbor;
+	
 	public AStar(PathFindingPanel panel) {
 		super(panel);
 		this.openList = new ArrayList<GridNode>();
 		this.closedList = new boolean[grid.getNumGridCols()][grid.getNumGridRows()];
+		this.neighbors = new ArrayList<GridNode>();
 	}
 	
 	@Override
@@ -41,6 +49,86 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					return null;
 				}
 				
+				// clear open/closed lists
+				openList.clear();
+				clearClosedList();
+				
+				// add start node to open list
+				openList.add(grid.getStartNode());
+				
+				GridNode qNode = null;
+				while (!openList.isEmpty()) {
+					
+					// clear neighbors
+					neighbors.clear();
+					
+					// Find node with lowest f cost
+					qNode = findLowestOpenFCost();
+					
+					// Path does not exist
+					if (qNode == null) {
+						System.out.println("Path does not exist!");
+						return null;
+					}
+					
+					// if qNode is the target (end) node, path found
+					if (qNode.isEnd()) {
+						System.out.println("Path found!");
+						tracePath();
+						return null;
+					}
+					
+					// Determine if north neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(qNode.getX(), qNode.getY() - 1) && !grid.getNode(qNode.getX(), qNode.getY() - 1).isObstacle()) {
+						northNeighbor = grid.getNode(qNode.getX(), qNode.getY() - 1);
+						neighbors.add(northNeighbor);
+					}
+					// Determine if south neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(qNode.getX(), qNode.getY() + 1) && !grid.getNode(qNode.getX(), qNode.getY() + 1).isObstacle()) {
+						southNeighbor = grid.getNode(qNode.getX(), qNode.getY() + 1);
+						neighbors.add(southNeighbor);
+					}
+					// Determine if east neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(qNode.getX() + 1, qNode.getY()) && !grid.getNode(qNode.getX() + 1, qNode.getY()).isObstacle()) {
+						eastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY());
+						neighbors.add(eastNeighbor);
+					}
+					// Determine if west neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(qNode.getX() - 1, qNode.getY()) && !grid.getNode(qNode.getX() - 1, qNode.getY()).isObstacle()) {
+						westNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY());
+						neighbors.add(westNeighbor);
+					}
+					
+					// for all neighbors of qNode
+					for (GridNode neighbor : neighbors) {
+						// if neighbor is not in either open or closed lists
+						if (!openList.contains(neighbor) && closedList[neighbor.getX()][neighbor.getY()] == false) {
+							neighbor.setParent(qNode);
+							neighbor.setGCost(qNode.gCost() + 1);
+							openList.add(neighbor);
+						}
+						else {
+							if (neighbor.gCost() > qNode.gCost() + 1) {
+								neighbor.setGCost(qNode.gCost() + 1);
+								neighbor.setParent(qNode);
+								// if neighbor is in closed list
+								if (closedList[neighbor.getX()][neighbor.getY()] == true) {
+									closedList[neighbor.getX()][neighbor.getY()] = false;
+									openList.add(neighbor);
+								}
+							}
+						}
+					}
+					
+					// all of qNode's neighbors has been processed,
+					// remove qNode from openList and add it to the closedList
+					openList.remove(qNode);
+					closedList[qNode.getX()][qNode.getY()] = true;
+				}
 				
 				publish();
 				return null;
@@ -68,6 +156,14 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			}
 		}
 		return nodeWithLowestFCost;
+	}
+	
+	private void clearClosedList() {
+		for (int i = 0; i < closedList.length; i++) {
+			for (int j = 0; j < closedList[i].length; j++) {
+				closedList[i][j] = false;
+			}
+		}
 	}
 	
 	@Override
