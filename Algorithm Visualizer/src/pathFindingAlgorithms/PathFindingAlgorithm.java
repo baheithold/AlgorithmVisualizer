@@ -49,10 +49,18 @@ public abstract class PathFindingAlgorithm {
 		constructPath();
 		GridNode curr = pathStack.pop();
 		while (curr != null) {
-			curr.setPath();
+			// if current node is not start/end node, set node as a path node
+			if (!curr.isStart() && !curr.isEnd()) {
+				curr.setPath();
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			panel.repaint();
 			curr = pathStack.pop();
 		}
-		panel.repaint();
 	}
 	
 	public abstract void runPathFindingAlgorithm();
