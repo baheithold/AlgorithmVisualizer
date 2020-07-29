@@ -67,6 +67,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
 				grid.getNode(i, j).setDefault();
 				grid.getNode(i, j).setGCost(0);
+				grid.getNode(i, j).setParent(null);
 			}
 		}
 		repaint();
