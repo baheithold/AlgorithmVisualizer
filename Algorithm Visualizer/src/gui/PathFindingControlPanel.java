@@ -143,7 +143,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: Run");
 			if (panel.pathFindingAlgorithm.isRunning()) {
-				panel.pathFindingAlgorithm.runPathFindingAlgorithm();
+				panel.pathFindingAlgorithm.killPathFindingAlgorithm();
 			}
 			panel.pathFindingAlgorithm.runPathFindingAlgorithm();
 		}
