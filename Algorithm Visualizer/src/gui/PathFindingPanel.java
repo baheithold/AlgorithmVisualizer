@@ -108,6 +108,11 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 						grid.setStartNode(null);
 						grid.getNode(xPos, yPos).setDefault();
 					}
+					else if (grid.getNode(xPos, yPos).isEnd()) {
+						grid.setEndNode(null);
+						grid.getNode(xPos, yPos).setStart();
+						grid.setStartNode(grid.getNode(xPos, yPos));
+					}
 					else {
 						if (grid.hasStartNode()) {
 							grid.getNode(grid.getStartNode().getX(), grid.getStartNode().getY()).setDefault();
@@ -119,7 +124,12 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 				case "end":
 					if (grid.getNode(xPos, yPos).isEnd()) {
 						grid.setEndNode(null);
-						grid.getNode(xPos, yPos).setDefault();;
+						grid.getNode(xPos, yPos).setDefault();
+					}
+					else if (grid.getNode(xPos, yPos).isStart()) {
+						grid.setStartNode(null);
+						grid.getNode(xPos, yPos).setEnd();
+						grid.setEndNode(grid.getNode(xPos, yPos));
 					}
 					else {
 						if (grid.hasEndNode()) {
