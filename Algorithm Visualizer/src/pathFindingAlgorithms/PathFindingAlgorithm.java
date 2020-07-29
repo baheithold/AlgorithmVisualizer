@@ -15,7 +15,6 @@ public abstract class PathFindingAlgorithm {
 	protected PathFindingPanel panel;
 	protected Grid grid;
 	private boolean isRunning;
-	private boolean pathFound;
 	
 	// path
 	private Stack<GridNode> pathStack = new Stack<GridNode>();
