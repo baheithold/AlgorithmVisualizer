@@ -28,7 +28,6 @@ public abstract class PathFindingAlgorithm {
 		this.panel = panel;
 		grid = panel.getGrid();
 		isRunning = false;
-		pathFound = false;
 	}
 	
 	public boolean isRunning() {
@@ -37,14 +36,6 @@ public abstract class PathFindingAlgorithm {
 	
 	public void setRunning(boolean run) {
 		isRunning = run;
-	}
-	
-	protected void setPathFound(boolean found) {
-		pathFound = found;
-	}
-	
-	protected boolean isPathFound() {
-		return pathFound;
 	}
 	
 	private void constructPath() {
