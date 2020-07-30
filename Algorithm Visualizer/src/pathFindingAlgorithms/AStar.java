@@ -51,13 +51,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 			protected Void doInBackground() throws Exception {
 				
 				// if start or end node is missing, return
-				if (!grid.hasStartNode()) {
-					System.out.println("Missing Start Node!");
-					setRunning(false);
-					return null;
-				}
-				else if (!grid.hasEndNode()) {
-					System.out.println("Missing End Node!");
+				if (!verifyStartEndNodesExist()) {
 					setRunning(false);
 					return null;
 				}

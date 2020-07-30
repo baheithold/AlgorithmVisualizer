@@ -65,6 +65,18 @@ public abstract class PathFindingAlgorithm {
 		}
 	}
 	
+	protected boolean verifyStartEndNodesExist() {
+		if (!grid.hasStartNode()) {
+			System.out.println("Missing Start Node!");
+			return false;
+		}
+		else if (!grid.hasEndNode()) {
+			System.out.println("Missing End Node!");
+			return false;
+		}
+		return true;
+	}
+	
 	public abstract void runPathFindingAlgorithm();
 	public abstract void killPathFindingAlgorithm();
 	
