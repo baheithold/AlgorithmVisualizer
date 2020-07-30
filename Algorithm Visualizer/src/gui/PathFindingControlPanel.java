@@ -38,11 +38,16 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JButton randomizeJButton;
 	private JButton resetJButton;
 	
-	// JRadioButtons
-	private ButtonGroup radioGroup;
+	// Node type JRadioButtons
+	private ButtonGroup nodeTypeRadioGroup;
 	private JRadioButton startRadioButton;
 	private JRadioButton endRadioButton;
 	private JRadioButton obstacleRadioButton;
+	
+	// Heuristic JRadioButtons
+	private ButtonGroup heuristicRadioGroup;
+	private JRadioButton manhattanRadioButton;
+	private JRadioButton diagonalRadioButton;
 	
 	public PathFindingControlPanel(PathFindingPanel panel) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -77,7 +82,8 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	}
 	
 	private void initializeRadioButtons() {
-		radioGroup = new ButtonGroup();
+		// initialize node type radio buttons
+		nodeTypeRadioGroup = new ButtonGroup();
 		startRadioButton = new JRadioButton("Start");
 		startRadioButton.setSelected(true);
 		startRadioButton.addActionListener(this);
@@ -85,6 +91,13 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		endRadioButton.addActionListener(this);
 		obstacleRadioButton = new JRadioButton("Obstacle");
 		obstacleRadioButton.addActionListener(this);
+		// initialize heuristic radio buttons
+		heuristicRadioGroup = new ButtonGroup();
+		manhattanRadioButton = new JRadioButton("Manhattan");
+		manhattanRadioButton.setSelected(true);
+		manhattanRadioButton.addActionListener(this);
+		diagonalRadioButton = new JRadioButton("Diagonal");
+		diagonalRadioButton.addActionListener(this);
 	}
 	
 	private void constructControlPanel() {
@@ -98,13 +111,24 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(new JSeparator(SwingConstants.VERTICAL));
 		this.add(Box.createHorizontalStrut(10));
 		
-		// radio buttons
-		radioGroup.add(startRadioButton);
-		radioGroup.add(endRadioButton);
-		radioGroup.add(obstacleRadioButton);
+		// Node type radio buttons
+		nodeTypeRadioGroup.add(startRadioButton);
+		nodeTypeRadioGroup.add(endRadioButton);
+		nodeTypeRadioGroup.add(obstacleRadioButton);
 		this.add(startRadioButton);
 		this.add(endRadioButton);
 		this.add(obstacleRadioButton);
+		
+		// Separator
+		this.add(Box.createHorizontalStrut(10));
+		this.add(new JSeparator(SwingConstants.VERTICAL));
+		this.add(Box.createHorizontalStrut(10));
+		
+		// Heuristic radio buttons
+		heuristicRadioGroup.add(manhattanRadioButton);
+		heuristicRadioGroup.add(diagonalRadioButton);
+		this.add(manhattanRadioButton);
+		this.add(diagonalRadioButton);
 		
 		// Separator
 		this.add(Box.createHorizontalStrut(10));
@@ -128,6 +152,12 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		if (startRadioButton.isSelected()) return "start";
 		else if (endRadioButton.isSelected()) return "end";
 		else if (obstacleRadioButton.isSelected()) return "obstacle";
+		else return "unknown";
+	}
+	
+	public String whichHeuristicRadioSelected() {
+		if (manhattanRadioButton.isSelected()) return "manhattan";
+		else if (diagonalRadioButton.isSelected()) return "diagonal";
 		else return "unknown";
 	}
 	
@@ -163,6 +193,12 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 		else if (e.getSource() == obstacleRadioButton) {
 			System.out.println("Radio Button Selected: Obstacle");
+		}
+		else if (e.getSource() == manhattanRadioButton) {
+			System.out.println("Radio Button Selected: Manhattan");
+		}
+		else if (e.getSource() == diagonalRadioButton) {
+			System.out.println("Radio Button Selected: Diagonal");
 		}
 	}
 	
