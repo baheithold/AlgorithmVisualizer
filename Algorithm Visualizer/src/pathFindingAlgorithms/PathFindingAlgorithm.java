@@ -61,7 +61,7 @@ public abstract class PathFindingAlgorithm {
 		constructPath();
 		resetDefaultColors();
 		GridNode curr = pathStack.pop();
-		while (curr != null) {
+		while (pathStack.size() > 0) {
 			// if current node is not start/end node, set node as a path node
 			if (!curr.isStart() && !curr.isEnd()) {
 				curr.setPath();
