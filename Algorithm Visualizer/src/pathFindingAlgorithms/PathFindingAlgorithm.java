@@ -30,6 +30,7 @@ public abstract class PathFindingAlgorithm {
 	}
 	
 	public boolean isRunning() {
+		System.out.println("isRunning: " + isRunning);
 		return isRunning;
 	}
 	
@@ -57,7 +58,8 @@ public abstract class PathFindingAlgorithm {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
+				panel.resetPathColorsToDefault();
 			}
 			panel.repaint();
 			curr = pathStack.pop();
