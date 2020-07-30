@@ -38,7 +38,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 				break;
 			default:
 				break;
-	}
+		}
 	}
 	
 	public Grid getGrid() {
@@ -95,6 +95,10 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// if algorithm is running, ignore
+		if (this.pathFindingAlgorithm.isRunning()) {
+			return;
+		}
 		// get mouse position in grid
 		int xPos = (int) Math.floor(e.getPoint().getX() / 20);
 		int yPos = (int) Math.floor(e.getPoint().getY() / 20);
