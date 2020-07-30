@@ -44,7 +44,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JRadioButton endRadioButton;
 	private JRadioButton obstacleRadioButton;
 	
-	// Heuristic JRadioButtons
+	// Heuristic JRadioButtons (Only used for A Star)
 	private ButtonGroup heuristicRadioGroup;
 	private JRadioButton manhattanRadioButton;
 	private JRadioButton diagonalRadioButton;
@@ -95,15 +95,17 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		obstacleRadioButton = new JRadioButton("Obstacle");
 		obstacleRadioButton.setToolTipText("Select GridNode type");
 		obstacleRadioButton.addActionListener(this);
-		// initialize heuristic radio buttons
-		heuristicRadioGroup = new ButtonGroup();
-		manhattanRadioButton = new JRadioButton("Manhattan");
-		manhattanRadioButton.setToolTipText("Select a heuristic");
-		manhattanRadioButton.setSelected(true);
-		manhattanRadioButton.addActionListener(this);
-		diagonalRadioButton = new JRadioButton("Diagonal");
-		diagonalRadioButton.setToolTipText("Select a heuristic");
-		diagonalRadioButton.addActionListener(this);
+		// if using the AStar algorithm, initialize heuristic radio buttons
+		if (panel.getAlgorithmName() == ("AStar")) {
+			heuristicRadioGroup = new ButtonGroup();
+			manhattanRadioButton = new JRadioButton("Manhattan");
+			manhattanRadioButton.setToolTipText("Select a heuristic");
+			manhattanRadioButton.setSelected(true);
+			manhattanRadioButton.addActionListener(this);
+			diagonalRadioButton = new JRadioButton("Diagonal");
+			diagonalRadioButton.setToolTipText("Select a heuristic");
+			diagonalRadioButton.addActionListener(this);
+		}
 	}
 	
 	private void constructControlPanel() {
@@ -130,16 +132,19 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(new JSeparator(SwingConstants.VERTICAL));
 		this.add(Box.createHorizontalStrut(10));
 		
-		// Heuristic radio buttons
-		heuristicRadioGroup.add(manhattanRadioButton);
-		heuristicRadioGroup.add(diagonalRadioButton);
-		this.add(manhattanRadioButton);
-		this.add(diagonalRadioButton);
-		
-		// Separator
-		this.add(Box.createHorizontalStrut(10));
-		this.add(new JSeparator(SwingConstants.VERTICAL));
-		this.add(Box.createHorizontalStrut(10));
+		// if using the AStar algorithm, construct heuristic radio buttons
+		if (panel.getAlgorithmName() == "AStar") {
+			heuristicRadioGroup.add(manhattanRadioButton);
+			heuristicRadioGroup.add(diagonalRadioButton);
+			this.add(manhattanRadioButton);
+			this.add(diagonalRadioButton);
+			
+			// Separator
+			this.add(Box.createHorizontalStrut(10));
+			this.add(new JSeparator(SwingConstants.VERTICAL));
+			this.add(Box.createHorizontalStrut(10));
+			
+		}
 		
 		// Run Button
 		this.add(runJButton);

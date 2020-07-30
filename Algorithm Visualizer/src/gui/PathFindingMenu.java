@@ -61,7 +61,7 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 			window.setTitle("Dijkstra");
 		}
 		else if (e.getSource() == aStarJMenuItem) {
-			algorithmName = "aStar";
+			algorithmName = "AStar";
 			window.setTitle("A*");
 		}
 		else {
