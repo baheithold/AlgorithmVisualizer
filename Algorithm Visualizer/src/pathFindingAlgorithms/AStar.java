@@ -1,5 +1,6 @@
 package pathFindingAlgorithms;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,6 +107,11 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					// for all neighbors of qNode
 					for (GridNode neighbor : neighbors) {
 						// if neighbor is not in either open or closed lists
+						if (!neighbor.isStart() && !neighbor.isEnd()) {
+							neighbor.setColor(Color.cyan);
+						}
+						Thread.sleep(10);
+						publish();
 						if (!openList.contains(neighbor) && closedList[neighbor.getX()][neighbor.getY()] == false) {
 							neighbor.setParent(qNode);
 							neighbor.setGCost(qNode.gCost() + 1);
