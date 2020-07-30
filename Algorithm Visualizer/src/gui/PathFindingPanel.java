@@ -55,6 +55,10 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.add(controlPanel, BorderLayout.SOUTH);
 	}
 	
+	public PathFindingControlPanel getPathFindingControlPanel() {
+		return this.controlPanel;
+	}
+	
 	public void randomizeGrid() {
 		resetGrid();
 		this.grid.randomizeGrid();
