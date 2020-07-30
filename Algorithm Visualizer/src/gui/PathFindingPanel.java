@@ -131,7 +131,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		int yPos = (int) Math.floor(e.getPoint().getY() / 20);
 		System.out.println("Mouse Released: " + xPos + ", " + yPos + " | Mouse in grid: " + mouseInGrid(xPos,  yPos));
 		if (mouseInGrid(xPos, yPos)) {
-			switch (controlPanel.whichRadioSelected()) {
+			switch (controlPanel.whichNodeTypeRadioSelected()) {
 				case "start":
 					if (grid.getNode(xPos, yPos).isStart()) {
 						grid.setStartNode(null);
