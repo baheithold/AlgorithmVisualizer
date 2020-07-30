@@ -33,14 +33,19 @@ public class SortingStatisticsPanel extends JPanel {
 	private void initializeStatisticJLabels() {
 		itemsJLabel = new JLabel("Items: ");
 		numItemsJLabel = new JLabel(Integer.toString(array.length()));
+		numItemsJLabel.setToolTipText("Number of items to be sorted");
 		delayJLabel = new JLabel("Delay (ms): ");
 		delayValueJLable = new JLabel(Integer.toString(array.getCurrentDelay()));
+		delayValueJLable.setToolTipText("Delay in milliseconds");
 		swapsJLabel = new JLabel("Swaps: ");
 		numSwapsJLabel = new JLabel(Integer.toString(array.getNumSwaps()));
+		numSwapsJLabel.setToolTipText("Number of swaps performed by the algorithm");
 		accessesJLabel = new JLabel("Accesses: ");
 		numAccessesJLabel = new JLabel(Integer.toString(array.getNumAccesses()));
+		numAccessesJLabel.setToolTipText("Number of array accesses performed by the algorithm");
 		comparisonsJlabel = new JLabel("Comparisons: ");
 		numComparisonsJLabel = new JLabel(Integer.toString(array.getNumComparisons()));
+		numComparisonsJLabel.setToolTipText("Number of comparisons performed by the algorithm");
 	}
 	
 	private void constructStatisticsPanel() {
