@@ -52,6 +52,10 @@ public class GridNode {
 		this.gCost = g;
 	}
 	
+	public Color getColor() {
+		return this.color;
+	}
+	
 	public void setColor(Color color) {
 		this.color = color;
 	}
@@ -102,10 +106,6 @@ public class GridNode {
 	
 	public void setPath() {
 		this.color = PATH_COLOR;
-	}
-	
-	public Color getColor() {
-		return this.color;
 	}
 	
 	public int manhattanDistanceTo(GridNode endNode) {
