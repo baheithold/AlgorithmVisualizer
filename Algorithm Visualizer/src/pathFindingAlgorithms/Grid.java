@@ -88,6 +88,22 @@ public class Grid {
 		return x >= 0 && x < this.numGridCols && y >= 0 && y < this.numGridRows;
 	}
 	
+	public void setManhattanHeuristicAStar() {
+		for (int i = 0; i < numGridCols; i++) {
+			for (int j = 0; j < numGridRows; j++) {
+				grid[i][j].setManhattanHeuristicAStar();
+			}
+		}
+	}
+	
+	public void setDiagonalHeuristicAStar() {
+		for (int i = 0; i < numGridCols; i++) {
+			for (int j = 0; j < numGridRows; j++) {
+				grid[i][j].setDiagonalHeuristicAStar();
+			}
+		}
+	}
+	
 	public void randomizeGrid() {
 		int numberOfObstacles = generateRandomNumber(0, (this.numGridRows * this.numGridCols) / 2);
 		while (numberOfObstacles > 0) {

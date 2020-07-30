@@ -20,12 +20,15 @@ public class GridNode {
 	private int gCost;
 	private Color color;
 	
+	private String heuristicAStar;
+	
 	public GridNode(int x, int y) {
 		this.parent = null;
 		this.x = x;
 		this.y = y;
 		this.gCost = 0;
 		this.color = DEFAULT_COLOR;
+		this.heuristicAStar = null;
 	}
 	
 	public GridNode getParent() {
@@ -61,11 +64,22 @@ public class GridNode {
 	}
 	
 	public int calculateFCost(GridNode endNode) {
-		return this.gCost + manhattanDistanceTo(endNode);
+		return this.gCost + calculateHeuristicDistance(endNode);
 	}
 	
 	public int calculateHCost(GridNode endNode) {
-		return manhattanDistanceTo(endNode);
+		return calculateHeuristicDistance(endNode);
+	}
+	
+	private int calculateHeuristicDistance(GridNode endNode) {
+		int result = 0;
+		if (this.heuristicAStar == "manhattan") {
+			result = manhattanDistanceTo(endNode);
+		}
+		else if (this.heuristicAStar == "diagonal") {
+			result = diagonalDistanceTo(endNode);
+		}
+		return result;
 	}
 	
 	public boolean isDefault() {
@@ -107,6 +121,14 @@ public class GridNode {
 	
 	public void setPath() {
 		this.color = PATH_COLOR;
+	}
+	
+	public void setManhattanHeuristicAStar() {
+		this.heuristicAStar = "manhattan";
+	}
+	
+	public void setDiagonalHeuristicAStar() {
+		this.heuristicAStar = "diagonal";
 	}
 	
 	public int manhattanDistanceTo(GridNode endNode) {

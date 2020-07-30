@@ -20,12 +20,17 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	private ArrayList<GridNode> openList;
 	private boolean[][] closedList;
 	
-	// Neighbors
+	// Neighbors used in both manhattan and diagonal heuristics
 	private ArrayList<GridNode> neighbors;
 	private GridNode northNeighbor;
 	private GridNode southNeighbor;
 	private GridNode eastNeighbor;
 	private GridNode westNeighbor;
+	// Neighbors used in only diagonal heuristic
+	private GridNode northeastNeighbor;
+	private GridNode northwestNeighbor;
+	private GridNode southeastNeighbor;
+	private GridNode southwestNeighbor;
 	
 	public AStar(PathFindingPanel panel) {
 		super(panel);
@@ -83,6 +88,8 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 						return null;
 					}
 					
+					/***** Calculate neighbors used in both heuristics *****/
+					
 					// Determine if north neighbor is inbounds and not an obstacle
 					// if inbounds and not an obstacle, add to neighbors list
 					if (grid.inBounds(qNode.getX(), qNode.getY() - 1) && !grid.getNode(qNode.getX(), qNode.getY() - 1).isObstacle()) {
@@ -106,6 +113,28 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					if (grid.inBounds(qNode.getX() - 1, qNode.getY()) && !grid.getNode(qNode.getX() - 1, qNode.getY()).isObstacle()) {
 						westNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY());
 						neighbors.add(westNeighbor);
+					}
+					
+					/***** Calculate neighbors used in only diagonal heuristic *****/
+					if (panel.getPathFindingControlPanel().whichHeuristicRadioSelected() == "diagonal") {
+						// Determine if northeast neighbor is inbounds and not an obstacle
+						// if inbounds and not an obstacle, add to neighbors list
+						if (grid.inBounds(qNode.getX() + 1, qNode.getY() - 1) && !grid.getNode(qNode.getX() + 1, qNode.getY() - 1).isObstacle()) {
+							northeastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY() - 1);
+							neighbors.add(northeastNeighbor);
+						}
+						if (grid.inBounds(qNode.getX() - 1, qNode.getY() - 1) && !grid.getNode(qNode.getX() - 1, qNode.getY() - 1).isObstacle()) {
+							northwestNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY() - 1);
+							neighbors.add(northwestNeighbor);
+						}
+						if (grid.inBounds(qNode.getX() + 1, qNode.getY() + 1) && !grid.getNode(qNode.getX() + 1, qNode.getY() + 1).isObstacle()) {
+							southeastNeighbor = grid.getNode(qNode.getX() + 1, qNode.getY() + 1);
+							neighbors.add(southeastNeighbor);
+						}
+						if (grid.inBounds(qNode.getX() - 1, qNode.getY() + 1) && !grid.getNode(qNode.getX() - 1, qNode.getY() + 1).isObstacle()) {
+							southwestNeighbor = grid.getNode(qNode.getX() - 1, qNode.getY() + 1);
+							neighbors.add(southwestNeighbor);
+						}
 					}
 					
 					// for all neighbors of qNode

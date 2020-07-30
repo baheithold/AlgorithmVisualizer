@@ -207,9 +207,11 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 		else if (e.getSource() == manhattanRadioButton) {
 			System.out.println("Radio Button Selected: Manhattan");
+			panel.getGrid().setManhattanHeuristicAStar();
 		}
 		else if (e.getSource() == diagonalRadioButton) {
 			System.out.println("Radio Button Selected: Diagonal");
+			panel.getGrid().setDiagonalHeuristicAStar();
 		}
 	}
 	
