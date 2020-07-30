@@ -35,7 +35,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	
 	// JButtons
 	private JButton runJButton;
-	private JButton stepJButton;
 	private JButton randomizeJButton;
 	private JButton resetJButton;
 	
@@ -71,8 +70,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private void initializeButtons() {
 		runJButton = new JButton("Run");
 		runJButton.addActionListener(this);
-		stepJButton = new JButton("Step");
-		stepJButton.addActionListener(this);
 		randomizeJButton = new JButton("Randomize");
 		randomizeJButton.addActionListener(this);
 		resetJButton = new JButton("Reset");
@@ -118,10 +115,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(runJButton);
 		this.add(Box.createHorizontalStrut(10));
 		
-		// Step Button
-		this.add(stepJButton);
-		this.add(Box.createHorizontalStrut(10));
-		
 		// Randomize Button
 		this.add(randomizeJButton);
 		this.add(Box.createHorizontalStrut(10));
@@ -147,9 +140,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 				panel.resetDefaultColors();
 				panel.pathFindingAlgorithm.runPathFindingAlgorithm();
 			}
-		}
-		else if (e.getSource() == stepJButton) {
-			System.out.println("Button Pressed: Step");
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
