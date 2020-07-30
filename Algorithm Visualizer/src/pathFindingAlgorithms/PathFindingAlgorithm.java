@@ -30,7 +30,6 @@ public abstract class PathFindingAlgorithm {
 	}
 	
 	public boolean isRunning() {
-		System.out.println("isRunning: " + isRunning);
 		return isRunning;
 	}
 	
