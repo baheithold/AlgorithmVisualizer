@@ -42,6 +42,10 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		}
 	}
 	
+	public String getAlgorithmName() {
+		return this.algorithmName;
+	}
+	
 	public Grid getGrid() {
 		return this.grid;
 	}
