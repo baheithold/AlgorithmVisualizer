@@ -43,10 +43,12 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 				// if start or end node is missing, return
 				if (!grid.hasStartNode()) {
 					System.out.println("Missing Start Node!");
+					setRunning(false);
 					return null;
 				}
 				else if (!grid.hasEndNode()) {
 					System.out.println("Missing End Node!");
+					setRunning(false);
 					return null;
 				}
 				
@@ -69,6 +71,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					// Path does not exist
 					if (qNode == null) {
 						System.out.println("Path does not exist!");
+						setRunning(false);
 						return null;
 					}
 					
@@ -76,6 +79,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					if (qNode.isEnd()) {
 						System.out.println("Path found!");
 						tracePath();
+						setRunning(false);
 						return null;
 					}
 					
@@ -150,6 +154,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 				
 				System.out.println("Path does not exist!");
 				publish();
+				setRunning(false);
 				return null;
 			}
 
