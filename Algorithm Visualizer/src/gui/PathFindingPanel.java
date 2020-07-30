@@ -82,6 +82,17 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.repaint();
 	}
 	
+	private void resetPathColorsToDefault() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				GridNode node = grid.getNode(i, j);
+				if (node.isPath()) {
+					node.setDefault();
+				}
+			}
+		}
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -112,6 +123,8 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		if (this.pathFindingAlgorithm.isRunning()) {
 			return;
 		}
+		// Reset path nodes to default
+		resetPathColorsToDefault();
 		// get mouse position in grid
 		int xPos = (int) Math.floor(e.getPoint().getX() / 20);
 		int yPos = (int) Math.floor(e.getPoint().getY() / 20);
