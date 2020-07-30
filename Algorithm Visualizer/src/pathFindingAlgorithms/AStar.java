@@ -107,14 +107,16 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					// for all neighbors of qNode
 					for (GridNode neighbor : neighbors) {
 						// if neighbor is not in either open or closed lists
-						if (!neighbor.isStart() && !neighbor.isEnd()) {
-							neighbor.setColor(Color.cyan);
-						}
 						Thread.sleep(10);
 						publish();
 						if (!openList.contains(neighbor) && closedList[neighbor.getX()][neighbor.getY()] == false) {
 							neighbor.setParent(qNode);
 							neighbor.setGCost(qNode.gCost() + 1);
+							if (!neighbor.isStart() && !neighbor.isEnd()) {
+								neighbor.setColor(Color.magenta);
+								publish();
+								Thread.sleep(10);
+							}
 							openList.add(neighbor);
 						}
 						else {
@@ -124,6 +126,11 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 								// if neighbor is in closed list
 								if (closedList[neighbor.getX()][neighbor.getY()] == true) {
 									closedList[neighbor.getX()][neighbor.getY()] = false;
+									if (!neighbor.isStart() && !neighbor.isEnd()) {
+										neighbor.setColor(Color.magenta);
+										publish();
+										Thread.sleep(10);
+									}
 									openList.add(neighbor);
 								}
 							}
@@ -133,6 +140,11 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					// all of qNode's neighbors has been processed,
 					// remove qNode from openList and add it to the closedList
 					openList.remove(qNode);
+					if (!qNode.isStart() && !qNode.isEnd()) {
+						qNode.setColor(Color.cyan);
+						publish();
+						Thread.sleep(10);
+					}
 					closedList[qNode.getX()][qNode.getY()] = true;
 				}
 				

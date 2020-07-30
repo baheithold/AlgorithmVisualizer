@@ -37,6 +37,18 @@ public abstract class PathFindingAlgorithm {
 		isRunning = run;
 	}
 	
+	private void resetDefaultColors() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				GridNode node = grid.getNode(i, j);
+				if (!node.isDefault() && !node.isStart() && !node.isEnd() && !node.isObstacle()) {
+					node.setDefault();
+				}
+			}
+		}
+		panel.repaint();
+	}
+	
 	private void constructPath() {
 		GridNode curr = grid.getEndNode();
 		while (curr != null) {
@@ -47,6 +59,7 @@ public abstract class PathFindingAlgorithm {
 	
 	protected void tracePath() {
 		constructPath();
+		resetDefaultColors();
 		GridNode curr = pathStack.pop();
 		while (curr != null) {
 			// if current node is not start/end node, set node as a path node
