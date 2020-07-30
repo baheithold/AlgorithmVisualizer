@@ -94,10 +94,9 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortJButton) {
 			System.out.println("Button Pressed: Sort");
-			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killSort();
+			if (!array.sortAlgorithm.isRunning()) {
+				array.sortAlgorithm.runSort();
 			}
-			array.sortAlgorithm.runSort();
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
