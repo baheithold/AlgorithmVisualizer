@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import pathFindingAlgorithms.AStar;
 import pathFindingAlgorithms.Grid;
+import pathFindingAlgorithms.GridNode;
 import pathFindingAlgorithms.PathFindingAlgorithm;
 
 /**
@@ -67,6 +68,18 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 			}
 		}
 		repaint();
+	}
+	
+	public void resetDefaultColors() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				GridNode node = grid.getNode(i, j);
+				if (!node.isDefault() && !node.isStart() && !node.isEnd() && !node.isObstacle()) {
+					node.setDefault();
+				}
+			}
+		}
+		this.repaint();
 	}
 	
 	@Override
