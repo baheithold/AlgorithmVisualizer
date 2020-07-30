@@ -65,6 +65,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	
 	private void initializeSliders() {
 		delayJSlider = new JSlider(MIN_DELAY, MAX_DELAY, DEFAULT_DELAY);
+		delayJSlider.setToolTipText("Select amount of delay between algorithm steps");
 		delayJSlider.setMajorTickSpacing(100);
 		delayJSlider.setMinorTickSpacing(10);
 		delayJSlider.setPaintTicks(true);
@@ -85,18 +86,23 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		// initialize node type radio buttons
 		nodeTypeRadioGroup = new ButtonGroup();
 		startRadioButton = new JRadioButton("Start");
+		startRadioButton.setToolTipText("Select GridNode type");
 		startRadioButton.setSelected(true);
 		startRadioButton.addActionListener(this);
 		endRadioButton = new JRadioButton("End");
+		endRadioButton.setToolTipText("Select GridNode type");
 		endRadioButton.addActionListener(this);
 		obstacleRadioButton = new JRadioButton("Obstacle");
+		obstacleRadioButton.setToolTipText("Select GridNode type");
 		obstacleRadioButton.addActionListener(this);
 		// initialize heuristic radio buttons
 		heuristicRadioGroup = new ButtonGroup();
 		manhattanRadioButton = new JRadioButton("Manhattan");
+		manhattanRadioButton.setToolTipText("Select a heuristic");
 		manhattanRadioButton.setSelected(true);
 		manhattanRadioButton.addActionListener(this);
 		diagonalRadioButton = new JRadioButton("Diagonal");
+		diagonalRadioButton.setToolTipText("Select a heuristic");
 		diagonalRadioButton.addActionListener(this);
 	}
 	
