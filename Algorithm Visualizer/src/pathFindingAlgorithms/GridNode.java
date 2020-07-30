@@ -82,6 +82,7 @@ public class GridNode {
 	
 	public void setStart() {
 		this.color = START_COLOR;
+		this.parent = null;
 	}
 	
 	public boolean isEnd() {
