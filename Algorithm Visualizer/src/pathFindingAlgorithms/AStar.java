@@ -136,6 +136,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					closedList[qNode.getX()][qNode.getY()] = true;
 				}
 				
+				System.out.println("Path does not exist!");
 				publish();
 				return null;
 			}
