@@ -113,4 +113,8 @@ public class GridNode {
 		return Math.abs(this.x - endNode.getX()) + Math.abs(this.y - endNode.getY());
 	}
 	
+	public int diagonalDistanceTo(GridNode endNode) {
+		return Math.max(Math.abs(this.x - endNode.getX()), Math.abs(this.y - endNode.getY()));
+	}
+	
 }
