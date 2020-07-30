@@ -32,11 +32,15 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 	private GridNode southeastNeighbor;
 	private GridNode southwestNeighbor;
 	
+	// Heuristic
+	private String heuristic;
+	
 	public AStar(PathFindingPanel panel) {
 		super(panel);
 		this.openList = new ArrayList<GridNode>();
 		this.closedList = new boolean[grid.getNumGridCols()][grid.getNumGridRows()];
 		this.neighbors = new ArrayList<GridNode>();
+		heuristic = null;
 	}
 	
 	@Override
@@ -45,6 +49,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
+				
 				// if start or end node is missing, return
 				if (!grid.hasStartNode()) {
 					System.out.println("Missing Start Node!");
@@ -55,6 +60,15 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					System.out.println("Missing End Node!");
 					setRunning(false);
 					return null;
+				}
+				
+				// get heuristic
+				heuristic = panel.getPathFindingControlPanel().whichHeuristicRadioSelected();
+				if (heuristic == "manhattan") {
+					panel.getGrid().setManhattanHeuristicAStar();
+				}
+				else if (heuristic == "diagonal") {
+					panel.getGrid().setDiagonalHeuristicAStar();
 				}
 				
 				// clear open/closed lists
@@ -116,7 +130,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					}
 					
 					/***** Calculate neighbors used in only diagonal heuristic *****/
-					if (panel.getPathFindingControlPanel().whichHeuristicRadioSelected() == "diagonal") {
+					if (heuristic == "diagonal") {
 						// Determine if northeast neighbor is inbounds and not an obstacle
 						// if inbounds and not an obstacle, add to neighbors list
 						if (grid.inBounds(qNode.getX() + 1, qNode.getY() - 1) && !grid.getNode(qNode.getX() + 1, qNode.getY() - 1).isObstacle()) {
