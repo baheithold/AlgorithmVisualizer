@@ -67,8 +67,10 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 				while (!queue.isEmpty()) {
 					v = queue.removeFirst();
 					if (v.isEnd()) {
+						System.out.println("Path found!");
 						tracePath();
 						setRunning(false);
+						clearDiscoveryMatrix();
 						return null;
 					}
 					
@@ -106,9 +108,13 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 							queue.addLast(neighbor);
 						}
 					}
+					neighbors.clear();
 				}
 				
+				System.out.println("Path does not exist!");
 				publish();
+				clearDiscoveryMatrix();
+				resetParents();
 				setRunning(false);
 				return null;
 			}
@@ -125,6 +131,10 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 	}
 	
 	private void initializeDiscoveryMatrix() {
+		clearDiscoveryMatrix();
+	}
+	
+	private void clearDiscoveryMatrix() {
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
 				discoveryMatrix[i][j] = false;
@@ -143,7 +153,7 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 		int y = node.getY();
 		return discoveryMatrix[x][y];
 	}
-
+	
 	@Override
 	public void runPathFindingAlgorithm() {
 		setRunning(true);

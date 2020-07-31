@@ -37,6 +37,14 @@ public abstract class PathFindingAlgorithm {
 		isRunning = run;
 	}
 	
+	protected void resetParents() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				grid.getNode(i, j).setParent(null);
+			}
+		}
+	}
+	
 	private void constructPath() {
 		GridNode curr = grid.getEndNode();
 		while (curr != null) {
