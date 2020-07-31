@@ -3,6 +3,7 @@
  */
 package pathFindingAlgorithms;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -80,32 +81,56 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 					// if inbounds and not an obstacle, add to neighbors list
 					if (grid.inBounds(v.getX(), v.getY() - 1) && !grid.getNode(v.getX(), v.getY() - 1).isObstacle()) {
 						northNeighbor = grid.getNode(v.getX(), v.getY() - 1);
+						if (!northNeighbor.isStart() && !northNeighbor.isEnd()) {
+							northNeighbor.setColor(Color.magenta);
+							publish();
+						}
 						neighbors.add(northNeighbor);
 					}
 					// Determine if south neighbor is inbounds and not an obstacle
 					// if inbounds and not an obstacle, add to neighbors list
 					if (grid.inBounds(v.getX(), v.getY() + 1) && !grid.getNode(v.getX(), v.getY() + 1).isObstacle()) {
 						southNeighbor = grid.getNode(v.getX(), v.getY() + 1);
+						if (!southNeighbor.isStart() && !southNeighbor.isEnd()) {
+							southNeighbor.setColor(Color.magenta);
+							publish();
+						}
 						neighbors.add(southNeighbor);
 					}
 					// Determine if east neighbor is inbounds and not an obstacle
 					// if inbounds and not an obstacle, add to neighbors list
 					if (grid.inBounds(v.getX() + 1, v.getY()) && !grid.getNode(v.getX() + 1, v.getY()).isObstacle()) {
 						eastNeighbor = grid.getNode(v.getX() + 1, v.getY());
+						if (!eastNeighbor.isStart() && !eastNeighbor.isEnd()) {
+							eastNeighbor.setColor(Color.magenta);
+							publish();
+						}
 						neighbors.add(eastNeighbor);
 					}
 					// Determine if west neighbor is inbounds and not an obstacle
 					// if inbounds and not an obstacle, add to neighbors list
 					if (grid.inBounds(v.getX() - 1, v.getY()) && !grid.getNode(v.getX() - 1, v.getY()).isObstacle()) {
 						westNeighbor = grid.getNode(v.getX() - 1, v.getY());
+						if (!westNeighbor.isStart() && !westNeighbor.isEnd()) {
+							westNeighbor.setColor(Color.magenta);
+							publish();
+						}
 						neighbors.add(westNeighbor);
 					}
+					Thread.sleep(100);
 					
 					for (GridNode neighbor : neighbors) {
 						if (!isDiscovered(neighbor)) {
 							setDiscovered(neighbor);
+							publish();
+							Thread.sleep(10);
 							neighbor.setParent(v);
 							queue.addLast(neighbor);
+						}
+						else {
+							if (!neighbor.isStart() && !neighbor.isEnd()) {
+								neighbor.setColor(Color.cyan);
+							}
 						}
 					}
 					neighbors.clear();
@@ -146,6 +171,9 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 		int x = node.getX();
 		int y = node.getY();
 		discoveryMatrix[x][y] = true;
+		if (!node.isStart() && !node.isEnd()) {
+			node.setColor(Color.cyan);
+		}
 	}
 	
 	private boolean isDiscovered(GridNode node) {
