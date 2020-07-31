@@ -74,8 +74,8 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 					if (v.isEnd()) {
 						System.out.println("Path found!");
 						tracePath();
-						setRunning(false);
 						clearDiscoveryMatrix();
+						setRunning(false);
 						return null;
 					}
 					
