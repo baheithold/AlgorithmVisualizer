@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import pathFindingAlgorithms.AStar;
 import pathFindingAlgorithms.BreadthFirstSearch;
+import pathFindingAlgorithms.DepthFirstSearch;
 import pathFindingAlgorithms.Grid;
 import pathFindingAlgorithms.GridNode;
 import pathFindingAlgorithms.PathFindingAlgorithm;
@@ -40,6 +41,9 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 				break;
 			case "bfs":
 				pathFindingAlgorithm = new BreadthFirstSearch(this);
+				break;
+			case "dfs":
+				pathFindingAlgorithm = new DepthFirstSearch(this);
 				break;
 			default:
 				break;
