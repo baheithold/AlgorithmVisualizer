@@ -30,9 +30,6 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 	private GridNode eastNeighbor;
 	private GridNode westNeighbor;
 	
-	// Queue
-	private LinkedList<GridNode> queue;
-	
 	// Discovery Matrix
 	private boolean[][] discoveryMatrix;
 	
@@ -41,8 +38,10 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 		grid = panel.getGrid();
 		discoveryMatrix = new boolean[grid.getNumGridCols()][grid.getNumGridRows()];
 		initializeDiscoveryMatrix();
-		neighbors = new ArrayList<GridNode>();
 	}
+	
+	// Queue
+	private LinkedList<GridNode> queue;
 	
 	@Override
 	public void run() {
@@ -58,6 +57,7 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 				
 				/***** Breadth First Search *****/
 				queue = new LinkedList<GridNode>();
+				neighbors = new ArrayList<GridNode>();
 				
 				// set start as discovered and add to queue
 				setDiscovered(grid.getStartNode());
