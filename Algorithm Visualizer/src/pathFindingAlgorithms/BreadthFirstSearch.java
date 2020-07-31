@@ -3,6 +3,8 @@
  */
 package pathFindingAlgorithms;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -17,14 +19,34 @@ import gui.PathFindingPanel;
 public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable {
 	SwingWorker<Void, Void> workerThread;
 	
+	// Grid
+	private Grid grid;
+	
+	// Neighbors
+	private ArrayList<GridNode> neighbors;
+	private GridNode northNeighbor;
+	private GridNode southNeighbor;
+	private GridNode eastNeighbor;
+	private GridNode westNeighbor;
+	
+	// Queue
+	private LinkedList<GridNode> queue;
+	
+	// Discovery Matrix
+	private boolean[][] discoveryMatrix;
+	
 	public BreadthFirstSearch(PathFindingPanel panel) {
 		super(panel);
+		grid = panel.getGrid();
+		discoveryMatrix = new boolean[grid.getNumGridCols()][grid.getNumGridRows()];
+		initializeDiscoveryMatrix();
+		neighbors = new ArrayList<GridNode>();
 	}
 	
 	@Override
 	public void run() {
 		workerThread = new SwingWorker<Void, Void>() {
-
+			
 			@Override
 			protected Void doInBackground() throws Exception {
 				// if start or end node is missing, return
@@ -33,7 +55,58 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 					return null;
 				}
 				
+				/***** Breadth First Search *****/
+				queue = new LinkedList<GridNode>();
 				
+				// set start as discovered and add to queue
+				setDiscovered(grid.getStartNode());
+				queue.addLast(grid.getStartNode());
+				
+				// while queue is not empty
+				GridNode v = null;
+				while (!queue.isEmpty()) {
+					v = queue.removeFirst();
+					if (v.isEnd()) {
+						tracePath();
+						setRunning(false);
+						return null;
+					}
+					
+					/***** Generate neighbors (North, South, East, and West) of v *****/
+					
+					// Determine if north neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(v.getX(), v.getY() - 1) && !grid.getNode(v.getX(), v.getY() - 1).isObstacle()) {
+						northNeighbor = grid.getNode(v.getX(), v.getY() - 1);
+						neighbors.add(northNeighbor);
+					}
+					// Determine if south neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(v.getX(), v.getY() + 1) && !grid.getNode(v.getX(), v.getY() + 1).isObstacle()) {
+						southNeighbor = grid.getNode(v.getX(), v.getY() + 1);
+						neighbors.add(southNeighbor);
+					}
+					// Determine if east neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(v.getX() + 1, v.getY()) && !grid.getNode(v.getX() + 1, v.getY()).isObstacle()) {
+						eastNeighbor = grid.getNode(v.getX() + 1, v.getY());
+						neighbors.add(eastNeighbor);
+					}
+					// Determine if west neighbor is inbounds and not an obstacle
+					// if inbounds and not an obstacle, add to neighbors list
+					if (grid.inBounds(v.getX() - 1, v.getY()) && !grid.getNode(v.getX() - 1, v.getY()).isObstacle()) {
+						westNeighbor = grid.getNode(v.getX() - 1, v.getY());
+						neighbors.add(westNeighbor);
+					}
+					
+					for (GridNode neighbor : neighbors) {
+						if (!isDiscovered(neighbor)) {
+							setDiscovered(neighbor);
+							neighbor.setParent(v);
+							queue.addLast(neighbor);
+						}
+					}
+				}
 				
 				publish();
 				setRunning(false);
@@ -49,6 +122,26 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 		
 		workerThread.execute();
 		
+	}
+	
+	private void initializeDiscoveryMatrix() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				discoveryMatrix[i][j] = false;
+			}
+		}
+	}
+	
+	private void setDiscovered(GridNode node) {
+		int x = node.getX();
+		int y = node.getY();
+		discoveryMatrix[x][y] = true;
+	}
+	
+	private boolean isDiscovered(GridNode node) {
+		int x = node.getX();
+		int y = node.getY();
+		return discoveryMatrix[x][y];
 	}
 
 	@Override

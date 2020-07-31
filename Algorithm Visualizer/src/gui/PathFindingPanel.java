@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import pathFindingAlgorithms.AStar;
+import pathFindingAlgorithms.BreadthFirstSearch;
 import pathFindingAlgorithms.Grid;
 import pathFindingAlgorithms.GridNode;
 import pathFindingAlgorithms.PathFindingAlgorithm;
@@ -36,6 +37,9 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		switch (algorithmName) {
 			case "AStar":
 				pathFindingAlgorithm = new AStar(this);
+				break;
+			case "bfs":
+				pathFindingAlgorithm = new BreadthFirstSearch(this);
 				break;
 			default:
 				break;
