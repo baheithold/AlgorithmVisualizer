@@ -48,16 +48,19 @@ public abstract class PathFindingAlgorithm {
 	private void constructPath() {
 		GridNode curr = grid.getEndNode();
 		while (curr != null) {
+			System.out.println(curr.getX() + ", " + curr.getY());
 			pathStack.add(curr);
 			curr = curr.getParent();
 		}
 	}
 	
 	protected void tracePath() {
+		System.out.println("TRACE HERE!!!");
 		constructPath();
 		panel.resetDefaultColors();
 		GridNode curr = pathStack.pop();
 		while (pathStack.size() > 0) {
+			System.out.println("TRACE WHILE HERE!!!!");
 			// if current node is not start/end node, set node as a path node
 			if (!curr.isStart() && !curr.isEnd()) {
 				curr.setPath();
