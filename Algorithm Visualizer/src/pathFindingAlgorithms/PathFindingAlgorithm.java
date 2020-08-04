@@ -88,6 +88,13 @@ public abstract class PathFindingAlgorithm {
 		return true;
 	}
 	
+	protected GridNode generateNeighbor(int x, int y) {
+		if (!grid.inBounds(x, y)) return null;
+		GridNode result = grid.getNode(x, y);
+		if (result.isObstacle()) return null;
+		return result;
+	}
+	
 	public abstract void runPathFindingAlgorithm();
 	public abstract void killPathFindingAlgorithm();
 	

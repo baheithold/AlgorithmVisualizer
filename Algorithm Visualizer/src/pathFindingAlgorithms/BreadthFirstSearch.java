@@ -163,16 +163,6 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 		return discoveryMatrix[x][y];
 	}
 	
-	private GridNode generateNeighbor(int x, int y) {
-		if (!grid.inBounds(x, y)) return null;
-		GridNode result = grid.getNode(x, y);
-		if (result.isObstacle()) return null;
-		if (!result.isStart() && !result.isEnd()) {
-			result.setColor(Color.pink);
-		}
-		return result;
-	}
-	
 	@Override
 	public void runPathFindingAlgorithm() {
 		setRunning(true);

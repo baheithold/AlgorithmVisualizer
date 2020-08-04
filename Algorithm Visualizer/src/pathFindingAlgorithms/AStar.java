@@ -209,13 +209,6 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 		}
 	}
 	
-	private GridNode generateNeighbor(int x, int y) {
-		if (!grid.inBounds(x, y)) return null;
-		GridNode result = grid.getNode(x, y);
-		if (result.isObstacle()) return null;
-		return result;
-	}
-	
 	@Override
 	public void runPathFindingAlgorithm() {
 		setRunning(true);
