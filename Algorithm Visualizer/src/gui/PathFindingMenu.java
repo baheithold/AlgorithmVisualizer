@@ -18,7 +18,7 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Path Finding Menu Items
-	private JMenuItem bfsJMenuItem, dfsJMenuItem, dijkstraJMenuItem, aStarJMenuItem;
+	private JMenuItem bfsJMenuItem, dijkstraJMenuItem, aStarJMenuItem;
 	
 	public PathFindingMenu(JFrame window) {
 		this.window = window;
@@ -30,8 +30,6 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 	private void initializePathFindingMenuItems() {
 		bfsJMenuItem = new JMenuItem("Breadth First Search");
 		bfsJMenuItem.addActionListener(this);
-		dfsJMenuItem = new JMenuItem("Depth First Search");
-		dfsJMenuItem.addActionListener(this);
 		dijkstraJMenuItem = new JMenuItem("Dijkstra");
 		dijkstraJMenuItem.addActionListener(this);
 		aStarJMenuItem = new JMenuItem("A*");
@@ -40,7 +38,6 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 
 	private void constructPathFindingMenu() {
 		add(bfsJMenuItem);
-		add(dfsJMenuItem);
 		add(dijkstraJMenuItem);
 		add(aStarJMenuItem);
 	}
@@ -51,10 +48,6 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 		if (e.getSource() == bfsJMenuItem) {
 			algorithmName = "bfs";
 			window.setTitle("Breadth First Search");
-		}
-		else if (e.getSource() == dfsJMenuItem) {
-			algorithmName = "dfs";
-			window.setTitle("Depth First Search");
 		}
 		else if (e.getSource() == dijkstraJMenuItem) {
 			algorithmName = "dijkstra";
