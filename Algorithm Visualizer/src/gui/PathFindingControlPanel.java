@@ -7,6 +7,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -28,7 +29,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private PathFindingPanel panel;
 
 	// JLabels
-	private JLabel delayJLabel;
+	private JLabel delayJLabel, nodeTypeJLabel, heuristicJLabel, gridJLabel;
 	
 	// JSliders
 	private JSlider delayJSlider;
@@ -49,6 +50,9 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JRadioButton manhattanRadioButton;
 	private JRadioButton diagonalRadioButton;
 	
+	// Checkbox
+	private JCheckBox gridCheckbox;
+	
 	public PathFindingControlPanel(PathFindingPanel panel) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.panel = panel;
@@ -56,11 +60,15 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		initializeSliders();
 		initializeButtons();
 		initializeRadioButtons();
+		initializeCheckbox();
 		constructControlPanel();
 	}
 	
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
+		nodeTypeJLabel = new JLabel("Node Types");
+		heuristicJLabel = new JLabel("Heuristics");
+		gridJLabel = new JLabel("Grid");
 	}
 	
 	private void initializeSliders() {
@@ -108,11 +116,16 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 	}
 	
+	private void initializeCheckbox() {
+		gridCheckbox = new JCheckBox();
+		gridCheckbox.setToolTipText("Turn grid on/off");
+		gridCheckbox.setSelected(true);
+		gridCheckbox.addActionListener(this);
+	}
+	
 	private void constructControlPanel() {
-		// Speed slider
-		this.add(Box.createHorizontalStrut(10));
-		this.add(delayJLabel);
-		this.add(delayJSlider);
+		// Delay Slider
+		this.add(constructDelayPanel());
 		
 		// Separator
 		this.add(Box.createHorizontalStrut(10));
@@ -120,12 +133,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		this.add(Box.createHorizontalStrut(10));
 		
 		// Node type radio buttons
-		nodeTypeRadioGroup.add(startRadioButton);
-		nodeTypeRadioGroup.add(endRadioButton);
-		nodeTypeRadioGroup.add(obstacleRadioButton);
-		this.add(startRadioButton);
-		this.add(endRadioButton);
-		this.add(obstacleRadioButton);
+		this.add(constructNodeTypePanel());
 		
 		// Separator
 		this.add(Box.createHorizontalStrut(10));
@@ -134,10 +142,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		
 		// if using the AStar algorithm, construct heuristic radio buttons
 		if (panel.getAlgorithmName() == "AStar") {
-			heuristicRadioGroup.add(manhattanRadioButton);
-			heuristicRadioGroup.add(diagonalRadioButton);
-			this.add(manhattanRadioButton);
-			this.add(diagonalRadioButton);
+			this.add(constructHeuristicPanel());
 			
 			// Separator
 			this.add(Box.createHorizontalStrut(10));
@@ -146,17 +151,96 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 			
 		}
 		
-		// Run Button
-		this.add(runJButton);
+		// Grid Checkbox
+		this.add(constructGridCheckboxPanel());
+		
+		// Separator
 		this.add(Box.createHorizontalStrut(10));
+		this.add(new JSeparator(SwingConstants.VERTICAL));
+		this.add(Box.createHorizontalStrut(10));
+		
+		// Run, Randomize, and Reset Buttons
+		this.add(constructButtonsPanel());
+	}
+	
+	private JPanel constructDelayPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		delayJLabel.add(Box.createVerticalStrut(5));
+		panel.add(delayJLabel);
+		delayJSlider.add(Box.createVerticalStrut(5));
+		panel.add(delayJSlider);
+		this.add(panel);
+		return panel;
+	}
+	
+	private JPanel constructGridCheckboxPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(Box.createVerticalStrut(5));
+		panel.add(gridJLabel);
+		panel.add(Box.createVerticalStrut(5));
+		panel.add(gridCheckbox);
+		panel.add(Box.createVerticalStrut(10));
+		this.add(panel);
+		return panel;
+	}
+	
+	private JPanel constructNodeTypeRadioPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		nodeTypeRadioGroup.add(startRadioButton);
+		nodeTypeRadioGroup.add(endRadioButton);
+		nodeTypeRadioGroup.add(obstacleRadioButton);
+		panel.add(startRadioButton);
+		panel.add(endRadioButton);
+		panel.add(obstacleRadioButton);
+		return panel;
+	}
+	
+	private JPanel constructNodeTypePanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(nodeTypeJLabel);
+		panel.add(constructNodeTypeRadioPanel());
+		return panel;
+	}
+	
+	private JPanel constructHeuristicRadioPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		heuristicRadioGroup.add(manhattanRadioButton);
+		heuristicRadioGroup.add(diagonalRadioButton);
+		panel.add(manhattanRadioButton);
+		panel.add(diagonalRadioButton);
+		return panel;
+	}
+	
+	private JPanel constructHeuristicPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(heuristicJLabel);
+		panel.add(constructHeuristicRadioPanel());
+		return panel;
+	}
+	
+	private JPanel constructButtonsPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
+		// Run Button
+		panel.add(runJButton);
+		panel.add(Box.createHorizontalStrut(10));
 		
 		// Randomize Button
-		this.add(randomizeJButton);
-		this.add(Box.createHorizontalStrut(10));
-		
+		panel.add(randomizeJButton);
+		panel.add(Box.createHorizontalStrut(10));
+				
 		// Reset Button
-		this.add(resetJButton);
-		this.add(Box.createHorizontalStrut(10));
+		panel.add(resetJButton);
+		panel.add(Box.createHorizontalStrut(10));
+		
+		return panel;
 	}
 
 	public String whichNodeTypeRadioSelected() {
@@ -210,6 +294,9 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 		else if (e.getSource() == diagonalRadioButton) {
 			System.out.println("Radio Button Selected: Diagonal");
+		}
+		else if (e.getSource() == gridCheckbox) {
+			System.out.println("Grid checkbox: " + gridCheckbox.isSelected());
 		}
 	}
 	
