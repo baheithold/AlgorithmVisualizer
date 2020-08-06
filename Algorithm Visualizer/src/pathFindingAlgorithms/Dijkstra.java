@@ -15,10 +15,20 @@ import gui.PathFindingPanel;
  *
  */
 public class Dijkstra extends PathFindingAlgorithm implements Runnable {
-	SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
+	
+	private Grid grid;
+	
+	private int[][] distances;
+	private GridNode[][] prev;
 	
 	public Dijkstra(PathFindingPanel panel) {
-		super(panel);		
+		super(panel);
+		grid = panel.getGrid();
+		distances = new int[grid.getNumGridCols()][grid.getNumGridRows()];
+		initializeDistancesToInfinity();
+		prev = new GridNode[grid.getNumGridCols()][grid.getNumGridRows()];
+		initializePrevMatrixToNULL();
 	}
 
 	@Override
@@ -34,6 +44,10 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 					return null;
 				}
 				
+				/***** Dijkstra *****/
+				
+				
+				// Path does NOT exist
 				System.out.println("Path does not exist!");
 				publish();
 				setRunning(false);
@@ -51,6 +65,22 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		
 	}
 
+	private void initializeDistancesToInfinity() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				distances[i][j] = (int) Double.POSITIVE_INFINITY;
+			}
+		}
+	}
+	
+	private void initializePrevMatrixToNULL() {
+		for (int i = 0; i < grid.getNumGridCols(); i++) {
+			for (int j = 0; j < grid.getNumGridRows(); j++) {
+				prev[i][j] = null;
+			}
+		}
+	}
+	
 	@Override
 	public void runPathFindingAlgorithm() {
 		setRunning(true);
