@@ -26,9 +26,9 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		super(panel);
 		grid = panel.getGrid();
 		distances = new int[grid.getNumGridCols()][grid.getNumGridRows()];
-		initializeDistancesToInfinity();
+		initializeDistancesMatrixToInfinity();
 		prev = new GridNode[grid.getNumGridCols()][grid.getNumGridRows()];
-		initializePrevMatrixToNULL();
+		initializePreviousMatrixToNull();
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		
 	}
 
-	private void initializeDistancesToInfinity() {
+	private void initializeDistancesMatrixToInfinity() {
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
 				distances[i][j] = (int) Double.POSITIVE_INFINITY;
@@ -73,7 +73,7 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		}
 	}
 	
-	private void initializePrevMatrixToNULL() {
+	private void initializePreviousMatrixToNull() {
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
 				prev[i][j] = null;
