@@ -44,16 +44,15 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 					return null;
 				}
 				
-				/***** Dijkstra *****/
-				
 				// set initialize distances, prev, and shortestPathSet matrices
-				initializeMatrixTo(distances, (int) Double.POSITIVE_INFINITY);
+				initializeMatrixTo(distances, Integer.MAX_VALUE);
 				initializeMatrixTo(prev, null);
 				initializeMatrixTo(shortestPathSet, false);
 				
+				/*************** Dijkstra ***************/
+		
 				// Set start distance to 0
 				distances[grid.getStartNode().getX()][grid.getStartNode().getY()] = 0;
-				
 				
 				// Path does NOT exist
 				System.out.println("Path does not exist!");
