@@ -19,14 +19,16 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 	
 	private Grid grid;
 	
-	private int[][] distances;
+	private Integer[][] distances;
 	private GridNode[][] prev;
+	private Boolean[][] shortestPathSet;
 	
 	public Dijkstra(PathFindingPanel panel) {
 		super(panel);
 		grid = panel.getGrid();
-		distances = new int[grid.getNumGridCols()][grid.getNumGridRows()];
+		distances = new Integer[grid.getNumGridCols()][grid.getNumGridRows()];
 		prev = new GridNode[grid.getNumGridCols()][grid.getNumGridRows()];
+		shortestPathSet = new Boolean[grid.getNumGridCols()][grid.getNumGridRows()];
 	}
 
 	@Override
@@ -44,9 +46,10 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 				
 				/***** Dijkstra *****/
 				
-				// set initialize distances and prev matrices
-				initializeDistancesMatrixToInfinity();
-				initializePreviousMatrixToNull();
+				// set initialize distances, prev, and shortestPathSet matrices
+				initializeMatrixTo(distances, (int) Double.POSITIVE_INFINITY);
+				initializeMatrixTo(prev, null);
+				initializeMatrixTo(shortestPathSet, false);
 				
 				// Set start distance to 0
 				distances[grid.getStartNode().getX()][grid.getStartNode().getY()] = 0;
@@ -69,19 +72,11 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		workerThread.execute();
 		
 	}
-
-	private void initializeDistancesMatrixToInfinity() {
-		for (int i = 0; i < grid.getNumGridCols(); i++) {
-			for (int j = 0; j < grid.getNumGridRows(); j++) {
-				distances[i][j] = (int) Double.POSITIVE_INFINITY;
-			}
-		}
-	}
 	
-	private void initializePreviousMatrixToNull() {
+	private <T> void initializeMatrixTo(T[][] matrix, T value) {
 		for (int i = 0; i < grid.getNumGridCols(); i++) {
 			for (int j = 0; j < grid.getNumGridRows(); j++) {
-				prev[i][j] = null;
+				matrix[i][j] = value;
 			}
 		}
 	}
