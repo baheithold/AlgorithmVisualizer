@@ -36,14 +36,15 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.addMouseListener(this);
 		
 		switch (algorithmName) {
-			case "AStar":
-				pathFindingAlgorithm = new AStar(this);
-				break;
+			
 			case "bfs":
 				pathFindingAlgorithm = new BreadthFirstSearch(this);
 				break;
 			case "dijkstra":
 				pathFindingAlgorithm = new Dijkstra(this);
+				break;
+			case "AStar":
+				pathFindingAlgorithm = new AStar(this);
 				break;
 			default:
 				break;
