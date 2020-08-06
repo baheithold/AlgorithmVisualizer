@@ -26,9 +26,7 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 		super(panel);
 		grid = panel.getGrid();
 		distances = new int[grid.getNumGridCols()][grid.getNumGridRows()];
-		initializeDistancesMatrixToInfinity();
 		prev = new GridNode[grid.getNumGridCols()][grid.getNumGridRows()];
-		initializePreviousMatrixToNull();
 	}
 
 	@Override
@@ -45,6 +43,13 @@ public class Dijkstra extends PathFindingAlgorithm implements Runnable {
 				}
 				
 				/***** Dijkstra *****/
+				
+				// set initialize distances and prev matrices
+				initializeDistancesMatrixToInfinity();
+				initializePreviousMatrixToNull();
+				
+				// Set start distance to 0
+				distances[grid.getStartNode().getX()][grid.getStartNode().getY()] = 0;
 				
 				
 				// Path does NOT exist
