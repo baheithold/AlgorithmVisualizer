@@ -1,8 +1,10 @@
 package gui;
 
-import java.awt.Checkbox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -10,12 +12,12 @@ import javax.swing.JMenuBar;
  * @author Brett Heithold
  *
  */
-public class VisualizerWindow extends JFrame {
+public class VisualizerWindow extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_WIDTH = 800; 
 	private static final int DEFAULT_HEIGHT = 600;
 	
-	private Checkbox darkModeCheckbox;
+	private JCheckBoxMenuItem darkModeCheckbox;
 
 	public VisualizerWindow() {
 		initializeWindow();
@@ -54,9 +56,18 @@ public class VisualizerWindow extends JFrame {
 		menubar.add(new HelpMenu(this));
 		
 		// Add Dark Mode Checkbox
-		darkModeCheckbox = new Checkbox("Dark Mode");
+		darkModeCheckbox = new JCheckBoxMenuItem();
+		darkModeCheckbox.setText("Dark Mode");
+		darkModeCheckbox.addActionListener(this);
 		menubar.add(Box.createHorizontalStrut(450));
 		menubar.add(darkModeCheckbox);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == darkModeCheckbox) {
+			System.out.println("Dark Mode: " + darkModeCheckbox.isSelected());
+		}
 	}
 	
 }
