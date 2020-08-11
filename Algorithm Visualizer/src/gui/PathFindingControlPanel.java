@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,7 +8,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -29,7 +29,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private PathFindingPanel panel;
 
 	// JLabels
-	private JLabel delayJLabel, nodeTypeJLabel, heuristicJLabel, gridJLabel;
+	private JLabel delayJLabel, nodeTypeJLabel, heuristicJLabel;
 	
 	// JSliders
 	private JSlider delayJSlider;
@@ -50,9 +50,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JRadioButton manhattanRadioButton;
 	private JRadioButton diagonalRadioButton;
 	
-	// Checkbox
-	private JCheckBox gridCheckbox;
-	
 	public PathFindingControlPanel(PathFindingPanel panel) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.panel = panel;
@@ -60,7 +57,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		initializeSliders();
 		initializeButtons();
 		initializeRadioButtons();
-		initializeCheckbox();
 		constructControlPanel();
 	}
 	
@@ -68,7 +64,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		delayJLabel = new JLabel("Delay (ms)");
 		nodeTypeJLabel = new JLabel("Node Types");
 		heuristicJLabel = new JLabel("Heuristics");
-		gridJLabel = new JLabel("Grid");
 	}
 	
 	private void initializeSliders() {
@@ -116,13 +111,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 	}
 	
-	private void initializeCheckbox() {
-		gridCheckbox = new JCheckBox();
-		gridCheckbox.setToolTipText("Turn grid on/off");
-		gridCheckbox.setSelected(true);
-		gridCheckbox.addActionListener(this);
-	}
-	
 	private void constructControlPanel() {
 		// Delay Slider
 		this.add(constructDelayPanel());
@@ -151,14 +139,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 			
 		}
 		
-		// Grid Checkbox
-		this.add(constructGridCheckboxPanel());
-		
-		// Separator
-		this.add(Box.createHorizontalStrut(10));
-		this.add(new JSeparator(SwingConstants.VERTICAL));
-		this.add(Box.createHorizontalStrut(10));
-		
 		// Run, Randomize, and Reset Buttons
 		this.add(constructButtonsPanel());
 	}
@@ -170,18 +150,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		panel.add(delayJLabel);
 		delayJSlider.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
-		this.add(panel);
-		return panel;
-	}
-	
-	private JPanel constructGridCheckboxPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(Box.createVerticalStrut(5));
-		panel.add(gridJLabel);
-		panel.add(Box.createVerticalStrut(5));
-		panel.add(gridCheckbox);
-		panel.add(Box.createVerticalStrut(10));
 		this.add(panel);
 		return panel;
 	}
@@ -294,9 +262,6 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		}
 		else if (e.getSource() == diagonalRadioButton) {
 			System.out.println("Radio Button Selected: Diagonal");
-		}
-		else if (e.getSource() == gridCheckbox) {
-			System.out.println("Grid checkbox: " + gridCheckbox.isSelected());
 		}
 	}
 	
