@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.Checkbox;
+
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -11,6 +14,8 @@ public class VisualizerWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_WIDTH = 800; 
 	private static final int DEFAULT_HEIGHT = 600;
+	
+	private Checkbox darkModeCheckbox;
 
 	public VisualizerWindow() {
 		initializeWindow();
@@ -47,6 +52,11 @@ public class VisualizerWindow extends JFrame {
 		
 		// create help menu and add it to the menu bar
 		menubar.add(new HelpMenu(this));
+		
+		// Add Dark Mode Checkbox
+		darkModeCheckbox = new Checkbox("Dark Mode");
+		menubar.add(Box.createHorizontalStrut(450));
+		menubar.add(darkModeCheckbox);
 	}
 	
 }
