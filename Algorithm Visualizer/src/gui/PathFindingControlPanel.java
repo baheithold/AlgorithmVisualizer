@@ -230,20 +230,20 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 			if (!panel.pathFindingAlgorithm.isRunning()) {
 				panel.resetPathColorsToDefault();
 				panel.resetDefaultColors();
-				panel.pathFindingAlgorithm.runPathFindingAlgorithm();
+				panel.pathFindingAlgorithm.runSort();
 			}
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
 			if (panel.pathFindingAlgorithm.isRunning()) {
-				panel.pathFindingAlgorithm.killPathFindingAlgorithm();
+				panel.pathFindingAlgorithm.killSort();
 			}
 			panel.randomizeGrid();
 		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: Reset");
 			if (panel.pathFindingAlgorithm.isRunning()) {
-				panel.pathFindingAlgorithm.killPathFindingAlgorithm();				
+				panel.pathFindingAlgorithm.killSort();				
 			}
 			panel.resetGrid();
 		}
