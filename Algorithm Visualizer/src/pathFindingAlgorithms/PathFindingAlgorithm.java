@@ -22,7 +22,6 @@ public abstract class PathFindingAlgorithm extends Algorithm {
 	public PathFindingAlgorithm(PathFindingPanel panel) {
 		super(panel);
 		grid = panel.getGrid();
-		setRunning(false);
 	}
 	
 	protected void resetParents() {
