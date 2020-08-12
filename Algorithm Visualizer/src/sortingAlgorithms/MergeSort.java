@@ -26,14 +26,14 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				sort(array.getArray(), 0, array.length() - 1);
+				sort(panel.getArray(), 0, panel.length() - 1);
 				if (verifySortedCorrectly()) {
 					System.out.println("MergeSort: Success!");
-					array.setAllColors(Color.green);
+					panel.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("MergeSort: Failed!");
-					array.setAllColors(Color.red);
+					panel.setAllColors(Color.red);
 				}
 				publish();
 				return null;
@@ -41,7 +41,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected void process(List<Void> chunks) {
-				array.repaint();
+				panel.repaint();
 			}
 
 			private void merge(int arr[], int l, int m, int r) {
@@ -66,15 +66,15 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				int j = 0;
 				int k = l;
 				while (i < nLeft && j < nRight) {
-					array.setColor(k, Color.red);
+					panel.setColor(k, Color.red);
 					publish();
-					array.incrementComparisons();
+					panel.incrementComparisons();
 					if (leftPartition[i] <= rightPartition[j]) {
 						arr[k] = leftPartition[i];
-						array.setColor(k, Color.red);
+						panel.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(array.getCurrentDelay());
+							Thread.sleep(panel.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -82,17 +82,17 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					}
 					else {
 						arr[k] = rightPartition[j];
-						array.setColor(k, Color.red);
+						panel.setColor(k, Color.red);
 						publish();
 						try {
-							Thread.sleep(array.getCurrentDelay());
+							Thread.sleep(panel.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 						j++;
 					}
 					// paint newly merged element green
-					array.setColor(k, Color.green);
+					panel.setColor(k, Color.green);
 					publish();
 					k++;
 				}
@@ -100,17 +100,17 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				// Either left partition or right partition is now empty, merge the remaining elements
 				while (i < nLeft) {
 					arr[k] = leftPartition[i];
-					array.setColor(k, Color.red);
+					panel.setColor(k, Color.red);
 					publish();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-					array.setColor(k, Color.green);
+					panel.setColor(k, Color.green);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -119,17 +119,17 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				}
 				while (j < nRight) {
 					arr[k] = rightPartition[j];
-					array.setColor(k, Color.red);
+					panel.setColor(k, Color.red);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-					array.setColor(k, Color.green);
+					panel.setColor(k, Color.green);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
@@ -153,9 +153,9 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
-						array.setColor(i - 1, Color.blue);
+				for (int i = 1; i < panel.length(); i++) {
+					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
+						panel.setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -165,8 +165,8 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
-					array.setColor(array.length() - 1, Color.blue);
+				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
+					panel.setColor(panel.length() - 1, Color.blue);
 					publish();
 				}
 				return true;

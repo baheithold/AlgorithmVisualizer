@@ -26,16 +26,16 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				sort(0, array.length());
+				sort(0, panel.length());
 				publish();
 				// Verify that the array was sorted correctly
 				if (verifySortedCorrectly()) {
 					System.out.println("QuickSort: Success!");
-					array.setAllColors(Color.green);
+					panel.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("QuickSort: Failed!");
-					array.setAllColors(Color.red);
+					panel.setAllColors(Color.red);
 				}
 				publish();
 				return null;
@@ -43,7 +43,7 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected void process(List<Void> chunks) {
-				array.repaint();
+				panel.repaint();
 			}
 			
 			private void sort(int low, int high) {
@@ -51,21 +51,21 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					int pivotIndex = partition(low, high);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					sort(low, pivotIndex);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					sort(pivotIndex + 1, high);
 					publish();
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -73,34 +73,34 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private int partition(int low, int high) {
-				int pivotValue = array.getValue(low, false);
+				int pivotValue = panel.getValue(low, false);
 				int leftwall = low;
 				
-				array.setColor(leftwall, Color.blue);
+				panel.setColor(leftwall, Color.blue);
 				publish();
 				
 				for (int i = low + 1; i < high; i++) {
-					array.setColor(i, Color.red);
+					panel.setColor(i, Color.red);
 					publish();
-					array.incrementComparisons();
-					if (array.getValue(i, false) < pivotValue) {
+					panel.incrementComparisons();
+					if (panel.getValue(i, false) < pivotValue) {
 						leftwall++;
-						array.swap(i, leftwall);
+						panel.swap(i, leftwall);
 						publish();
 						try {
-							Thread.sleep(array.getCurrentDelay());
+							Thread.sleep(panel.getCurrentDelay());
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-					array.setColor(i, Color.lightGray);
+					panel.setColor(i, Color.lightGray);
 					publish();
 				}
-				array.swap(low, leftwall);
-				array.setColor(leftwall, Color.green);
+				panel.swap(low, leftwall);
+				panel.setColor(leftwall, Color.green);
 				publish();
 				try {
-					Thread.sleep(array.getCurrentDelay());
+					Thread.sleep(panel.getCurrentDelay());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -108,9 +108,9 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
-						array.setColor(i - 1, Color.blue);
+				for (int i = 1; i < panel.length(); i++) {
+					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
+						panel.setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -120,8 +120,8 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
-					array.setColor(array.length() - 1, Color.blue);
+				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
+					panel.setColor(panel.length() - 1, Color.blue);
 					publish();
 				}
 				return true;

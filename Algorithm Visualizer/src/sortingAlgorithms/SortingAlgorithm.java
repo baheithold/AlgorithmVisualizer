@@ -7,7 +7,7 @@ import gui.SortingPanel;
  *
  */
 public abstract class SortingAlgorithm {
-	protected SortingPanel array;
+	protected SortingPanel panel;
 	private boolean isRunning;
 	
 	public SortingAlgorithm() {
@@ -16,7 +16,7 @@ public abstract class SortingAlgorithm {
 	
 	public SortingAlgorithm(SortingPanel array) {
 		isRunning = false;
-		this.array = array;
+		this.panel = array;
 	}
 	
 	public boolean isRunning() {
@@ -28,11 +28,11 @@ public abstract class SortingAlgorithm {
 	}
 	
 	public int getCurrentDelay() {
-		return array.getCurrentDelay();
+		return panel.getCurrentDelay();
 	}
 	
 	public void setCurrentDelay(int n) {
-		array.setCurrentDelay(n);
+		panel.setCurrentDelay(n);
 	}
 	
 	public abstract void runSort();

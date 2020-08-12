@@ -26,49 +26,49 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				for (int j = 0; j < array.length() - 1; j++) {
+				for (int j = 0; j < panel.length() - 1; j++) {
 					int iMin = j;
-					array.setColor(iMin, Color.red);
+					panel.setColor(iMin, Color.red);
 					publish();
-					Thread.sleep(array.getCurrentDelay());
-					for (int i = j + 1; i < array.length(); i++) {
-						array.setColor(i, Color.blue);
+					Thread.sleep(panel.getCurrentDelay());
+					for (int i = j + 1; i < panel.length(); i++) {
+						panel.setColor(i, Color.blue);
 						publish();
-						Thread.sleep(array.getCurrentDelay());
-						array.incrementComparisons();
-						if (array.getValue(i, false) < array.getValue(iMin, false)) {
-							array.setColor(iMin, Color.lightGray);
-							array.setColor(i, Color.red);
+						Thread.sleep(panel.getCurrentDelay());
+						panel.incrementComparisons();
+						if (panel.getValue(i, false) < panel.getValue(iMin, false)) {
+							panel.setColor(iMin, Color.lightGray);
+							panel.setColor(i, Color.red);
 							publish();
 							iMin = i;
 						}
 						else {
-							array.setColor(i, Color.lightGray);
+							panel.setColor(i, Color.lightGray);
 							publish();
 						}
 					}
 					if (iMin != j) {
-						array.swap(j, iMin);
-						array.setColor(iMin, Color.lightGray);
-						array.setColor(j, Color.green);
+						panel.swap(j, iMin);
+						panel.setColor(iMin, Color.lightGray);
+						panel.setColor(j, Color.green);
 						publish();
 					}
 					else {
-						array.setColor(iMin, Color.green);
+						panel.setColor(iMin, Color.green);
 						publish();
 					}
 				}
 				
 				// Verify that the array was sorted correctly
-				array.setAllColors(Color.green);
+				panel.setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("SelectionSort: Success!");
-					array.setAllColors(Color.green);
+					panel.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("SelectionSort: Failed!");
-					array.setAllColors(Color.red);
+					panel.setAllColors(Color.red);
 				}
 				publish();
 				
@@ -76,9 +76,9 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 			}
 
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
-						array.setColor(i - 1, Color.blue);
+				for (int i = 1; i < panel.length(); i++) {
+					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
+						panel.setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -88,8 +88,8 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
-					array.setColor(array.length() - 1, Color.blue);
+				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
+					panel.setColor(panel.length() - 1, Color.blue);
 					publish();
 				}
 				return true;
@@ -97,7 +97,7 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 			
 			@Override
 			protected void process(List<Void> chunks) {
-				array.repaint();
+				panel.repaint();
 			}
 			
 		};

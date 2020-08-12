@@ -25,42 +25,42 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 			@Override
 			protected Void doInBackground() throws Exception {
 				boolean isSorted = false;
-				int lastUnsortedIndex = array.length() - 1;
+				int lastUnsortedIndex = panel.length() - 1;
 				while (!isSorted) {
 					isSorted = true;
 					for (int i = 0; i < lastUnsortedIndex; i++) {
-						array.setColor(i, Color.blue);
-						array.setColor(i + 1, Color.red);
+						panel.setColor(i, Color.blue);
+						panel.setColor(i + 1, Color.red);
 						publish();
-						Thread.sleep(array.getCurrentDelay());
-						if (array.getValue(i, false) > array.getValue(i + 1, false)) {
-							array.swap(i, i + 1);
+						Thread.sleep(panel.getCurrentDelay());
+						if (panel.getValue(i, false) > panel.getValue(i + 1, false)) {
+							panel.swap(i, i + 1);
 							isSorted = false;
 						}
-						array.incrementComparisons();
-						array.setColor(i, Color.lightGray);
+						panel.incrementComparisons();
+						panel.setColor(i, Color.lightGray);
 						publish();
 					}
-					array.setColor(lastUnsortedIndex, Color.green);
+					panel.setColor(lastUnsortedIndex, Color.green);
 					publish();
 					lastUnsortedIndex--;					
 					try {
-						Thread.sleep(array.getCurrentDelay());
+						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
 				
 				// Verify that the array was sorted correctly
-				array.setAllColors(Color.green);
+				panel.setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("BubbleSort: Success!");
-					array.setAllColors(Color.green);
+					panel.setAllColors(Color.green);
 				}
 				else {
 					System.out.println("BubbleSort: Failed!");
-					array.setAllColors(Color.red);
+					panel.setAllColors(Color.red);
 				}
 				publish();
 				
@@ -68,9 +68,9 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < array.length(); i++) {
-					if (array.getValue(i - 1, true) <= array.getValue(i, true)) {
-						array.setColor(i - 1, Color.blue);
+				for (int i = 1; i < panel.length(); i++) {
+					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
+						panel.setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -80,8 +80,8 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (array.getValue(array.length() - 1, true) > array.getValue(array.length() - 2, true)) {
-					array.setColor(array.length() - 1, Color.blue);
+				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
+					panel.setColor(panel.length() - 1, Color.blue);
 					publish();
 				}
 				return true;
@@ -89,7 +89,7 @@ public class BubbleSort extends SortingAlgorithm implements Runnable {
 			
 			@Override
 			protected void process(List<Void> chunks) {
-				array.repaint();
+				panel.repaint();
 			}
 
 		};
