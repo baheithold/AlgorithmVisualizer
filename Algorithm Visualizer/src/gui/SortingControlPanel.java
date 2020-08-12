@@ -125,7 +125,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		}
 		else if (e.getSource() == delayJSlider) {
 			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
-			array.setCurrentDelay(delayJSlider.getValue());
+			array.setCurrentStatsControlPanelDelay(delayJSlider.getValue());
 		}
 	}
 	

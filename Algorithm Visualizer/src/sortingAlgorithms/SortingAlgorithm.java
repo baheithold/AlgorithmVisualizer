@@ -1,41 +1,21 @@
 package sortingAlgorithms;
 
+import algorithmVisualizer.Algorithm;
 import gui.SortingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public abstract class SortingAlgorithm {
-	protected SortingPanel panel;
-	private boolean isRunning;
+public abstract class SortingAlgorithm extends Algorithm {
 	
 	public SortingAlgorithm() {
-		isRunning = false;
+		setRunning(false);
 	}
 	
-	public SortingAlgorithm(SortingPanel array) {
-		isRunning = false;
-		this.panel = array;
+	public SortingAlgorithm(SortingPanel panel) {
+		super(panel);
+		this.panel = panel;
 	}
-	
-	public boolean isRunning() {
-		return isRunning;
-	}
-	
-	public void setRunning(boolean run) {
-		isRunning = run;
-	}
-	
-	public int getCurrentDelay() {
-		return panel.getCurrentDelay();
-	}
-	
-	public void setCurrentDelay(int n) {
-		panel.setCurrentDelay(n);
-	}
-	
-	public abstract void runSort();
-	public abstract void killSort();
 	
 }

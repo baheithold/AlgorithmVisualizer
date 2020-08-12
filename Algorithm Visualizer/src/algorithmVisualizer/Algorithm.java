@@ -9,6 +9,7 @@ import gui.VisualizationPanel;
 public abstract class Algorithm {
 	protected VisualizationPanel panel;
 	private boolean isRunning;
+	private int currentDelay;
 
 	public Algorithm() {
 		isRunning = false;
@@ -25,6 +26,14 @@ public abstract class Algorithm {
 	
 	public void setRunning(boolean run) {
 		isRunning = run;
+	}
+	
+	public int getCurrentDelay() {
+		return panel.getCurrentDelay();
+	}
+	
+	public void setCurrentDelay(int n) {
+		currentDelay = n;
 	}
 	
 	public abstract void runSort();

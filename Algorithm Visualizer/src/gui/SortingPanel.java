@@ -36,10 +36,6 @@ public class SortingPanel extends VisualizationPanel {
 	private SortingControlPanel controlPanel;
 	
 	// Control Panel
-	public final int DEFAULT_DELAY = 100;
-	public final int MIN_DELAY = 1;
-	public final int MAX_DELAY = 500;
-	private int currentDelay;
 	public final int DEFAULT_NUM_ITEMS = 98;
 	public final int MIN_NUM_ITEMS = 1;
 	public final int MAX_NUM_ITEMS = 98;
@@ -49,7 +45,7 @@ public class SortingPanel extends VisualizationPanel {
 	public SortingAlgorithm sortAlgorithm;
 	
 	public SortingPanel(String sortName) {
-		currentDelay = DEFAULT_DELAY;
+		
 		currentNumItems = DEFAULT_NUM_ITEMS;
 		array = new int[DEFAULT_NUM_ITEMS];
 		colors = new Color[DEFAULT_NUM_ITEMS];
@@ -183,15 +179,6 @@ public class SortingPanel extends VisualizationPanel {
 		this.add(controlPanel, BorderLayout.SOUTH);
 	}
 	
-	public int getCurrentDelay() {
-		return currentDelay;
-	}
-	
-	public void setCurrentDelay(int delay) {
-		currentDelay = delay;
-		statsPanel.updateDelayJLabel(getCurrentDelay());
-	}
-	
 	public int getCurrentNumItems() {
 		return currentNumItems;
 	}
@@ -204,6 +191,11 @@ public class SortingPanel extends VisualizationPanel {
 		resetColors();
 		repaint();
 		statsPanel.updateNumItemsJLabel(num);
+	}
+	
+	public void setCurrentStatsControlPanelDelay(int delay) {
+		setCurrentStatsControlPanelDelay(delay);
+		statsPanel.updateDelayJLabel(getCurrentDelay());
 	}
 	
 	@Override
