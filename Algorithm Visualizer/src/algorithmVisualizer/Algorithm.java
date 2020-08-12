@@ -27,7 +27,7 @@ public abstract class Algorithm {
 		isRunning = run;
 	}
 	
-	public abstract void runPathFindingAlgorithm();
-	public abstract void killPathFindingAlgorithm();
+	public abstract void runSort();
+	public abstract void killSort();
 	
 }
