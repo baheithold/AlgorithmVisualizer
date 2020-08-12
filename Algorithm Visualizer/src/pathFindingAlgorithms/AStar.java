@@ -49,12 +49,12 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 				}
 				
 				// get heuristic
-				heuristic = panel.getPathFindingControlPanel().whichHeuristicRadioSelected();
+				heuristic = ((PathFindingPanel) panel).getPathFindingControlPanel().whichHeuristicRadioSelected();
 				if (heuristic == "manhattan") {
-					panel.getGrid().setManhattanHeuristicAStar();
+					((PathFindingPanel) panel).getGrid().setManhattanHeuristicAStar();
 				}
 				else if (heuristic == "diagonal") {
-					panel.getGrid().setDiagonalHeuristicAStar();
+					((PathFindingPanel) panel).getGrid().setDiagonalHeuristicAStar();
 				}
 				
 				// clear open/closed lists

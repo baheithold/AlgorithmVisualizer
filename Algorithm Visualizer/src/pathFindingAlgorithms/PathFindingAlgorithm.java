@@ -2,36 +2,27 @@ package pathFindingAlgorithms;
 
 import java.util.Stack;
 
+import algorithmVisualizer.Algorithm;
 import gui.PathFindingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public abstract class PathFindingAlgorithm {
-	protected PathFindingPanel panel;
+public abstract class PathFindingAlgorithm extends Algorithm {
 	protected Grid grid;
-	private boolean isRunning;
 	
 	// path
 	private Stack<GridNode> pathStack = new Stack<GridNode>();
 	
 	public PathFindingAlgorithm() {
-		isRunning = false;
+		setRunning(false);
 	}
 	
 	public PathFindingAlgorithm(PathFindingPanel panel) {
-		this.panel = panel;
+		super(panel);
 		grid = panel.getGrid();
-		isRunning = false;
-	}
-	
-	public boolean isRunning() {
-		return isRunning;
-	}
-	
-	public void setRunning(boolean run) {
-		isRunning = run;
+		setRunning(false);
 	}
 	
 	protected void resetParents() {
@@ -54,7 +45,7 @@ public abstract class PathFindingAlgorithm {
 	protected void tracePath() {
 		System.out.println("TRACE HERE!!!");
 		constructPath();
-		panel.resetDefaultColors();
+		((PathFindingPanel) panel).resetDefaultColors();
 		GridNode curr = pathStack.pop();
 		while (pathStack.size() > 0) {
 			System.out.println("TRACE WHILE HERE!!!!");
@@ -66,7 +57,7 @@ public abstract class PathFindingAlgorithm {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
-				panel.resetPathColorsToDefault();
+				((PathFindingPanel) panel).resetPathColorsToDefault();
 			}
 			panel.repaint();
 			curr = pathStack.pop();
@@ -91,8 +82,5 @@ public abstract class PathFindingAlgorithm {
 		if (result.isObstacle()) return null;
 		return result;
 	}
-	
-	public abstract void runPathFindingAlgorithm();
-	public abstract void killPathFindingAlgorithm();
 	
 }
