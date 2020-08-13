@@ -8,15 +8,15 @@ import javax.swing.JPanel;
  */
 public class VisualizationPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
+	// Window constants
+	protected final int WINDOW_WIDTH = 800;
+	protected final int WINDOW_HEIGHT = 600;
+
 	
 	// Delay constants
 	public final int DEFAULT_DELAY = 100;
 	public final int MIN_DELAY = 1;
 	public final int MAX_DELAY = 500;
-	
-	// Window constants
-	protected final int WINDOW_WIDTH = 800;
-	protected final int WINDOW_HEIGHT = 600;
 	
 	private int currentDelay;
 	
