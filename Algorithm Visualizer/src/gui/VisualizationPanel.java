@@ -13,7 +13,6 @@ public class VisualizationPanel extends JPanel {
 	protected final int WINDOW_WIDTH = 800;
 	protected final int WINDOW_HEIGHT = 600;
 
-	
 	// Delay constants
 	public final int DEFAULT_DELAY = 100;
 	public final int MIN_DELAY = 1;
