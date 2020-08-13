@@ -3,8 +3,6 @@ package pathFindingAlgorithms;
 import java.awt.Color;
 import java.util.Random;
 
-import gui.PathFindingPanel;
-
 /**
  * @author Brett Heithold
  *
