@@ -32,7 +32,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	private JSlider numItemsJSlider;
 	
 	// JButtons
-	private JButton sortJButton;
+	private JButton runJButton;
 	private JButton randomizeJButton;
 	
 	public SortingControlPanel(SortingPanel panel) {
@@ -70,8 +70,8 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	}
 	
 	private void initializeJButtons() {
-		sortJButton = new JButton("Sort");
-		sortJButton.addActionListener(this);
+		runJButton = new JButton("Run");
+		runJButton.addActionListener(this);
 		randomizeJButton = new JButton("Randomize");
 		randomizeJButton.addActionListener(this);
 	}
@@ -86,7 +86,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		this.add(numItemsJLabel);
 		this.add(numItemsJSlider);
 		this.add(Box.createHorizontalStrut(10));
-		this.add(sortJButton);
+		this.add(runJButton);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(randomizeJButton);
 		this.add(Box.createHorizontalStrut(10));
@@ -94,7 +94,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == sortJButton) {
+		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: Sort");
 			if (!panel.sortAlgorithm.isRunning()) {
 				panel.sortAlgorithm.runAlgorithm();
