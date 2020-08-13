@@ -26,16 +26,16 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				sort(0, panel.length());
+				sort(0, ((SortingPanel) panel).length());
 				publish();
 				// Verify that the array was sorted correctly
 				if (verifySortedCorrectly()) {
 					System.out.println("QuickSort: Success!");
-					panel.setAllColors(Color.green);
+					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
 					System.out.println("QuickSort: Failed!");
-					panel.setAllColors(Color.red);
+					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				return null;
@@ -73,19 +73,19 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private int partition(int low, int high) {
-				int pivotValue = panel.getValue(low, false);
+				int pivotValue = ((SortingPanel) panel).getValue(low, false);
 				int leftwall = low;
 				
-				panel.setColor(leftwall, Color.blue);
+				((SortingPanel) panel).setColor(leftwall, Color.blue);
 				publish();
 				
 				for (int i = low + 1; i < high; i++) {
-					panel.setColor(i, Color.red);
+					((SortingPanel) panel).setColor(i, Color.red);
 					publish();
-					panel.incrementComparisons();
-					if (panel.getValue(i, false) < pivotValue) {
+					((SortingPanel) panel).incrementComparisons();
+					if (((SortingPanel) panel).getValue(i, false) < pivotValue) {
 						leftwall++;
-						panel.swap(i, leftwall);
+						((SortingPanel) panel).swap(i, leftwall);
 						publish();
 						try {
 							Thread.sleep(panel.getCurrentDelay());
@@ -93,11 +93,11 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 							e.printStackTrace();
 						}
 					}
-					panel.setColor(i, Color.lightGray);
+					((SortingPanel) panel).setColor(i, Color.lightGray);
 					publish();
 				}
-				panel.swap(low, leftwall);
-				panel.setColor(leftwall, Color.green);
+				((SortingPanel) panel).swap(low, leftwall);
+				((SortingPanel) panel).setColor(leftwall, Color.green);
 				publish();
 				try {
 					Thread.sleep(panel.getCurrentDelay());
@@ -108,9 +108,9 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < panel.length(); i++) {
-					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
-						panel.setColor(i - 1, Color.blue);
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
+					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
+						((SortingPanel) panel).setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -120,8 +120,8 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
-					panel.setColor(panel.length() - 1, Color.blue);
+				if (((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 1, true) > ((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 2, true)) {
+					((SortingPanel) panel).setColor(((SortingPanel) panel).length() - 1, Color.blue);
 					publish();
 				}
 				return true;

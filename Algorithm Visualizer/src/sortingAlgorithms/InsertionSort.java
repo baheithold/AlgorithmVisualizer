@@ -26,17 +26,17 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				panel.setColor(0, Color.green);
+				((SortingPanel) panel).setColor(0, Color.green);
 				publish();
-				for (int i = 1; i < panel.length(); i++) {
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
 					int j = i;
-					while (j > 0 && panel.getValue(j - 1, false) > panel.getValue(j, false)) {
-						panel.incrementComparisons();
-						panel.setColor(j, Color.red);
+					while (j > 0 && ((SortingPanel) panel).getValue(j - 1, false) > ((SortingPanel) panel).getValue(j, false)) {
+						((SortingPanel) panel).incrementComparisons();
+						((SortingPanel) panel).setColor(j, Color.red);
 						publish();
 						Thread.sleep(panel.getCurrentDelay());
-						panel.swap(j, j - 1);
-						panel.setColor(j, Color.green);
+						((SortingPanel) panel).swap(j, j - 1);
+						((SortingPanel) panel).setColor(j, Color.green);
 						publish();
 						Thread.sleep(panel.getCurrentDelay());
 						j--;
@@ -45,15 +45,15 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 				}
 				
 				// Verify that the array was sorted correctly
-				panel.setAllColors(Color.green);
+				((SortingPanel) panel).setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("InsertionSort: Success!");
-					panel.setAllColors(Color.green);
+					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
 					System.out.println("InsertionSort: Failed!");
-					panel.setAllColors(Color.red);
+					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				
@@ -61,9 +61,9 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 			}
 
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < panel.length(); i++) {
-					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
-						panel.setColor(i - 1, Color.blue);
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
+					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
+						((SortingPanel) panel).setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -73,8 +73,8 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
-					panel.setColor(panel.length() - 1, Color.blue);
+				if (((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 1, true) > ((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 2, true)) {
+					((SortingPanel) panel).setColor(((SortingPanel) panel).length() - 1, Color.blue);
 					publish();
 				}
 				return true;

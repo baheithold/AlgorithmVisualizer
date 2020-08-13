@@ -26,49 +26,49 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				for (int j = 0; j < panel.length() - 1; j++) {
+				for (int j = 0; j < ((SortingPanel) panel).length() - 1; j++) {
 					int iMin = j;
-					panel.setColor(iMin, Color.red);
+					((SortingPanel) panel).setColor(iMin, Color.red);
 					publish();
 					Thread.sleep(panel.getCurrentDelay());
-					for (int i = j + 1; i < panel.length(); i++) {
-						panel.setColor(i, Color.blue);
+					for (int i = j + 1; i < ((SortingPanel) panel).length(); i++) {
+						((SortingPanel) panel).setColor(i, Color.blue);
 						publish();
 						Thread.sleep(panel.getCurrentDelay());
-						panel.incrementComparisons();
-						if (panel.getValue(i, false) < panel.getValue(iMin, false)) {
-							panel.setColor(iMin, Color.lightGray);
-							panel.setColor(i, Color.red);
+						((SortingPanel) panel).incrementComparisons();
+						if (((SortingPanel) panel).getValue(i, false) < ((SortingPanel) panel).getValue(iMin, false)) {
+							((SortingPanel) panel).setColor(iMin, Color.lightGray);
+							((SortingPanel) panel).setColor(i, Color.red);
 							publish();
 							iMin = i;
 						}
 						else {
-							panel.setColor(i, Color.lightGray);
+							((SortingPanel) panel).setColor(i, Color.lightGray);
 							publish();
 						}
 					}
 					if (iMin != j) {
-						panel.swap(j, iMin);
-						panel.setColor(iMin, Color.lightGray);
-						panel.setColor(j, Color.green);
+						((SortingPanel) panel).swap(j, iMin);
+						((SortingPanel) panel).setColor(iMin, Color.lightGray);
+						((SortingPanel) panel).setColor(j, Color.green);
 						publish();
 					}
 					else {
-						panel.setColor(iMin, Color.green);
+						((SortingPanel) panel).setColor(iMin, Color.green);
 						publish();
 					}
 				}
 				
 				// Verify that the array was sorted correctly
-				panel.setAllColors(Color.green);
+				((SortingPanel) panel).setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("SelectionSort: Success!");
-					panel.setAllColors(Color.green);
+					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
 					System.out.println("SelectionSort: Failed!");
-					panel.setAllColors(Color.red);
+					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				
@@ -76,9 +76,9 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 			}
 
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < panel.length(); i++) {
-					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
-						panel.setColor(i - 1, Color.blue);
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
+					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
+						((SortingPanel) panel).setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -88,8 +88,8 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
-					panel.setColor(panel.length() - 1, Color.blue);
+				if (((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 1, true) > ((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 2, true)) {
+					((SortingPanel) panel).setColor(((SortingPanel) panel).length() - 1, Color.blue);
 					publish();
 				}
 				return true;

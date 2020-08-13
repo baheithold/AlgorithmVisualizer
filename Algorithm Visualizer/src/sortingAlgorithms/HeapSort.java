@@ -30,15 +30,15 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 				publish();
 				
 				// Verify that the array was sorted correctly
-				panel.setAllColors(Color.green);
+				((SortingPanel) panel).setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
 					System.out.println("HeapSort: Success!");
-					panel.setAllColors(Color.green);
+					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
 					System.out.println("HeapSort: Failed!");
-					panel.setAllColors(Color.red);
+					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				
@@ -51,13 +51,13 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private void sort() {
-				int heapSize = panel.length();
+				int heapSize = ((SortingPanel) panel).length();
 				BuildMaxHeap(heapSize);
 				// Swap each extreme value with last value,
 				// then call Heapify
 				for (int i = heapSize - 1; i > 0; i--) {
-					panel.swap(0, i);
-					panel.setColor(i, Color.green);
+					((SortingPanel) panel).swap(0, i);
+					((SortingPanel) panel).setColor(i, Color.green);
 					publish();
 					Heapify(i, 0);
 				}
@@ -74,26 +74,26 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 				int rightIndex = 2 * i + 2;
 				int maxIndex = i;
 				
-				if (leftIndex < heapSize && panel.getValue(leftIndex, false) > panel.getValue(maxIndex, false)) {
+				if (leftIndex < heapSize && ((SortingPanel) panel).getValue(leftIndex, false) > ((SortingPanel) panel).getValue(maxIndex, false)) {
 					maxIndex = leftIndex;
 				}
-				panel.incrementComparisons();
+				((SortingPanel) panel).incrementComparisons();
 				
-				if (rightIndex < heapSize && panel.getValue(rightIndex, false) > panel.getValue(maxIndex, false)) {
+				if (rightIndex < heapSize && ((SortingPanel) panel).getValue(rightIndex, false) > ((SortingPanel) panel).getValue(maxIndex, false)) {
 					maxIndex = rightIndex;
 				}
-				panel.incrementComparisons();
+				((SortingPanel) panel).incrementComparisons();
 				
 				if (maxIndex != i) {
-					panel.setColor(maxIndex, Color.red);
+					((SortingPanel) panel).setColor(maxIndex, Color.red);
 					publish();
-					panel.swap(i, maxIndex);
+					((SortingPanel) panel).swap(i, maxIndex);
 					try {
 						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					panel.setColor(maxIndex, Color.lightGray);
+					((SortingPanel) panel).setColor(maxIndex, Color.lightGray);
 					publish();
 					Heapify(heapSize, maxIndex);
 				}
@@ -106,9 +106,9 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < panel.length(); i++) {
-					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
-						panel.setColor(i - 1, Color.blue);
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
+					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
+						((SortingPanel) panel).setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -118,8 +118,8 @@ public class HeapSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
-					panel.setColor(panel.length() - 1, Color.blue);
+				if (((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 1, true) > ((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 2, true)) {
+					((SortingPanel) panel).setColor(((SortingPanel) panel).length() - 1, Color.blue);
 					publish();
 				}
 				return true;

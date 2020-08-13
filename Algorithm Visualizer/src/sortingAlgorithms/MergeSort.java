@@ -26,14 +26,14 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				sort(panel.getArray(), 0, panel.length() - 1);
+				sort(((SortingPanel) panel).getArray(), 0, ((SortingPanel) panel).length() - 1);
 				if (verifySortedCorrectly()) {
 					System.out.println("MergeSort: Success!");
-					panel.setAllColors(Color.green);
+					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
 					System.out.println("MergeSort: Failed!");
-					panel.setAllColors(Color.red);
+					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				return null;
@@ -66,12 +66,12 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				int j = 0;
 				int k = l;
 				while (i < nLeft && j < nRight) {
-					panel.setColor(k, Color.red);
+					((SortingPanel) panel).setColor(k, Color.red);
 					publish();
-					panel.incrementComparisons();
+					((SortingPanel) panel).incrementComparisons();
 					if (leftPartition[i] <= rightPartition[j]) {
 						arr[k] = leftPartition[i];
-						panel.setColor(k, Color.red);
+						((SortingPanel) panel).setColor(k, Color.red);
 						publish();
 						try {
 							Thread.sleep(panel.getCurrentDelay());
@@ -82,7 +82,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					}
 					else {
 						arr[k] = rightPartition[j];
-						panel.setColor(k, Color.red);
+						((SortingPanel) panel).setColor(k, Color.red);
 						publish();
 						try {
 							Thread.sleep(panel.getCurrentDelay());
@@ -92,7 +92,7 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 						j++;
 					}
 					// paint newly merged element green
-					panel.setColor(k, Color.green);
+					((SortingPanel) panel).setColor(k, Color.green);
 					publish();
 					k++;
 				}
@@ -100,14 +100,14 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				// Either left partition or right partition is now empty, merge the remaining elements
 				while (i < nLeft) {
 					arr[k] = leftPartition[i];
-					panel.setColor(k, Color.red);
+					((SortingPanel) panel).setColor(k, Color.red);
 					publish();
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-					panel.setColor(k, Color.green);
+					((SortingPanel) panel).setColor(k, Color.green);
 					publish();
 					try {
 						Thread.sleep(panel.getCurrentDelay());
@@ -119,14 +119,14 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 				}
 				while (j < nRight) {
 					arr[k] = rightPartition[j];
-					panel.setColor(k, Color.red);
+					((SortingPanel) panel).setColor(k, Color.red);
 					publish();
 					try {
 						Thread.sleep(panel.getCurrentDelay());
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-					panel.setColor(k, Color.green);
+					((SortingPanel) panel).setColor(k, Color.green);
 					publish();
 					try {
 						Thread.sleep(panel.getCurrentDelay());
@@ -153,9 +153,9 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 			}
 			
 			private Boolean verifySortedCorrectly() {
-				for (int i = 1; i < panel.length(); i++) {
-					if (panel.getValue(i - 1, true) <= panel.getValue(i, true)) {
-						panel.setColor(i - 1, Color.blue);
+				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
+					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
+						((SortingPanel) panel).setColor(i - 1, Color.blue);
 						publish();
 						try {
 							Thread.sleep(10);
@@ -165,8 +165,8 @@ public class MergeSort extends SortingAlgorithm implements Runnable {
 					}
 					else return false;
 				}
-				if (panel.getValue(panel.length() - 1, true) > panel.getValue(panel.length() - 2, true)) {
-					panel.setColor(panel.length() - 1, Color.blue);
+				if (((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 1, true) > ((SortingPanel) panel).getValue(((SortingPanel) panel).length() - 2, true)) {
+					((SortingPanel) panel).setColor(((SortingPanel) panel).length() - 1, Color.blue);
 					publish();
 				}
 				return true;
