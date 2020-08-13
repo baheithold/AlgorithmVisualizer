@@ -22,9 +22,6 @@ import javax.swing.event.ChangeListener;
  */
 public class PathFindingControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
-	private final int MIN_DELAY = 1;
-	private final int MAX_DELAY = 200;
-	private final int DEFAULT_DELAY = 100;
 	private PathFindingPanel panel;
 
 	// JLabels
@@ -66,7 +63,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	}
 	
 	private void initializeSliders() {
-		delayJSlider = new JSlider(MIN_DELAY, MAX_DELAY, DEFAULT_DELAY);
+		delayJSlider = new JSlider(panel.MIN_DELAY, panel.MAX_DELAY, panel.DEFAULT_DELAY);
 		delayJSlider.setToolTipText("Select amount of delay between algorithm steps");
 		delayJSlider.setMajorTickSpacing(100);
 		delayJSlider.setMinorTickSpacing(10);
