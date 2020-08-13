@@ -10,15 +10,13 @@ import gui.PathFindingPanel;
  *
  */
 public class Grid {
-	private PathFindingPanel panel;
 	private int numGridRows;
 	private int numGridCols;
 	private GridNode[][] grid;
 	private GridNode startNode;
 	private GridNode endNode;
 
-	public Grid(PathFindingPanel panel, int rows, int cols) {
-		this.panel = panel;
+	public Grid(int rows, int cols) {
 		this.numGridRows = rows;
 		this.numGridCols = cols;
 		this.grid = new GridNode[numGridCols][numGridRows];
