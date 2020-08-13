@@ -21,7 +21,7 @@ import javax.swing.event.ChangeListener;
 public class SortingControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 
-	private SortingPanel array;
+	private SortingPanel panel;
 	
 	// JLabels
 	private JLabel sortingSpeedJLabel;
@@ -35,8 +35,8 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	private JButton sortJButton;
 	private JButton randomizeJButton;
 	
-	public SortingControlPanel(SortingPanel array) {
-		this.array = array;
+	public SortingControlPanel(SortingPanel panel) {
+		this.panel = panel;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initializeJLabels();
 		initializeJSliders();
@@ -51,7 +51,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	
 	private void initializeJSliders() {
 		// speedJSlider
-		delayJSlider = new JSlider(array.MIN_DELAY, array.MAX_DELAY, array.DEFAULT_DELAY);
+		delayJSlider = new JSlider(panel.MIN_DELAY, panel.MAX_DELAY, panel.DEFAULT_DELAY);
 		delayJSlider.setToolTipText("Select amount of delay between algorithm steps");
 		delayJSlider.setMajorTickSpacing(500);
 		delayJSlider.setMinorTickSpacing(100);
@@ -60,7 +60,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		delayJSlider.addChangeListener(this);
 		
 		// numItemsJSlider
-		numItemsJSlider = new JSlider(array.MIN_NUM_ITEMS, array.MAX_NUM_ITEMS, array.DEFAULT_NUM_ITEMS);
+		numItemsJSlider = new JSlider(panel.MIN_NUM_ITEMS, panel.MAX_NUM_ITEMS, panel.DEFAULT_NUM_ITEMS);
 		numItemsJSlider.setToolTipText("Select number of items to sort");
 		numItemsJSlider.setMajorTickSpacing(10);
 		numItemsJSlider.setMinorTickSpacing(1);
@@ -96,20 +96,20 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sortJButton) {
 			System.out.println("Button Pressed: Sort");
-			if (!array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.runAlgorithm();
+			if (!panel.sortAlgorithm.isRunning()) {
+				panel.sortAlgorithm.runAlgorithm();
 			}
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
-			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killAlgorithm();
+			if (panel.sortAlgorithm.isRunning()) {
+				panel.sortAlgorithm.killAlgorithm();
 			}
-			array.randomizeArray();
-			array.resetColors();
-			array.repaint();
+			panel.randomizeArray();
+			panel.resetColors();
+			panel.repaint();
 		}
-		array.resetStatistics();
+		panel.resetStatistics();
 	}
 
 	@Override
@@ -118,14 +118,14 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		if (e.getSource() == numItemsJSlider) {
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
 			// check if a sort is currently running and kill it
-			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killAlgorithm();
+			if (panel.sortAlgorithm.isRunning()) {
+				panel.sortAlgorithm.killAlgorithm();
 			}
-			array.setCurrentNumItems(numItemsJSlider.getValue());
+			panel.setCurrentNumItems(numItemsJSlider.getValue());
 		}
 		else if (e.getSource() == delayJSlider) {
 			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
-			array.setCurrentStatsControlPanelDelay(delayJSlider.getValue());
+			panel.setCurrentStatsControlPanelDelay(delayJSlider.getValue());
 		}
 	}
 	

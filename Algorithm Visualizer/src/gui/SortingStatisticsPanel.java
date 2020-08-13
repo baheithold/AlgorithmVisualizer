@@ -13,15 +13,15 @@ import javax.swing.SwingConstants;
  */
 public class SortingStatisticsPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private SortingPanel array;
+	private SortingPanel panel;
 	private JLabel itemsJLabel, numItemsJLabel;
 	private JLabel delayJLabel, delayValueJLable;
 	private JLabel swapsJLabel, numSwapsJLabel;
 	private JLabel accessesJLabel, numAccessesJLabel;
 	private JLabel comparisonsJlabel, numComparisonsJLabel;
 	
-	public SortingStatisticsPanel(SortingPanel array) {
-		this.array = array;
+	public SortingStatisticsPanel(SortingPanel panel) {
+		this.panel = panel;
 		
 		// initialize statistic panel items
 		initializeStatisticJLabels();
@@ -32,19 +32,19 @@ public class SortingStatisticsPanel extends JPanel {
 	
 	private void initializeStatisticJLabels() {
 		itemsJLabel = new JLabel("Items: ");
-		numItemsJLabel = new JLabel(Integer.toString(array.length()));
+		numItemsJLabel = new JLabel(Integer.toString(panel.length()));
 		numItemsJLabel.setToolTipText("Number of items to be sorted");
 		delayJLabel = new JLabel("Delay (ms): ");
-		delayValueJLable = new JLabel(Integer.toString(array.getCurrentDelay()));
+		delayValueJLable = new JLabel(Integer.toString(panel.getCurrentDelay()));
 		delayValueJLable.setToolTipText("Delay in milliseconds");
 		swapsJLabel = new JLabel("Swaps: ");
-		numSwapsJLabel = new JLabel(Integer.toString(array.getNumSwaps()));
+		numSwapsJLabel = new JLabel(Integer.toString(panel.getNumSwaps()));
 		numSwapsJLabel.setToolTipText("Number of swaps performed by the algorithm");
 		accessesJLabel = new JLabel("Accesses: ");
-		numAccessesJLabel = new JLabel(Integer.toString(array.getNumAccesses()));
+		numAccessesJLabel = new JLabel(Integer.toString(panel.getNumAccesses()));
 		numAccessesJLabel.setToolTipText("Number of array accesses performed by the algorithm");
 		comparisonsJlabel = new JLabel("Comparisons: ");
-		numComparisonsJLabel = new JLabel(Integer.toString(array.getNumComparisons()));
+		numComparisonsJLabel = new JLabel(Integer.toString(panel.getNumComparisons()));
 		numComparisonsJLabel.setToolTipText("Number of comparisons performed by the algorithm");
 	}
 	
