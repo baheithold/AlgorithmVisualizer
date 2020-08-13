@@ -34,6 +34,7 @@ public abstract class Algorithm {
 	
 	public void setCurrentDelay(int n) {
 		currentDelay = n;
+		panel.setCurrentDelay(n);
 	}
 	
 	public abstract void runAlgorithm();
