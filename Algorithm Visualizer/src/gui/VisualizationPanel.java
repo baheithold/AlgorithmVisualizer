@@ -8,6 +8,7 @@ import javax.swing.JPanel;
  */
 public class VisualizationPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
+	
 	// Window constants
 	protected final int WINDOW_WIDTH = 800;
 	protected final int WINDOW_HEIGHT = 600;
