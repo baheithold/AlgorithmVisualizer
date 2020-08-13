@@ -23,6 +23,9 @@ public class VisualizationPanel extends JPanel {
 	private int currentDelay;
 	private String algorithmName;
 	
+	public VisualizationPanel() {
+	}
+	
 	public VisualizationPanel(String name) {
 		currentDelay = DEFAULT_DELAY;
 		algorithmName = name;
