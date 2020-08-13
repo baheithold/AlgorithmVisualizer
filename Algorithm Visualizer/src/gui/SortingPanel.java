@@ -44,7 +44,8 @@ public class SortingPanel extends VisualizationPanel {
 	// Sort
 	public SortingAlgorithm sortAlgorithm;
 	
-	public SortingPanel(String sortName) {
+	public SortingPanel(String algorithmName) {
+		super(algorithmName);
 		
 		currentNumItems = DEFAULT_NUM_ITEMS;
 		array = new int[DEFAULT_NUM_ITEMS];
@@ -61,7 +62,7 @@ public class SortingPanel extends VisualizationPanel {
 		resetColors();
 		setBackground(Color.DARK_GRAY);
 		
-		switch (sortName) {
+		switch (algorithmName) {
 			case "bubbleSort":
 				sortAlgorithm = new BubbleSort(this);
 				break;

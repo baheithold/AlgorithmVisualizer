@@ -21,10 +21,16 @@ public class VisualizationPanel extends JPanel {
 	public final int MAX_DELAY = 250;
 	
 	private int currentDelay;
+	private String algorithmName;
 	
-	public VisualizationPanel() {
+	public VisualizationPanel(String name) {
 		currentDelay = DEFAULT_DELAY;
-		this.setLayout(new BorderLayout());
+		algorithmName = name;
+		setLayout(new BorderLayout());
+	}
+	
+	protected String getAlgorithmName() {
+		return algorithmName;
 	}
 	
 	public int getCurrentDelay() {

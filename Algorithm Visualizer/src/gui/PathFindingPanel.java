@@ -17,7 +17,6 @@ import pathFindingAlgorithms.PathFindingAlgorithm;
  */
 public class PathFindingPanel extends VisualizationPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
-	private String algorithmName;
 	private Grid grid;
 	
 	// Control Panel
@@ -27,7 +26,7 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	public PathFindingAlgorithm pathFindingAlgorithm;
 
 	public PathFindingPanel(String algorithmName) {
-		this.algorithmName = algorithmName;
+		super(algorithmName);
 		this.grid = new Grid((this.WINDOW_HEIGHT / 20) - 6, (this.WINDOW_WIDTH / 20) - 1);
 		initializeControlPanel();
 		pathFindingAlgorithm = new AStar(this);
@@ -43,10 +42,6 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 			default:
 				break;
 		}
-	}
-	
-	public String getAlgorithmName() {
-		return this.algorithmName;
 	}
 	
 	public Grid getGrid() {
