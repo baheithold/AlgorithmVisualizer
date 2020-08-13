@@ -65,11 +65,11 @@ public class GraphMenu extends JMenu implements ActionListener {
 			window.setTitle("Prim");
 		}
 		else if (e.getSource() == kruskalJMenuItem) {
-			algorithmName = "Kruskal";
+			algorithmName = "kruskal";
 			window.setTitle("Kruskal");
 		}
 		else if (e.getSource() == bellmanfordJMenuItem) {
-			algorithmName = "Bellman-Ford";
+			algorithmName = "bellman-ford";
 			window.setTitle("Bellman-Ford");
 		}
 		else {
