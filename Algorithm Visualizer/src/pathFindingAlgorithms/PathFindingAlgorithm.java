@@ -15,10 +15,6 @@ public abstract class PathFindingAlgorithm extends Algorithm {
 	// path
 	private Stack<GridNode> pathStack = new Stack<GridNode>();
 	
-	public PathFindingAlgorithm() {
-		setRunning(false);
-	}
-	
 	public PathFindingAlgorithm(PathFindingPanel panel) {
 		super(panel);
 		grid = panel.getGrid();
