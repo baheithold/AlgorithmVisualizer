@@ -9,7 +9,6 @@ import gui.VisualizationPanel;
 public abstract class Algorithm {
 	protected VisualizationPanel panel;
 	private boolean isRunning;
-	private int currentDelay;
 
 	public Algorithm() {
 		isRunning = false;
@@ -33,7 +32,6 @@ public abstract class Algorithm {
 	}
 	
 	public void setCurrentDelay(int n) {
-		currentDelay = n;
 		panel.setCurrentDelay(n);
 	}
 	
