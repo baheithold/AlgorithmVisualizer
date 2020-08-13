@@ -164,13 +164,13 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 	}
 	
 	@Override
-	public void runSort() {
+	public void runAlgorithm() {
 		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
 
 	@Override
-	public void killSort() {
+	public void killAlgorithm() {
 		setRunning(false);
 		workerThread.cancel(true);
 	}

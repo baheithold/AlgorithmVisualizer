@@ -97,13 +97,13 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		if (e.getSource() == sortJButton) {
 			System.out.println("Button Pressed: Sort");
 			if (!array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.runSort();
+				array.sortAlgorithm.runAlgorithm();
 			}
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: Randomize");
 			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killSort();
+				array.sortAlgorithm.killAlgorithm();
 			}
 			array.randomizeArray();
 			array.resetColors();
@@ -119,7 +119,7 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
 			// check if a sort is currently running and kill it
 			if (array.sortAlgorithm.isRunning()) {
-				array.sortAlgorithm.killSort();
+				array.sortAlgorithm.killAlgorithm();
 			}
 			array.setCurrentNumItems(numItemsJSlider.getValue());
 		}

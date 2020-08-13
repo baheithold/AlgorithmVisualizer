@@ -36,7 +36,7 @@ public abstract class Algorithm {
 		currentDelay = n;
 	}
 	
-	public abstract void runSort();
-	public abstract void killSort();
+	public abstract void runAlgorithm();
+	public abstract void killAlgorithm();
 	
 }
