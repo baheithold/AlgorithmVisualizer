@@ -86,6 +86,8 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		this.add(numItemsJLabel);
 		this.add(numItemsJSlider);
 		this.add(Box.createHorizontalStrut(10));
+		this.add(new JSeparator(SwingConstants.VERTICAL));
+		this.add(Box.createHorizontalStrut(10));
 		this.add(runJButton);
 		this.add(Box.createHorizontalStrut(10));
 		this.add(randomizeJButton);
