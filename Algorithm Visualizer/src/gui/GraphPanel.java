@@ -13,18 +13,18 @@ public class GraphPanel extends VisualizationPanel {
 		
 		// select what algorithm to use
 		switch (algorithmName) {
-		case "dfs":
-			break;
-		case "dijkstra":
-			break;
-		case "prim":
-			break;
-		case "kruskal":
-			break;
-		case "bellman-ford":
-			break;
-		default:
-			break;
+			case "dfs":
+				break;
+			case "dijkstra":
+				break;
+			case "prim":
+				break;
+			case "kruskal":
+				break;
+			case "bellman-ford":
+				break;
+			default:
+				break;
 		}
 	}
 	
