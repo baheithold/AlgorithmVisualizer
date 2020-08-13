@@ -130,7 +130,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 					// for all neighbors of qNode
 					for (GridNode neighbor : neighbors) {
 						// if neighbor is not in either open or closed lists
-						Thread.sleep(10);
+						Thread.sleep(panel.getCurrentDelay());
 						publish();
 						if (!openList.contains(neighbor) && closedList[neighbor.getX()][neighbor.getY()] == false) {
 							neighbor.setParent(qNode);
@@ -138,7 +138,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 							if (!neighbor.isStart() && !neighbor.isEnd()) {
 								neighbor.setColor(Color.magenta);
 								publish();
-								Thread.sleep(10);
+								Thread.sleep(panel.getCurrentDelay());
 							}
 							openList.add(neighbor);
 						}
@@ -152,7 +152,7 @@ public class AStar extends PathFindingAlgorithm implements Runnable {
 									if (!neighbor.isStart() && !neighbor.isEnd()) {
 										neighbor.setColor(Color.magenta);
 										publish();
-										Thread.sleep(10);
+										Thread.sleep(panel.getCurrentDelay());
 									}
 									openList.add(neighbor);
 								}

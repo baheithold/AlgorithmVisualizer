@@ -94,13 +94,13 @@ public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable
 					// if inbounds and not an obstacle, add to neighbors list
 					neighbor = generateNeighbor(v.getX() - 1, v.getY());
 					if (neighbor != null) neighbors.add(neighbor);
-					Thread.sleep(150);
+					Thread.sleep(panel.getCurrentDelay());
 					
 					for (GridNode neighbor : neighbors) {
 						if (!isDiscovered(neighbor)) {
 							setDiscovered(neighbor);
 							publish();
-							Thread.sleep(10);
+							Thread.sleep(panel.getCurrentDelay() / 10);
 							neighbor.setParent(v);
 							queue.addLast(neighbor);
 						}

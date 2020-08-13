@@ -268,6 +268,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == delayJSlider) {
 			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
+			panel.setCurrentDelay(delayJSlider.getValue());
 		}
 	}
 	
