@@ -9,10 +9,6 @@ import gui.SortingPanel;
  */
 public abstract class SortingAlgorithm extends Algorithm {
 	
-	public SortingAlgorithm() {
-		setRunning(false);
-	}
-	
 	public SortingAlgorithm(SortingPanel panel) {
 		super(panel);
 		this.panel = panel;
