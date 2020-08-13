@@ -35,7 +35,6 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 		this.addMouseListener(this);
 		
 		switch (algorithmName) {
-			
 			case "bfs":
 				pathFindingAlgorithm = new BreadthFirstSearch(this);
 				break;
