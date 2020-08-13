@@ -10,6 +10,22 @@ public class GraphPanel extends VisualizationPanel {
 
 	public GraphPanel(String algorithmName) {
 		this.algorithmName = algorithmName;
+		
+		// select what algorithm to use
+		switch (algorithmName) {
+		case "dfs":
+			break;
+		case "dijkstra":
+			break;
+		case "prim":
+			break;
+		case "kruskal":
+			break;
+		case "bellman-ford":
+			break;
+		default:
+			break;
+		}
 	}
 	
 }
