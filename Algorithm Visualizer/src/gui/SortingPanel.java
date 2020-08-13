@@ -50,9 +50,6 @@ public class SortingPanel extends VisualizationPanel {
 		array = new int[DEFAULT_NUM_ITEMS];
 		colors = new Color[DEFAULT_NUM_ITEMS];
 
-		// set layout to BorderLayout
-		this.setLayout(new BorderLayout());
-
 		// initialize statistics panel
 		initializeStatisticsPanel();
 		

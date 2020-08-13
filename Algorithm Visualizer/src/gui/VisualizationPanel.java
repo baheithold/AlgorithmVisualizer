@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +24,7 @@ public class VisualizationPanel extends JPanel {
 	
 	public VisualizationPanel() {
 		currentDelay = DEFAULT_DELAY;
+		this.setLayout(new BorderLayout());
 	}
 	
 	public int getCurrentDelay() {
