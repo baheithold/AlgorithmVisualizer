@@ -28,4 +28,8 @@ public class VisualizationPanel extends JPanel {
 		return currentDelay;
 	}
 	
+	public void setCurrentDelay(int delay) {
+		currentDelay = delay;
+	}
+	
 }
