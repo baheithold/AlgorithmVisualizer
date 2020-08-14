@@ -18,7 +18,7 @@ public class GraphMenu extends JMenu implements ActionListener {
 	private JFrame window;
 	
 	// Graph Menu Items
-	private JMenuItem dfsJMenuItem, dijkstraJMenuItem, primJMenuItem, kruskalJMenuItem, bellmanfordJMenuItem;
+	private JMenuItem bfsJMenuItem, dfsJMenuItem, dijkstraJMenuItem, primJMenuItem, kruskalJMenuItem, bellmanfordJMenuItem;
 	
 	public GraphMenu(JFrame window) {
 		this.window = window;
@@ -28,7 +28,9 @@ public class GraphMenu extends JMenu implements ActionListener {
 	}
 	
 	private void initializeGraphMenuItems() {
-
+		
+		bfsJMenuItem = new JMenuItem("Breadth First Search");
+		bfsJMenuItem.addActionListener(this);
 		dfsJMenuItem = new JMenuItem("Depth First Search");
 		dfsJMenuItem.addActionListener(this);
 		dijkstraJMenuItem = new JMenuItem("Dijkstra");
@@ -42,6 +44,7 @@ public class GraphMenu extends JMenu implements ActionListener {
 	}
 	
 	private void constructGraphMenu() {
+		add(bfsJMenuItem);
 		add(dfsJMenuItem);
 		add(dijkstraJMenuItem);
 		add(primJMenuItem);
@@ -52,7 +55,11 @@ public class GraphMenu extends JMenu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String algorithmName;
-		if (e.getSource() == dfsJMenuItem) {
+		if (e.getSource() == bfsJMenuItem) {
+			algorithmName = "bfs";
+			window.setTitle("Breadth First Search");
+		}
+		else if (e.getSource() == dfsJMenuItem) {
 			algorithmName = "dfs";
 			window.setTitle("Depth First Search");
 		}
