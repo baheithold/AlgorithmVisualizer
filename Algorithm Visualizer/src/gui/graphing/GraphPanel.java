@@ -55,7 +55,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	
 	private void addVertex(double xPos, double yPos) {
 		System.out.println("Adding a new vertex at coordinates: " + xPos + ", " + yPos);
-		Vertex v = new Vertex(xPos, yPos);
+		Vertex v = new Vertex(xPos, yPos, controlPanel.getDiameter());
 		vertices.add(v);
 	}
 	

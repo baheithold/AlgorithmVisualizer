@@ -1,8 +1,10 @@
 package gui.graphing;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,13 +22,20 @@ import javax.swing.event.ChangeListener;
  */
 public class GraphControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
+	
+	// Diameter Constants
+	private final int MIN_DIAMETER = 25;
+	private final int MAX_DIAMETER = 100;
+	private final int DEFAULT_DIAMETER = 50;
+	
+	// Graph Panel
 	private GraphPanel panel;
 	
 	// JLabels
-	private JLabel delayJLabel, numItemsJLabel;
+	private JLabel delayJLabel, numItemsJLabel, diameterJLabel;
 	
 	// JSliders
-	private JSlider delayJSlider, numItemsJSlider;
+	private JSlider delayJSlider, numItemsJSlider, diameterJSlider;
 	
 	// JButtons
 	private JButton runJButton, randomizeJButton, resetJButton;
@@ -43,13 +52,25 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
 		numItemsJLabel = new JLabel("Number of Items");
+		diameterJLabel = new JLabel("Vertex Diameter (pixels)");
 	}
 	
 	private void initializeSliders() {
+		// delay slider
 		delayJSlider = new JSlider(panel.MIN_DELAY, panel.MAX_DELAY, panel.DEFAULT_DELAY);
 		delayJSlider.addChangeListener(this);
+		
+		// number of items slider
 		numItemsJSlider = new JSlider(0, 10, 5);
 		numItemsJSlider.addChangeListener(this);
+		
+		// diameter slider
+		diameterJSlider = new JSlider(MIN_DIAMETER, MAX_DIAMETER, DEFAULT_DIAMETER);
+		diameterJSlider.setPaintLabels(true);
+		diameterJSlider.setPaintTicks(true);
+		diameterJSlider.setSnapToTicks(true);
+		diameterJSlider.setMajorTickSpacing(25);
+		diameterJSlider.addChangeListener(this);
 	}
 	
 	private void initializeButtons() {
@@ -62,24 +83,37 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	}
 	
 	private void constructControlPanel() {
+		// add border around control panel
+		setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.black));
+		
 		// Delay Slider
+		this.add(Box.createHorizontalStrut(10));
 		add(constructDelayPanel());
+		this.add(Box.createHorizontalStrut(10));
 
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
 		// Number of Items Slider
+		this.add(Box.createHorizontalStrut(10));
 		add(constructNumberOfItemsPanel());
+		this.add(Box.createHorizontalStrut(10));
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
-		// Run Button
-		add(runJButton);
-		add(Box.createHorizontalStrut(10));
+		// Diameter Slider
+		this.add(Box.createHorizontalStrut(10));
+		add(constructDiameterSliderPanel());
+		this.add(Box.createHorizontalStrut(10));
+		
+		// Separator
+		add(new JSeparator(SwingConstants.VERTICAL));
 		
 		// Randomize Button
+		this.add(Box.createHorizontalStrut(10));
 		add(constructButtonsPanel());
+		this.add(Box.createHorizontalStrut(10));
 	}
 	
 	private JPanel constructDelayPanel() {
@@ -104,6 +138,17 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		return panel;
 	}
 	
+	private JPanel constructDiameterSliderPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		diameterJSlider.add(Box.createVerticalStrut(5));
+		panel.add(diameterJLabel);
+		diameterJSlider.add(Box.createVerticalStrut(5));
+		panel.add(diameterJSlider);
+		this.add(panel);
+		return panel;
+	}
+	
 	private JPanel constructButtonsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -118,9 +163,12 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 				
 		// Reset Button
 		panel.add(resetJButton);
-		panel.add(Box.createHorizontalStrut(10));
 		
 		return panel;
+	}
+	
+	public double getDiameter() {
+		return diameterJSlider.getValue();
 	}
 	
 	@Override
