@@ -1,4 +1,4 @@
-package sortingAlgorithms;
+package algorithms.sorting;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,53 +6,68 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import gui.SortingPanel;
+import gui.sorting.SortingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public class InsertionSort extends SortingAlgorithm implements Runnable {
+public class SelectionSort extends SortingAlgorithm implements Runnable {
 	private SwingWorker<Void, Void> workerThread;
 	
-	public InsertionSort(SortingPanel array) {
+	public SelectionSort(SortingPanel array) {
 		super(array);
 	}
 	
 	@Override
-	public void run() {
+	public void run() {	
 		
 		workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				((SortingPanel) panel).setColor(0, Color.green);
-				publish();
-				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
-					int j = i;
-					while (j > 0 && ((SortingPanel) panel).getValue(j - 1, false) > ((SortingPanel) panel).getValue(j, false)) {
-						((SortingPanel) panel).incrementComparisons();
-						((SortingPanel) panel).setColor(j, Color.red);
+				for (int j = 0; j < ((SortingPanel) panel).length() - 1; j++) {
+					int iMin = j;
+					((SortingPanel) panel).setColor(iMin, Color.red);
+					publish();
+					Thread.sleep(panel.getCurrentDelay());
+					for (int i = j + 1; i < ((SortingPanel) panel).length(); i++) {
+						((SortingPanel) panel).setColor(i, Color.blue);
 						publish();
 						Thread.sleep(panel.getCurrentDelay());
-						((SortingPanel) panel).swap(j, j - 1);
+						((SortingPanel) panel).incrementComparisons();
+						if (((SortingPanel) panel).getValue(i, false) < ((SortingPanel) panel).getValue(iMin, false)) {
+							((SortingPanel) panel).setColor(iMin, Color.lightGray);
+							((SortingPanel) panel).setColor(i, Color.red);
+							publish();
+							iMin = i;
+						}
+						else {
+							((SortingPanel) panel).setColor(i, Color.lightGray);
+							publish();
+						}
+					}
+					if (iMin != j) {
+						((SortingPanel) panel).swap(j, iMin);
+						((SortingPanel) panel).setColor(iMin, Color.lightGray);
 						((SortingPanel) panel).setColor(j, Color.green);
 						publish();
-						Thread.sleep(panel.getCurrentDelay());
-						j--;
 					}
-					Thread.sleep(panel.getCurrentDelay());
+					else {
+						((SortingPanel) panel).setColor(iMin, Color.green);
+						publish();
+					}
 				}
 				
 				// Verify that the array was sorted correctly
 				((SortingPanel) panel).setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
-					System.out.println("InsertionSort: Success!");
+					System.out.println("SelectionSort: Success!");
 					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
-					System.out.println("InsertionSort: Failed!");
+					System.out.println("SelectionSort: Failed!");
 					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
@@ -96,11 +111,11 @@ public class InsertionSort extends SortingAlgorithm implements Runnable {
 		setRunning(true);
 		SwingUtilities.invokeLater(this);
 	}
-
+	
 	@Override
 	public void killAlgorithm() {
 		setRunning(false);
 		workerThread.cancel(true);
 	}
-	
+
 }

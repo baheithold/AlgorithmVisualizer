@@ -8,6 +8,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import gui.graphing.GraphMenu;
+import gui.pathfinding.PathFindingMenu;
+import gui.sorting.SortingMenu;
+
 /**
  * @author Brett Heithold
  *

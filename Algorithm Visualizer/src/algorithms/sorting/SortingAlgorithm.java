@@ -1,7 +1,7 @@
-package sortingAlgorithms;
+package algorithms.sorting;
 
-import algorithmVisualizer.Algorithm;
-import gui.SortingPanel;
+import algorithms.Algorithm;
+import gui.sorting.SortingPanel;
 
 /**
  * @author Brett Heithold

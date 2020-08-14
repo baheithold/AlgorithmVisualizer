@@ -1,15 +1,16 @@
-package gui;
+package gui.pathfinding;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import pathFindingAlgorithms.AStar;
-import pathFindingAlgorithms.BreadthFirstSearch;
-import pathFindingAlgorithms.Grid;
-import pathFindingAlgorithms.GridNode;
-import pathFindingAlgorithms.PathFindingAlgorithm;
+import algorithms.pathfinding.AStar;
+import algorithms.pathfinding.BreadthFirstSearch;
+import algorithms.pathfinding.Grid;
+import algorithms.pathfinding.GridNode;
+import algorithms.pathfinding.PathFindingAlgorithm;
+import gui.VisualizationPanel;
 
 /**
  * @author Brett Heithold

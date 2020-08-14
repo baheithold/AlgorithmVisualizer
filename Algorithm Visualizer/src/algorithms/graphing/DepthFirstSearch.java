@@ -1,7 +1,7 @@
-package graphAlgorithms;
+package algorithms.graphing;
 
-import algorithmVisualizer.Algorithm;
-import gui.GraphPanel;
+import algorithms.Algorithm;
+import gui.graphing.GraphPanel;
 
 /**
  * @author Brett Heithold

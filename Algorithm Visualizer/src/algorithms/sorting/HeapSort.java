@@ -1,4 +1,4 @@
-package sortingAlgorithms;
+package algorithms.sorting;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,38 +6,42 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import gui.SortingPanel;
+import gui.sorting.SortingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public class QuickSort extends SortingAlgorithm implements Runnable {
+public class HeapSort extends SortingAlgorithm implements Runnable {
 	private SwingWorker<Void, Void> workerThread;
 	
-	public QuickSort(SortingPanel array) {
+	public HeapSort(SortingPanel array) {
 		super(array);
 	}
-	
+
 	@Override
 	public void run() {
-		
 		workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				sort(0, ((SortingPanel) panel).length());
+				// Perform Heap Sort
+				sort();
 				publish();
+				
 				// Verify that the array was sorted correctly
+				((SortingPanel) panel).setAllColors(Color.green);
+				publish();
 				if (verifySortedCorrectly()) {
-					System.out.println("QuickSort: Success!");
+					System.out.println("HeapSort: Success!");
 					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
-					System.out.println("QuickSort: Failed!");
+					System.out.println("HeapSort: Failed!");
 					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
+				
 				return null;
 			}
 
@@ -46,65 +50,59 @@ public class QuickSort extends SortingAlgorithm implements Runnable {
 				panel.repaint();
 			}
 			
-			private void sort(int low, int high) {
-				if (low < high) {
-					int pivotIndex = partition(low, high);
+			private void sort() {
+				int heapSize = ((SortingPanel) panel).length();
+				BuildMaxHeap(heapSize);
+				// Swap each extreme value with last value,
+				// then call Heapify
+				for (int i = heapSize - 1; i > 0; i--) {
+					((SortingPanel) panel).swap(0, i);
+					((SortingPanel) panel).setColor(i, Color.green);
 					publish();
-					try {
-						Thread.sleep(panel.getCurrentDelay());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					sort(low, pivotIndex);
-					publish();
-					try {
-						Thread.sleep(panel.getCurrentDelay());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					sort(pivotIndex + 1, high);
-					publish();
-					try {
-						Thread.sleep(panel.getCurrentDelay());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					Heapify(i, 0);
 				}
 			}
 			
-			private int partition(int low, int high) {
-				int pivotValue = ((SortingPanel) panel).getValue(low, false);
-				int leftwall = low;
-				
-				((SortingPanel) panel).setColor(leftwall, Color.blue);
-				publish();
-				
-				for (int i = low + 1; i < high; i++) {
-					((SortingPanel) panel).setColor(i, Color.red);
-					publish();
-					((SortingPanel) panel).incrementComparisons();
-					if (((SortingPanel) panel).getValue(i, false) < pivotValue) {
-						leftwall++;
-						((SortingPanel) panel).swap(i, leftwall);
-						publish();
-						try {
-							Thread.sleep(panel.getCurrentDelay());
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					((SortingPanel) panel).setColor(i, Color.lightGray);
-					publish();
+			private void BuildMaxHeap(int heapSize) {
+				for (int i = heapSize / 2 - 1; i >= 0; i--) {
+					Heapify(heapSize, i);
 				}
-				((SortingPanel) panel).swap(low, leftwall);
-				((SortingPanel) panel).setColor(leftwall, Color.green);
-				publish();
+			}
+			
+			private void Heapify(int heapSize, int i) {		
+				int leftIndex = 2 * i + 1;
+				int rightIndex = 2 * i + 2;
+				int maxIndex = i;
+				
+				if (leftIndex < heapSize && ((SortingPanel) panel).getValue(leftIndex, false) > ((SortingPanel) panel).getValue(maxIndex, false)) {
+					maxIndex = leftIndex;
+				}
+				((SortingPanel) panel).incrementComparisons();
+				
+				if (rightIndex < heapSize && ((SortingPanel) panel).getValue(rightIndex, false) > ((SortingPanel) panel).getValue(maxIndex, false)) {
+					maxIndex = rightIndex;
+				}
+				((SortingPanel) panel).incrementComparisons();
+				
+				if (maxIndex != i) {
+					((SortingPanel) panel).setColor(maxIndex, Color.red);
+					publish();
+					((SortingPanel) panel).swap(i, maxIndex);
+					try {
+						Thread.sleep(panel.getCurrentDelay());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					((SortingPanel) panel).setColor(maxIndex, Color.lightGray);
+					publish();
+					Heapify(heapSize, maxIndex);
+				}
+				
 				try {
 					Thread.sleep(panel.getCurrentDelay());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				return leftwall;
 			}
 			
 			private Boolean verifySortedCorrectly() {

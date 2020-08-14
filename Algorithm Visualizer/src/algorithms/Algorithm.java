@@ -1,4 +1,4 @@
-package algorithmVisualizer;
+package algorithms;
 
 import gui.VisualizationPanel;
 

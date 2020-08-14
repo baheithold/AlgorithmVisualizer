@@ -32,7 +32,7 @@ public class VisualizationPanel extends JPanel {
 		setLayout(new BorderLayout());
 	}
 	
-	protected String getAlgorithmName() {
+	public String getAlgorithmName() {
 		return algorithmName;
 	}
 	

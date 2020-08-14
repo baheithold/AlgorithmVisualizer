@@ -1,4 +1,4 @@
-package pathFindingAlgorithms;
+package algorithms.pathfinding;
 
 import java.awt.Color;
 import java.util.Random;

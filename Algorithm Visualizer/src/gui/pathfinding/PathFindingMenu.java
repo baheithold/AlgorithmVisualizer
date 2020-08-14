@@ -1,4 +1,4 @@
-package gui;
+package gui.pathfinding;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

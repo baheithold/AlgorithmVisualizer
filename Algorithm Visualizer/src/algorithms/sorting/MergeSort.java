@@ -1,4 +1,4 @@
-package sortingAlgorithms;
+package algorithms.sorting;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import gui.SortingPanel;
+import gui.sorting.SortingPanel;
 
 /**
  * @author Brett Heithold

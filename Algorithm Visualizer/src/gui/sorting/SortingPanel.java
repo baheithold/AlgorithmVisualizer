@@ -1,4 +1,4 @@
-package gui;
+package gui.sorting;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,13 +6,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import sortingAlgorithms.BubbleSort;
-import sortingAlgorithms.HeapSort;
-import sortingAlgorithms.InsertionSort;
-import sortingAlgorithms.MergeSort;
-import sortingAlgorithms.QuickSort;
-import sortingAlgorithms.SelectionSort;
-import sortingAlgorithms.SortingAlgorithm;
+import algorithms.sorting.BubbleSort;
+import algorithms.sorting.HeapSort;
+import algorithms.sorting.InsertionSort;
+import algorithms.sorting.MergeSort;
+import algorithms.sorting.QuickSort;
+import algorithms.sorting.SelectionSort;
+import algorithms.sorting.SortingAlgorithm;
+import gui.VisualizationPanel;
 
 /**
  * @author Brett Heithold

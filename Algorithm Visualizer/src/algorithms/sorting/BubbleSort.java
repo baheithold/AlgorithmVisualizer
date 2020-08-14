@@ -1,4 +1,4 @@
-package sortingAlgorithms;
+package algorithms.sorting;
 
 import java.awt.Color;
 import java.util.List;
@@ -6,56 +6,48 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import gui.SortingPanel;
+import gui.sorting.SortingPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public class SelectionSort extends SortingAlgorithm implements Runnable {
+public class BubbleSort extends SortingAlgorithm implements Runnable {
 	private SwingWorker<Void, Void> workerThread;
 	
-	public SelectionSort(SortingPanel array) {
-		super(array);
+	public BubbleSort(SortingPanel panel) {
+		super(panel);
 	}
 	
-	@Override
-	public void run() {	
-		
+	public void run() {
 		workerThread = new SwingWorker<Void, Void>() {
 
 			@Override
 			protected Void doInBackground() throws Exception {
-				for (int j = 0; j < ((SortingPanel) panel).length() - 1; j++) {
-					int iMin = j;
-					((SortingPanel) panel).setColor(iMin, Color.red);
-					publish();
-					Thread.sleep(panel.getCurrentDelay());
-					for (int i = j + 1; i < ((SortingPanel) panel).length(); i++) {
+				boolean isSorted = false;
+				int lastUnsortedIndex = ((SortingPanel) panel).length() - 1;
+				while (!isSorted) {
+					isSorted = true;
+					for (int i = 0; i < lastUnsortedIndex; i++) {
 						((SortingPanel) panel).setColor(i, Color.blue);
+						((SortingPanel) panel).setColor(i + 1, Color.red);
 						publish();
 						Thread.sleep(panel.getCurrentDelay());
+						if (((SortingPanel) panel).getValue(i, false) > ((SortingPanel) panel).getValue(i + 1, false)) {
+							((SortingPanel) panel).swap(i, i + 1);
+							isSorted = false;
+						}
 						((SortingPanel) panel).incrementComparisons();
-						if (((SortingPanel) panel).getValue(i, false) < ((SortingPanel) panel).getValue(iMin, false)) {
-							((SortingPanel) panel).setColor(iMin, Color.lightGray);
-							((SortingPanel) panel).setColor(i, Color.red);
-							publish();
-							iMin = i;
-						}
-						else {
-							((SortingPanel) panel).setColor(i, Color.lightGray);
-							publish();
-						}
-					}
-					if (iMin != j) {
-						((SortingPanel) panel).swap(j, iMin);
-						((SortingPanel) panel).setColor(iMin, Color.lightGray);
-						((SortingPanel) panel).setColor(j, Color.green);
+						((SortingPanel) panel).setColor(i, Color.lightGray);
 						publish();
 					}
-					else {
-						((SortingPanel) panel).setColor(iMin, Color.green);
-						publish();
+					((SortingPanel) panel).setColor(lastUnsortedIndex, Color.green);
+					publish();
+					lastUnsortedIndex--;					
+					try {
+						Thread.sleep(panel.getCurrentDelay());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
 				
@@ -63,18 +55,18 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 				((SortingPanel) panel).setAllColors(Color.green);
 				publish();
 				if (verifySortedCorrectly()) {
-					System.out.println("SelectionSort: Success!");
+					System.out.println("BubbleSort: Success!");
 					((SortingPanel) panel).setAllColors(Color.green);
 				}
 				else {
-					System.out.println("SelectionSort: Failed!");
+					System.out.println("BubbleSort: Failed!");
 					((SortingPanel) panel).setAllColors(Color.red);
 				}
 				publish();
 				
 				return null;
 			}
-
+			
 			private Boolean verifySortedCorrectly() {
 				for (int i = 1; i < ((SortingPanel) panel).length(); i++) {
 					if (((SortingPanel) panel).getValue(i - 1, true) <= ((SortingPanel) panel).getValue(i, true)) {
@@ -99,13 +91,13 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 			protected void process(List<Void> chunks) {
 				panel.repaint();
 			}
-			
+
 		};
 		
 		workerThread.execute();
 		
 	}
-
+	
 	@Override
 	public void runAlgorithm() {
 		setRunning(true);
@@ -117,5 +109,5 @@ public class SelectionSort extends SortingAlgorithm implements Runnable {
 		setRunning(false);
 		workerThread.cancel(true);
 	}
-
+	
 }

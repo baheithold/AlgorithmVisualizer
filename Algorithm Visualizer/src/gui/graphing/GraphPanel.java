@@ -1,10 +1,11 @@
-package gui;
+package gui.graphing;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import graphAlgorithms.DepthFirstSearch;
+import algorithms.graphing.DepthFirstSearch;
+import gui.VisualizationPanel;
 
 /**
  * @author Brett Heithold

@@ -1,9 +1,9 @@
-package pathFindingAlgorithms;
+package algorithms.pathfinding;
 
 import java.util.Stack;
 
-import algorithmVisualizer.Algorithm;
-import gui.PathFindingPanel;
+import algorithms.Algorithm;
+import gui.pathfinding.PathFindingPanel;
 
 /**
  * @author Brett Heithold

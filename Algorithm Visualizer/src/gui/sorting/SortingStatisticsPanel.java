@@ -1,4 +1,4 @@
-package gui;
+package gui.sorting;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
