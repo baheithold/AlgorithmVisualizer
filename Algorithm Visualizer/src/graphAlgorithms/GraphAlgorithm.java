@@ -1,6 +1,7 @@
 package graphAlgorithms;
 
 import algorithmVisualizer.Algorithm;
+import gui.GraphPanel;
 
 /**
  * @author Brett Heithold
@@ -8,7 +9,8 @@ import algorithmVisualizer.Algorithm;
  */
 public class GraphAlgorithm extends Algorithm{
 	
-	public GraphAlgorithm() {
+	public GraphAlgorithm(GraphPanel panel) {
+		super(panel);
 	}
 
 	@Override
