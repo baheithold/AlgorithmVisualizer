@@ -34,6 +34,8 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private final int MIN_DIAMETER = 25;
 	private final int MAX_DIAMETER = 100;
 	private final int DEFAULT_DIAMETER = 50;
+	private final int DIAMETER_MAJOR_TICK = 25;
+	private final int DIAMETER_MINIOR_TICK = 5;
 	
 	// Graph Panel
 	private GraphPanel panel;
@@ -83,8 +85,8 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		diameterJSlider = new JSlider(MIN_DIAMETER, MAX_DIAMETER, DEFAULT_DIAMETER);
 		diameterJSlider.setPaintLabels(true);
 		diameterJSlider.setPaintTicks(true);
-		diameterJSlider.setSnapToTicks(true);
-		diameterJSlider.setMajorTickSpacing(25);
+		diameterJSlider.setMajorTickSpacing(DIAMETER_MAJOR_TICK);
+		diameterJSlider.setMinorTickSpacing(DIAMETER_MINIOR_TICK);
 		diameterJSlider.addChangeListener(this);
 	}
 	
@@ -193,6 +195,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		}
 		else if (e.getSource() == numItemsJSlider) {
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
+		}
+		else if (e.getSource() == diameterJSlider) {
+			System.out.println("Diameter Slider Changed: " + diameterJSlider.getValue());
 		}
 	}
 
