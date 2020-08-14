@@ -20,9 +20,17 @@ public class Vertex {
 		yPosition = yPos;
 	}
 	
+	public double xCentered() {
+		return xPosition - (diameter / 2);
+	}
+	
+	public double yCentered() {
+		return yPosition - (diameter / 2);
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		Ellipse2D.Double circle = new Ellipse2D.Double(xPosition, yPosition, diameter, diameter);
+		Ellipse2D.Double circle = new Ellipse2D.Double(xCentered(), yCentered(), diameter, diameter);
 		g2d.setColor(Color.black);
 		g2d.fill(circle);
 	}
