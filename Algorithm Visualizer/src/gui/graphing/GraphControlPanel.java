@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -104,25 +105,19 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.black));
 		
 		// Delay Slider
-		this.add(Box.createHorizontalStrut(10));
 		add(constructDelayPanel());
-		this.add(Box.createHorizontalStrut(10));
 
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
 		// Number of Items Slider
-		this.add(Box.createHorizontalStrut(10));
 		add(constructNumberOfItemsPanel());
-		this.add(Box.createHorizontalStrut(10));
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
 		// Diameter Slider
-		this.add(Box.createHorizontalStrut(10));
 		add(constructDiameterSliderPanel());
-		this.add(Box.createHorizontalStrut(10));
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
@@ -136,9 +131,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructDelayPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		delayJLabel.add(Box.createVerticalStrut(5));
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(delayJLabel);
-		delayJSlider.add(Box.createVerticalStrut(5));
+		panel.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
 		this.add(panel);
 		return panel;
@@ -147,9 +142,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructNumberOfItemsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		numItemsJLabel.add(Box.createVerticalStrut(5));
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(numItemsJLabel);
-		numItemsJSlider.add(Box.createVerticalStrut(5));
+		panel.add(Box.createVerticalStrut(5));
 		panel.add(numItemsJSlider);
 		this.add(panel);
 		return panel;
@@ -158,9 +153,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructDiameterSliderPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		diameterJSlider.add(Box.createVerticalStrut(5));
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(diameterJLabel);
-		diameterJSlider.add(Box.createVerticalStrut(5));
+		panel.add(Box.createVerticalStrut(5));
 		panel.add(diameterJSlider);
 		this.add(panel);
 		return panel;
@@ -169,6 +164,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructButtonsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setBorder(new EmptyBorder(0, 10, 0, 10));
 		
 		// Run Button
 		panel.add(runJButton);
