@@ -17,8 +17,10 @@ public class VisualizationPanel extends JPanel {
 
 	// Delay constants
 	public final int DEFAULT_DELAY = 100;
-	public final int MIN_DELAY = 1;
+	public final int MIN_DELAY = 0;
 	public final int MAX_DELAY = 250;
+	public final int DELAY_MAJOR_TICK_SPACING = 125;
+	public final int DELAY_MINOR_TICK_SPACING = 25;
 	
 	private int currentDelay;
 	private String algorithmName;

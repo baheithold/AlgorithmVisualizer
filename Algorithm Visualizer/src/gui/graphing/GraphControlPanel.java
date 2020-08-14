@@ -23,6 +23,13 @@ import javax.swing.event.ChangeListener;
 public class GraphControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 	
+	// Number of Items slider Constants
+	private final int MIN_NUM_ITEMS = 0;
+	private final int MAX_NUM_ITEMS = 50;
+	private final int DEFAULT_NUM_ITEMS = 10;
+	private final int NUM_ITEMS_MAJOR_TICK = 25;
+	private final int NUM_ITEMS_MINOR_TICK = 5;
+	
 	// Diameter Constants
 	private final int MIN_DIAMETER = 25;
 	private final int MAX_DIAMETER = 100;
@@ -58,10 +65,18 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private void initializeSliders() {
 		// delay slider
 		delayJSlider = new JSlider(panel.MIN_DELAY, panel.MAX_DELAY, panel.DEFAULT_DELAY);
+		delayJSlider.setMajorTickSpacing(panel.DELAY_MAJOR_TICK_SPACING);
+		delayJSlider.setMinorTickSpacing(panel.DELAY_MINOR_TICK_SPACING);
+		delayJSlider.setPaintTicks(true);
+		delayJSlider.setPaintLabels(true);
 		delayJSlider.addChangeListener(this);
 		
 		// number of items slider
-		numItemsJSlider = new JSlider(0, 10, 5);
+		numItemsJSlider = new JSlider(MIN_NUM_ITEMS, MAX_NUM_ITEMS, DEFAULT_NUM_ITEMS);
+		numItemsJSlider.setMajorTickSpacing(NUM_ITEMS_MAJOR_TICK);
+		numItemsJSlider.setMinorTickSpacing(NUM_ITEMS_MINOR_TICK);
+		numItemsJSlider.setPaintTicks(true);
+		numItemsJSlider.setPaintLabels(true);
 		numItemsJSlider.addChangeListener(this);
 		
 		// diameter slider
