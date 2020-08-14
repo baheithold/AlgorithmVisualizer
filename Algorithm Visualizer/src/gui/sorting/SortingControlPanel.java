@@ -53,8 +53,8 @@ public class SortingControlPanel extends JPanel implements ActionListener, Chang
 		// speedJSlider
 		delayJSlider = new JSlider(panel.MIN_DELAY, panel.MAX_DELAY, panel.DEFAULT_DELAY);
 		delayJSlider.setToolTipText("Select amount of delay between algorithm steps");
-		delayJSlider.setMajorTickSpacing(500);
-		delayJSlider.setMinorTickSpacing(100);
+		delayJSlider.setMajorTickSpacing(panel.DELAY_MAJOR_TICK_SPACING);
+		delayJSlider.setMinorTickSpacing(panel.DELAY_MINOR_TICK_SPACING);
 		delayJSlider.setPaintTicks(true);
 		delayJSlider.setPaintLabels(true);
 		delayJSlider.addChangeListener(this);
