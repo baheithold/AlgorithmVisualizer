@@ -140,9 +140,11 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		}
 		else if (e.getSource() == randomizeJButton) {
 			System.out.println("Button Pressed: " + "Randomize");
+			panel.clearVertices();
 		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: " + "Reset");
+			panel.clearVertices();
 		}
 	}
 
