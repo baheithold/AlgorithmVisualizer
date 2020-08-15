@@ -28,6 +28,10 @@ public class Vertex {
 		return yPosition - (diameter / 2);
 	}
 	
+	public double radius() {
+		return diameter / 2;
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		Ellipse2D.Double circle = new Ellipse2D.Double(xCentered(), yCentered(), diameter, diameter);
