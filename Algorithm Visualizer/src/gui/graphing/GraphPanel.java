@@ -71,11 +71,9 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
 		if (v.xCentered() >= 0 && v.xCentered() + 65 <= WINDOW_WIDTH) {
-			System.out.println("xInBounds set to TRUE");
 			xInBounds = true;
 		}
 		if (v.yCentered() + v.radius() * 2 + this.controlPanel.getHeight() + 65 <= WINDOW_HEIGHT && v.yCentered() >= 0) {
-			System.out.println("yInBounds set to TRUE");
 			yInBounds = true;
 		}
 		return xInBounds && yInBounds;
