@@ -2,6 +2,7 @@ package gui.graphing;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -56,12 +57,28 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private void addVertex(double xPos, double yPos) {
 		System.out.println("New Vertex: x = " + xPos + ", y = " + yPos + ", diameter = " + controlPanel.getDiameter());
 		Vertex v = new Vertex(xPos, yPos, controlPanel.getDiameter());
-		vertices.add(v);
+		if (inBounds(v)) {
+			vertices.add(v);
+		}
 	}
 	
 	public void clearVertices() {
 		vertices.clear();
 		repaint();
+	}
+	
+	public boolean inBounds(Vertex v) {
+		boolean xInBounds = false;
+		boolean yInBounds = false;
+		if (v.xCentered() >= 0 && v.xCentered() + 65 <= WINDOW_WIDTH) {
+			System.out.println("xInBounds set to TRUE");
+			xInBounds = true;
+		}
+		if (v.yCentered() + v.radius() * 2 + this.controlPanel.getHeight() + 65 <= WINDOW_HEIGHT && v.yCentered() >= 0) {
+			System.out.println("yInBounds set to TRUE");
+			yInBounds = true;
+		}
+		return xInBounds && yInBounds;
 	}
 	
 	@Override
