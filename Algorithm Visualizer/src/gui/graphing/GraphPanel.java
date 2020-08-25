@@ -75,7 +75,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	
 	private void addVertex(double xPos, double yPos) {
 		Vertex v = new Vertex(xPos, yPos, controlPanel.getDiameter());
-		if (inBounds(v)) {
+		if (inBounds(v) && !overlapExists(v)) {
 			vertices.add(v);
 			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered() + ", diameter = " + controlPanel.getDiameter());
 		}
@@ -119,6 +119,25 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 			yInBounds = true;
 		}
 		return xInBounds && yInBounds;
+	}
+	
+	private boolean verticesOverlap(Vertex u, Vertex v) {
+		double ux = u.xCentered();
+		double uy = u.yCentered();
+		double vx = v.xCentered();
+		double vy = v.yCentered();
+		double distanceBetweenOrigins = Math.sqrt(Math.pow((vx - ux), 2) + Math.pow((vy - uy), 2));
+		return distanceBetweenOrigins <= controlPanel.getDiameter();
+	}
+	
+	private boolean overlapExists(Vertex u) {
+		for (Vertex v : vertices) {
+			if (verticesOverlap(u, v)) {
+				System.out.println("Overlap exists!");
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
