@@ -7,13 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,18 +29,24 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private final int MIN_NUM_ITEMS = 0;
 	private final int MAX_NUM_ITEMS = 50;
 	private final int DEFAULT_NUM_ITEMS = 10;
-	private final int NUM_ITEMS_MAJOR_TICK = 25;
+	private final int NUM_ITEMS_MAJOR_TICK = 10;
 	private final int NUM_ITEMS_MINOR_TICK = 5;
-	public final int DIAMETER = 50;
+	public final double DIAMETER = 50.0;
 	
 	// Graph Panel
 	private GraphPanel panel;
 	
 	// JLabels
-	private JLabel delayJLabel, numItemsJLabel;
+	private JLabel delayJLabel, numItemsJLabel, vertexTypeJLabel;
 	
 	// JSliders
 	private JSlider delayJSlider, numItemsJSlider;
+	
+	// Vertex Type Radio
+	private ButtonGroup vertexTypeRadioGroup;
+	private JRadioButton defaultRadioButton;
+	private JRadioButton startRadioButton;
+	private JRadioButton endRadioButton;
 	
 	// JButtons
 	private JButton runJButton, randomizeJButton, resetJButton;
@@ -50,12 +57,14 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		initializeLabels();
 		initializeSliders();
 		initializeButtons();
+		initializeRadioButtons();
 		constructControlPanel();
 	}
 
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
 		numItemsJLabel = new JLabel("Number of Items");
+		vertexTypeJLabel = new JLabel("Vertex Type");
 	}
 	
 	private void initializeSliders() {
@@ -76,6 +85,20 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		numItemsJSlider.addChangeListener(this);
 	}
 	
+	private void initializeRadioButtons() {
+		vertexTypeRadioGroup = new ButtonGroup();
+		defaultRadioButton = new JRadioButton("Default");
+		defaultRadioButton .setToolTipText("Select Vertex Type");
+		defaultRadioButton.setSelected(true);
+		defaultRadioButton.addActionListener(this);
+		startRadioButton = new JRadioButton("Start");
+		startRadioButton.setToolTipText("Select Vertex type");
+		startRadioButton.addActionListener(this);
+		endRadioButton = new JRadioButton("End");
+		endRadioButton.setToolTipText("Select Vertex type");
+		endRadioButton.addActionListener(this);
+	}
+	
 	private void initializeButtons() {
 		runJButton = new JButton("Run");
 		runJButton.addActionListener(this);
@@ -89,50 +112,72 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		// add border around control panel
 		setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.black));
 		
-		// Delay Slider
+		// Delay Slider Panel
 		add(constructDelayPanel());
 
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
-		// Number of Items Slider
+		// Number of Items Panel
 		add(constructNumberOfItemsPanel());
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
-		// Randomize Button
+		// Vertex Type Panel
+		add(constructVertexTypePanel());
+		
+		// Separator
+		add(new JSeparator(SwingConstants.VERTICAL));
+		
+		// Button Panel
 		this.add(Box.createHorizontalStrut(10));
 		add(constructButtonsPanel());
 		this.add(Box.createHorizontalStrut(10));
+		
 	}
 	
 	private JPanel constructDelayPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(delayJLabel);
 		panel.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
-		this.add(panel);
 		return panel;
 	}
 	
 	private JPanel constructNumberOfItemsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(numItemsJLabel);
 		panel.add(Box.createVerticalStrut(5));
 		panel.add(numItemsJSlider);
-		this.add(panel);
+		return panel;
+	}
+	
+	private JPanel constructVertexTypeRadioPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		vertexTypeRadioGroup.add(defaultRadioButton);
+		vertexTypeRadioGroup.add(startRadioButton);
+		vertexTypeRadioGroup.add(endRadioButton);
+		panel.add(defaultRadioButton);
+		panel.add(startRadioButton);
+		panel.add(endRadioButton);
+		return panel;
+	}
+	
+	private JPanel constructVertexTypePanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(vertexTypeJLabel);
+		panel.add(constructVertexTypeRadioPanel());
 		return panel;
 	}
 	
 	private JPanel constructButtonsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.setBorder(new EmptyBorder(0, 10, 0, 10));
 		
 		// Run Button
 		panel.add(runJButton);
@@ -146,6 +191,13 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		panel.add(resetJButton);
 		
 		return panel;
+	}
+	
+	public String whichVertexTypeRadioSelected() {
+		if (startRadioButton.isSelected()) return "start";
+		else if (endRadioButton.isSelected()) return "end";
+		else if (defaultRadioButton.isSelected()) return "default";
+		else return "unknown";
 	}
 	
 	@Override
@@ -170,6 +222,15 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: " + "Reset");
 			panel.clearVertices();
+		}
+		else if (e.getSource() == defaultRadioButton) {
+			System.out.println("Radio Button Selected: Default");
+		}
+		else if (e.getSource() == startRadioButton) {
+			System.out.println("Radio Button Selected: Start");
+		}
+		else if (e.getSource() == endRadioButton) {
+			System.out.println("Radio Button Selected: End");
 		}
 	}
 

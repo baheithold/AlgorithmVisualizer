@@ -20,6 +20,9 @@ public class Vertex {
 	// Color
 	private Color color;
 	
+	// Circle
+	Ellipse2D.Double circle;
+	
 	private double diameter;
 	private double xPosition, yPosition;
 
@@ -78,9 +81,13 @@ public class Vertex {
 		return color == SELECTED_COLOR;
 	}
 	
+	public boolean containsCoordinates(double x, double y) {
+		return circle.contains(x, y);
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		Ellipse2D.Double circle = new Ellipse2D.Double(xCentered(), yCentered(), diameter, diameter);
+		circle = new Ellipse2D.Double(xCentered(), yCentered(), diameter, diameter);
 		g2d.setColor(color);
 		g2d.fill(circle);
 	}

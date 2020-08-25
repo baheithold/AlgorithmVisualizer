@@ -28,6 +28,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	// Algorithm
 	private DepthFirstSearch graphAlgorithm;
 	
+	// Start and End Vertices
+	private Vertex startVertex;
+	private Vertex endVertex;
+	
 	// Vertices
 	private ArrayList<Vertex> vertices;
 	
@@ -37,6 +41,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		controlPanel = new GraphControlPanel(this);
 		this.add(controlPanel, BorderLayout.SOUTH);
 		vertices = new ArrayList<Vertex>();
+		startVertex = null;
+		endVertex = null;
 		
 		// select what algorithm to use
 		switch (algorithmName) {
@@ -64,12 +70,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		
 		// search for vertex
 		for (Vertex v : vertices) {
-			if (x <= v.xCentered() + v.radius() && x >= v.xCentered() - v.radius()) {
-				if (y <= v.yCentered() + v.radius() && y >= v.yCentered() - v.radius()) {
-					return v;
-					
-				}
-			}
+			if (v.containsCoordinates(x, y)) return v;
 		}
 		
 		// vertex DNE at coordinates (x, y), return null
@@ -79,6 +80,27 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private void addVertex(double xPos, double yPos) {
 		Vertex v = new Vertex(xPos, yPos, controlPanel.DIAMETER);
 		if (inBounds(v) && !overlapExists(v)) {
+			// set correct vertex type
+			switch (controlPanel.whichVertexTypeRadioSelected()) {
+				case "default":
+					v.setDefault();
+					break;
+				case "start":
+					v.setStart();
+					if (startVertex != null) startVertex.setDefault();
+					startVertex = v;
+					break;
+				case "end":
+					v.setEnd();
+					if (endVertex != null) endVertex.setDefault();
+					endVertex = v;
+					break;
+				default:
+					System.out.println("addVertex: Unknown vertex type");
+					break;
+			}
+			
+			// add vertex to vertices list
 			vertices.add(v);
 			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered());
 		}
@@ -87,11 +109,68 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private void removeVertex(double xPos, double yPos) {
 		Vertex v = containedByVertex(xPos - this.controlPanel.DIAMETER / 2, yPos - this.controlPanel.DIAMETER / 2);
 		if (v != null) {
+			if (v.isStart()) startVertex = null;
+			else if (v.isEnd()) endVertex = null;
 			vertices.remove(v);
 			System.out.println("Removed Vertex centered at: x = " + v.xCentered() + " y = " + v.yCentered());
 		}
 		else {
 			System.out.println("Vertex DNE at coordinates: " + xPos + ", " + yPos);
+		}
+	}
+	
+	private void updateVertex(Vertex v) {
+		switch (controlPanel.whichVertexTypeRadioSelected()) {
+			case "default":
+				if (v.isStart()) {
+					startVertex = null;
+					v.setDefault();
+				}
+				else if (v.isEnd()) {
+					endVertex = null;
+					v.setDefault();
+				}
+				break;
+			case "start":
+				if (v.isStart()) {
+					startVertex = null;
+					v.setDefault();
+				}
+				else if (v.isEnd()) {
+					endVertex = null;
+					startVertex.setDefault();
+					v.setStart();
+					startVertex = v;
+				}
+				else {
+					if (startVertex != null) {
+						startVertex.setDefault();
+					}
+					v.setStart();
+					startVertex = v;
+				}
+				break;
+			case "end":
+				if (v.isStart()) {
+					startVertex = null;
+					endVertex.setDefault();
+					v.setEnd();
+					endVertex = v;
+				}
+				else if (v.isEnd()) {
+					endVertex = null;
+					v.setDefault();
+				}
+				else {
+					if (endVertex != null) {
+						endVertex.setDefault();
+					}
+					v.setEnd();
+					endVertex = v;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 	
@@ -129,7 +208,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		double uy = u.yCentered();
 		double vx = v.xCentered();
 		double vy = v.yCentered();
-		double distanceBetweenOrigins = Math.sqrt(Math.pow((vx - ux), 2) + Math.pow((vy - uy), 2)) - MINIMUM_VERTEX_SEPARATION;
+		double distanceBetweenOrigins = Math.sqrt(Math.pow(vx - ux, 2) + Math.pow(vy - uy, 2)) - MINIMUM_VERTEX_SEPARATION;
 		return distanceBetweenOrigins <= controlPanel.DIAMETER;
 	}
 	
@@ -174,7 +253,12 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			// Left mouse button click
-			addVertex(convertedX, convertedY);
+			Vertex v = containedByVertex(convertedX, convertedY);
+			if (v != null) {
+				// update vertex v
+				updateVertex(v);
+			}
+			else addVertex(convertedX, convertedY);
 		}
 		else if (e.getButton() == MouseEvent.BUTTON3) {
 			// Right mouse button click
