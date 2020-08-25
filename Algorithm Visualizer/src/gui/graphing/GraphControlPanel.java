@@ -30,22 +30,16 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private final int DEFAULT_NUM_ITEMS = 10;
 	private final int NUM_ITEMS_MAJOR_TICK = 25;
 	private final int NUM_ITEMS_MINOR_TICK = 5;
-	
-	// Diameter Constants
-	private final int MIN_DIAMETER = 25;
-	private final int MAX_DIAMETER = 100;
-	private final int DEFAULT_DIAMETER = 50;
-	private final int DIAMETER_MAJOR_TICK = 25;
-	private final int DIAMETER_MINIOR_TICK = 5;
+	public final int DIAMETER = 50;
 	
 	// Graph Panel
 	private GraphPanel panel;
 	
 	// JLabels
-	private JLabel delayJLabel, numItemsJLabel, diameterJLabel;
+	private JLabel delayJLabel, numItemsJLabel;
 	
 	// JSliders
-	private JSlider delayJSlider, numItemsJSlider, diameterJSlider;
+	private JSlider delayJSlider, numItemsJSlider;
 	
 	// JButtons
 	private JButton runJButton, randomizeJButton, resetJButton;
@@ -62,7 +56,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
 		numItemsJLabel = new JLabel("Number of Items");
-		diameterJLabel = new JLabel("Vertex Diameter (pixels)");
 	}
 	
 	private void initializeSliders() {
@@ -81,14 +74,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		numItemsJSlider.setPaintTicks(true);
 		numItemsJSlider.setPaintLabels(true);
 		numItemsJSlider.addChangeListener(this);
-		
-		// diameter slider
-		diameterJSlider = new JSlider(MIN_DIAMETER, MAX_DIAMETER, DEFAULT_DIAMETER);
-		diameterJSlider.setPaintLabels(true);
-		diameterJSlider.setPaintTicks(true);
-		diameterJSlider.setMajorTickSpacing(DIAMETER_MAJOR_TICK);
-		diameterJSlider.setMinorTickSpacing(DIAMETER_MINIOR_TICK);
-		diameterJSlider.addChangeListener(this);
 	}
 	
 	private void initializeButtons() {
@@ -112,12 +97,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		
 		// Number of Items Slider
 		add(constructNumberOfItemsPanel());
-		
-		// Separator
-		add(new JSeparator(SwingConstants.VERTICAL));
-		
-		// Diameter Slider
-		add(constructDiameterSliderPanel());
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
@@ -150,17 +129,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		return panel;
 	}
 	
-	private JPanel constructDiameterSliderPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panel.add(diameterJLabel);
-		panel.add(Box.createVerticalStrut(5));
-		panel.add(diameterJSlider);
-		this.add(panel);
-		return panel;
-	}
-	
 	private JPanel constructButtonsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -180,10 +148,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		return panel;
 	}
 	
-	public double getDiameter() {
-		return diameterJSlider.getValue();
-	}
-	
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == delayJSlider) {
@@ -191,9 +155,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		}
 		else if (e.getSource() == numItemsJSlider) {
 			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
-		}
-		else if (e.getSource() == diameterJSlider) {
-			System.out.println("Diameter Slider Changed: " + diameterJSlider.getValue());
 		}
 	}
 

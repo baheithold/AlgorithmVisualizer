@@ -74,15 +74,15 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	}
 	
 	private void addVertex(double xPos, double yPos) {
-		Vertex v = new Vertex(xPos, yPos, controlPanel.getDiameter());
+		Vertex v = new Vertex(xPos, yPos, controlPanel.DIAMETER);
 		if (inBounds(v) && !overlapExists(v)) {
 			vertices.add(v);
-			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered() + ", diameter = " + controlPanel.getDiameter());
+			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered());
 		}
 	}
 	
 	private void removeVertex(double xPos, double yPos) {
-		Vertex v = containedByVertex(xPos - this.controlPanel.getDiameter() / 2, yPos - this.controlPanel.getDiameter() / 2);
+		Vertex v = containedByVertex(xPos - this.controlPanel.DIAMETER / 2, yPos - this.controlPanel.DIAMETER / 2);
 		if (v != null) {
 			vertices.remove(v);
 			System.out.println("Removed Vertex centered at: x = " + v.xCentered() + " y = " + v.yCentered());
@@ -127,7 +127,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		double vx = v.xCentered();
 		double vy = v.yCentered();
 		double distanceBetweenOrigins = Math.sqrt(Math.pow((vx - ux), 2) + Math.pow((vy - uy), 2));
-		return distanceBetweenOrigins <= controlPanel.getDiameter();
+		return distanceBetweenOrigins <= controlPanel.DIAMETER;
 	}
 	
 	private boolean overlapExists(Vertex u) {
