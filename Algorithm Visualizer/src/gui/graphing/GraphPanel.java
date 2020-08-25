@@ -112,8 +112,12 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	public boolean inBounds(double xPos, double yPos) {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
-		if (xPos - this.controlPanel.getDiameter() / 2 >= 0 && xPos + this.controlPanel.getDiameter() / 2 <= WINDOW_WIDTH) xInBounds = true;
-		if (yPos - this.controlPanel.getDiameter() / 2 >= 0 && yPos + this.controlPanel.getDiameter() / 2 <= WINDOW_HEIGHT) yInBounds = true;
+		if (xPos <= WINDOW_WIDTH && xPos >= 0) {
+			xInBounds = true;
+		}
+		if (yPos <= WINDOW_HEIGHT && yPos >= 0) {
+			yInBounds = true;
+		}
 		return xInBounds && yInBounds;
 	}
 	
