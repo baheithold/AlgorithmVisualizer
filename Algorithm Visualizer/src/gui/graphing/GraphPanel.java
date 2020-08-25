@@ -2,10 +2,11 @@ package gui.graphing;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.Panel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
 
 import algorithms.graphing.DepthFirstSearch;
 import algorithms.graphing.Vertex;
@@ -54,11 +55,40 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		}
 	}
 	
+	private Vertex containedByVertex(double x, double y) {
+		// coordinates are out of bounds, return null
+		if (!inBounds(x, y)) return null;
+		
+		// search for vertex
+		for (Vertex v : vertices) {
+			if (x <= v.xCentered() + v.radius() && x >= v.xCentered() - v.radius()) {
+				if (y <= v.yCentered() + v.radius() && y >= v.yCentered() - v.radius()) {
+					return v;
+					
+				}
+			}
+		}
+		
+		// vertex DNE at coordinates (x, y), return null
+		return null;
+	}
+	
 	private void addVertex(double xPos, double yPos) {
-		System.out.println("New Vertex: x = " + xPos + ", y = " + yPos + ", diameter = " + controlPanel.getDiameter());
 		Vertex v = new Vertex(xPos, yPos, controlPanel.getDiameter());
 		if (inBounds(v)) {
 			vertices.add(v);
+			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered() + ", diameter = " + controlPanel.getDiameter());
+		}
+	}
+	
+	private void removeVertex(double xPos, double yPos) {
+		Vertex v = containedByVertex(xPos - this.controlPanel.getDiameter() / 2, yPos - this.controlPanel.getDiameter() / 2);
+		if (v != null) {
+			vertices.remove(v);
+			System.out.println("Removed Vertex centered at: x = " + v.xCentered() + " y = " + v.yCentered());
+		}
+		else {
+			System.out.println("Vertex DNE at coordinates: " + xPos + ", " + yPos);
 		}
 	}
 	
@@ -76,6 +106,14 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		if (v.yCentered() + v.radius() * 2 + this.controlPanel.getHeight() + 65 <= WINDOW_HEIGHT && v.yCentered() >= 0) {
 			yInBounds = true;
 		}
+		return xInBounds && yInBounds;
+	}
+	
+	public boolean inBounds(double xPos, double yPos) {
+		boolean xInBounds = false;
+		boolean yInBounds = false;
+		if (xPos - this.controlPanel.getDiameter() / 2 >= 0 && xPos + this.controlPanel.getDiameter() / 2 <= WINDOW_WIDTH) xInBounds = true;
+		if (yPos - this.controlPanel.getDiameter() / 2 >= 0 && yPos + this.controlPanel.getDiameter() / 2 <= WINDOW_HEIGHT) yInBounds = true;
 		return xInBounds && yInBounds;
 	}
 	
@@ -102,11 +140,21 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 			return;
 		}
 		
-		// get mouse position and display
-		double xPos = Math.floor(e.getPoint().getX());
-		double yPos = Math.floor(e.getPoint().getY());
-		System.out.println("Mouse Released: " + xPos + ", " + yPos);
-		addVertex(xPos, yPos);
+		// get converted mouse position
+		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
+		double convertedX = convertedE.getPoint().getX();
+		double convertedY = convertedE.getPoint().getY();
+		System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
+		
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			// Left mouse button click
+			addVertex(convertedX, convertedY);
+		}
+		else if (e.getButton() == MouseEvent.BUTTON3) {
+			// Right mouse button click
+			removeVertex(convertedX, convertedY);
+		}
+		
 		repaint();
 	}
 
