@@ -18,6 +18,9 @@ import gui.VisualizationPanel;
  */
 public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
+	
+	// Constants
+	private final int MINIMUM_VERTEX_SEPARATION = 10;
 
 	// Control Panel
 	private GraphControlPanel controlPanel;
@@ -126,7 +129,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		double uy = u.yCentered();
 		double vx = v.xCentered();
 		double vy = v.yCentered();
-		double distanceBetweenOrigins = Math.sqrt(Math.pow((vx - ux), 2) + Math.pow((vy - uy), 2));
+		double distanceBetweenOrigins = Math.sqrt(Math.pow((vx - ux), 2) + Math.pow((vy - uy), 2)) - MINIMUM_VERTEX_SEPARATION;
 		return distanceBetweenOrigins <= controlPanel.DIAMETER;
 	}
 	
