@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import algorithms.graphing.DepthFirstSearch;
+import algorithms.graphing.Edge;
 import algorithms.graphing.Vertex;
 import gui.VisualizationPanel;
 
@@ -32,17 +33,30 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private Vertex startVertex;
 	private Vertex endVertex;
 	
-	// Vertices
+	// Vertices and Edges
 	private ArrayList<Vertex> vertices;
+	private ArrayList<Edge> edges;
+	
+	// Vertices for use when creating an edge
+	private Vertex uVertex;
+	private Vertex vVertex;
 	
 	public GraphPanel(String algorithmName) {
 		super(algorithmName);
 		this.addMouseListener(this);
+		
+		// get graphing control panel and add to south border
 		controlPanel = new GraphControlPanel(this);
 		this.add(controlPanel, BorderLayout.SOUTH);
+		
 		vertices = new ArrayList<Vertex>();
+		edges = new ArrayList<Edge>();
+		
 		startVertex = null;
 		endVertex = null;
+		
+		uVertex = null;
+		vVertex = null;
 		
 		// select what algorithm to use
 		switch (algorithmName) {
@@ -179,6 +193,11 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		repaint();
 	}
 	
+	public void clearEdges() {
+		edges.clear();
+		repaint();
+	}
+	
 	public boolean inBounds(Vertex v) {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
@@ -228,6 +247,9 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		for (Vertex vertex : vertices) {
 			vertex.draw(g);
 		}
+		for (Edge edge : edges) {
+			edge.draw(g);
+		}
 	}
 	
 	@Override
@@ -251,20 +273,41 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		double convertedY = convertedE.getPoint().getY();
 		System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
 		
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			// Left mouse button click
-			Vertex v = containedByVertex(convertedX, convertedY);
-			if (v != null) {
-				// update vertex v
-				updateVertex(v);
-			}
-			else addVertex(convertedX, convertedY);
+		switch (controlPanel.whichVertexEdgeRadioSelected()) {
+			case "vertex":
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					// Left mouse button click
+					Vertex v = containedByVertex(convertedX, convertedY);
+					if (v != null) {
+						// update vertex v
+						updateVertex(v);
+					}
+					else addVertex(convertedX, convertedY);
+				}
+				else if (e.getButton() == MouseEvent.BUTTON3) {
+					// Right mouse button click
+					removeVertex(convertedX, convertedY);
+				}
+				break;
+			case "edge":
+				Vertex v = containedByVertex(convertedX, convertedY);
+				if (v != null) {
+					v.setSelected(true);
+					if (uVertex == null) uVertex = v;
+					else {
+						vVertex = v;
+						uVertex.setSelected(false);
+						vVertex.setSelected(false);
+						edges.add(new Edge(uVertex, vVertex));
+						uVertex = null;
+						vVertex = null;
+					}
+				}
+				break;
+			default:
+				break;
 		}
-		else if (e.getButton() == MouseEvent.BUTTON3) {
-			// Right mouse button click
-			removeVertex(convertedX, convertedY);
-		}
-		
+				
 		repaint();
 	}
 

@@ -37,10 +37,15 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private GraphPanel panel;
 	
 	// JLabels
-	private JLabel delayJLabel, numItemsJLabel, vertexTypeJLabel;
+	private JLabel delayJLabel, numItemsJLabel, vertexEdgeJLabel, vertexTypeJLabel;
 	
 	// JSliders
 	private JSlider delayJSlider, numItemsJSlider;
+	
+	// VertexEdge Radio
+	private ButtonGroup vertexEdgeRadioGroup;
+	private JRadioButton vertexRadioButton;
+	private JRadioButton edgeRadioButton;
 	
 	// Vertex Type Radio
 	private ButtonGroup vertexTypeRadioGroup;
@@ -64,6 +69,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
 		numItemsJLabel = new JLabel("Number of Items");
+		vertexEdgeJLabel = new JLabel("Vertex or Edge?");
 		vertexTypeJLabel = new JLabel("Vertex Type");
 	}
 	
@@ -86,6 +92,17 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	}
 	
 	private void initializeRadioButtons() {
+		// VertexEdge Radio
+		vertexEdgeRadioGroup = new ButtonGroup();
+		vertexRadioButton = new JRadioButton("Vertex");
+		vertexRadioButton.setToolTipText("Vertex or Edge?");
+		vertexRadioButton.setSelected(true);
+		vertexRadioButton.addActionListener(this);
+		edgeRadioButton = new JRadioButton("Edge");
+		edgeRadioButton.setToolTipText("Vertex or Edge");
+		edgeRadioButton.addActionListener(this);
+		
+		// Vertex Type Radio
 		vertexTypeRadioGroup = new ButtonGroup();
 		defaultRadioButton = new JRadioButton("Default");
 		defaultRadioButton .setToolTipText("Select Vertex Type");
@@ -124,6 +141,11 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
 		
+		add(constructVertexEdgePanel());
+		
+		// Separator
+		add(new JSeparator(SwingConstants.VERTICAL));
+		
 		// Vertex Type Panel
 		add(constructVertexTypePanel());
 		
@@ -152,6 +174,24 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		panel.add(numItemsJLabel);
 		panel.add(Box.createVerticalStrut(5));
 		panel.add(numItemsJSlider);
+		return panel;
+	}
+	
+	private JPanel constructVertexEdgeRadioPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		vertexEdgeRadioGroup.add(vertexRadioButton);
+		vertexEdgeRadioGroup.add(edgeRadioButton);
+		panel.add(vertexRadioButton);
+		panel.add(edgeRadioButton);
+		return panel;
+	}
+	
+	private JPanel constructVertexEdgePanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(vertexEdgeJLabel);
+		panel.add(constructVertexEdgeRadioPanel());
 		return panel;
 	}
 	
@@ -200,6 +240,12 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		else return "unknown";
 	}
 	
+	public String whichVertexEdgeRadioSelected() {
+		if (vertexRadioButton.isSelected()) return "vertex";
+		else if (edgeRadioButton.isSelected()) return "edge";
+		else return "unknown";
+	}
+	
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == delayJSlider) {
@@ -222,15 +268,22 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: " + "Reset");
 			panel.clearVertices();
+			panel.clearEdges();
+		}
+		else if (e.getSource() == vertexRadioButton) {
+			System.out.println("Vertex Radio Button Selected");
+		}
+		else if (e.getSource() == edgeRadioButton) {
+			System.out.println("Edge Radio Button Selected");
 		}
 		else if (e.getSource() == defaultRadioButton) {
-			System.out.println("Radio Button Selected: Default");
+			System.out.println("Vertex Type Radio Button Selected: Default");
 		}
 		else if (e.getSource() == startRadioButton) {
-			System.out.println("Radio Button Selected: Start");
+			System.out.println("Vertex Type Radio Button Selected: Start");
 		}
 		else if (e.getSource() == endRadioButton) {
-			System.out.println("Radio Button Selected: End");
+			System.out.println("Vertex Type Radio Button Selected: End");
 		}
 	}
 
