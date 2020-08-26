@@ -25,18 +25,11 @@ import javax.swing.event.ChangeListener;
 public class GraphControlPanel extends JPanel implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 	
-	// Number of Items slider Constants
-	private final int MIN_NUM_ITEMS = 0;
-	private final int MAX_NUM_ITEMS = 50;
-	private final int DEFAULT_NUM_ITEMS = 10;
-	private final int NUM_ITEMS_MAJOR_TICK = 10;
-	private final int NUM_ITEMS_MINOR_TICK = 5;
-	
 	// Graph Panel
 	private GraphPanel panel;
 	
 	// JLabels
-	private JLabel delayJLabel, numItemsJLabel, vertexEdgeJLabel, vertexTypeJLabel;
+	private JLabel delayJLabel, vertexEdgeJLabel, vertexTypeJLabel;
 	
 	// JSliders
 	private JSlider delayJSlider, numItemsJSlider;
@@ -67,7 +60,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 
 	private void initializeLabels() {
 		delayJLabel = new JLabel("Delay (ms)");
-		numItemsJLabel = new JLabel("Number of Items");
 		vertexEdgeJLabel = new JLabel("Vertex or Edge?");
 		vertexTypeJLabel = new JLabel("Vertex Type");
 	}
@@ -80,14 +72,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		delayJSlider.setPaintTicks(true);
 		delayJSlider.setPaintLabels(true);
 		delayJSlider.addChangeListener(this);
-		
-		// number of items slider
-		numItemsJSlider = new JSlider(MIN_NUM_ITEMS, MAX_NUM_ITEMS, DEFAULT_NUM_ITEMS);
-		numItemsJSlider.setMajorTickSpacing(NUM_ITEMS_MAJOR_TICK);
-		numItemsJSlider.setMinorTickSpacing(NUM_ITEMS_MINOR_TICK);
-		numItemsJSlider.setPaintTicks(true);
-		numItemsJSlider.setPaintLabels(true);
-		numItemsJSlider.addChangeListener(this);
 	}
 	
 	private void initializeRadioButtons() {
@@ -128,12 +112,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		
 		// Delay Slider Panel
 		add(constructDelayPanel());
-
-		// Separator
-		add(new JSeparator(SwingConstants.VERTICAL));
-		
-		// Number of Items Panel
-		add(constructNumberOfItemsPanel());
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
@@ -162,15 +140,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		panel.add(delayJLabel);
 		panel.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
-		return panel;
-	}
-	
-	private JPanel constructNumberOfItemsPanel() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(numItemsJLabel);
-		panel.add(Box.createVerticalStrut(5));
-		panel.add(numItemsJSlider);
 		return panel;
 	}
 	
