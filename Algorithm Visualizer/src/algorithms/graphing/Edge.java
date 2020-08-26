@@ -1,5 +1,6 @@
 package algorithms.graphing;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,6 +13,9 @@ public class Edge {
 	
 	// Color Constants
 	private final Color DEFAULT_COLOR = Color.black;
+	
+	// Edge Constants
+	private final int EDGE_THICKNESS = 3;
 
 	private Vertex u;
 	private Vertex v;
@@ -52,7 +56,9 @@ public class Edge {
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(color);
-		g2d.drawLine((int)u.xCentered(), (int)u.yCentered(), (int)v.xCentered(), (int)v.yCentered());
+		g2d.setStroke(new BasicStroke(EDGE_THICKNESS));
+		g2d.drawLine((int)u.xCentered() + (int)u.radius(), (int)u.yCentered() + (int)u.radius(), (int)v.xCentered() + (int)u.radius(), (int)v.yCentered() + (int)u.radius());
+		g2d.setStroke(new BasicStroke(0));
 	}
 	
 }

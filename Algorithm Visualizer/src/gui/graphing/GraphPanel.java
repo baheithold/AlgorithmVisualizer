@@ -121,7 +121,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	}
 	
 	private void removeVertex(double xPos, double yPos) {
-		Vertex v = containedByVertex(xPos - this.controlPanel.DIAMETER / 2, yPos - this.controlPanel.DIAMETER / 2);
+		Vertex v = containedByVertex(xPos, yPos);
 		if (v != null) {
 			if (v.isStart()) startVertex = null;
 			else if (v.isEnd()) endVertex = null;
@@ -241,14 +241,26 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 		return false;
 	}
 	
+	public void resetEdgeVerticesUV() {
+		if (uVertex != null) {
+			uVertex.setSelected(false);
+			uVertex = null;
+		}
+		if (vVertex != null) {
+			vVertex.setSelected(false);
+			vVertex = null;
+		}
+		repaint();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (Vertex vertex : vertices) {
-			vertex.draw(g);
-		}
 		for (Edge edge : edges) {
 			edge.draw(g);
+		}
+		for (Vertex vertex : vertices) {
+			vertex.draw(g);
 		}
 	}
 	

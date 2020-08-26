@@ -271,6 +271,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 			panel.clearEdges();
 		}
 		else if (e.getSource() == vertexRadioButton) {
+			panel.resetEdgeVerticesUV();
 			System.out.println("Vertex Radio Button Selected");
 		}
 		else if (e.getSource() == edgeRadioButton) {
