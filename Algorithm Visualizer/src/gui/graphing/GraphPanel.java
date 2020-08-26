@@ -48,8 +48,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	private Vertex vertexToMove;
 	private Point mouseMovePoint;
 	
-	// Number of Vertices
-	private static int numVertices;
+	// ID
+	private static int nextID;
 	
 	public GraphPanel(String algorithmName) {
 		super(algorithmName);
@@ -61,7 +61,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		this.add(controlPanel, BorderLayout.SOUTH);
 		
 		vertices = new ArrayList<Vertex>();
-		numVertices = 0;
+		nextID = 0;
 		edges = new ArrayList<Edge>();
 		
 		startVertex = null;
@@ -104,7 +104,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	}
 	
 	private void addVertex(double xPos, double yPos) {
-		Vertex v = new Vertex(xPos, yPos, numVertices);
+		Vertex v = new Vertex(xPos, yPos, nextID);
 		if (inBounds(v) && !overlapExists(v)) {
 			// set correct vertex type
 			switch (controlPanel.whichVertexTypeRadioSelected()) {
@@ -128,7 +128,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			
 			// add vertex to vertices list
 			vertices.add(v);
-			numVertices++;
+			nextID++;
 			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered());
 		}
 	}
@@ -216,7 +216,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	public void clearVertices() {
 		vertices.clear();
-		numVertices = 0;
+		nextID = 0;
 		repaint();
 	}
 	
