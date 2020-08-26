@@ -273,52 +273,62 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// if algorithm is running, ignore
+		if (graphAlgorithm.isRunning()) {
+			return;
+		}
+		
 		// get converted mouse position
-				MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
-				double convertedX = convertedE.getPoint().getX();
-				double convertedY = convertedE.getPoint().getY();
-				System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
-				
-				switch (controlPanel.whichVertexEdgeRadioSelected()) {
-					case "vertex":
-						if (e.getButton() == MouseEvent.BUTTON1) {
-							// Left mouse button click
-							Vertex v = containedByVertex(convertedX, convertedY);
-							if (v != null) {
-								// update vertex v
-								updateVertex(v);
-							}
-							else addVertex(convertedX, convertedY);
-						}
-						else if (e.getButton() == MouseEvent.BUTTON3) {
-							// Right mouse button click
-							removeVertex(convertedX, convertedY);
-						}
-						break;
-					case "edge":
-						Vertex v = containedByVertex(convertedX, convertedY);
-						if (v != null) {
-							v.setSelected(true);
-							if (uVertex == null) uVertex = v;
-							else {
-								vVertex = v;
-								uVertex.setSelected(false);
-								vVertex.setSelected(false);
-								edges.add(new Edge(uVertex, vVertex));
-								uVertex = null;
-								vVertex = null;
-							}
-						}
-						break;
-					default:
-						break;
+		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
+		double convertedX = convertedE.getPoint().getX();
+		double convertedY = convertedE.getPoint().getY();
+		System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
+		
+		switch (controlPanel.whichVertexEdgeRadioSelected()) {
+			case "vertex":
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					// Left mouse button click
+					Vertex v = containedByVertex(convertedX, convertedY);
+					if (v != null) {
+						// update vertex v
+						updateVertex(v);
+					}
+					else addVertex(convertedX, convertedY);
 				}
-						
-				repaint();
+				else if (e.getButton() == MouseEvent.BUTTON3) {
+					// Right mouse button click
+					removeVertex(convertedX, convertedY);
+				}
+				break;
+			case "edge":
+				Vertex v = containedByVertex(convertedX, convertedY);
+				if (v != null) {
+					v.setSelected(true);
+					if (uVertex == null) uVertex = v;
+					else {
+						vVertex = v;
+						uVertex.setSelected(false);
+						vVertex.setSelected(false);
+						edges.add(new Edge(uVertex, vVertex));
+						uVertex = null;
+						vVertex = null;
+					}
+				}
+				break;
+			default:
+				break;
+		}
+				
+		repaint();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// if algorithm is running, ignore
+		if (graphAlgorithm.isRunning()) {
+			return;
+		}
+		
 		// get converted mouse position
 		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
 		double convertedX = convertedE.getPoint().getX();
@@ -362,6 +372,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		double dx = e.getX() - mouseMovePoint.getX();
 		double dy = e.getY() - mouseMovePoint.getY();
 		vertexToMove.move(dx, dy);
+		// if vertex is moved out of bounds, move it back
+		if (!inBounds(vertexToMove)) {
+			vertexToMove.move(-dx, -dy);
+		}
 		vertexToMove.setSelected(true);
 		mouseMovePoint = e.getPoint();
 		repaint();
