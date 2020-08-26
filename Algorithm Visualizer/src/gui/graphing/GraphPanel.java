@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
 
@@ -47,6 +48,9 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	private Vertex vertexToMove;
 	private Point mouseMovePoint;
 	
+	// Number of Vertices
+	private static int numVertices;
+	
 	public GraphPanel(String algorithmName) {
 		super(algorithmName);
 		this.addMouseListener(this);
@@ -57,6 +61,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		this.add(controlPanel, BorderLayout.SOUTH);
 		
 		vertices = new ArrayList<Vertex>();
+		numVertices = 0;
 		edges = new ArrayList<Edge>();
 		
 		startVertex = null;
@@ -99,7 +104,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	}
 	
 	private void addVertex(double xPos, double yPos) {
-		Vertex v = new Vertex(xPos, yPos, controlPanel.DIAMETER);
+		Vertex v = new Vertex(xPos, yPos, numVertices);
 		if (inBounds(v) && !overlapExists(v)) {
 			// set correct vertex type
 			switch (controlPanel.whichVertexTypeRadioSelected()) {
@@ -123,6 +128,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			
 			// add vertex to vertices list
 			vertices.add(v);
+			numVertices++;
 			System.out.println("New Vertex: x = " + v.xCentered() + ", y = " + v.yCentered());
 		}
 	}
@@ -130,8 +136,21 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	private void removeVertex(double xPos, double yPos) {
 		Vertex v = containedByVertex(xPos, yPos);
 		if (v != null) {
+			
+			// if v is start or end, set start/end to null
 			if (v.isStart()) startVertex = null;
 			else if (v.isEnd()) endVertex = null;
+			
+			// remove edges connected to v
+			Iterator<Edge> iter = edges.iterator();
+			while (iter.hasNext()) {
+				Edge e = iter.next();
+				if (e.hasVertexAsEndpoint(v)) {
+					iter.remove();
+				}
+			}
+			
+			// remove v
 			vertices.remove(v);
 			System.out.println("Removed Vertex centered at: x = " + v.xCentered() + " y = " + v.yCentered());
 		}
@@ -197,6 +216,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	public void clearVertices() {
 		vertices.clear();
+		numVertices = 0;
 		repaint();
 	}
 	
@@ -235,7 +255,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		double vx = v.xCentered();
 		double vy = v.yCentered();
 		double distanceBetweenOrigins = Math.sqrt(Math.pow(vx - ux, 2) + Math.pow(vy - uy, 2)) - MINIMUM_VERTEX_SEPARATION;
-		return distanceBetweenOrigins <= controlPanel.DIAMETER;
+		return distanceBetweenOrigins <= u.radius() * 2;
 	}
 	
 	private boolean overlapExists(Vertex u) {

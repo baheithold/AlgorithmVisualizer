@@ -31,7 +31,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private final int DEFAULT_NUM_ITEMS = 10;
 	private final int NUM_ITEMS_MAJOR_TICK = 10;
 	private final int NUM_ITEMS_MINOR_TICK = 5;
-	public final double DIAMETER = 50.0;
 	
 	// Graph Panel
 	private GraphPanel panel;

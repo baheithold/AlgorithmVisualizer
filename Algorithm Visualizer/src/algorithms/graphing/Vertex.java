@@ -11,6 +11,9 @@ import java.awt.geom.Ellipse2D;
  */
 public class Vertex {
 	
+	// Vertex Diameter Constant
+	private final double DIAMETER = 50.0;
+	
 	// Color Constants
 	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color START_COLOR = Color.green;
@@ -24,16 +27,15 @@ public class Vertex {
 	Ellipse2D.Double circle;
 	
 	private boolean isSelected;
-	
-	private double diameter;
 	private double xPosition, yPosition;
+	private int id;
 
-	public Vertex(double xPos, double yPos, double diameter) {
-		this.diameter = diameter;
+	public Vertex(double xPos, double yPos, int id) {
 		xPosition = xPos;
 		yPosition = yPos;
 		color = DEFAULT_COLOR;
 		isSelected = false;
+		this.id = id;
 	}
 	
 	public void move(double dx, double dy) {
@@ -42,15 +44,15 @@ public class Vertex {
 	}
 	
 	public double xCentered() {
-		return xPosition - (diameter / 2);
+		return xPosition - radius();
 	}
 	
 	public double yCentered() {
-		return yPosition - (diameter / 2);
+		return yPosition - radius();
 	}
 	
 	public double radius() {
-		return diameter / 2;
+		return DIAMETER / 2;
 	}
 	
 	public Color getColor() {
@@ -93,9 +95,13 @@ public class Vertex {
 		isSelected = b;
 	}
 	
+	public int getID() {
+		return id;
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		circle = new Ellipse2D.Double(xCentered(), yCentered(), diameter, diameter);
+		circle = new Ellipse2D.Double(xCentered(), yCentered(), DIAMETER, DIAMETER);
 		g2d.setColor(color);
 		if (isSelected) {
 			g2d.setColor(SELECTED_COLOR);

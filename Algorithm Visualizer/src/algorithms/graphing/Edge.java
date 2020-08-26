@@ -68,6 +68,19 @@ public class Edge {
 		stroke = SELECTED_STROKE;
 	}
 
+	private double distanceBetweenVertices(Vertex u, Vertex v) {
+		return Math.sqrt(Math.pow(v.yCentered() - u.yCentered(), 2) + Math.pow(v.xCentered() - u.xCentered(), 2));
+	}
+	
+	public boolean containsPoint(double x, double y) {
+		Vertex p = new Vertex(x, y, -1);
+		return distanceBetweenVertices(u, p) + distanceBetweenVertices(v, p) == distanceBetweenVertices(u, v);
+	}
+	
+	public boolean hasVertexAsEndpoint(Vertex z) {
+		return z.getID() == u.getID() || z.getID() == v.getID();
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
