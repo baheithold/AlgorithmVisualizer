@@ -54,7 +54,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JRadioButton endRadioButton;
 	
 	// JButtons
-	private JButton runJButton, randomizeJButton, resetJButton;
+	private JButton runJButton, resetJButton;
 
 	public GraphControlPanel(GraphPanel panel) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -119,8 +119,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private void initializeButtons() {
 		runJButton = new JButton("Run");
 		runJButton.addActionListener(this);
-		randomizeJButton = new JButton("Randomize");
-		randomizeJButton.addActionListener(this);
 		resetJButton = new JButton("Reset");
 		resetJButton.addActionListener(this);
 	}
@@ -222,10 +220,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		// Run Button
 		panel.add(runJButton);
 		panel.add(Box.createHorizontalStrut(10));
-		
-		// Randomize Button
-		panel.add(randomizeJButton);
-		panel.add(Box.createHorizontalStrut(10));
 				
 		// Reset Button
 		panel.add(resetJButton);
@@ -260,10 +254,6 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: " + "Run");
-		}
-		else if (e.getSource() == randomizeJButton) {
-			System.out.println("Button Pressed: " + "Randomize");
-			panel.clearVertices();
 		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: " + "Reset");
