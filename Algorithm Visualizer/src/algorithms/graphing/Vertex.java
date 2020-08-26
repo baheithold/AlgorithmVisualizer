@@ -36,6 +36,11 @@ public class Vertex {
 		isSelected = false;
 	}
 	
+	public void move(double dx, double dy) {
+		xPosition += dx;
+		yPosition += dy;
+	}
+	
 	public double xCentered() {
 		return xPosition - (diameter / 2);
 	}

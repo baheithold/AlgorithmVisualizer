@@ -2,8 +2,10 @@ package gui.graphing;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -17,7 +19,7 @@ import gui.VisualizationPanel;
  * @author Brett Heithold
  *
  */
-public class GraphPanel extends VisualizationPanel implements MouseListener {
+public class GraphPanel extends VisualizationPanel implements MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
 	
 	// Constants
@@ -41,9 +43,14 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	private Vertex uVertex;
 	private Vertex vVertex;
 	
+	// Dragging
+	private Vertex vertexToMove;
+	private Point mouseMovePoint;
+	
 	public GraphPanel(String algorithmName) {
 		super(algorithmName);
 		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		
 		// get graphing control panel and add to south border
 		controlPanel = new GraphControlPanel(this);
@@ -266,10 +273,60 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// get converted mouse position
+				MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
+				double convertedX = convertedE.getPoint().getX();
+				double convertedY = convertedE.getPoint().getY();
+				System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
+				
+				switch (controlPanel.whichVertexEdgeRadioSelected()) {
+					case "vertex":
+						if (e.getButton() == MouseEvent.BUTTON1) {
+							// Left mouse button click
+							Vertex v = containedByVertex(convertedX, convertedY);
+							if (v != null) {
+								// update vertex v
+								updateVertex(v);
+							}
+							else addVertex(convertedX, convertedY);
+						}
+						else if (e.getButton() == MouseEvent.BUTTON3) {
+							// Right mouse button click
+							removeVertex(convertedX, convertedY);
+						}
+						break;
+					case "edge":
+						Vertex v = containedByVertex(convertedX, convertedY);
+						if (v != null) {
+							v.setSelected(true);
+							if (uVertex == null) uVertex = v;
+							else {
+								vVertex = v;
+								uVertex.setSelected(false);
+								vVertex.setSelected(false);
+								edges.add(new Edge(uVertex, vVertex));
+								uVertex = null;
+								vVertex = null;
+							}
+						}
+						break;
+					default:
+						break;
+				}
+						
+				repaint();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// get converted mouse position
+		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
+		double convertedX = convertedE.getPoint().getX();
+		double convertedY = convertedE.getPoint().getY();
+		vertexToMove = containedByVertex(convertedX, convertedY);
+		if (vertexToMove == null) return;
+		mouseMovePoint = e.getPoint();
+		repaint();
 	}
 
 	@Override
@@ -279,48 +336,15 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 			return;
 		}
 		
-		// get converted mouse position
-		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
-		double convertedX = convertedE.getPoint().getX();
-		double convertedY = convertedE.getPoint().getY();
-		System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
-		
-		switch (controlPanel.whichVertexEdgeRadioSelected()) {
-			case "vertex":
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					// Left mouse button click
-					Vertex v = containedByVertex(convertedX, convertedY);
-					if (v != null) {
-						// update vertex v
-						updateVertex(v);
-					}
-					else addVertex(convertedX, convertedY);
-				}
-				else if (e.getButton() == MouseEvent.BUTTON3) {
-					// Right mouse button click
-					removeVertex(convertedX, convertedY);
-				}
-				break;
-			case "edge":
-				Vertex v = containedByVertex(convertedX, convertedY);
-				if (v != null) {
-					v.setSelected(true);
-					if (uVertex == null) uVertex = v;
-					else {
-						vVertex = v;
-						uVertex.setSelected(false);
-						vVertex.setSelected(false);
-						edges.add(new Edge(uVertex, vVertex));
-						uVertex = null;
-						vVertex = null;
-					}
-				}
-				break;
-			default:
-				break;
+		// check if dragging a vertex
+		if (vertexToMove != null) {
+			vertexToMove.setSelected(false);
+			vertexToMove = null;
+			repaint();
+			return;
 		}
-				
-		repaint();
+		
+		
 	}
 
 	@Override
@@ -329,6 +353,22 @@ public class GraphPanel extends VisualizationPanel implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if (vertexToMove == null) return;
+		// get converted mouse position
+		double dx = e.getX() - mouseMovePoint.getX();
+		double dy = e.getY() - mouseMovePoint.getY();
+		vertexToMove.move(dx, dy);
+		vertexToMove.setSelected(true);
+		mouseMovePoint = e.getPoint();
+		repaint();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 	}
 	
 }
