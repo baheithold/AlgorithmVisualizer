@@ -81,6 +81,14 @@ public class Edge {
 		return z.getID() == u.getID() || z.getID() == v.getID();
 	}
 	
+	public void print() {
+		System.out.print("[");
+		u.print();
+		System.out.print(", ");
+		v.print();
+		System.out.print(", " + weight + "]");
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		

@@ -146,13 +146,18 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			while (iter.hasNext()) {
 				Edge e = iter.next();
 				if (e.hasVertexAsEndpoint(v)) {
+					System.out.print("Removed edge: ");
+					e.print();
+					System.out.println();
 					iter.remove();
 				}
 			}
 			
 			// remove v
+			System.out.print("Removed Vertex: ");
+			v.print();
+			System.out.println();
 			vertices.remove(v);
-			System.out.println("Removed Vertex centered at: x = " + v.xCentered() + " y = " + v.yCentered());
 		}
 		else {
 			System.out.println("Vertex DNE at coordinates: " + xPos + ", " + yPos);

@@ -99,6 +99,10 @@ public class Vertex {
 		return id;
 	}
 	
+	public void print() {
+		System.out.print("<" + xCentered() + ", " + yCentered() + " | " + id + ">");
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		circle = new Ellipse2D.Double(xCentered(), yCentered(), DIAMETER, DIAMETER);
