@@ -326,17 +326,31 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 				}
 				break;
 			case "edge":
-				Vertex v = containedByVertex(convertedX, convertedY);
-				if (v != null) {
-					v.setSelected(true);
-					if (uVertex == null) uVertex = v;
-					else {
-						vVertex = v;
-						uVertex.setSelected(false);
-						vVertex.setSelected(false);
-						edges.add(new Edge(uVertex, vVertex));
-						uVertex = null;
-						vVertex = null;
+				// if left-click, add a new edge between vertices u and v
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					Vertex v = containedByVertex(convertedX, convertedY);
+					if (v != null) {
+						v.setSelected(true);
+						if (uVertex == null) uVertex = v;
+						else {
+							vVertex = v;
+							uVertex.setSelected(false);
+							vVertex.setSelected(false);
+							edges.add(new Edge(uVertex, vVertex));
+							uVertex = null;
+							vVertex = null;
+						}
+					}
+				}
+				// if right-click, delete appropriate edge
+				else if (e.getButton() == MouseEvent.BUTTON3) {
+					Iterator<Edge> iter = edges.iterator();
+					while (iter.hasNext()) {
+						Edge edge = iter.next();
+						if (edge.containsPoint(convertedX, convertedY)) {
+							iter.remove();
+							break;
+						}
 					}
 				}
 				break;

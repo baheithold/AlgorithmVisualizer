@@ -74,7 +74,7 @@ public class Edge {
 	
 	public boolean containsPoint(double x, double y) {
 		Vertex p = new Vertex(x, y, -1);
-		return distanceBetweenVertices(u, p) + distanceBetweenVertices(v, p) == distanceBetweenVertices(u, v);
+		return distanceBetweenVertices(u, p) + distanceBetweenVertices(v, p) - distanceBetweenVertices(u, v) < 0.2;
 	}
 	
 	public boolean hasVertexAsEndpoint(Vertex z) {
