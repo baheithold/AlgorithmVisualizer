@@ -2,6 +2,7 @@ package algorithms.graphing;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -17,11 +18,10 @@ public class Edge {
 	
 	// Edge Constants
 	private final int DEFAULT_STROKE = 3;
-	private final int SELECTED_STROKE = 5;
 
 	private Vertex u;
 	private Vertex v;
-	private double weight;
+	private int weight;
 	
 	private Color color;
 	private int stroke;
@@ -29,12 +29,12 @@ public class Edge {
 	public Edge(Vertex u, Vertex v) {
 		this.u = u;
 		this.v = v;
-		this.weight = 0.0;
+		this.weight = 0;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_STROKE;
 	}
 	
-	public Edge(Vertex u, Vertex v, double w) {
+	public Edge(Vertex u, Vertex v, int w) {
 		this.u = u;
 		this.v = v;
 		this.weight = w;
@@ -50,11 +50,11 @@ public class Edge {
 		return v;
 	}
 	
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	
-	public void setWeight(double w) {
+	public void setWeight(int w) {
 		weight = w;
 	}
 	
@@ -65,7 +65,6 @@ public class Edge {
 	
 	public void setSelected() {
 		color = SELECTED_COLOR;
-		stroke = SELECTED_STROKE;
 	}
 
 	private double distanceBetweenVertices(Vertex u, Vertex v) {
@@ -99,6 +98,13 @@ public class Edge {
 		
 		// reset stroke to 0
 		g2d.setStroke(new BasicStroke(0));
+		
+		// draw weight
+		int xPosition = (int) ((u.xCentered() + v.xCentered()) / 2);
+		int yPosition = (int) ((u.yCentered() + v.yCentered()) / 2);
+		g2d.setColor(Color.black);
+		g2d.setFont(new Font("default", Font.BOLD, 15));
+		g2d.drawString(Integer.toString(weight), xPosition, yPosition);
 	}
 	
 }

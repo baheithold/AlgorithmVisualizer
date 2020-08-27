@@ -112,6 +112,7 @@ public class Vertex {
 			g2d.setColor(SELECTED_COLOR);
 		}
 		g2d.fill(circle);
+		
 		// draw id
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("default", Font.BOLD, 15));
