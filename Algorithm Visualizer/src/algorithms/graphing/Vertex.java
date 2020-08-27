@@ -1,6 +1,8 @@
 package algorithms.graphing;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
@@ -111,6 +113,10 @@ public class Vertex {
 			g2d.setColor(SELECTED_COLOR);
 		}
 		g2d.fill(circle);
+		// draw id
+		g2d.setColor(Color.white);
+		g2d.setFont(new Font("default", Font.BOLD, 15));
+		g2d.drawString(Integer.toString(id), (int)xPosition - (id < 10 ? 3 : 7), (int)yPosition + 5);
 	}
 
 }
