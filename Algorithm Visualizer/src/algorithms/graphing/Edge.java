@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
 public class Edge {
 	
 	// Color Constants
-	private final Color DEFAULT_COLOR = Color.black;
+	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color SELECTED_COLOR = Color.magenta;
 	
 	// Edge Constants
