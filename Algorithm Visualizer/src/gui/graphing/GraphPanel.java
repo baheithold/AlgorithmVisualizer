@@ -291,7 +291,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	private int getEdgeWeightFromUser() {
 		String userStr = JOptionPane.showInputDialog(WEIGHT_DIALOG_MESSAGE);
-		return userStr.isEmpty() ? Integer.MAX_VALUE : Integer.parseInt(userStr);
+		if (userStr == null || userStr.isEmpty()) {
+			return Integer.MAX_VALUE;
+		}
+		else return Integer.parseInt(userStr);
 	}
 	
 	@Override
