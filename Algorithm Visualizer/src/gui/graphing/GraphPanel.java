@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import algorithms.graphing.DepthFirstSearch;
@@ -25,6 +26,9 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	// Constants
 	private final int MINIMUM_VERTEX_SEPARATION = 10;
+	
+	// Dialog Message Constants
+	private final String WEIGHT_DIALOG_MESSAGE = "Enter an edge weight (Integers only)";
 
 	// Control Panel
 	private GraphControlPanel controlPanel;
@@ -285,6 +289,11 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		repaint();
 	}
 	
+	private int getEdgeWeightFromUser() {
+		String userStr = JOptionPane.showInputDialog(WEIGHT_DIALOG_MESSAGE);
+		return userStr.isEmpty() ? Integer.MAX_VALUE : Integer.parseInt(userStr);
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -333,10 +342,25 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 						v.setSelected(true);
 						if (uVertex == null) uVertex = v;
 						else {
+							// second vertex is chosen, reset uv selection
 							vVertex = v;
 							uVertex.setSelected(false);
 							vVertex.setSelected(false);
-							edges.add(new Edge(uVertex, vVertex));
+							
+							// get weight from user and add new edge to edges list
+							Edge newEdge = new Edge(uVertex, vVertex);
+							newEdge.setSelected();
+							edges.add(newEdge);
+							repaint();
+							int userEnteredWeight = getEdgeWeightFromUser();
+							if (userEnteredWeight < Integer.MAX_VALUE) {
+								newEdge.setWeight(userEnteredWeight);
+								newEdge.setDefault();
+							}
+							else {
+								edges.remove(newEdge);
+							}
+							
 							uVertex = null;
 							vVertex = null;
 						}
