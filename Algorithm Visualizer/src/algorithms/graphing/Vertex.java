@@ -21,6 +21,9 @@ public class Vertex {
 	private final Color END_COLOR = Color.red;
 	private final Color SELECTED_COLOR = Color.magenta;
 	
+	// Font Constants
+	private final int DEFAULT_FONT_SIZE = 15;
+	
 	// Color
 	private Color color;
 	
@@ -115,7 +118,7 @@ public class Vertex {
 		
 		// draw id
 		g2d.setColor(Color.white);
-		g2d.setFont(new Font("default", Font.BOLD, 15));
+		g2d.setFont(new Font("default", Font.BOLD, DEFAULT_FONT_SIZE));
 		g2d.drawString(Integer.toString(id), (int)xPosition - (id < 10 ? 3 : 7), (int)yPosition + 5);
 	}
 

@@ -12,9 +12,13 @@ import java.awt.Graphics2D;
  */
 public class Edge {
 	
-	// Color Constants
+	// Edge Constants
 	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color SELECTED_COLOR = Color.magenta;
+	
+	// Edge Weight Constants
+	private final Color DEFAULT_TEXT_COLOR = Color.darkGray;
+	private final int DEFAULT_FONT_SIZE = 15;
 	
 	// Edge Constants
 	private final int DEFAULT_STROKE = 3;
@@ -102,8 +106,8 @@ public class Edge {
 		// draw weight
 		int xPosition = (int) ((u.xCentered() + v.xCentered()) / 2);
 		int yPosition = (int) ((u.yCentered() + v.yCentered()) / 2);
-		g2d.setColor(Color.black);
-		g2d.setFont(new Font("default", Font.BOLD, 15));
+		g2d.setColor(DEFAULT_TEXT_COLOR);
+		g2d.setFont(new Font("default", Font.BOLD, DEFAULT_FONT_SIZE));
 		g2d.drawString(Integer.toString(weight), xPosition, yPosition);
 	}
 	
