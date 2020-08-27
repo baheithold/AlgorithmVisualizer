@@ -347,9 +347,11 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 					Iterator<Edge> iter = edges.iterator();
 					while (iter.hasNext()) {
 						Edge edge = iter.next();
-						if (edge.containsPoint(convertedX, convertedY)) {
-							iter.remove();
-							break;
+						if (containedByVertex(convertedX, convertedY) == null) {
+							if (edge.containsPoint(convertedX, convertedY)) {
+								iter.remove();
+								break;
+							}
 						}
 					}
 				}
@@ -367,6 +369,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		if (graphAlgorithm.isRunning()) {
 			return;
 		}
+		
+		if (e.getButton() == MouseEvent.BUTTON3) return;
 		
 		// get converted mouse position
 		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
