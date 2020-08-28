@@ -3,12 +3,15 @@ package gui.graphing;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,11 +21,13 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import algorithms.graphing.Edge;
+
 /**
  * @author Brett Heithold
  *
  */
-public class GraphControlPanel extends JPanel implements ActionListener, ChangeListener {
+public class GraphControlPanel extends JPanel implements ActionListener, ChangeListener, ItemListener {
 	private static final long serialVersionUID = 1L;
 	
 	// Graph Panel
@@ -45,6 +50,10 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JRadioButton startRadioButton;
 	private JRadioButton endRadioButton;
 	
+	// Checkboxes
+	private JCheckBox weightedJCheckBox;
+	private JCheckBox directedJCheckBox;
+	
 	// JButtons
 	private JButton runJButton, resetJButton;
 
@@ -53,8 +62,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		this.panel = panel;
 		initializeLabels();
 		initializeSliders();
-		initializeButtons();
 		initializeRadioButtons();
+		initializeCheckBoxes();
+		initializeButtons();
 		constructControlPanel();
 	}
 
@@ -99,6 +109,13 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		endRadioButton.addActionListener(this);
 	}
 	
+	private void initializeCheckBoxes() {
+		weightedJCheckBox = new JCheckBox("Weighted");
+		weightedJCheckBox.addItemListener(this);
+		directedJCheckBox = new JCheckBox("Directed");
+		directedJCheckBox.addItemListener(this);
+	}
+	
 	private void initializeButtons() {
 		runJButton = new JButton("Run");
 		runJButton.addActionListener(this);
@@ -123,6 +140,12 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		
 		// Vertex Type Panel
 		add(constructVertexTypePanel());
+		
+		// Separator
+		add(new JSeparator(SwingConstants.VERTICAL));
+		
+		// Weighted and Directed
+		add(constructWeightedDirectedPanel());
 		
 		// Separator
 		add(new JSeparator(SwingConstants.VERTICAL));
@@ -181,6 +204,14 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		return panel;
 	}
 	
+	private JPanel constructWeightedDirectedPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(weightedJCheckBox);
+		panel.add(directedJCheckBox);
+		return panel;
+	}
+	
 	private JPanel constructButtonsPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -206,6 +237,14 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		if (vertexRadioButton.isSelected()) return "vertex";
 		else if (edgeRadioButton.isSelected()) return "edge";
 		else return "unknown";
+	}
+	
+	public boolean isWeighted() {
+		return weightedJCheckBox.isSelected();
+	}
+	
+	public boolean isDirected() {
+		return directedJCheckBox.isSelected();
 	}
 	
 	@Override
@@ -243,6 +282,24 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		}
 		else if (e.getSource() == endRadioButton) {
 			System.out.println("Vertex Type Radio Button Selected: End");
+		}
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == weightedJCheckBox) {
+			// if weighted checkbox is deselected, set each edge to non-weighted
+			if (!weightedJCheckBox.isSelected()) {
+				for (Edge edge : panel.getEdges()) {
+					edge.setWeighted(false);
+				}
+			}
+			else {
+				for (Edge edge : panel.getEdges()) {
+					edge.setWeighted(true);
+				}
+			}
+			panel.repaint();
 		}
 	}
 

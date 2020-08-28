@@ -26,14 +26,17 @@ public class Edge {
 	private Vertex u;
 	private Vertex v;
 	private int weight;
+	private boolean isWeighted;
 	
 	private Color color;
 	private int stroke;
+	
 	
 	public Edge(Vertex u, Vertex v) {
 		this.u = u;
 		this.v = v;
 		this.weight = 0;
+		isWeighted = false;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_STROKE;
 	}
@@ -42,6 +45,7 @@ public class Edge {
 		this.u = u;
 		this.v = v;
 		this.weight = w;
+		isWeighted = true;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_STROKE;
 	}
@@ -60,6 +64,15 @@ public class Edge {
 	
 	public void setWeight(int w) {
 		weight = w;
+	}
+	
+	public boolean isWeighted() {
+		return isWeighted;
+	}
+	
+	public void setWeighted(boolean b) {
+		isWeighted = b;
+		weight = 0;
 	}
 	
 	public void setDefault() {
@@ -103,12 +116,14 @@ public class Edge {
 		// reset stroke to 0
 		g2d.setStroke(new BasicStroke(0));
 		
-		// draw weight
-		int xPosition = (int) ((u.xCentered() + v.xCentered()) / 2);
-		int yPosition = (int) ((u.yCentered() + v.yCentered()) / 2);
-		g2d.setColor(DEFAULT_TEXT_COLOR);
-		g2d.setFont(new Font("default", Font.BOLD, DEFAULT_FONT_SIZE));
-		g2d.drawString(Integer.toString(weight), xPosition, yPosition);
+		// if edge is weighted, draw weight
+		if (isWeighted) {
+			int xPosition = (int) ((u.xCentered() + v.xCentered()) / 2);
+			int yPosition = (int) ((u.yCentered() + v.yCentered()) / 2);
+			g2d.setColor(DEFAULT_TEXT_COLOR);
+			g2d.setFont(new Font("default", Font.BOLD, DEFAULT_FONT_SIZE));
+			g2d.drawString(Integer.toString(weight), xPosition, yPosition);
+		}
 	}
 	
 }

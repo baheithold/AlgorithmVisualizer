@@ -107,6 +107,18 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		return null;
 	}
 	
+	private Edge containedByEdge(double x, double y) {
+		if (!inBounds(x, y)) return null;
+		
+		// search for edge
+		for (Edge edge : edges) {
+			if (edge.containsPoint(x, y)) return edge;
+		}
+		
+		// edge DNE at coordinates (x, y), return null
+		return null;
+	}
+	
 	private void addVertex(double xPos, double yPos) {
 		Vertex v = new Vertex(xPos, yPos, nextID);
 		if (inBounds(v) && !overlapExists(v)) {
@@ -290,11 +302,15 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	}
 	
 	private int getEdgeWeightFromUser() {
-		String userStr = JOptionPane.showInputDialog(WEIGHT_DIALOG_MESSAGE);
+		String userStr = JOptionPane.showInputDialog(null, WEIGHT_DIALOG_MESSAGE, 0);
 		if (userStr == null || userStr.isEmpty()) {
 			return Integer.MAX_VALUE;
 		}
 		else return Integer.parseInt(userStr);
+	}
+	
+	public ArrayList<Edge> getEdges() {
+		return edges;
 	}
 	
 	@Override
@@ -319,7 +335,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
 		double convertedX = convertedE.getPoint().getX();
 		double convertedY = convertedE.getPoint().getY();
-		System.out.println("Mouse Released: " + convertedX + ", " + convertedY);
+		System.out.println("Mouse Clicked: " + convertedX + ", " + convertedY);
 		
 		switch (controlPanel.whichVertexEdgeRadioSelected()) {
 			case "vertex":
@@ -341,6 +357,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 				// if left-click, add a new edge between vertices u and v
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					Vertex v = containedByVertex(convertedX, convertedY);
+					// if v is not null, user must be trying to create another edge
 					if (v != null) {
 						v.setSelected(true);
 						if (uVertex == null) uVertex = v;
@@ -350,22 +367,48 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 							uVertex.setSelected(false);
 							vVertex.setSelected(false);
 							
-							// get weight from user and add new edge to edges list
+							// create new edge from u to v
 							Edge newEdge = new Edge(uVertex, vVertex);
-							newEdge.setSelected();
-							edges.add(newEdge);
-							repaint();
-							int userEnteredWeight = getEdgeWeightFromUser();
-							if (userEnteredWeight < Integer.MAX_VALUE) {
-								newEdge.setWeight(userEnteredWeight);
-								newEdge.setDefault();
-							}
-							else {
-								edges.remove(newEdge);
-							}
 							
+							// if graph is weighted, get weight from user
+							if (controlPanel.isWeighted()) {
+								newEdge.setWeighted(true);
+								newEdge.setSelected();
+								edges.add(newEdge);
+								repaint();
+								int userEnteredWeight = getEdgeWeightFromUser();
+								if (userEnteredWeight < Integer.MAX_VALUE) {
+									// the user entered a valid weight
+									// set the new edge's weight and deselect edge
+									newEdge.setWeight(userEnteredWeight);
+									newEdge.setDefault();
+								}
+								else {
+									// user canceled the new edge during weight dialog
+									edges.remove(newEdge);
+								}
+							}
+							// otherwise, just add new edge to edges list
+							else {
+								edges.add(newEdge);
+							}
+												
 							uVertex = null;
 							vVertex = null;
+						}
+					}
+					// if edge is NOT null, user must be trying to edit an edge
+					else {
+						if (controlPanel.isWeighted()) {
+							Edge edge = containedByEdge(convertedX, convertedY);
+							if (edge != null) {
+								edge.setSelected();
+								repaint();
+								int userEnteredWeight = getEdgeWeightFromUser();
+								edge.setWeight(userEnteredWeight);
+								edge.setDefault();
+								repaint();
+							}
 						}
 					}
 				}
