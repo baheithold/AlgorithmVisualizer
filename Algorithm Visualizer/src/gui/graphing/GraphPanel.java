@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -302,7 +303,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	}
 	
 	private int getEdgeWeightFromUser() {
-		String userStr = JOptionPane.showInputDialog(null, WEIGHT_DIALOG_MESSAGE, 0);
+		String userStr = JOptionPane.showInputDialog(null, WEIGHT_DIALOG_MESSAGE, new Random().nextInt(vertices.size() * 2));
 		if (userStr == null || userStr.isEmpty()) {
 			// user canceled
 			// MIN VALUE is used because future algorithms may need to make use of MAX VALUE
