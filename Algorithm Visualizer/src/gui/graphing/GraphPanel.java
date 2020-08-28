@@ -304,7 +304,9 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	private int getEdgeWeightFromUser() {
 		String userStr = JOptionPane.showInputDialog(null, WEIGHT_DIALOG_MESSAGE, 0);
 		if (userStr == null || userStr.isEmpty()) {
-			return Integer.MAX_VALUE;
+			// user canceled
+			// MIN VALUE is used because future algorithms may need to make use of MAX VALUE
+			return Integer.MIN_VALUE;
 		}
 		else return Integer.parseInt(userStr);
 	}
@@ -377,7 +379,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 								edges.add(newEdge);
 								repaint();
 								int userEnteredWeight = getEdgeWeightFromUser();
-								if (userEnteredWeight < Integer.MAX_VALUE) {
+								if (userEnteredWeight > Integer.MIN_VALUE) {
 									// the user entered a valid weight
 									// set the new edge's weight and deselect edge
 									newEdge.setWeight(userEnteredWeight);
@@ -405,7 +407,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 								edge.setSelected();
 								repaint();
 								int userEnteredWeight = getEdgeWeightFromUser();
-								edge.setWeight(userEnteredWeight);
+								if (userEnteredWeight > Integer.MIN_VALUE) {
+									edge.setWeight(userEnteredWeight);
+								}
+								else edge.setWeight(0);
 								edge.setDefault();
 								repaint();
 							}
