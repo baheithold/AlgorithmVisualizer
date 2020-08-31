@@ -302,6 +302,10 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 				}
 			}
 			panel.repaint();
+			System.out.println("Weighted: " + weightedJCheckBox.isSelected());
+		}
+		else if (e.getSource() == directedJCheckBox) {
+			System.out.println("Directed: " + directedJCheckBox.isSelected());
 		}
 	}
 
