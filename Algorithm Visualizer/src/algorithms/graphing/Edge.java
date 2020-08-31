@@ -39,6 +39,7 @@ public class Edge {
 		this.v = v;
 		this.weight = 0;
 		isWeighted = false;
+		isDirected = false;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_STROKE;
 	}
@@ -48,6 +49,7 @@ public class Edge {
 		this.v = v;
 		this.weight = w;
 		isWeighted = true;
+		isDirected = false;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_STROKE;
 	}
@@ -141,8 +143,8 @@ public class Edge {
 		
 		// get vertex edge components for U
 		double theta = Math.atan2(v.yCentered() - u.yCentered(), v.xCentered() - u.xCentered());
-		double uxComponent = u.xCentered() + u.radius() + (u.radius() * Math.cos(theta));
-		double uyComponent = u.yCentered() + u.radius() + (u.radius() * Math.sin(theta));
+		double uxComponent = u.xCentered() + u.radius() + ((u.radius() + 5) * Math.cos(theta));
+		double uyComponent = u.yCentered() + u.radius() + ((u.radius() + 5) * Math.sin(theta));
 		
 		// get vertex edge components for V
 		double vxComponent = v.xCentered() + v.radius() - ((v.radius() + 5) * Math.cos(theta));
