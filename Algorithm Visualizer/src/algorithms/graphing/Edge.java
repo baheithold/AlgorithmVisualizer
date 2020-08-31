@@ -29,6 +29,7 @@ public class Edge {
 	private Vertex v;
 	private int weight;
 	private boolean isWeighted;
+	private boolean isDirected;
 	
 	private Color color;
 	private int stroke;
@@ -74,6 +75,14 @@ public class Edge {
 	public void setWeighted(boolean b) {
 		isWeighted = b;
 		weight = 0;
+	}
+	
+	public boolean isDirected() {
+		return isDirected;
+	}
+	
+	public void setDirected(boolean b) {
+		isDirected = b;
 	}
 	
 	public void setDefault() {
@@ -144,8 +153,10 @@ public class Edge {
 		g2d.setStroke(new BasicStroke(stroke));
 		g2d.drawLine((int)uxComponent, (int)uyComponent, (int)vxComponent, (int)vyComponent);
 		
-		// draw arrowhead
-		drawArrow(g, vxComponent, vyComponent);
+		// if graph is directed, draw arrowhead
+		if (isDirected) {
+			drawArrow(g, vxComponent, vyComponent);
+		}
 		
 		// reset stroke to 0
 		g2d.setStroke(new BasicStroke(0));

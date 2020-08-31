@@ -301,12 +301,16 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 					edge.setWeight(new Random().nextInt(panel.getEdges().size() * 2));
 				}
 			}
-			panel.repaint();
 			System.out.println("Weighted: " + weightedJCheckBox.isSelected());
 		}
 		else if (e.getSource() == directedJCheckBox) {
+			// if directed checkbox is deselected, set each edge to non-directed
+			for (Edge edge : panel.getEdges()) {
+				edge.setDirected(!edge.isDirected());
+			}
 			System.out.println("Directed: " + directedJCheckBox.isSelected());
 		}
+		panel.repaint();
 	}
 
 }
