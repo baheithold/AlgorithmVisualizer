@@ -136,8 +136,8 @@ public class Edge {
 		double uyComponent = u.yCentered() + u.radius() + (u.radius() * Math.sin(theta));
 		
 		// get vertex edge components for V
-		double vxComponent = v.xCentered() + v.radius() - ((v.radius() + 7) * Math.cos(theta));
-		double vyComponent = v.yCentered() + v.radius() - ((v.radius() + 7) * Math.sin(theta));
+		double vxComponent = v.xCentered() + v.radius() - ((v.radius() + 5) * Math.cos(theta));
+		double vyComponent = v.yCentered() + v.radius() - ((v.radius() + 5) * Math.sin(theta));
 		
 		// draw line from u to v
 		g2d.setColor(color);
