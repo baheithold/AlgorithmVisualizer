@@ -305,8 +305,15 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		}
 		else if (e.getSource() == directedJCheckBox) {
 			// if directed checkbox is deselected, set each edge to non-directed
-			for (Edge edge : panel.getEdges()) {
-				edge.setDirected(!edge.isDirected());
+			if (!directedJCheckBox.isSelected()) {
+				for (Edge edge : panel.getEdges()) {
+					edge.setDirected(false);
+				}
+			}
+			else {
+				for (Edge edge : panel.getEdges()) {
+					edge.setDirected(true);
+				}
 			}
 			System.out.println("Directed: " + directedJCheckBox.isSelected());
 		}

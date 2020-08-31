@@ -372,6 +372,11 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 							// create new edge from u to v
 							Edge newEdge = new Edge(uVertex, vVertex);
 							
+							// if graph is directed, set edge to directed
+							if (controlPanel.isDirected()) {
+								newEdge.setDirected(true);
+							}
+							
 							// if graph is weighted, get weight from user
 							if (controlPanel.isWeighted()) {
 								newEdge.setWeighted(true);
