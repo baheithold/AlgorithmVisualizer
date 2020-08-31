@@ -60,7 +60,6 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		super(algorithmName);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		
 		// get graphing control panel and add to south border
 		controlPanel = new GraphControlPanel(this);
 		this.add(controlPanel, BorderLayout.SOUTH);

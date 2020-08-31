@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -130,7 +129,6 @@ public class Edge {
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
 		// get vertex edge components for U
 		double theta = Math.atan2(v.yCentered() - u.yCentered(), v.xCentered() - u.xCentered());
@@ -161,5 +159,4 @@ public class Edge {
 			g2d.drawString(Integer.toString(weight), xPosition, yPosition);
 		}
 	}
-	
 }

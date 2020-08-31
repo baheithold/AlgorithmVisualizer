@@ -45,5 +45,4 @@ public class VisualizationPanel extends JPanel {
 	public void setCurrentDelay(int delay) {
 		currentDelay = delay;
 	}
-	
 }

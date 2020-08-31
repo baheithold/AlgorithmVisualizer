@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -110,7 +109,6 @@ public class Vertex {
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		circle = new Ellipse2D.Double(xCentered(), yCentered(), DIAMETER, DIAMETER);
 		g2d.setColor(color);
 		if (isSelected) {
