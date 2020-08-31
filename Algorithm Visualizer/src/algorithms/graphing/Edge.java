@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 
 /**
  * @author Brett Heithold
@@ -31,7 +33,6 @@ public class Edge {
 	
 	private Color color;
 	private int stroke;
-	
 	
 	public Edge(Vertex u, Vertex v) {
 		this.u = u;
@@ -106,14 +107,47 @@ public class Edge {
 		System.out.print(", " + weight + "]");
 	}
 	
+	private void drawArrow(Graphics g, double x, double y) {
+		// arrowhead transform
+		AffineTransform tx = new AffineTransform();
+		tx.setToIdentity();
+		
+		Polygon arrowhead = new Polygon();
+		arrowhead.addPoint(0, 7);
+		arrowhead.addPoint(-7, -7);
+		arrowhead.addPoint(7, -7);
+		
+		// calculate angle
+		double angle = Math.atan2(v.yCentered() - u.yCentered(), v.xCentered() - u.xCentered());
+		tx.translate(x, y);
+		tx.rotate((angle - Math.PI / 2d));
+		
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setTransform(tx);
+		g2d.fill(arrowhead);
+		g2d.dispose();
+	}
+	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		
+		// get vertex edge components for U
+		double theta = Math.atan2(v.yCentered() - u.yCentered(), v.xCentered() - u.xCentered());
+		double uxComponent = u.xCentered() + u.radius() + (u.radius() * Math.cos(theta));
+		double uyComponent = u.yCentered() + u.radius() + (u.radius() * Math.sin(theta));
+		
+		// get vertex edge components for V
+		double vxComponent = v.xCentered() + v.radius() - ((v.radius() + 7) * Math.cos(theta));
+		double vyComponent = v.yCentered() + v.radius() - ((v.radius() + 7) * Math.sin(theta));
+		
 		// draw line from u to v
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(stroke));
-		g2d.drawLine((int)u.xCentered() + (int)u.radius(), (int)u.yCentered() + (int)u.radius(), (int)v.xCentered() + (int)u.radius(), (int)v.yCentered() + (int)u.radius());
+		g2d.drawLine((int)uxComponent, (int)uyComponent, (int)vxComponent, (int)vyComponent);
+		
+		// draw arrowhead
+		drawArrow(g, vxComponent, vyComponent);
 		
 		// reset stroke to 0
 		g2d.setStroke(new BasicStroke(0));

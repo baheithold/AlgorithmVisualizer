@@ -319,11 +319,11 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (Edge edge : edges) {
-			edge.draw(g);
-		}
 		for (Vertex vertex : vertices) {
 			vertex.draw(g);
+		}
+		for (Edge edge : edges) {
+			edge.draw(g);
 		}
 	}
 	
