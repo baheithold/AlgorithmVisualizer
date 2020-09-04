@@ -16,7 +16,7 @@ public class Edge {
 	// Edge Constants
 	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color SELECTED_COLOR = Color.magenta;
-	private final Color HIGHLIGHTED_COLOR = Color.blue;
+	private final Color HIGHLIGHTED_COLOR = Color.cyan;
 	
 	// Edge Constants
 	private final int DEFAULT_EDGE_STROKE = 3;

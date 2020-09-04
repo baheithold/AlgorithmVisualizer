@@ -20,7 +20,7 @@ public class Vertex {
 	private final Color START_COLOR = Color.green;
 	private final Color END_COLOR = Color.red;
 	private final Color SELECTED_COLOR = Color.magenta;
-	private final Color HIGHLIGHTED_COLOR = Color.blue;
+	private final Color HIGHLIGHTED_COLOR = Color.cyan;
 	
 	// Font Constants
 	private final int DEFAULT_FONT_SIZE = 15;
