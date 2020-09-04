@@ -16,6 +16,7 @@ public class Edge {
 	// Edge Constants
 	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color SELECTED_COLOR = Color.magenta;
+	private final Color HIGHLIGHTED_COLOR = Color.blue;
 	
 	// Edge Constants
 	private final int DEFAULT_EDGE_STROKE = 3;
@@ -97,9 +98,13 @@ public class Edge {
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_EDGE_STROKE;
 		weight.setDefault();
-		u.setDefault();
+		if (!u.isStart() && !u.isEnd()) {
+			u.setDefault();
+		}
 		u.setSelected(false);
-		v.setDefault();
+		if (!v.isStart() && !v.isEnd()) {
+			v.setDefault();
+		}
 		v.setSelected(false);
 	}
 	
@@ -109,6 +114,10 @@ public class Edge {
 		weight.setSelected();
 		u.setSelected(true);
 		v.setSelected(true);
+	}
+	
+	public void setHighlighted() {
+		color = HIGHLIGHTED_COLOR;
 	}
 
 	private double distanceBetweenVertices(Vertex u, Vertex v) {

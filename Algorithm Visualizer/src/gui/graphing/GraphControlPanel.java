@@ -263,6 +263,8 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: " + "Run");
 			if (!panel.graphAlgorithm.isRunning()) {
+				panel.resetVerticesToDefaultUnvisited();
+				panel.resetEdgesToDefault();
 				panel.graphAlgorithm.runAlgorithm();
 			}
 		}

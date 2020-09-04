@@ -98,11 +98,27 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	}
 	
 	public boolean hasStartVertex() {
-		return startVertex == null;
+		return startVertex != null;
 	}
 	
 	public boolean hasEndVertex() {
-		return endVertex == null;
+		return endVertex != null;
+	}
+	
+	public Vertex getStartVertex() {
+		return startVertex;
+	}
+	
+	public Vertex getEndVertex() {
+		return endVertex;
+	}
+	
+	public ArrayList<Vertex> getVertices() {
+		return this.vertices;
+	}
+	
+	public ArrayList<Edge> getEdges() {
+		return edges;
 	}
 	
 	private Vertex containedByVertex(double x, double y) {
@@ -337,10 +353,6 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		else return Integer.parseInt(userStr);
 	}
 	
-	public ArrayList<Edge> getEdges() {
-		return edges;
-	}
-	
 	private ArrayList<Edge> getEdgeSiblings(Edge edge) {
 		Vertex edgeU = edge.getU();
 		int edgeUID = edgeU.getID();
@@ -543,6 +555,22 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			weightToMove.getParentEdge().makeEdgeLineOpaque();
 			weightToMove.getParentEdge().setSelected();
 			repaint();
+		}
+	}
+	
+	public void resetVerticesToDefaultUnvisited() {
+		for (Vertex vertex : vertices) {
+			if (!vertex.isStart()) {
+				vertex.setDefault();
+			}
+			vertex.setSelected(false);
+			vertex.setVisited(false);
+		}
+	}
+	
+	public void resetEdgesToDefault() {
+		for (Edge edge : edges) {
+			edge.setDefault();
 		}
 	}
 
