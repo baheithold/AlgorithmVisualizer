@@ -33,6 +33,7 @@ public class Vertex {
 	private boolean isSelected;
 	private double xPosition, yPosition;
 	private int id;
+	private boolean isVisited;
 
 	public Vertex(double xPos, double yPos, int id) {
 		xPosition = xPos;
@@ -40,6 +41,7 @@ public class Vertex {
 		color = DEFAULT_COLOR;
 		isSelected = false;
 		this.id = id;
+		isVisited = false;
 	}
 	
 	public void move(double dx, double dy) {
@@ -101,6 +103,14 @@ public class Vertex {
 	
 	public int getID() {
 		return id;
+	}
+	
+	public boolean isVisited() {
+		return isVisited;
+	}
+	
+	public void setVisited(boolean b) {
+		isVisited = b;
 	}
 	
 	public void print() {
