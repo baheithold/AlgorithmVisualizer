@@ -97,6 +97,14 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		}
 	}
 	
+	public boolean hasStartVertex() {
+		return startVertex == null;
+	}
+	
+	public boolean hasEndVertex() {
+		return endVertex == null;
+	}
+	
 	private Vertex containedByVertex(double x, double y) {
 		// coordinates are out of bounds, return null
 		if (!inBounds(x, y)) return null;
