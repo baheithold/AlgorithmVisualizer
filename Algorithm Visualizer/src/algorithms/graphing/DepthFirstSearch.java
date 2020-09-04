@@ -1,13 +1,12 @@
 package algorithms.graphing;
 
-import algorithms.Algorithm;
 import gui.graphing.GraphPanel;
 
 /**
  * @author Brett Heithold
  *
  */
-public class DepthFirstSearch extends Algorithm {
+public class DepthFirstSearch extends GraphAlgorithm {
 
 	public DepthFirstSearch(GraphPanel panel) {
 		super(panel);
