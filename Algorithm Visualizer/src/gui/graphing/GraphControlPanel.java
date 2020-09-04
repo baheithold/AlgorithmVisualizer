@@ -262,6 +262,9 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == runJButton) {
 			System.out.println("Button Pressed: " + "Run");
+			if (!panel.graphAlgorithm.isRunning()) {
+				panel.graphAlgorithm.runAlgorithm();
+			}
 		}
 		else if (e.getSource() == resetJButton) {
 			System.out.println("Button Pressed: " + "Reset");
