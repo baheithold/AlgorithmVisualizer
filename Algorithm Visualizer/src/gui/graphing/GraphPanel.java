@@ -257,8 +257,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 				if (v.isStart()) {
 					startVertex = null;
 					endVertex.setDefault();
-					v.setEnd();
 					endVertex = v;
+					v.setEnd();
 				}
 				else if (v.isEnd()) {
 					endVertex = null;
