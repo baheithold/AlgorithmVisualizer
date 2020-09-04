@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import algorithms.graphing.DepthFirstSearch;
 import algorithms.graphing.Edge;
 import algorithms.graphing.Vertex;
+import algorithms.graphing.Weight;
 import gui.VisualizationPanel;
 
 /**
@@ -51,6 +52,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	// Dragging
 	private Vertex vertexToMove;
+	private Weight weightToMove;
 	private Point mouseMovePoint;
 	
 	// ID
@@ -104,6 +106,21 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		}
 		
 		// vertex DNE at coordinates (x, y), return null
+		return null;
+	}
+	
+	private Weight containedByWeight(double x, double y) {
+		// coordinates are out of bounds, return null
+		if (!inBounds(x, y)) return null;
+		
+		// search for weight
+		for (Edge edge : edges) {
+			double weightX = edge.getWeightObject().xPosition();
+			double weightY = edge.getWeightObject().yPosition();
+			if (Math.abs(x - weightX) <= 10 && Math.abs(y - weightY) <= 10) return edge.getWeightObject();
+		}
+		
+		// weight DNE at coordinates (x, y), return null
 		return null;
 	}
 	
@@ -261,10 +278,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	public boolean inBounds(double xPos, double yPos) {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
-		if (xPos <= WINDOW_WIDTH && xPos >= 0) {
+		if (xPos <= WINDOW_WIDTH - 25 && xPos >= 5) {
 			xInBounds = true;
 		}
-		if (yPos <= WINDOW_HEIGHT && yPos >= 0) {
+		if (yPos + this.controlPanel.getHeight() + 70 <= WINDOW_HEIGHT && yPos >= 15) {
 			yInBounds = true;
 		}
 		return xInBounds && yInBounds;
@@ -313,6 +330,34 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	
 	public ArrayList<Edge> getEdges() {
 		return edges;
+	}
+	
+	private ArrayList<Edge> getEdgeSiblings(Edge edge) {
+		Vertex edgeU = edge.getU();
+		int edgeUID = edgeU.getID();
+		Vertex edgeV = edge.getV();
+		int edgeVID = edgeV.getID();
+		ArrayList<Edge> siblings = new ArrayList<Edge>();
+		for (Edge sibling : edges) {
+			int siblingUID = sibling.getU().getID();
+			int siblingVID = sibling.getV().getID();
+			if ((edgeUID == siblingUID || edgeUID == siblingVID) && (edgeVID == siblingUID || edgeVID == siblingVID)) {
+				siblings.add(sibling);
+			}
+		}
+		return siblings;
+	}
+	
+	private void makeSiblingsTransparent(ArrayList<Edge> siblings) {
+		for (Edge sibling : siblings) {
+			sibling.makeEdgeLineTransparent();
+		}
+	}
+	
+	private void makeSiblingsOpaque(ArrayList<Edge> siblings) {
+		for (Edge sibling : siblings) {
+			sibling.makeEdgeLineOpaque();
+		}
 	}
 	
 	@Override
@@ -389,6 +434,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 									// set the new edge's weight and deselect edge
 									newEdge.setWeight(userEnteredWeight);
 									newEdge.setDefault();
+									uVertex.setSelected(false);
+									vVertex.setSelected(false);
 								}
 								else {
 									// user canceled the new edge during weight dialog
@@ -404,33 +451,51 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 							vVertex = null;
 						}
 					}
-					// if edge is NOT null, user must be trying to edit an edge
+					// if edge is NOT null, user must be trying to edit/inspect an edge
 					else {
 						if (controlPanel.isWeighted()) {
+							// mouse-click was contained by a weight
+							Weight weight = containedByWeight(convertedX, convertedY);
 							Edge edge = containedByEdge(convertedX, convertedY);
-							if (edge != null) {
-								edge.setSelected();
+							if (weight != null) {
+								weight.setSelected();
 								repaint();
+								// edit a weight
+								// left-click, user wants to manually enter a weight
 								int userEnteredWeight = getEdgeWeightFromUser();
 								if (userEnteredWeight > Integer.MIN_VALUE) {
-									edge.setWeight(userEnteredWeight);
+									weight.setValue(userEnteredWeight);
 								}
-								else edge.setWeight(0);
-								edge.setDefault();
+								else weight.setValue(0);
+								weight.setDefault();
 								repaint();
+							}
+							// mouse-click was contained by an edge
+							else if (edge != null) {
+								// inspect an edge
+								System.out.println("Inspect and edge");
 							}
 						}
 					}
 				}
-				// if right-click, delete appropriate edge
+				// if right-click, randomize weight or delete appropriate edge
 				else if (e.getButton() == MouseEvent.BUTTON3) {
-					Iterator<Edge> iter = edges.iterator();
-					while (iter.hasNext()) {
-						Edge edge = iter.next();
-						if (containedByVertex(convertedX, convertedY) == null) {
-							if (edge.containsPoint(convertedX, convertedY)) {
-								iter.remove();
-								break;
+					Weight weight = containedByWeight(convertedX, convertedY);
+					Edge edge = containedByEdge(convertedX, convertedY);
+					// mouse-click contained by  weight
+					if (weight != null) {
+						weight.setValue(new Random().nextInt(vertices.size() * 2));
+					}
+					// mouse-click contained by edge
+					else if (edge != null) {
+						Iterator<Edge> iter = edges.iterator();
+						while (iter.hasNext()) {
+							Edge iterEdge = iter.next();
+							if (containedByVertex(convertedX, convertedY) == null) {
+								if (iterEdge.containsPoint(convertedX, convertedY)) {
+									iter.remove();
+									break;
+								}
 							}
 						}
 					}
@@ -450,16 +515,26 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			return;
 		}
 		
-		if (e.getButton() == MouseEvent.BUTTON3) return;
+		if (e.getButton() != MouseEvent.BUTTON1) return;
 		
 		// get converted mouse position
 		MouseEvent convertedE = SwingUtilities.convertMouseEvent(getParent(), e, this);
 		double convertedX = convertedE.getPoint().getX();
 		double convertedY = convertedE.getPoint().getY();
 		vertexToMove = containedByVertex(convertedX, convertedY);
-		if (vertexToMove == null) return;
-		mouseMovePoint = e.getPoint();
-		repaint();
+		weightToMove = containedByWeight(convertedX, convertedY);
+		if (vertexToMove != null) {
+			mouseMovePoint = e.getPoint();
+			repaint();
+		}
+		else if (weightToMove != null) {
+			mouseMovePoint = e.getPoint();
+			weightToMove.setSelected();
+			makeSiblingsTransparent(getEdgeSiblings(weightToMove.getParentEdge()));
+			weightToMove.getParentEdge().makeEdgeLineOpaque();
+			weightToMove.getParentEdge().setSelected();
+			repaint();
+		}
 	}
 
 	@Override
@@ -469,15 +544,21 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 			return;
 		}
 		
-		// check if dragging a vertex
+		// check if dragging a vertex or a weight
 		if (vertexToMove != null) {
 			vertexToMove.setSelected(false);
 			vertexToMove = null;
 			repaint();
 			return;
 		}
-		
-		
+		else if (weightToMove != null) {
+			makeSiblingsOpaque(getEdgeSiblings(weightToMove.getParentEdge()));
+			weightToMove.getParentEdge().setDefault();
+			weightToMove.setDefault();
+			weightToMove = null;
+			repaint();
+			return;
+		}		
 	}
 
 	@Override
@@ -490,17 +571,35 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (vertexToMove == null) return;
+		if (vertexToMove == null && weightToMove == null) return;
+		
 		// get converted mouse position
 		double dx = e.getX() - mouseMovePoint.getX();
 		double dy = e.getY() - mouseMovePoint.getY();
-		vertexToMove.move(dx, dy);
-		// if vertex is moved out of bounds, move it back
-		if (!inBounds(vertexToMove)) {
-			vertexToMove.move(-dx, -dy);
+		
+		// vertex is being dragged
+		if (vertexToMove != null) {
+			vertexToMove.move(dx, dy);
+			
+			// if vertex is moved out of bounds, move it back
+			if (!inBounds(vertexToMove)) {
+				vertexToMove.move(-dx, -dy);
+			}
+			vertexToMove.setSelected(true);
 		}
-		vertexToMove.setSelected(true);
+		else if (weightToMove != null) {
+			weightToMove.move(dx, dy);
+			
+			// if vertex is moved out of bounds, move it back
+			if (!inBounds(weightToMove.xPosition(), weightToMove.yPosition())) {
+				weightToMove.move(-dx, -dy);
+			}
+			weightToMove.setSelected();
+		}
+		
+		// get updated mouse position
 		mouseMovePoint = e.getPoint();
+		
 		repaint();
 	}
 

@@ -2,7 +2,6 @@ package algorithms.graphing;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -18,40 +17,47 @@ public class Edge {
 	private final Color DEFAULT_COLOR = Color.darkGray;
 	private final Color SELECTED_COLOR = Color.magenta;
 	
-	// Edge Weight Constants
-	private final Color DEFAULT_TEXT_COLOR = Color.darkGray;
-	private final int DEFAULT_FONT_SIZE = 15;
-	
 	// Edge Constants
-	private final int DEFAULT_STROKE = 3;
+	private final int DEFAULT_EDGE_STROKE = 3;
+	private final int HIGHLIGHTED_STROKE = 4;
+	private final int EDGE_TO_WEIGHT_STROKE = 1;
 
 	private Vertex u;
 	private Vertex v;
-	private int weight;
+	private Weight weight;
 	private boolean isWeighted;
 	private boolean isDirected;
 	
 	private Color color;
 	private int stroke;
+	private boolean isTransparent;
 	
 	public Edge(Vertex u, Vertex v) {
 		this.u = u;
 		this.v = v;
-		this.weight = 0;
+		// calculate x, y coordinate for weight
+		int x = (int) ((u.xCentered() + v.xCentered()) / 2);
+		int y = (int) ((u.yCentered() + v.yCentered()) / 2);
+		this.weight = new Weight(this, 0, x, y);
 		isWeighted = false;
 		isDirected = false;
 		color = DEFAULT_COLOR;
-		stroke = DEFAULT_STROKE;
+		stroke = DEFAULT_EDGE_STROKE;
+		isTransparent = false;
 	}
 	
 	public Edge(Vertex u, Vertex v, int w) {
 		this.u = u;
 		this.v = v;
-		this.weight = w;
+		// calculate x, y coordinate for weight
+		int x = (int) ((u.xCentered() + v.xCentered()) / 2);
+		int y = (int) ((u.yCentered() + v.yCentered()) / 2);
+		this.weight = new Weight(this, w, x, y);
 		isWeighted = true;
 		isDirected = false;
 		color = DEFAULT_COLOR;
-		stroke = DEFAULT_STROKE;
+		stroke = DEFAULT_EDGE_STROKE;
+		isTransparent = false;
 	}
 	
 	public Vertex getU() {
@@ -62,12 +68,16 @@ public class Edge {
 		return v;
 	}
 	
-	public int getWeight() {
+	public Weight getWeightObject() {
 		return weight;
 	}
 	
+	public int getWeightValue() {
+		return weight.getValue();
+	}
+	
 	public void setWeight(int w) {
-		weight = w;
+		weight.setValue(w);
 	}
 	
 	public boolean isWeighted() {
@@ -76,7 +86,6 @@ public class Edge {
 	
 	public void setWeighted(boolean b) {
 		isWeighted = b;
-		weight = 0;
 	}
 	
 	public boolean isDirected() {
@@ -89,11 +98,20 @@ public class Edge {
 	
 	public void setDefault() {
 		color = DEFAULT_COLOR;
-		stroke = DEFAULT_STROKE;
+		stroke = DEFAULT_EDGE_STROKE;
+		weight.setDefault();
+		u.setDefault();
+		u.setSelected(false);
+		v.setDefault();
+		v.setSelected(false);
 	}
 	
 	public void setSelected() {
 		color = SELECTED_COLOR;
+		stroke = HIGHLIGHTED_STROKE;
+		weight.setSelected();
+		u.setSelected(true);
+		v.setSelected(true);
 	}
 
 	private double distanceBetweenVertices(Vertex u, Vertex v) {
@@ -117,6 +135,16 @@ public class Edge {
 		System.out.print(", " + weight + "]");
 	}
 	
+	public void makeEdgeLineTransparent() {
+		isTransparent = true;
+		color = new Color(0, 0, 0, 0.0f);
+	}
+	
+	public void makeEdgeLineOpaque() {
+		isTransparent = false;
+		setDefault();
+	}
+	
 	private void drawArrow(Graphics g, double x, double y) {
 		// arrowhead transform
 		AffineTransform tx = new AffineTransform();
@@ -136,6 +164,21 @@ public class Edge {
 		g2d.setTransform(tx);
 		g2d.fill(arrowhead);
 		g2d.dispose();
+	}
+	
+	public void drawLineToWeight(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		
+		// calculate edge midpoint
+		double midpointX = (v.xCentered() + u.xCentered() + u.radius()) / 2;
+		double midpointY = (v.yCentered() + u.yCentered() + v.radius()) / 2;
+		
+		g2d.setColor(color);
+		g2d.setStroke(new BasicStroke(EDGE_TO_WEIGHT_STROKE));
+		g2d.drawLine((int) midpointX, (int) midpointY, (int) weight.xPosition(), (int) weight.yPosition());
+
+		// reset stroke to 0
+		g2d.setStroke(new BasicStroke(0));
 	}
 	
 	public void draw(Graphics g) {
@@ -165,11 +208,10 @@ public class Edge {
 		
 		// if edge is weighted, draw weight
 		if (isWeighted) {
-			int xPosition = (int) ((u.xCentered() + v.xCentered()) / 2);
-			int yPosition = (int) ((u.yCentered() + v.yCentered()) / 2);
-			g2d.setColor(DEFAULT_TEXT_COLOR);
-			g2d.setFont(new Font("default", Font.BOLD, DEFAULT_FONT_SIZE));
-			g2d.drawString(Integer.toString(weight), xPosition, yPosition);
+			weight.draw(g);
+			if (weight.isSelected()) {
+				drawLineToWeight(g);
+			}
 		}
 	}
 }
