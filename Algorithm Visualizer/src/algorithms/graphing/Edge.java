@@ -30,7 +30,6 @@ public class Edge {
 	
 	private Color color;
 	private int stroke;
-	private boolean isTransparent;
 	
 	public Edge(Vertex u, Vertex v) {
 		this.u = u;
@@ -43,7 +42,6 @@ public class Edge {
 		isDirected = false;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_EDGE_STROKE;
-		isTransparent = false;
 	}
 	
 	public Edge(Vertex u, Vertex v, int w) {
@@ -57,7 +55,6 @@ public class Edge {
 		isDirected = false;
 		color = DEFAULT_COLOR;
 		stroke = DEFAULT_EDGE_STROKE;
-		isTransparent = false;
 	}
 	
 	public Vertex getU() {
@@ -136,12 +133,10 @@ public class Edge {
 	}
 	
 	public void makeEdgeLineTransparent() {
-		isTransparent = true;
 		color = new Color(0, 0, 0, 0.0f);
 	}
 	
 	public void makeEdgeLineOpaque() {
-		isTransparent = false;
 		setDefault();
 	}
 	
