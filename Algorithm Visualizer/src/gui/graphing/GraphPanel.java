@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 
 import algorithms.graphing.DepthFirstSearch;
 import algorithms.graphing.Edge;
+import algorithms.graphing.GraphAlgorithm;
 import algorithms.graphing.Vertex;
 import algorithms.graphing.Weight;
 import gui.VisualizationPanel;
@@ -36,7 +37,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	private GraphControlPanel controlPanel;
 	
 	// Algorithm
-	private DepthFirstSearch graphAlgorithm;
+	public GraphAlgorithm graphAlgorithm;
 	
 	// Start and End Vertices
 	private Vertex startVertex;
