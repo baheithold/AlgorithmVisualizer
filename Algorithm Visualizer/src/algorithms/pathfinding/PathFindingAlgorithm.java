@@ -38,12 +38,10 @@ public abstract class PathFindingAlgorithm extends Algorithm {
 	}
 	
 	protected void tracePath() {
-		System.out.println("TRACE HERE!!!");
 		constructPath();
 		((PathFindingPanel) panel).resetDefaultColors();
 		GridNode curr = pathStack.pop();
 		while (pathStack.size() > 0) {
-			System.out.println("TRACE WHILE HERE!!!!");
 			// if current node is not start/end node, set node as a path node
 			if (!curr.isStart() && !curr.isEnd()) {
 				curr.setPath();
