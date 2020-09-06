@@ -38,7 +38,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JLabel delayJLabel, vertexEdgeJLabel, vertexTypeJLabel;
 	
 	// JSliders
-	private JSlider delayJSlider, numItemsJSlider;
+	private JSlider delayJSlider;
 	
 	// VertexEdge Radio
 	private ButtonGroup vertexEdgeRadioGroup;
@@ -252,9 +252,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == delayJSlider) {
 			System.out.println("Delay Slider Changed: " + delayJSlider.getValue());
-		}
-		else if (e.getSource() == numItemsJSlider) {
-			System.out.println("Items Slider Changed: " + numItemsJSlider.getValue());
+			panel.setCurrentDelay(delayJSlider.getValue());
 		}
 	}
 
