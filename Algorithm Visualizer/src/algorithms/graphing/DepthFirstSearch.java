@@ -45,19 +45,42 @@ public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
 				// set all vertices to unvisited
 				setAllVerticesUnvisited();
 				
+				// used for highlighting edges
+				ArrayList<Vertex> alreadyVisitedQueue = new ArrayList<Vertex>();
+				
 				// push start node to stack
 				s.push(panel.getStartVertex());
-				while (!s.isEmpty()) {
+				while (!s.empty()) {
 					Vertex u = s.pop();
 					// if u vertex has not yet been visited, push unvisited neighbors of u onto stack
 					if (!u.isVisited()) {
 						u.setVisited(true);
+						u.setHighlighted();
+						// find and highlight appropriate edge
+						if (!u.isStart()) {
+							Edge edgeToHighlight = null;
+							for (Vertex vertex : alreadyVisitedQueue) {
+								edgeToHighlight = findEdge(vertex, u);
+								if (edgeToHighlight != null) break;
+							}
+							if (edgeToHighlight == null) {
+								for (Vertex vertex : alreadyVisitedQueue) {
+									edgeToHighlight = findEdge(u, vertex);
+									if (edgeToHighlight != null) break;
+								}
+							}
+							if (edgeToHighlight != null) {
+								edgeToHighlight.setHighlighted();
+							}
+						}
 						pushUnvisitedNeighborsToStack(u);
+						alreadyVisitedQueue.add(u);
 					}
+					publish();
+					Thread.sleep(panel.getCurrentDelay());
 				}
 				
 				System.out.println("DFS Finished!");
-				highlightUsedEdges();
 				publish();
 				setRunning(false);
 				return null;
@@ -102,12 +125,13 @@ public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
 		}
 	}
 	
-	private void highlightUsedEdges() {
+	private Edge findEdge(Vertex v1, Vertex v2) {
 		for (Edge edge : edges) {
-			if (edge.getU().isVisited() && edge.getV().isVisited()) {
-				edge.setHighlighted();
+			if (edge.getU().getID() == v1.getID() && edge.getV().getID() == v2.getID()) {
+				return edge;
 			}
 		}
+		return null;
 	}
 	
 	@Override
