@@ -15,16 +15,12 @@ import gui.graphing.GraphPanel;
  */
 public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
 	private SwingWorker<Void, Void> workerThread;
-	
-	private ArrayList<Vertex> vertices;
-	private ArrayList<Edge> edges;
 
+	// Stack
 	Stack<Vertex> s;
 	
 	public DepthFirstSearch(GraphPanel panel) {
 		super(panel);
-		this.vertices = panel.getVertices();
-		this.edges = panel.getEdges();
 	}
 
 	@Override
@@ -97,12 +93,6 @@ public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
 		
 	}
 	
-	private void setAllVerticesUnvisited() {
-		for (Vertex vertex : vertices) {
-			vertex.setVisited(false);
-		}
-	}
-	
 	private ArrayList<Vertex> getUnvisitedNeighbors(Vertex u) {
 		ArrayList<Vertex> unvisitedList = new ArrayList<Vertex>();
 		for (Edge edge : edges) {
@@ -123,15 +113,6 @@ public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
 		for (Vertex vertex : neighbors) {
 			s.push(vertex);
 		}
-	}
-	
-	private Edge findEdge(Vertex v1, Vertex v2) {
-		for (Edge edge : edges) {
-			if (edge.getU().getID() == v1.getID() && edge.getV().getID() == v2.getID()) {
-				return edge;
-			}
-		}
-		return null;
 	}
 	
 	@Override
