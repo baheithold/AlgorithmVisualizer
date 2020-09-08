@@ -36,6 +36,7 @@ public class Vertex {
 	private int id;
 	private boolean isVisited;
 	private Vertex parent;
+	private int distance;
 
 	public Vertex(double xPos, double yPos, int id) {
 		xPosition = xPos;
@@ -45,6 +46,7 @@ public class Vertex {
 		this.id = id;
 		isVisited = false;
 		parent = null;
+		distance = 0;
 	}
 	
 	public void move(double dx, double dy) {
@@ -126,6 +128,14 @@ public class Vertex {
 	
 	public void setParent(Vertex p) {
 		this.parent = p;
+	}
+	
+	public int getDistance() {
+		return distance;
+	}
+	
+	public void setDistance(int d) {
+		distance = d;
 	}
 	
 	public void print() {
