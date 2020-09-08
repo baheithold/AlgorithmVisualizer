@@ -18,7 +18,7 @@ import gui.pathfinding.PathFindingPanel;
  *
  */
 public class BreadthFirstSearch extends PathFindingAlgorithm implements Runnable {
-	SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	// Grid
 	private Grid grid;

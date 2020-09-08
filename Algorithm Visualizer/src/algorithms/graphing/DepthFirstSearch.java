@@ -14,7 +14,7 @@ import gui.graphing.GraphPanel;
  *
  */
 public class DepthFirstSearch extends GraphAlgorithm implements Runnable {
-	SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 	
 	private ArrayList<Vertex> vertices;
 	private ArrayList<Edge> edges;

@@ -14,7 +14,7 @@ import gui.pathfinding.PathFindingPanel;
  *
  */
 public class AStar extends PathFindingAlgorithm implements Runnable {
-	SwingWorker<Void, Void> workerThread;
+	private SwingWorker<Void, Void> workerThread;
 
 	// Open/Closed
 	private ArrayList<GridNode> openList;
