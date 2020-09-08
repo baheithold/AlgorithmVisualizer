@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import algorithms.graphing.BreadthFirstSearch;
 import algorithms.graphing.DepthFirstSearch;
 import algorithms.graphing.Edge;
 import algorithms.graphing.GraphAlgorithm;
@@ -80,6 +81,7 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 		// select what algorithm to use
 		switch (algorithmName) {
 			case "bfs":
+				graphAlgorithm = new BreadthFirstSearch(this);
 				break;
 			case "dfs":
 				graphAlgorithm = new DepthFirstSearch(this);
