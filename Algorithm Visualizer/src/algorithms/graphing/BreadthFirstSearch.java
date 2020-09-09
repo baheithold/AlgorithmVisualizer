@@ -27,6 +27,11 @@ public class BreadthFirstSearch extends GraphAlgorithm implements Runnable {
 
 			@Override
 			protected Void doInBackground() throws Exception {
+				//if start or end node is missing, return
+				if (!verifyStartEndVerticesExist(true, false)) {
+					setRunning(false);
+					return null;
+				}
 				
 				// Queue
 				Queue<Vertex> q = new LinkedList<Vertex>();
