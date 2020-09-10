@@ -161,6 +161,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructDelayPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		delayJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(delayJLabel);
 		panel.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
@@ -180,6 +181,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructVertexEdgePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		vertexEdgeJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(vertexEdgeJLabel);
 		panel.add(constructVertexEdgeRadioPanel());
 		return panel;
@@ -200,6 +202,7 @@ public class GraphControlPanel extends JPanel implements ActionListener, ChangeL
 	private JPanel constructVertexTypePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		vertexTypeJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(vertexTypeJLabel);
 		panel.add(constructVertexTypeRadioPanel());
 		return panel;

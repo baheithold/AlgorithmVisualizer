@@ -26,9 +26,9 @@ public class PathFindingPanel extends VisualizationPanel implements MouseListene
 	// Path Finding Algorithm
 	public PathFindingAlgorithm pathFindingAlgorithm;
 
-	public PathFindingPanel(String algorithmName) {
-		super(algorithmName);
-		this.grid = new Grid((this.WINDOW_HEIGHT / 20) - 6, (this.WINDOW_WIDTH / 20) - 1);
+	public PathFindingPanel(String algorithmName, int width, int height) {
+		super(algorithmName, width, height);
+		this.grid = new Grid((getCurrentHeight() / 20) - 6, (getCurrentWidth() / 20) - 1);
 		initializeControlPanel();
 		pathFindingAlgorithm = new AStar(this);
 		this.addMouseListener(this);

@@ -10,10 +10,6 @@ import javax.swing.JPanel;
  */
 public class VisualizationPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	// Window constants
-	protected final int WINDOW_WIDTH = 800;
-	protected final int WINDOW_HEIGHT = 600;
 
 	// Delay constants
 	public final int DEFAULT_DELAY = 100;
@@ -22,13 +18,23 @@ public class VisualizationPanel extends JPanel {
 	public final int DELAY_MAJOR_TICK_SPACING = 125;
 	public final int DELAY_MINOR_TICK_SPACING = 25;
 	
+	// window dimensions
+	protected int currentWidth;
+	protected int currentHeight;
+	
 	private int currentDelay;
 	private String algorithmName;
 	
-	public VisualizationPanel() {
+	public VisualizationPanel(int width, int height) {
+		currentWidth = width;
+		currentHeight = height;
+		currentDelay = DEFAULT_DELAY;
+		setLayout(new BorderLayout());
 	}
 	
-	public VisualizationPanel(String name) {
+	public VisualizationPanel(String name, int width, int height) {
+		currentWidth = width;
+		currentHeight = height;
 		currentDelay = DEFAULT_DELAY;
 		algorithmName = name;
 		setLayout(new BorderLayout());
@@ -44,5 +50,13 @@ public class VisualizationPanel extends JPanel {
 	
 	public void setCurrentDelay(int delay) {
 		currentDelay = delay;
+	}
+	
+	public int getCurrentWidth() {
+		return currentWidth;
+	}
+	
+	public int getCurrentHeight() {
+		return currentHeight;
 	}
 }

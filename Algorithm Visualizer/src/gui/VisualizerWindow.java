@@ -1,10 +1,5 @@
 package gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Box;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -16,29 +11,32 @@ import gui.sorting.SortingMenu;
  * @author Brett Heithold
  *
  */
-public class VisualizerWindow extends JFrame implements ActionListener {
+public class VisualizerWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_WIDTH = 800; 
 	private static final int DEFAULT_HEIGHT = 600;
 	
-	private JCheckBox darkModeCheckbox;
+	private int currentWindowWidth;
+	private int currentWindowHeight;
 
 	public VisualizerWindow() {
 		initializeWindow(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		createMenuBar();
-		add(new AboutPanel());
+		add(new AboutPanel(currentWindowWidth, currentWindowHeight));
 		setVisible(true);
 	}
 	
 	public VisualizerWindow(int width, int height) {
 		initializeWindow(width, height);
 		createMenuBar();
-		add(new AboutPanel());
+		add(new AboutPanel(currentWindowWidth, currentWindowHeight));
 		setVisible(true);
 	}
 	
 	private void initializeWindow(int width, int height) {
 		setTitle("Algorithm Visualizer");
+		currentWindowWidth = width;
+		currentWindowHeight = height;
 		setSize(width, height);
 		setFocusable(true);
 		setResizable(false);
@@ -65,20 +63,14 @@ public class VisualizerWindow extends JFrame implements ActionListener {
 		
 		// create help menu and add it to the menu bar
 		menubar.add(new HelpMenu(this));
-		
-		// Add Dark Mode Checkbox
-		darkModeCheckbox = new JCheckBox();
-		darkModeCheckbox.setText("Dark Mode");
-		darkModeCheckbox.addActionListener(this);
-		menubar.add(Box.createHorizontalStrut(450));
-		menubar.add(darkModeCheckbox);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == darkModeCheckbox) {
-			System.out.println("Dark Mode: " + darkModeCheckbox.isSelected());
-		}
+	public int getCurrentWindowWidth() {
+		return currentWindowWidth;
+	}
+	
+	public int getCurrentWindowHeight() {
+		return currentWindowHeight;
 	}
 	
 }

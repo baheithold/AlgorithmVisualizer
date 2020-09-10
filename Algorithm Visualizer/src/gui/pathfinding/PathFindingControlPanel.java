@@ -143,6 +143,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		delayJLabel.add(Box.createVerticalStrut(5));
+		delayJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(delayJLabel);
 		delayJSlider.add(Box.createVerticalStrut(5));
 		panel.add(delayJSlider);
@@ -165,6 +166,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JPanel constructNodeTypePanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		nodeTypeJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(nodeTypeJLabel);
 		panel.add(constructNodeTypeRadioPanel());
 		return panel;
@@ -183,6 +185,7 @@ public class PathFindingControlPanel extends JPanel implements ActionListener, C
 	private JPanel constructHeuristicPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		heuristicJLabel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.add(heuristicJLabel);
 		panel.add(constructHeuristicRadioPanel());
 		return panel;
