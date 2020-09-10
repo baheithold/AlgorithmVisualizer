@@ -2,7 +2,7 @@ package algorithmVisualizer;
 
 import gui.VisualizerWindow;
 
-public class Visualizer {
+public class AlgorithmVisualizer {
 	
 	public static void main(String[] args) {
 		new VisualizerWindow();
