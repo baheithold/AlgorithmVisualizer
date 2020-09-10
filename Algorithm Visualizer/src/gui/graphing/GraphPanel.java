@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 
 import algorithms.graphing.BreadthFirstSearch;
 import algorithms.graphing.DepthFirstSearch;
-import algorithms.graphing.Dijkstra;
 import algorithms.graphing.Edge;
 import algorithms.graphing.GraphAlgorithm;
 import algorithms.graphing.Vertex;
@@ -86,15 +85,6 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 				break;
 			case "dfs":
 				graphAlgorithm = new DepthFirstSearch(this);
-				break;
-			case "dijkstra":
-				graphAlgorithm = new Dijkstra(this);
-				break;
-			case "prim":
-				break;
-			case "kruskal":
-				break;
-			case "bellman-ford":
 				break;
 			default:
 				break;
