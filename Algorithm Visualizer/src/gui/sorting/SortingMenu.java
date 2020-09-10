@@ -3,12 +3,14 @@ package gui.sorting;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
+import gui.VisualizerWindow;
 
 /**
  * @author Brett Heithold
@@ -18,12 +20,12 @@ public class SortingMenu extends JMenu implements ActionListener {
 	static final long serialVersionUID = 1L;
 	
 	// Window
-	private JFrame window;
+	private VisualizerWindow window;
 	
 	// Sorting Menu Items
 	private JMenuItem bubbleSortJMenuItem, insertionSortJMenuItem, selectionSortJMenuItem, mergeSortJMenuItem, quickSortJMenuItem, heapSortJMenuItem, bucketSortJMenuItem, countingSortJMenuItem, radixSortJMenuItem;
 	
-	public SortingMenu(JFrame window) {
+	public SortingMenu(VisualizerWindow window) {
 		this.window = window;
 		setText("Sorting");
 		initializeSortingMenuItems();
@@ -59,13 +61,13 @@ public class SortingMenu extends JMenu implements ActionListener {
 		JLabel noncomparisonLabel = new JLabel("Non-comparison Based");
 		add(noncomparisonLabel);
 		add(new JSeparator(SwingConstants.HORIZONTAL));
-		bucketSortJMenuItem = new JMenuItem("Bucket Sort");
+		bucketSortJMenuItem = new JMenuItem("Bucket Sort (Coming Soon!)");
 		bucketSortJMenuItem.addActionListener(this);
 		add(bucketSortJMenuItem);
-		countingSortJMenuItem = new JMenuItem("Counting Sort");
+		countingSortJMenuItem = new JMenuItem("Counting Sort (Coming Soon!)");
 		countingSortJMenuItem.addActionListener(this);
 		add(countingSortJMenuItem);
-		radixSortJMenuItem = new JMenuItem("Radix Sort");
+		radixSortJMenuItem = new JMenuItem("Radix Sort (Coming Soon!)");
 		radixSortJMenuItem.addActionListener(this);
 		add(radixSortJMenuItem);
 	}
@@ -100,22 +102,32 @@ public class SortingMenu extends JMenu implements ActionListener {
 		}
 		else if (e.getSource() == bucketSortJMenuItem) {
 			sortName = "bucketSort";
-			window.setTitle("Bucket Sort");
 		}
 		else if (e.getSource() == countingSortJMenuItem) {
 			sortName = "countingSort";
-			window.setTitle("Counting Sort");
 		}
 		else if (e.getSource() == radixSortJMenuItem) {
 			sortName = "radixSort";
-			window.setTitle("Radix Sort");
 		}
 		else sortName = "unknown algorithm";
 		
-		//instantiate sortingArrayPanel
-		window.getContentPane().removeAll();
-		window.getContentPane().add(new SortingPanel(sortName));
-		window.revalidate();
+		// if user clicks on an algorithm that is "Coming Soon" then notify user and stay on current screen
+		switch (sortName) {
+			case "unknown algorithm":
+				JOptionPane.showMessageDialog(window, "How did you get here? Be you hacker?");
+				break;
+			case "bucketSort":
+			case "countingSort":
+			case "radixSort":
+				JOptionPane.showMessageDialog(window, "Coming Soon!");
+				break;
+			default:
+				//instantiate sortingArrayPanel
+				window.getContentPane().removeAll();
+				window.getContentPane().add(new SortingPanel(sortName, window.getCurrentWindowWidth(), window.getCurrentWindowHeight()));
+				window.revalidate();
+				break;
+		}
 	}
 	
 }

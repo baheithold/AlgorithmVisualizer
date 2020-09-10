@@ -45,8 +45,8 @@ public class SortingPanel extends VisualizationPanel {
 	// Sort
 	public SortingAlgorithm sortAlgorithm;
 	
-	public SortingPanel(String algorithmName) {
-		super(algorithmName);
+	public SortingPanel(String algorithmName, int width, int height) {
+		super(algorithmName, width, height);
 		
 		currentNumItems = DEFAULT_NUM_ITEMS;
 		array = new int[DEFAULT_NUM_ITEMS];
@@ -91,7 +91,7 @@ public class SortingPanel extends VisualizationPanel {
 		Random rand = new Random();
 		for (int i = 0; i < array.length; i++) {
 			// generate an integer [1..windowHeight]
-			int n = rand.nextInt(WINDOW_HEIGHT - 125) + 20;
+			int n = rand.nextInt(getCurrentHeight() - 125) + 20;
 			array[i] = n;
 		}
 	}
@@ -204,7 +204,7 @@ public class SortingPanel extends VisualizationPanel {
 		for (int i = 0; i < array.length; i++) {
 			int height = array[i];
 			int xBegin = i + (BAR_WIDTH - 1) * i;
-			int yBegin = WINDOW_HEIGHT - height - 85;
+			int yBegin = getCurrentHeight() - height - 85;
 			graphics.setColor(colors[i]);
 			graphics.fillRect(xBegin, yBegin, BAR_WIDTH, height);
 		}

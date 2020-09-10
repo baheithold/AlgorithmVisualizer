@@ -3,9 +3,10 @@ package gui.pathfinding;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import gui.VisualizerWindow;
 
 /**
  * @author Brett Heithold
@@ -15,12 +16,12 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	// Window
-	private JFrame window;
+	private VisualizerWindow window;
 	
 	// Path Finding Menu Items
 	private JMenuItem bfsJMenuItem, aStarJMenuItem;
 	
-	public PathFindingMenu(JFrame window) {
+	public PathFindingMenu(VisualizerWindow window) {
 		this.window = window;
 		setText("Path Finding");
 		initializePathFindingMenuItems();
@@ -56,7 +57,7 @@ public class PathFindingMenu extends JMenu implements ActionListener {
 		
 		// change content on content pane
 		window.getContentPane().removeAll();
-		window.getContentPane().add(new PathFindingPanel(algorithmName));
+		window.getContentPane().add(new PathFindingPanel(algorithmName, window.getCurrentWindowWidth(), window.getCurrentWindowHeight()));
 		window.revalidate();
 	}
 

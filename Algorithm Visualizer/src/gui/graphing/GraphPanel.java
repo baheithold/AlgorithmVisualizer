@@ -60,8 +60,8 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	// ID
 	private static int nextID;
 	
-	public GraphPanel(String algorithmName) {
-		super(algorithmName);
+	public GraphPanel(String algorithmName, int width, int height) {
+		super(algorithmName, width, height);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		// get graphing control panel and add to south border
@@ -285,10 +285,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	public boolean inBounds(Vertex v) {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
-		if (v.xCentered() >= 0 && v.xCentered() + 65 <= WINDOW_WIDTH) {
+		if (v.xCentered() >= 0 && v.xCentered() + 65 <= getCurrentWidth()) {
 			xInBounds = true;
 		}
-		if (v.yCentered() + v.radius() * 2 + this.controlPanel.getHeight() + 65 <= WINDOW_HEIGHT && v.yCentered() >= 0) {
+		if (v.yCentered() + v.radius() * 2 + this.controlPanel.getHeight() + 65 <= getCurrentHeight() && v.yCentered() >= 0) {
 			yInBounds = true;
 		}
 		return xInBounds && yInBounds;
@@ -297,10 +297,10 @@ public class GraphPanel extends VisualizationPanel implements MouseListener, Mou
 	public boolean inBounds(double xPos, double yPos) {
 		boolean xInBounds = false;
 		boolean yInBounds = false;
-		if (xPos <= WINDOW_WIDTH - 25 && xPos >= 5) {
+		if (xPos <= getCurrentWidth() - 25 && xPos >= 5) {
 			xInBounds = true;
 		}
-		if (yPos + this.controlPanel.getHeight() + 70 <= WINDOW_HEIGHT && yPos >= 15) {
+		if (yPos + this.controlPanel.getHeight() + 70 <= getCurrentHeight() && yPos >= 15) {
 			yInBounds = true;
 		}
 		return xInBounds && yInBounds;
