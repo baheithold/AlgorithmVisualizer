@@ -24,15 +24,22 @@ public class VisualizerWindow extends JFrame implements ActionListener {
 	private JCheckBox darkModeCheckbox;
 
 	public VisualizerWindow() {
-		initializeWindow();
+		initializeWindow(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		createMenuBar();
 		add(new AboutPanel());
 		setVisible(true);
 	}
 	
-	private void initializeWindow() {
+	public VisualizerWindow(int width, int height) {
+		initializeWindow(width, height);
+		createMenuBar();
+		add(new AboutPanel());
+		setVisible(true);
+	}
+	
+	private void initializeWindow(int width, int height) {
 		setTitle("Algorithm Visualizer");
-		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		setSize(width, height);
 		setFocusable(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
